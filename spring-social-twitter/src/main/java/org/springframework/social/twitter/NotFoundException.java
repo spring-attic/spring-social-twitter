@@ -13,16 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter.support.extractors;
+package org.springframework.social.twitter;
 
-import java.util.Map;
+import org.springframework.social.SocialException;
 
-import org.springframework.social.twitter.types.Trend;
+// TODO : This may be a candidate for extraction as a more general-purpose provider exception
+@SuppressWarnings("serial")
+public class NotFoundException extends SocialException {
 
-public class TrendResponseExtractor extends AbstractResponseExtractor<Trend> {
+	public NotFoundException(String message) {
+		super(message);
+	}
 	
-	public Trend extractObject(Map<String, Object> trendMap) {
-		return new Trend((String) trendMap.get("name"), (String) trendMap.get("query"));
+	public NotFoundException(String message, Throwable cause) {
+		super(message, cause);
 	}
 	
 }
