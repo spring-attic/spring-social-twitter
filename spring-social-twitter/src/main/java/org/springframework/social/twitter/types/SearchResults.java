@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter;
+package org.springframework.social.twitter.types;
 
 import java.util.List;
+
 
 /**
  * Represents the results of a Twitter search, including matching {@link Tweet}s
