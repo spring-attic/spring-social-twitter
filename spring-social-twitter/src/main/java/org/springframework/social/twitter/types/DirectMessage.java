@@ -13,10 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter;
+package org.springframework.social.twitter.types;
 
 import java.util.Date;
 
+/**
+ * Represents a direct message.
+ * @author Craig Walls
+ */
 public class DirectMessage {
 	private long id;
 	private String text;

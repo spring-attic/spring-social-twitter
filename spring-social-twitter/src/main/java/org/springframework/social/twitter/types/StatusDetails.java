@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter;
+package org.springframework.social.twitter.types;
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Carries optional metadata pertaining to a Twitter status update.
- * 
  * @author Craig Walls
  */
 public class StatusDetails {
@@ -74,7 +73,7 @@ public class StatusDetails {
 	 * @return A {@link Map} of parameters to be passed along in the status
 	 *         update post to Twitter.
 	 */
-	Map<String, Object> toParameterMap() {
+	public Map<String, Object> toParameterMap() {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		if (latitude != null && longitude != null) {
 			parameterMap.put("lat", latitude.toString());

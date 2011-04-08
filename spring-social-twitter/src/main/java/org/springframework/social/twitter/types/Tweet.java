@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter;
+package org.springframework.social.twitter.types;
 
 import java.util.Date;
 
 /**
  * Represents a Twitter status update (e.g., a "tweet").
- * 
  * @author Craig Walls
  */
 public class Tweet {
