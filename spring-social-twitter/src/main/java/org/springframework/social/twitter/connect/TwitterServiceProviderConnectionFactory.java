@@ -15,10 +15,10 @@
  */
 package org.springframework.social.twitter.connect;
 
-import org.springframework.social.connect.support.OAuth1ServiceProviderConnectionFactory;
+import org.springframework.social.connect.support.OAuth1ConnectionFactory;
 import org.springframework.social.twitter.api.TwitterApi;
 
-public class TwitterServiceProviderConnectionFactory extends OAuth1ServiceProviderConnectionFactory<TwitterApi> {
+public class TwitterServiceProviderConnectionFactory extends OAuth1ConnectionFactory<TwitterApi> {
 
 	public TwitterServiceProviderConnectionFactory(String consumerKey, String consumerSecret) {
 		super("twitter", new TwitterServiceProvider(consumerKey, consumerSecret), new TwitterServiceApiAdapter());
