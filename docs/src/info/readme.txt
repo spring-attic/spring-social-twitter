@@ -1,7 +1,6 @@
-Spring Social
+Spring Social Twitter
 -----------------------------------------------------------
-The Spring Social project allows you to integrate the APIs exposed by Software-as-a-Service (SaaS) providers such as Facebook and Twitter into your applications.
-It consists of a service provider 'connect' framework, sign-in support, and strongly-typed Java API bindings.
+Spring Social Twitter is an extension to Spring Social to enable connectivity with Twitter.
 
 To find out what has changed in this release, see 'changelog.txt'
 
