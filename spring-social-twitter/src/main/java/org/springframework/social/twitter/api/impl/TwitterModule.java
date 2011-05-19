@@ -18,6 +18,7 @@ package org.springframework.social.twitter.api.impl;
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.module.SimpleModule;
 import org.springframework.social.twitter.api.DirectMessage;
+import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.SuggestionCategory;
@@ -46,5 +47,6 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(UserList.class, UserListMixin.class);
 		context.setMixInAnnotations(Tweet.class, TweetMixin.class);
 		context.setMixInAnnotations(SearchResults.class, SearchResultsMixin.class);
+		context.setMixInAnnotations(Place.class, PlaceMixin.class);
 	}
 }
