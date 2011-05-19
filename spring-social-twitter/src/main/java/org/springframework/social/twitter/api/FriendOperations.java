@@ -133,6 +133,34 @@ public interface FriendOperations {
 	String unfollow(String screenName);
 	
 	/**
+	 * Enable mobile device notifications from Twitter for the specified user.
+	 * @param userId the Twitter ID of the user to receive notifications for. 
+	 * @return the TwitterProfile for the user
+	 */
+	TwitterProfile enableNotifications(long userId);
+
+	/**
+	 * Enable mobile device notifications from Twitter for the specified user.
+	 * @param screenName the Twitter screen name of the user to receive notifications for. 
+	 * @return the TwitterProfile for the user
+	 */
+	TwitterProfile enableNotifications(String screenName);
+
+	/**
+	 * Disable mobile device notifications from Twitter for the specified user.
+	 * @param userId the Twitter ID of the user to stop notifications for. 
+	 * @return the TwitterProfile for the user
+	 */
+	TwitterProfile disableNotifications(long userId);
+
+	/**
+	 * Disable mobile device notifications from Twitter for the specified user.
+	 * @param screenName the Twitter screen name of the user to stop notifications for. 
+	 * @return the TwitterProfile for the user
+	 */
+	TwitterProfile disableNotifications(String screenName);
+
+	/**
 	 * Checks for a friendship between two users. Returns true if userA follows userB.
 	 * @param userA the screen name of userA
 	 * @param userB the screen name of userB

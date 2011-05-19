@@ -230,6 +230,46 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
     }
 	
 	@Test
+	public void enableNotifications_byUserId() {
+        mockServer.expect(requestTo("https://api.twitter.com/1/notifications/follow.json?user_id=98765"))
+            .andExpect(method(POST))
+            .andRespond(withResponse(new ClassPathResource("follow.json", getClass()), responseHeaders));
+		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications(98765);
+        assertEquals("oizik2", unFollowedUser.getScreenName());
+        mockServer.verify();
+    }
+
+	@Test
+	public void enableNotifications_byScreenName() {
+        mockServer.expect(requestTo("https://api.twitter.com/1/notifications/follow.json?screen_name=oizik2"))
+            .andExpect(method(POST))
+            .andRespond(withResponse(new ClassPathResource("follow.json", getClass()), responseHeaders));
+		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications("oizik2");
+        assertEquals("oizik2", unFollowedUser.getScreenName());
+        mockServer.verify();
+    }
+
+	@Test
+	public void disableNotifications_byUserId() {
+        mockServer.expect(requestTo("https://api.twitter.com/1/notifications/leave.json?user_id=98765"))
+            .andExpect(method(POST))
+            .andRespond(withResponse(new ClassPathResource("unfollow.json", getClass()), responseHeaders));
+		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications(98765);
+        assertEquals("oizik2", unFollowedUser.getScreenName());
+        mockServer.verify();
+    }
+
+	@Test
+	public void disableNotifications_byScreenName() {
+        mockServer.expect(requestTo("https://api.twitter.com/1/notifications/leave.json?screen_name=oizik2"))
+            .andExpect(method(POST))
+            .andRespond(withResponse(new ClassPathResource("unfollow.json", getClass()), responseHeaders));
+		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications("oizik2");
+        assertEquals("oizik2", unFollowedUser.getScreenName());
+        mockServer.verify();
+    }
+	
+	@Test
 	public void exists() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/exists.json?user_a=kdonald&user_b=tinyrod"))
 			.andExpect(method(GET))

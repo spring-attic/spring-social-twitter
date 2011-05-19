@@ -129,6 +129,26 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		return (String) restTemplate.postForObject(buildUri("friendships/destroy.json", "screen_name", screenName), EMPTY_DATA, Map.class).get("screen_name");
 	}
 	
+	public TwitterProfile enableNotifications(long userId) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("notifications/follow.json", "user_id", String.valueOf(userId)), EMPTY_DATA, TwitterProfile.class);
+	}
+	
+	public TwitterProfile enableNotifications(String screenName) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("notifications/follow.json", "screen_name", screenName), EMPTY_DATA, TwitterProfile.class);
+	}
+
+	public TwitterProfile disableNotifications(long userId) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("notifications/leave.json", "user_id", String.valueOf(userId)), EMPTY_DATA, TwitterProfile.class);
+	}
+	
+	public TwitterProfile disableNotifications(String screenName) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("notifications/leave.json", "screen_name", screenName), EMPTY_DATA, TwitterProfile.class);
+	}
+	
 	// doesn't require authentication
 	public boolean friendshipExists(String userA, String userB) {
 		requireUserAuthorization();
