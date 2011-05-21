@@ -15,21 +15,37 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.io.IOException;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.DeserializationContext;
+import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.springframework.social.twitter.api.PlaceType;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PlaceMixin {
+class PlaceMixin {
 	
 	@JsonCreator
 	public PlaceMixin(
 			@JsonProperty("id") String id, 
 			@JsonProperty("name") String name, 
-			@JsonProperty("full_name") String fullName, 
+			@JsonProperty("full_name") String fullName,
+			@JsonProperty("attributes") @JsonDeserialize(using = StreetAddressDeserializer.class) String streetAddress,
 			@JsonProperty("country") String country, 
 			@JsonProperty("country_code") String countryCode, 
 			@JsonProperty("place_type") @JsonDeserialize(using = PlaceTypeDeserializer.class) PlaceType placeType) {}
+	
+	private static class StreetAddressDeserializer extends JsonDeserializer<String> {
+		@Override
+		public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+			JsonNode tree = jp.readValueAsTree();
+			return tree.has("street_address") ? tree.get("street_address").getValueAsText() : null;
+		}
+	}
 }

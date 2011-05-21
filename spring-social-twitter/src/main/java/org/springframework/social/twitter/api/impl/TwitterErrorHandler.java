@@ -16,6 +16,7 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.JsonFactory;
@@ -62,8 +63,15 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			throw new BadCredentialsException("Bad or missing access token.");
 		}
 		
-		Map<String, String> errorMap = extractErrorDetailsFromResponse(response);
-	    String errorText = errorMap.get("error");
+		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
+		
+		String errorText = null;
+		if(errorMap.containsKey("error")) {
+			errorText = (String) errorMap.get("error");
+		} else if(errorMap.containsKey("errors")) {
+			List<Map<String, String>> errors = (List<Map<String, String>>) errorMap.get("errors");
+			errorText = errors.get(0).get("message");
+		}
 		
 		if(statusCode == HttpStatus.FORBIDDEN) {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
@@ -92,9 +100,9 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		}
 	}
 
-	private Map<String, String> extractErrorDetailsFromResponse(ClientHttpResponse response) throws IOException {
+	private Map<String, Object> extractErrorDetailsFromResponse(ClientHttpResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper(new JsonFactory());
-	    return mapper.<Map<String, String>>readValue(response.getBody(), new TypeReference<Map<String, String>>() {});
+	    return mapper.<Map<String, Object>>readValue(response.getBody(), new TypeReference<Map<String, Object>>() {});
 	}
 
 	private static final String INVALID_MESSAGE_RECIPIENT_TEXT = "You cannot send messages to users who are not following you.";

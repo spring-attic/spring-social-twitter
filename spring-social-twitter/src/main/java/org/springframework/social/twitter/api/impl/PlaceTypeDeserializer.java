@@ -23,7 +23,7 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.springframework.social.twitter.api.PlaceType;
 
-public class PlaceTypeDeserializer extends JsonDeserializer<PlaceType> {
+class PlaceTypeDeserializer extends JsonDeserializer<PlaceType> {
 
 	@Override
 	public PlaceType deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {

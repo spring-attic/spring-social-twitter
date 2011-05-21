@@ -29,17 +29,20 @@ public class Place {
 	
 	private final String fullName;
 	
+	private final String streetAddress;
+	
 	private final String country;
 	
 	private final String countryCode;
 	
 	private final PlaceType placeType;
 
-	public Place(String id, String name, String fullName, String country, String countryCode, PlaceType placeType) {
+	public Place(String id, String name, String fullName, String streetAddress, String country, String countryCode, PlaceType placeType) {
 		this.id = id;
 		this.name = name;
 		this.fullName = fullName;
 		this.country = country;
+		this.streetAddress = streetAddress;
 		this.countryCode = countryCode;
 		this.placeType = placeType;
 	}
@@ -54,6 +57,10 @@ public class Place {
 
 	public String getFullName() {
 		return fullName;
+	}
+	
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
 	public String getCountry() {

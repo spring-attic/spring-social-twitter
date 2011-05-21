@@ -67,4 +67,34 @@ public interface GeoOperations {
 	 */
 	List<Place> search(double latitude, double longitude, PlaceType granularity, String accuracy, String query);
 
+	/**
+	 * Finds places similar to a place described in the parameters.
+	 * Returns a list of places along with a token that is required for creating a new place.
+	 * This method must be called before calling createPlace().
+	 * @param latitude the latitude
+	 * @param longitude the longitude
+	 * @param name the name that the place is known as
+	 * @return a {@link SimilarPlacesResponse} collection, including a token that can be used to create a new place.
+	 */
+	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name);
+
+	/**
+	 * Finds places similar to a place described in the parameters.
+	 * Returns a list of places along with a token that is required for creating a new place.
+	 * This method must be called before calling createPlace().
+	 * @param latitude the latitude
+	 * @param longitude the longitude
+	 * @param name the name that the place is known as
+	 * @param the place's street address. May be null.
+	 * @param the ID of the place that the plce is contained within
+	 * @return a {@link SimilarPlacesResponse} collection, including a token that can be used to create a new place.
+	 */
+	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name, String streetAddress, String containedWithin);
+
+	/**
+	 * Creates a new place.
+	 * @param placePrototype the place prototype returned in a {@link SimilarPlaces} from a call to findSimilarPlaces()
+	 * @return a {@link Place} object with the newly created place data
+	 */
+	Place createPlace(PlacePrototype placePrototype);
 }

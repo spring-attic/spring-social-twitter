@@ -25,7 +25,9 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.social.twitter.api.Place;
+import org.springframework.social.twitter.api.PlacePrototype;
 import org.springframework.social.twitter.api.PlaceType;
+import org.springframework.social.twitter.api.SimilarPlaces;
 
 public class GeoTemplateTest extends AbstractTwitterApiTest {
 	
@@ -35,7 +37,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(new ClassPathResource("geo-place.json", getClass()), responseHeaders));
 		Place place = twitter.geoOperations().getPlace("0bba15b36bd9e8cc");
-		assertEquals("0bba15b36bd9e8cc", place.getId());
+		assertPlace(place);
 	}
 
 	@Test
@@ -136,23 +138,76 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833, PlaceType.CITY, "5280ft", "Public School");
 		assertPlaces(places);
 	}
+	
+	@Test
+	public void findSimilarPlaces() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/geo/similar_places.json?lat=37.7821120598956&long=-122.400612831116&name=Twitter+HQ&attribute%3Astreet_address=795+Folsom+St&contained_within=2e056b6d9c0ff3cd"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("similar-places.json", getClass()), responseHeaders));
+		SimilarPlaces similarPlaces = twitter.geoOperations().findSimilarPlaces(37.7821120598956, -122.400612831116, "Twitter HQ", "795 Folsom St", "2e056b6d9c0ff3cd");
+		assertEquals("9c8072b2a6788ee530e8c8cbb487107c", similarPlaces.getPlacePrototype().getCreateToken());
+		assertEquals(37.7821120598956, similarPlaces.getPlacePrototype().getLatitude(), 0.0000001);
+		assertEquals(-122.400612831116, similarPlaces.getPlacePrototype().getLongitude(), 0.0000001);
+		assertEquals("Twitter HQ", similarPlaces.getPlacePrototype().getName());
+		assertEquals("2e056b6d9c0ff3cd", similarPlaces.getPlacePrototype().getContainedWithin());
+		assertEquals(2, similarPlaces.size());
+		assertEquals("851a1ba23cb8c6ee", similarPlaces.get(0).getId());
+		assertEquals("twitter", similarPlaces.get(0).getName());
+		assertEquals("twitter, Twitter HQ", similarPlaces.get(0).getFullName());
+		assertNull(similarPlaces.get(0).getStreetAddress());
+		assertEquals("United States", similarPlaces.get(0).getCountry());
+		assertEquals("US", similarPlaces.get(0).getCountryCode());
+		assertEquals(PlaceType.POINT_OF_INTEREST, similarPlaces.get(0).getPlaceType());
+		assertEquals("247f43d441defc03", similarPlaces.get(1).getId());
+		assertEquals("Twitter HQ", similarPlaces.get(1).getName());
+		assertEquals("Twitter HQ, San Francisco", similarPlaces.get(1).getFullName());
+		assertEquals("795 Folsom St", similarPlaces.get(1).getStreetAddress());
+		assertEquals("United States", similarPlaces.get(1).getCountry());
+		assertEquals("US", similarPlaces.get(1).getCountryCode());
+		assertEquals(PlaceType.POINT_OF_INTEREST, similarPlaces.get(1).getPlaceType());
+	}
+	
+	@Test
+	public void createPlace() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/geo/place.json"))
+			.andExpect(method(POST))
+			.andExpect(body("lat=33.153661&long=-94.973045&name=Restaurant+Mexico&attribute%3Astreet_address=301+W+Ferguson+Rd&contained_within=2e056b6d9c0ff3cd&token=0b699bfda6514e84c7b69cf993c0c23e"))
+			.andRespond(withResponse(new ClassPathResource("geo-place.json", getClass()), responseHeaders));
+		PlacePrototype placePrototype = new PlacePrototype("0b699bfda6514e84c7b69cf993c0c23e", 33.153661, -94.973045, "Restaurant Mexico", "301 W Ferguson Rd", "2e056b6d9c0ff3cd");
+		Place place = twitter.geoOperations().createPlace(placePrototype);
+		assertPlace(place);
+		mockServer.verify();
+	}
 
+	private void assertPlace(Place place) {
+		assertEquals("0bba15b36bd9e8cc", place.getId());
+		assertEquals("Restaurant Mexico", place.getName());
+		assertEquals("Restaurant Mexico, Mount Pleasant", place.getFullName());
+		assertEquals("301 W Ferguson Rd", place.getStreetAddress());
+		assertEquals("United States", place.getCountry());
+		assertEquals("US", place.getCountryCode());
+		assertEquals(PlaceType.POINT_OF_INTEREST, place.getPlaceType());
+	}
+	
 	private void assertPlaces(List<Place> places) {
 		assertEquals(3, places.size());
 		assertEquals("488da0de4c92ac8e", places.get(0).getId());
 		assertEquals("Plano", places.get(0).getName());
 		assertEquals("Plano, TX", places.get(0).getFullName());
+		assertNull(places.get(0).getStreetAddress());
 		assertEquals("United States", places.get(0).getCountry());
 		assertEquals("US", places.get(0).getCountryCode());
 		assertEquals(PlaceType.CITY, places.get(0).getPlaceType());
 		assertEquals("e0060cda70f5f341", places.get(1).getId());
 		assertEquals("Texas", places.get(1).getName());
+		assertNull(places.get(1).getStreetAddress());
 		assertEquals("Texas, US", places.get(1).getFullName());
 		assertEquals("United States", places.get(1).getCountry());
 		assertEquals("US", places.get(1).getCountryCode());
 		assertEquals(PlaceType.ADMIN, places.get(1).getPlaceType());
 		assertEquals("96683cc9126741d1", places.get(2).getId());
 		assertEquals("United States", places.get(2).getName());
+		assertNull(places.get(2).getStreetAddress());
 		assertEquals("United States", places.get(2).getFullName());
 		assertEquals("United States", places.get(2).getCountry());
 		assertEquals("US", places.get(2).getCountryCode());

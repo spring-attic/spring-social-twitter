@@ -21,39 +21,24 @@ import java.util.List;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.social.twitter.api.Place;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-class PlacesList {
-	
-	private final List<Place> list;
-
-	@JsonCreator
-	public PlacesList(@JsonProperty("result") @JsonDeserialize(using=PlacesDeserializer.class) List<Place> list) {
-		this.list = list;
-	}
-
-	public List<Place> getList() {
-		return list;
-	}
-
-	private static class PlacesDeserializer extends JsonDeserializer<List<Place>> {
-		@Override
-		public List<Place> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-			ObjectMapper mapper = new ObjectMapper();
-		    mapper.setDeserializationConfig(ctxt.getConfig());
-		    jp.setCodec(mapper);
-		    
-            JsonNode dataNode = jp.readValueAsTree().get("places");
-            return (List<Place>) mapper.readValue(dataNode, new TypeReference<List<Place>>() {});
-		}
+class SimilarPlacesDeserializer extends JsonDeserializer<SimilarPlacesResponse> {
+	@Override
+	public SimilarPlacesResponse deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+	    mapper.setDeserializationConfig(ctxt.getConfig());
+	    jp.setCodec(mapper);
+	    
+        JsonNode tree = jp.readValueAsTree();
+		JsonNode resultNode = tree.get("result");
+		String token = resultNode.get("token").getTextValue();
+		JsonNode placesNode = resultNode.get("places");
+		List<Place> places = (List<Place>) mapper.readValue(placesNode, new TypeReference<List<Place>>() {});
+		return new SimilarPlacesResponse(places, token);
 	}
 }
