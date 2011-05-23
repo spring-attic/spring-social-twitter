@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.springframework.http.HttpStatus;
@@ -64,6 +65,9 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		}
 		
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
+		if(errorMap == null) {
+			super.handleError(response);
+		}
 		
 		String errorText = null;
 		if(errorMap.containsKey("error")) {
@@ -102,7 +106,11 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 
 	private Map<String, Object> extractErrorDetailsFromResponse(ClientHttpResponse response) throws IOException {
 		ObjectMapper mapper = new ObjectMapper(new JsonFactory());
-	    return mapper.<Map<String, Object>>readValue(response.getBody(), new TypeReference<Map<String, Object>>() {});
+		try {
+			return mapper.<Map<String, Object>>readValue(response.getBody(), new TypeReference<Map<String, Object>>() {});
+		} catch (JsonParseException e) {
+			return null;
+		}
 	}
 
 	private static final String INVALID_MESSAGE_RECIPIENT_TEXT = "You cannot send messages to users who are not following you.";

@@ -24,6 +24,7 @@ import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.BadCredentialsException;
 import org.springframework.social.twitter.api.EnhanceYourCalmException;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 public class ApiErrorTest extends AbstractTwitterApiTest {
@@ -82,5 +83,13 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		} catch (HttpServerErrorException e) {
 			assertEquals("503 Twitter is overloaded with requests. Try again later.", e.getMessage());
 		}
+	}
+	
+	@Test(expected = HttpClientErrorException.class)
+	public void defaultErrorHandlingWhenNonJSONResponse() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse("<h1>HTML response</h1>", responseHeaders, HttpStatus.BAD_REQUEST, ""));
+		twitter.timelineOperations().getHomeTimeline();
 	}
 }
