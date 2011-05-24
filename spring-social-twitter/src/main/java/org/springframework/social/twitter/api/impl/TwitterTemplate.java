@@ -28,6 +28,7 @@ import org.springframework.social.twitter.api.FriendOperations;
 import org.springframework.social.twitter.api.GeoOperations;
 import org.springframework.social.twitter.api.ListOperations;
 import org.springframework.social.twitter.api.SearchOperations;
+import org.springframework.social.twitter.api.StreamingOperations;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.UserOperations;
@@ -66,6 +67,8 @@ public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitte
 	private BlockOperations blockOperations;
 	
 	private GeoOperations geoOperations;
+	
+	private StreamingOperations streamOperations;
 
 	/**
 	 * Create a new instance of TwitterTemplate.
@@ -126,6 +129,10 @@ public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitte
 	public GeoOperations geoOperations() {
 		return geoOperations;
 	}
+	
+	public StreamingOperations streamingOperations() {
+		return streamOperations;
+	}
 		
 	// private helper 
 
@@ -150,6 +157,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitte
 		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorizedForUser());
 		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorizedForUser());
 		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorizedForUser());
+		this.streamOperations = new StreamingTemplate(getRestTemplate(), isAuthorizedForUser());
 	}
 
 }

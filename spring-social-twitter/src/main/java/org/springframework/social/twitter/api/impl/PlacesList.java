@@ -49,11 +49,11 @@ class PlacesList {
 		@Override
 		public List<Place> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			ObjectMapper mapper = new ObjectMapper();
-		    mapper.setDeserializationConfig(ctxt.getConfig());
-		    jp.setCodec(mapper);
+			mapper.setDeserializationConfig(ctxt.getConfig());
+			jp.setCodec(mapper);
 		    
-            JsonNode dataNode = jp.readValueAsTree().get("places");
-            return (List<Place>) mapper.readValue(dataNode, new TypeReference<List<Place>>() {});
+			JsonNode dataNode = jp.readValueAsTree().get("places");
+			return (List<Place>) mapper.readValue(dataNode, new TypeReference<List<Place>>() {});
 		}
 	}
 }

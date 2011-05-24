@@ -16,29 +16,27 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
-import org.springframework.social.twitter.api.Place;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.springframework.social.twitter.api.DeleteTweetEvent;
+import org.springframework.social.twitter.api.impl.DeleteTweetEventMixin.DeleteTweetEventDeserializer;
 
-class SimilarPlacesDeserializer extends JsonDeserializer<SimilarPlacesResponse> {
-	@Override
-	public SimilarPlacesResponse deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.setDeserializationConfig(ctxt.getConfig());
-		jp.setCodec(mapper);
-	    
-		JsonNode tree = jp.readValueAsTree();
-		JsonNode resultNode = tree.get("result");
-		String token = resultNode.get("token").getTextValue();
-		JsonNode placesNode = resultNode.get("places");
-		List<Place> places = (List<Place>) mapper.readValue(placesNode, new TypeReference<List<Place>>() {});
-		return new SimilarPlacesResponse(places, token);
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonDeserialize(using = DeleteTweetEventDeserializer.class)
+class DeleteTweetEventMixin {
+	
+	static final class DeleteTweetEventDeserializer extends JsonDeserializer<DeleteTweetEvent> {
+		@Override
+		public DeleteTweetEvent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+			JsonNode deleteNode = jp.readValueAsTree().get("delete").get("status");
+			return new DeleteTweetEvent(deleteNode.get("id").getValueAsLong(), deleteNode.get("user_id").getValueAsLong());
+		}
 	}
+	
 }
