@@ -27,7 +27,6 @@ import org.springframework.social.twitter.api.StreamingException;
 class StreamImpl implements Stream {
 	
 	private volatile boolean open;
-	
 	private final List<StreamListener> listeners;
 	
 	private final InputStream inputStream;
@@ -42,9 +41,6 @@ class StreamImpl implements Stream {
 	}
 	
 	public void next() {
-		if(!open) {
-			throw new IllegalStateException();
-		}
 		try {
 			String line = reader.readLine();
 			if(line == null) {
@@ -61,7 +57,6 @@ class StreamImpl implements Stream {
 	
 	public void close() {
 		try {
-			open = false;
 			inputStream.close();
 		} catch(IOException ignore) {}
 	}
