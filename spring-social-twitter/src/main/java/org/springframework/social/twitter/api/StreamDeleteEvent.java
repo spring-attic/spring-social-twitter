@@ -19,7 +19,7 @@ package org.springframework.social.twitter.api;
  * A stream event indicating that a tweet should be removed from the client.
  * @author Craig Walls
  */
-public class DeleteTweetEvent {
+public class StreamDeleteEvent {
 
 	private final long tweetId;
 	
@@ -39,7 +39,7 @@ public class DeleteTweetEvent {
 		return userId;
 	}
 
-	public DeleteTweetEvent(long tweetId, long userId) {
+	public StreamDeleteEvent(long tweetId, long userId) {
 		this.tweetId = tweetId;
 		this.userId = userId;
 	}

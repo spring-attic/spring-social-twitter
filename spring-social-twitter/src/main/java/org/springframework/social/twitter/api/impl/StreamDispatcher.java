@@ -17,9 +17,10 @@ package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Queue;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.social.twitter.api.DeleteTweetEvent;
+import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.Tweet;
 
@@ -27,34 +28,45 @@ class StreamDispatcher implements Runnable {
 
 	private final List<StreamListener> listeners;
 
-	private final String line;
-
 	private ObjectMapper objectMapper;
+	
+	private volatile boolean active;
 
-	public StreamDispatcher(List<StreamListener> listeners, String line) {
+	private final Queue<String> queue;
+
+	public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
+		this.queue = queue;
 		this.listeners = listeners;
-		this.line = line;
 		objectMapper = new ObjectMapper();
 		objectMapper.getDeserializationConfig().addMixInAnnotations(Tweet.class, TweetMixin.class);
-		objectMapper.getDeserializationConfig().addMixInAnnotations(DeleteTweetEvent.class, DeleteTweetEventMixin.class);
+		objectMapper.getDeserializationConfig().addMixInAnnotations(StreamDeleteEvent.class, DeleteTweetEventMixin.class);
+		active = true;
 	}
 
 	public void run() {
-		try {
-			if (line.contains("in_reply_to_status_id_str")) {
-				handleTweet();
-			} else if (line.startsWith("{\"limit")) {
-				handleLimit();				
-			} else if (line.startsWith("{\"delete")) {
-				handleDelete();				
+		while(active || queue.peek() != null) {
+			String line = queue.poll();
+			if(line == null) continue;
+			try {
+				if (line.contains("in_reply_to_status_id_str")) {
+					handleTweet(line);
+				} else if (line.startsWith("{\"limit")) {
+					handleLimit(line);				
+				} else if (line.startsWith("{\"delete")) {
+					handleDelete(line);				
+				}
+			} catch (IOException e) {
+				// TODO: Should only happen if Jackson doesn't know how to map the line
 			}
-		} catch (IOException e) {
-			// TODO: Should only happen if Jackson doesn't know how to map the line
 		}
 	}
+	
+	public void stop() {
+		active = false;
+	}
 
-	private void handleDelete() throws IOException {
-		final DeleteTweetEvent deleteEvent = objectMapper.readValue(line, DeleteTweetEvent.class);
+	private void handleDelete(String line) throws IOException {
+		final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
 		for (final StreamListener listener : listeners) {
 			new Thread(new Runnable() {
 				public void run() {
@@ -64,7 +76,7 @@ class StreamDispatcher implements Runnable {
 		}
 	}
 
-	private void handleLimit() throws IOException {
+	private void handleLimit(String line) throws IOException {
 		final TrackLimitEvent limitEvent = objectMapper.readValue(line, TrackLimitEvent.class);
 		for (final StreamListener listener : listeners) {
 			new Thread(new Runnable() {
@@ -75,7 +87,7 @@ class StreamDispatcher implements Runnable {
 		}
 	}
 
-	private void handleTweet() throws IOException {
+	private void handleTweet(String line) throws IOException {
 		final Tweet tweet = objectMapper.readValue(line, Tweet.class);
 		for (final StreamListener listener : listeners) {
 			new Thread(new Runnable() {

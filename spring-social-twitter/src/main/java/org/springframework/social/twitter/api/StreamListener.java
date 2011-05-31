@@ -30,10 +30,9 @@ public interface StreamListener {
 	void onTweet(Tweet tweet);
 	
 	/**
-	 * Called when a delete message is availble on the stream
-	 * @param deleteEvent
+	 * Called when a delete message is available on the stream
 	 */
-	void onDelete(DeleteTweetEvent deleteEvent);
+	void onDelete(StreamDeleteEvent deleteEvent);
 
 	/**
 	 * Called when the stream is being track limited.

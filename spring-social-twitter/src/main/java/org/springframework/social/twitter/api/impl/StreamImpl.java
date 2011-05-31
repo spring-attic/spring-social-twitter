@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingException;
@@ -27,17 +29,22 @@ import org.springframework.social.twitter.api.StreamingException;
 class StreamImpl implements Stream {
 	
 	private volatile boolean open;
-	private final List<StreamListener> listeners;
-	
+		
 	private final InputStream inputStream;
 
 	private final BufferedReader reader;
 	
+	private final Queue<String> queue;
+
+	private final StreamDispatcher dispatcher;
+	
 	public StreamImpl(InputStream inputStream, List<StreamListener> listeners) {
 		this.inputStream = inputStream;
 		this.reader = new BufferedReader(new InputStreamReader(inputStream));
-		this.listeners = listeners;
-		open = true;
+		queue = new ConcurrentLinkedQueue<String>();
+		dispatcher = new StreamDispatcher(queue, listeners);
+		new Thread(dispatcher).start();
+		open = true;		
 	}
 	
 	public void next() {
@@ -46,7 +53,7 @@ class StreamImpl implements Stream {
 			if(line == null) {
 				throw new IOException("Stream closed");
 			}			
-			new Thread(new StreamDispatcher(listeners, line)).start();
+			queue.add(line);
 		} catch (IOException e) {
 			if(open) {
 				close();
@@ -54,11 +61,13 @@ class StreamImpl implements Stream {
 			}
 		}
 	}
-	
+
 	public void close() {
 		try {
+			open = false;
+			dispatcher.stop();
 			inputStream.close();
 		} catch(IOException ignore) {}
 	}
-	
+
 }

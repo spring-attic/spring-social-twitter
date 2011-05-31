@@ -24,18 +24,18 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.springframework.social.twitter.api.DeleteTweetEvent;
+import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.impl.DeleteTweetEventMixin.DeleteTweetEventDeserializer;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = DeleteTweetEventDeserializer.class)
 class DeleteTweetEventMixin {
 	
-	static final class DeleteTweetEventDeserializer extends JsonDeserializer<DeleteTweetEvent> {
+	static final class DeleteTweetEventDeserializer extends JsonDeserializer<StreamDeleteEvent> {
 		@Override
-		public DeleteTweetEvent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+		public StreamDeleteEvent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonNode deleteNode = jp.readValueAsTree().get("delete").get("status");
-			return new DeleteTweetEvent(deleteNode.get("id").getValueAsLong(), deleteNode.get("user_id").getValueAsLong());
+			return new StreamDeleteEvent(deleteNode.get("id").getValueAsLong(), deleteNode.get("user_id").getValueAsLong());
 		}
 	}
 	
