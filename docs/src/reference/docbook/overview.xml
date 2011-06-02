@@ -9,6 +9,14 @@
     <para>
 	    The Spring Social Twitter project is an extension to <ulink url="http://www.springframework.org/spring-social">Spring Social</ulink> that enables integration with Twitter.
 	</para>
+
+	<para>
+		<ulink url="http://www.twitter.com">Twitter</ulink> is a popular micro-blogging and social networking service, enabling people to communicate with each other 140 characters at a time.
+	</para>
+
+	<para>
+		Spring Social Twitter enables integration with Twitter with <classname>TwitterConnectionFactory</classname>, a connection factory that can be plugged into Spring Social's service provider connection framework, and with an API binding to Twitter's REST API.
+	</para>
   </section>
 
   <section id="overview-howtoget">

@@ -3,9 +3,7 @@
 	<title>Twitter API Binding</title>
   
 	<para>
-		From a user's perspective, Twitter's function is rather simple: Enable users to post whatever they're thinking, 140 characters at a time.
-		In contrast, Twitter's API is rather rich, enabling applications to interact with Twitter in ways that may not be obvious from the humble tweet box.
-		Spring Social offers interaction with Twitter's service API through the <interfacename>Twitter</interfacename> interface and its implementation, <classname>TwitterTemplate</classname>.			
+		Spring Social Twitter offers integration with Twitter's REST API through the <interfacename>Twitter</interfacename> interface and its implementation, <classname>TwitterTemplate</classname>.			
 	</para>
 
 	<para>
