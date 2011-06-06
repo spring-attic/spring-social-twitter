@@ -17,7 +17,6 @@ package org.springframework.social.twitter.api;
 
 import org.springframework.social.SocialException;
 
-// TODO: This *may* be a candidate for extraction as a more general-purpose provider exception
 @SuppressWarnings("serial")
 public class StatusLengthException extends SocialException {
 

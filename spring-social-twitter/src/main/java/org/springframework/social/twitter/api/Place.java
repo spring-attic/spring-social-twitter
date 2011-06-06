@@ -21,8 +21,6 @@ package org.springframework.social.twitter.api;
  */
 public class Place {
 
-	// TODO: Adde geometry and bounding box
-
 	private final String id;
 	
 	private final String name;

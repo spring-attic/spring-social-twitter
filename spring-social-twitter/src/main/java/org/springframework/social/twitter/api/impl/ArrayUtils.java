@@ -15,7 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-// TODO: Move this to a support/utils package
 class ArrayUtils {
 	private ArrayUtils() {
 	}
