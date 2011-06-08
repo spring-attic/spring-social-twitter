@@ -38,6 +38,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<TwitterProfile> getFriends() {
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/friends.json", "cursor", "-1"), TwitterProfileUsersList.class).getList();
 	}
 
@@ -56,6 +57,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public List<Long> getFriendIds() {
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("friends/ids.json", "cursor", "-1"), LongIdsList.class).getList();
 	}
 
@@ -74,6 +76,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<TwitterProfile> getFollowers() {
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/followers.json", "cursor", "-1"), TwitterProfileUsersList.class).getList();
 	}
 
@@ -92,6 +95,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<Long> getFollowerIds() {
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("followers/ids.json", "cursor", "-1"), LongIdsList.class).getList();
 	}
 
@@ -151,7 +155,6 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	// doesn't require authentication
 	public boolean friendshipExists(String userA, String userB) {
-		requireUserAuthorization();
 		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
 		params.set("user_a", userA);
 		params.set("user_b", userB);

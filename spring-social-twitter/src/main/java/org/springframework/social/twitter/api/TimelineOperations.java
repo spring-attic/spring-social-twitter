@@ -47,6 +47,7 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s in the authenticating user's home
 	 *         timeline.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getHomeTimeline();
 
@@ -60,6 +61,7 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s in the authenticating user's
 	 *         friends timeline.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFriendsTimeline();
 
@@ -68,6 +70,7 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s that have been posted by the
 	 *         authenticating user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getUserTimeline();
 
@@ -94,21 +97,25 @@ public interface TimelineOperations {
 	/**
 	 * Retrieve the 20 most recent tweets that mention the authenticated user.
 	 * @return a collection of {@link Tweet} objects that mention the authenticated user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getMentions();
 
 	/**
 	 * Retrieve the 20 most recent retweets posted by the authenticated user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetedByMe();
 
 	/**
 	 * Retrieve the 20 most recent retweets posted by users the authenticating user follow.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetedToMe();
 
 	/**
 	 * Retrieve the 20 most recent tweets of the authenticated user that have been retweeted by others.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetsOfMe();
 
@@ -121,6 +128,7 @@ public interface TimelineOperations {
 	/**
 	 * Updates the user's status.
 	 * @param status The status message
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status);
 
@@ -128,18 +136,21 @@ public interface TimelineOperations {
 	 * Updates the user's status, including additional metadata concerning the status.
 	 * @param status The status message
 	 * @param details Metadata pertaining to the status
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status, StatusDetails details);
 
 	/**
 	 * Removes a status entry.
 	 * @param tweetId the tweet's ID
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteStatus(long tweetId);
 
 	/**
 	 * Posts a retweet of an existing tweet.
 	 * @param tweetId The ID of the tweet to be retweeted
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void retweet(long tweetId);
 
@@ -158,6 +169,7 @@ public interface TimelineOperations {
 	/**
 	 * Retrieves the IDs of up to 100 users who have retweeted a specific tweet.
 	 * @param id the tweet's ID.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getRetweetedByIds(long id);
 
@@ -166,18 +178,21 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s from the specified user's favorite
 	 *         timeline.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFavorites();
 
 	/**
 	 * Adds a tweet to the user's collection of favorite tweets.
 	 * @param id the tweet's ID
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void addToFavorites(long id);
 
 	/**
 	 * Removes a tweet from the user's collection of favorite tweets.
 	 * @param id the tweet's ID
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromFavorites(long id);
 

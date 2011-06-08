@@ -118,12 +118,11 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<TwitterProfile> getRetweetedBy(long tweetId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/" + tweetId + "/retweeted_by.json"), TwitterProfileList.class);
 	}
 
 	public List<Long> getRetweetedByIds(long tweetId) {
-		requireUserAuthorization();
+		requireUserAuthorization(); // requires authentication, even though getRetweetedBy() does not.
 		return restTemplate.getForObject(buildUri("statuses/" + tweetId + "/retweeted_by/ids.json"), LongList.class);
 	}
 

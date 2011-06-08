@@ -48,22 +48,18 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<UserList> getLists(long userId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
 	public List<UserList> getLists(String screenName) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
 	public UserList getList(long listId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/show.json", "list_id", String.valueOf(listId)), UserList.class);
 	}
 
 	public UserList getList(String screenName, String listSlug) {
-		requireUserAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
@@ -100,12 +96,10 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<TwitterProfile> getListMembers(long listId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/members.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 	
 	public List<TwitterProfile> getListMembers(String screenName, String listSlug) {
-		requireUserAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
@@ -145,12 +139,10 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<TwitterProfile> getListSubscribers(long userId, long listId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 
 	public List<TwitterProfile> getListSubscribers(String screenName, String listSlug) {
-		requireUserAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
@@ -189,22 +181,18 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<UserList> getMemberships(long userId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
 	public List<UserList> getMemberships(String screenName) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
 	public List<UserList> getSubscriptions(long userId) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
 	public List<UserList> getSubscriptions(String screenName) {
-		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "screen_name", screenName), UserListList.class).getList();
 	}
 

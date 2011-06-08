@@ -61,6 +61,7 @@ public interface SearchOperations {
 	/**
 	 * Retrieves the authenticating user's saved searches.
 	 * @return a list of SavedSearch items
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<SavedSearch> getSavedSearches();
 	
@@ -68,18 +69,21 @@ public interface SearchOperations {
 	 * Retrieves a single saved search by the saved search's ID.
 	 * @param searchId the ID of the saved search
 	 * @return a SavedSearch
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	SavedSearch getSavedSearch(long searchId);
 
 	/**
 	 * Creates a new saved search for the authenticating user.
 	 * @param query the search query to save
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void createSavedSearch(String query);
 
 	/**
 	 * Deletes a saved search
 	 * @param searchId the ID of the saved search
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteSavedSearch(long searchId);
 

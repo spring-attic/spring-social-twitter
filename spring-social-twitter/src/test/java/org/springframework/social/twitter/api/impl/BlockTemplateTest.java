@@ -44,6 +44,11 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void block_userId_unauthorized() {
+		unauthorizedTwitter.blockOperations().block(12345);
+	}
+
 	@Test
 	public void block_screenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/create.json"))
@@ -54,7 +59,12 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
 	}	
-	
+
+	@Test(expected = IllegalStateException.class)
+	public void block_screenName_unauthorized() {
+		unauthorizedTwitter.blockOperations().block("habuma");
+	}
+
 	@Test
 	public void unblock_userId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/destroy.json"))
@@ -64,6 +74,11 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		TwitterProfile blockedUser = twitter.blockOperations().unblock(12345);
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void unblock_userId_unauthorized() {
+		unauthorizedTwitter.blockOperations().unblock(12345);
 	}
 
 	@Test
@@ -77,6 +92,11 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}	
 	
+	@Test(expected = IllegalStateException.class)
+	public void unblock_screenName_unauthorized() {
+		unauthorizedTwitter.blockOperations().unblock("habuma");
+	}
+
 	@Test
 	public void getBlockedUsers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking.json"))
@@ -86,7 +106,12 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(2, blockedUsers.size());
 		mockServer.verify();
 	}
-	
+
+	@Test(expected = IllegalStateException.class)
+	public void getBlockedUsers_unauthorized() {
+		unauthorizedTwitter.blockOperations().getBlockedUsers();
+	}
+
 	@Test
 	public void getBlockedUserIds() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking/ids.json"))
@@ -95,6 +120,11 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		List<Long> blockedUsers = twitter.blockOperations().getBlockedUserIds();
 		assertEquals(4, blockedUsers.size());
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getBlockedUserIds_unauthorized() {
+		unauthorizedTwitter.blockOperations().getBlockedUserIds();
 	}
 	
 	@Test

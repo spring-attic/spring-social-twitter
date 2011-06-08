@@ -40,6 +40,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withResponse(new ClassPathResource("list-of-lists.json", getClass()), responseHeaders));
 		assertListOfLists(twitter.listOperations().getLists());
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getLists_currentUser_unauthorized() {
+		unauthorizedTwitter.listOperations().getLists();
+	}
 
 	@Test
 	public void getLists_byId() {
@@ -83,6 +88,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(twitter.listOperations().createList("forfun2", "Just for Fun, too", false));
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void createList_unauthorized() {
+		unauthorizedTwitter.listOperations().createList("forfun2", "Just for Fun, too", false);
+	}
+	
 	@Test
 	public void updateList_publicListForUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/update.json"))
@@ -101,6 +111,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(twitter.listOperations().updateList(40841803, "forfun2", "Just for Fun, too", false));
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void updateList_unauthorized() {
+		unauthorizedTwitter.listOperations().updateList(40841803, "forfun2", "Just for Fun, too", false);
+	}
+
 	@Test
 	public void deleteList_forUserIdByListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/destroy.json?list_id=40841803"))
@@ -110,6 +125,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void deleteList_unauthorized() {
+		unauthorizedTwitter.listOperations().deleteList(40841803);
+	}
+
 	@Test
 	public void getListMembers_byUserIdAndListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members.json?list_id=40841803"))
@@ -146,6 +166,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(twitter.listOperations().addToList(40841803, 123456, 234567, 345678));
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void addToList_forUserIdListId_unauthorized() {
+		unauthorizedTwitter.listOperations().addToList(40841803, 123456);
+	}
+
 	@Test
 	public void addToList_forScreenNameMultiple() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/create_all.json"))
@@ -154,6 +179,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withResponse(new ClassPathResource("single-list.json", getClass()), responseHeaders));		
 
 		assertSingleList(twitter.listOperations().addToList(40841803, "habuma", "royclarkson"));
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void addToList_forScreenName_unauthorized() {
+		unauthorizedTwitter.listOperations().addToList(40841803, "habuma", "royclarkson");
 	}
 
 	@Test
@@ -165,6 +195,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		twitter.listOperations().removeFromList(40841803, 12345);
 		mockServer.verify();
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void removeFromList_ownerIdListIdMemberId_unauthorized() {
+		unauthorizedTwitter.listOperations().removeFromList(40841803, 12345);
+	}
 
 	@Test
 	public void removeFromList_screenName() {		
@@ -174,6 +209,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withResponse("{}", responseHeaders));
 		twitter.listOperations().removeFromList(40841803, "habuma");
 		mockServer.verify();
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void removeFromList_screenName_unauthorized() {
+		unauthorizedTwitter.listOperations().removeFromList(40841803, "habuma");
 	}
 
 	@Test
@@ -282,6 +322,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(list);
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void subscribe_unauthorized() {
+		unauthorizedTwitter.listOperations().subscribe(54321);
+	}
+
 	@Test
 	public void subscribe_usernameAndSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/create.json"))
@@ -292,6 +337,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(list);
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void subscribe_usernameAndSlug_unauthorized() {
+		unauthorizedTwitter.listOperations().subscribe("habuma", "somelist");
+	}
+
 	@Test
 	public void unsubscribe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/destroy.json"))
@@ -301,6 +351,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		UserList list = twitter.listOperations().unsubscribe(54321);
 		assertSingleList(list);
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void unsubscribe_unauthorized() {
+		unauthorizedTwitter.listOperations().unsubscribe(54321);
 	}
 	
 	@Test
@@ -313,7 +368,11 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	
+	@Test(expected = IllegalStateException.class)
+	public void unsubscribe_usernameAndSlug_unauthorized() {
+		unauthorizedTwitter.listOperations().unsubscribe("habuma", "somelist");
+	}
+
 	// private helpers
 	
 	private void assertSingleList(UserList list) {

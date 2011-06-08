@@ -42,6 +42,11 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(161064614, twitter.userOperations().getProfileId());
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void getProfileId_unauthorized() {
+		unauthorizedTwitter.userOperations().getProfileId();
+	}
+
 	@Test
 	public void getScreenName() {
 		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -49,6 +54,11 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andExpect(method(GET))
 				.andRespond(withResponse(new ClassPathResource("verify-credentials.json", getClass()), responseHeaders));
 		assertEquals("artnames", twitter.userOperations().getScreenName());
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void getScreenName_unauthorized() {
+		unauthorizedTwitter.userOperations().getScreenName();
 	}
 
 	@Test
@@ -67,6 +77,11 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void getUserProfile_unauthorized() {
+		unauthorizedTwitter.userOperations().getUserProfile();
+	}
+
 	@Test
 	public void getUserProfile_userId() throws Exception {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/show.json?user_id=12345"))
@@ -114,6 +129,11 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void searchForUsers_unauthorized() {
+		unauthorizedTwitter.userOperations().searchForUsers("some query");
 	}
 	
 	@Test

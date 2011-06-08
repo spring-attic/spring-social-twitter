@@ -40,6 +40,141 @@ import org.springframework.social.twitter.api.TwitterProfile;
 public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
+	public void getPublicTimeline() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/public_timeline.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getPublicTimeline();
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getHomeTimeline() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getHomeTimeline();
+		assertTimelineTweets(timeline);
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getHomeTimeline_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getHomeTimeline();
+	}
+
+	@Test
+	public void getFriendsTimeline() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/friends_timeline.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getFriendsTimeline();
+		assertTimelineTweets(timeline);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void getFriendsTimeline_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getFriendsTimeline();
+	}
+	
+	@Test
+	public void getUserTimeline() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline();
+		assertTimelineTweets(timeline);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void getUserTimeline_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getUserTimeline();
+	}
+	
+	@Test
+	public void getUserTimeline_forScreenName() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?screen_name=habuma"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline("habuma");
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getUserTimeline_forUserId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?user_id=12345"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getMentions() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> mentions = twitter.timelineOperations().getMentions();
+		assertTimelineTweets(mentions);
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void getMentions_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getMentions();
+	}
+
+	@Test
+	public void getRetweetedByMe() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByMe();
+		assertTimelineTweets(timeline);		
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void getRetweetedByMe_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getRetweetedByMe();
+	}
+	
+	@Test
+	public void getRetweetedToMe() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToMe();
+		assertTimelineTweets(timeline);				
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getRetweetedToMe_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getRetweetedToMe();
+	}
+		
+	@Test
+	public void getRetweetsOfMe() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe();
+		assertTimelineTweets(timeline);				
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getRetweetsOfMe_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getRetweetsOfMe();
+	}
+	
+	@Test
+	public void getStatus() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/12345.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("status.json", getClass()), responseHeaders));
+		
+		Tweet tweet = twitter.timelineOperations().getStatus(12345);
+		assertSingleTweet(tweet);
+	}
+	
+	@Test
 	public void updateStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
 				.andExpect(method(POST))
@@ -51,6 +186,11 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void updateStatus_unauthorized() {
+		unauthorizedTwitter.timelineOperations().updateStatus("Shouldn't work");
+	}
+	
 	@Test
 	public void updateStatus_withLocation() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
@@ -63,6 +203,13 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().updateStatus("Test Message", details);
 
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void updateStatus_withLocation_unauthorized() {
+		StatusDetails details = new StatusDetails();
+		details.setLocation(123.1f, -111.2f);
+		unauthorizedTwitter.timelineOperations().updateStatus("Test Message", details);
 	}
 
 	@Test(expected = DuplicateTweetException.class)
@@ -103,6 +250,11 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void deleteStatus_unauthorized() {
+		unauthorizedTwitter.timelineOperations().deleteStatus(12345L);
+	}
+	
 	@Test
 	public void retweet() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweet/12345.json"))
@@ -112,6 +264,11 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().retweet(12345);
 
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void retweet_unauthorized() {
+		unauthorizedTwitter.timelineOperations().retweet(12345L);
 	}
 
 	@Test(expected=DuplicateTweetException.class)
@@ -131,88 +288,16 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 		twitter.timelineOperations().retweet(12345);
 	}
-
-	@Test
-	public void getMentions() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> mentions = twitter.timelineOperations().getMentions();
-		assertTimelineTweets(mentions);
-	}
-
-	@Test
-	public void getPublicTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/public_timeline.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getPublicTimeline();
-		assertTimelineTweets(timeline);
-	}
-
-	@Test
-	public void getHomeTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getHomeTimeline();
-		assertTimelineTweets(timeline);
-	}
-
-	@Test
-	public void getFriendsTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/friends_timeline.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getFriendsTimeline();
-		assertTimelineTweets(timeline);
-	}
-
-	@Test
-	public void getUserTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline();
-		assertTimelineTweets(timeline);
-	}
-
-	@Test
-	public void getUserTimeline_forScreenName() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?screen_name=habuma"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline("habuma");
-		assertTimelineTweets(timeline);
-	}
-
-	@Test
-	public void getUserTimeline_forUserId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?user_id=12345"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345);
-		assertTimelineTweets(timeline);
-	}
 	
 	@Test
-	public void getFavorites() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("favorite.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getFavorites();
-		assertTimelineTweets(timeline);
+	public void getRetweets() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweets(42L);
+		assertTimelineTweets(timeline);						
 	}
 
-	@Test
-	public void addToFavorites() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/favorites/create/42.json"))
-			.andExpect(method(POST))
-			.andRespond(withResponse("{}", responseHeaders));
-		twitter.timelineOperations().addToFavorites(42L);
-		mockServer.verify();
-	}
-	
 	@Test
 	public void getRetweetedBy() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by.json"))
@@ -238,42 +323,39 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567, (long) retweetedByIds.get(2));
 	}
 	
-	@Test
-	public void getRetweetedByMe() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByMe();
-		assertTimelineTweets(timeline);		
+	@Test(expected = IllegalStateException.class)
+	public void getRetweetedByIds_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getRetweetedByIds(12345L);
 	}
 	
 	@Test
-	public void getRetweetedToMe() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToMe();
-		assertTimelineTweets(timeline);				
+	public void getFavorites() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(new ClassPathResource("favorite.json", getClass()), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getFavorites();
+		assertTimelineTweets(timeline);
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void getFavorites_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getFavorites();
+	}
+
 	@Test
-	public void getRetweets() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getRetweets(42L);
-		assertTimelineTweets(timeline);						
+	public void addToFavorites() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/favorites/create/42.json"))
+			.andExpect(method(POST))
+			.andRespond(withResponse("{}", responseHeaders));
+		twitter.timelineOperations().addToFavorites(42L);
+		mockServer.verify();
 	}
 	
-	@Test
-	public void getRetweetsOfMe() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe();
-		assertTimelineTweets(timeline);				
+	@Test(expected = IllegalStateException.class)
+	public void addToFavorites_unauthorized() {
+		unauthorizedTwitter.timelineOperations().addToFavorites(12345L);
 	}
-	
+
 	@Test
 	public void removeFromFavorites() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/favorites/destroy/71.json"))
@@ -281,6 +363,11 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withResponse("{}", responseHeaders));
 		twitter.timelineOperations().removeFromFavorites(71L);
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void removeFromFavorites_unauthorized() {
+		unauthorizedTwitter.timelineOperations().removeFromFavorites(12345L);
 	}
 	
 }

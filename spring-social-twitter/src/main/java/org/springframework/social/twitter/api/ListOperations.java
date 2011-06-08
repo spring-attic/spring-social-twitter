@@ -27,6 +27,7 @@ public interface ListOperations {
 	/**
 	 * Retrieves user lists for the authenticated user.
 	 * @return a list of {@link UserList}s for the specified user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<UserList> getLists();
 	
@@ -80,6 +81,7 @@ public interface ListOperations {
 	 * @param description the list description.
 	 * @param isPublic if true, the list will be public; if false the list will be private.
 	 * @return the newly created {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList createList(String name, String description, boolean isPublic);
 
@@ -90,12 +92,14 @@ public interface ListOperations {
 	 * @param description the new list description.
 	 * @param isPublic if true, the list will be public; if false the list will be private.
 	 * @return the newly created {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList updateList(long listId, String name, String description, boolean isPublic);
 
 	/**
 	 * Removes a user list.
 	 * @param listId the ID of the list to be removed.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteList(long listId);
 	
@@ -119,6 +123,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @param newMemberIds one or more profile IDs of the Twitter profiles to add to the list.
 	 * @return the {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList addToList(long listId, long... newMemberIds);
 
@@ -127,6 +132,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @param newMemberScreenNames one or more profile IDs of the Twitter profiles to add to the list.
 	 * @return the {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList addToList(long listId, String... newMemberScreenNames);
 
@@ -134,6 +140,7 @@ public interface ListOperations {
 	 * Removes a member from a user list.
 	 * @param listId the ID of the list.
 	 * @param memberId the ID of the member to be removed.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromList(long listId, long memberId);
 
@@ -141,6 +148,7 @@ public interface ListOperations {
 	 * Removes a member from a user list.
 	 * @param listId the ID of the list.
 	 * @param memberScreenName the ID of the member to be removed.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromList(long listId, String memberScreenName);
 
@@ -148,6 +156,7 @@ public interface ListOperations {
 	 * Subscribes the authenticating user to a list.
 	 * @param listId the ID of the list.
 	 * @return the {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList subscribe(long listId);
 
@@ -156,6 +165,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @return the {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList subscribe(String screenName, String listSlug);
 
@@ -163,6 +173,7 @@ public interface ListOperations {
 	 * Unsubscribes the authenticating user from a list.
 	 * @param listId the ID of the list.
 	 * @return the {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList unsubscribe(long listId);
 
@@ -171,6 +182,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @return the {@link UserList}
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList unsubscribe(String screenName, String listSlug);
 
@@ -223,6 +235,7 @@ public interface ListOperations {
 	 * @param listId the list ID
 	 * @param memberId the user ID to check for membership
 	 * @return true if the user is a member of the list
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isMember(long listId, long memberId);
 	
@@ -232,6 +245,7 @@ public interface ListOperations {
 	 * @param listSlug the list's slug
 	 * @param memberScreenName the screenName to check for membership
 	 * @return true if the user is a member of the list
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isMember(String screenName, String listSlug, String memberScreenName);
 

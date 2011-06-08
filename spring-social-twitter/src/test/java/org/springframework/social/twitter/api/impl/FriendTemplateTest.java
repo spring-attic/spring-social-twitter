@@ -44,6 +44,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", friends.get(1).getScreenName());
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void getFriends_currentUser_unauthorized() {
+		unauthorizedTwitter.friendOperations().getFriends();
+	}
+	
 	@Test
 	public void getFriends_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/friends.json?cursor=-1&user_id=98765"))
@@ -81,6 +86,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567L, (long) followerIds.get(2));
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void getFriendIds_currentUser_unauthorized() {
+		unauthorizedTwitter.friendOperations().getFriendIds();
+	}
+	
 	@Test
 	public void getFriendIds_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=-1&user_id=98765"))
@@ -118,6 +128,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("royclarkson", followers.get(0).getScreenName());
 		assertEquals("kdonald", followers.get(1).getScreenName());
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getFollowers_currentUser_unauthorized() {
+		unauthorizedTwitter.friendOperations().getFollowers();
+	}
 
 	@Test 
 	public void getFollowers_byUserId() {
@@ -154,6 +169,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(12345L, (long) followerIds.get(0));
 		assertEquals(9223372036854775807L, (long) followerIds.get(1));		
 		assertEquals(34567L, (long) followerIds.get(2));
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getFollowerIds_currentUser_unauthorized() {
+		unauthorizedTwitter.friendOperations().getFollowerIds();
 	}
 
 	@Test
@@ -193,6 +213,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	    
 	    mockServer.verify();
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void follow_byUserId_unauthorized() {
+		unauthorizedTwitter.friendOperations().follow(98765);
+	}
+	
 	@Test
 	public void follow_byScreenName() {
 	    mockServer.expect(requestTo("https://api.twitter.com/1/friendships/create.json?screen_name=oizik2"))
@@ -203,6 +229,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	    assertEquals("oizik2", followedScreenName);
 	    
 	    mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void follow_byScreenName_unauthorized() {
+		unauthorizedTwitter.friendOperations().follow("aizik2");
 	}
 	
 	@Test
@@ -216,7 +247,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         
         mockServer.verify();
     }
-	
+
+	@Test(expected = IllegalStateException.class)
+	public void unfollow_byUserId_unauthorized() {
+		unauthorizedTwitter.friendOperations().unfollow(98765);
+	}
+
 	@Test
 	public void unfollow_byScreenName() {
         mockServer.expect(requestTo("https://api.twitter.com/1/friendships/destroy.json?screen_name=oizik2"))
@@ -229,6 +265,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 	
+	@Test(expected = IllegalStateException.class)
+	public void unfollow_byScreenName_unauthorized() {
+		unauthorizedTwitter.friendOperations().follow("aizik2");
+	}
+
 	@Test
 	public void enableNotifications_byUserId() {
         mockServer.expect(requestTo("https://api.twitter.com/1/notifications/follow.json?user_id=98765"))
@@ -239,6 +280,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 
+	@Test(expected = IllegalStateException.class)
+	public void enableNotifications_byUserId_unauthorized() {
+		unauthorizedTwitter.friendOperations().enableNotifications(98765);
+	}
+	
 	@Test
 	public void enableNotifications_byScreenName() {
         mockServer.expect(requestTo("https://api.twitter.com/1/notifications/follow.json?screen_name=oizik2"))
@@ -248,6 +294,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         assertEquals("oizik2", unFollowedUser.getScreenName());
         mockServer.verify();
     }
+
+	@Test(expected = IllegalStateException.class)
+	public void enableNotifications_byScreenName_unauthorized() {
+		unauthorizedTwitter.friendOperations().enableNotifications("oizik2");
+	}
 
 	@Test
 	public void disableNotifications_byUserId() {
@@ -259,6 +310,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 
+	@Test(expected = IllegalStateException.class)
+	public void disableNotifications_byUserId_unauthorized() {
+		unauthorizedTwitter.friendOperations().disableNotifications(98765);
+	}
+	
 	@Test
 	public void disableNotifications_byScreenName() {
         mockServer.expect(requestTo("https://api.twitter.com/1/notifications/leave.json?screen_name=oizik2"))
@@ -268,6 +324,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         assertEquals("oizik2", unFollowedUser.getScreenName());
         mockServer.verify();
     }
+	
+	@Test(expected = IllegalStateException.class)
+	public void disableNotifications_byScreenName_unauthorized() {
+		unauthorizedTwitter.friendOperations().disableNotifications("oizik2");
+	}
 	
 	@Test
 	public void exists() {
@@ -295,6 +356,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567, (long) friendships.get(2));
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void getIncomingFriendships_unauthorized() {
+		unauthorizedTwitter.friendOperations().getIncomingFriendships();
+	}
+	
 	@Test
 	public void getOutgoingFriendships() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/outgoing.json"))
@@ -306,5 +372,10 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(12345, (long) friendships.get(0));
 		assertEquals(23456, (long) friendships.get(1));
 		assertEquals(34567, (long) friendships.get(2));
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getOutgoingFriendships_unauthorized() {
+		unauthorizedTwitter.friendOperations().getOutgoingFriendships();
 	}
 }

@@ -79,13 +79,11 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public List<TwitterProfile> getUsers(long... userIds) {
-		requireUserAuthorization();
 		String joinedIds = ArrayUtils.join(userIds);
 		return restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class);
 	}
 
 	public List<TwitterProfile> getUsers(String... screenNames) {
-		requireUserAuthorization();
 		String joinedScreenNames = ArrayUtils.join(screenNames);
 		return restTemplate.getForObject(buildUri("users/lookup.json", "screen_name", joinedScreenNames), TwitterProfileList.class);
 	}

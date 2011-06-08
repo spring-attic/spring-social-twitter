@@ -91,6 +91,11 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(1, search2.getPosition());
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void getSavedSearches_unauthorized() {
+		unauthorizedTwitter.searchOperations().getSavedSearches();
+	}
+
 	@Test
 	public void getSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/saved_searches/show/26897775.json"))
@@ -103,6 +108,11 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(0, savedSearch.getPosition());
 	}
 	
+	@Test(expected = IllegalStateException.class)
+	public void getSavedSearch_unauthorized() {
+		unauthorizedTwitter.searchOperations().getSavedSearch(26897775);
+	}
+
 	@Test
 	public void createSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/saved_searches/create.json"))
@@ -113,6 +123,11 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void createSavedSearch_unauthorized() {
+		unauthorizedTwitter.searchOperations().createSavedSearch("#twitter");
+	}
+
 	@Test
 	public void deleteSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/saved_searches/destroy/26897775.json"))
@@ -120,6 +135,11 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withResponse("{}", responseHeaders));
 		twitter.searchOperations().deleteSavedSearch(26897775);
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void deleteSavedSearch_unauthorized() {
+		unauthorizedTwitter.searchOperations().deleteSavedSearch(26897775);
 	}
 	
 	@Test

@@ -27,6 +27,7 @@ public interface FriendOperations {
 	/**
 	 * Retrieves a list of users that the authenticated user follows.
 	 * @return a list of TwitterProfiles
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getFriends();
 
@@ -47,6 +48,7 @@ public interface FriendOperations {
 	/**
 	 * Retrieves a list of IDs for the Twitter users that the authenticated user follows.
 	 * @return a list of user IDs
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getFriendIds();
 
@@ -67,6 +69,7 @@ public interface FriendOperations {
 	/**
 	 * Retrieves a list of users that the authenticated user is being followed by
 	 * @return a list of TwitterProfiles
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getFollowers();
 
@@ -87,6 +90,7 @@ public interface FriendOperations {
 	/**
 	 * Retrieves a list of IDs for the Twitter users that follow the authenticated user.
 	 * @return a list of user IDs
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getFollowerIds();
 
@@ -108,6 +112,7 @@ public interface FriendOperations {
 	 * Allows the authenticated user to follow (create a friendship) with another user.
 	 * @param userId The Twitter ID of the user to follow
 	 * @return the name of the followed user if successful
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String follow(long userId);
 	
@@ -115,6 +120,7 @@ public interface FriendOperations {
 	 * Allows the authenticated user to follow (create a friendship) with another user.
 	 * @param screenName The screen name of the user to follow
 	 * @return the name of the followed user if successful
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String follow(String screenName);
 
@@ -122,6 +128,7 @@ public interface FriendOperations {
 	 * Allows the authenticated use to unfollow (destroy a friendship) with another user
 	 * @param userId the Twitter ID of the user to unfollow 
 	 * @return the name of the unfolloed user if successful 
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String unfollow(long userId);
 	
@@ -129,6 +136,7 @@ public interface FriendOperations {
 	 * Allows the authenticated use to unfollow (destroy a friendship) with another user
 	 * @param screenName the screen name of the user to unfollow 
 	 * @return the name of the unfolloed user if successful 
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String unfollow(String screenName);
 	
@@ -136,6 +144,7 @@ public interface FriendOperations {
 	 * Enable mobile device notifications from Twitter for the specified user.
 	 * @param userId the Twitter ID of the user to receive notifications for. 
 	 * @return the TwitterProfile for the user
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile enableNotifications(long userId);
 
@@ -143,6 +152,7 @@ public interface FriendOperations {
 	 * Enable mobile device notifications from Twitter for the specified user.
 	 * @param screenName the Twitter screen name of the user to receive notifications for. 
 	 * @return the TwitterProfile for the user
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile enableNotifications(String screenName);
 
@@ -150,6 +160,7 @@ public interface FriendOperations {
 	 * Disable mobile device notifications from Twitter for the specified user.
 	 * @param userId the Twitter ID of the user to stop notifications for. 
 	 * @return the TwitterProfile for the user
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile disableNotifications(long userId);
 
@@ -157,6 +168,7 @@ public interface FriendOperations {
 	 * Disable mobile device notifications from Twitter for the specified user.
 	 * @param screenName the Twitter screen name of the user to stop notifications for. 
 	 * @return the TwitterProfile for the user
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile disableNotifications(String screenName);
 
@@ -169,11 +181,13 @@ public interface FriendOperations {
 
 	/**
 	 * Returns an array of numeric IDs for every user who has a pending request to follow the authenticating user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getIncomingFriendships();
 
 	/**
 	 * Returns an array of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getOutgoingFriendships();
 }

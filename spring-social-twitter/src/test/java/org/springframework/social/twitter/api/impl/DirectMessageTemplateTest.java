@@ -40,6 +40,11 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesReceived();
 		assertDirectMessageListContents(messages);
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void getDirectMessagesReceived_unauthorized() {
+		unauthorizedTwitter.directMessageOperations().getDirectMessagesReceived();
+	}
 
 	@Test
 	public void getDirectMessagesSent() {
@@ -51,6 +56,11 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void getDirectMessagesSent_unauthorized() {
+		unauthorizedTwitter.directMessageOperations().getDirectMessagesSent();
+	}
+
 	@Test
 	public void sendDirectMessage_toScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/new.json")).andExpect(method(POST))
@@ -59,6 +69,11 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		twitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
 		mockServer.verify();
 	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void sendDirectMessaage_toScreenName_unauthorized() {
+		unauthorizedTwitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
+	}
 
 	@Test
 	public void sendDirectMessage_toUserId() {
@@ -66,6 +81,11 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 				.andExpect(body("user_id=11223&text=Hello+there%21")).andRespond(withResponse("{}", responseHeaders));
 		twitter.directMessageOperations().sendDirectMessage(11223, "Hello there!");
 		mockServer.verify();
+	}
+	
+	@Test(expected = IllegalStateException.class)
+	public void sendDirectMessaage_toUserId_unauthorized() {
+		unauthorizedTwitter.directMessageOperations().sendDirectMessage(112233, "Hello there!");
 	}
 	
 	@Test
@@ -77,6 +97,11 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
+	@Test(expected = IllegalStateException.class)
+	public void deleteDirectMessage_unauthorized() {
+		unauthorizedTwitter.directMessageOperations().deleteDirectMessage(42L);
+	}
+	
 	private void assertDirectMessageListContents(List<DirectMessage> messages) {
 		assertEquals(2, messages.size());
 		assertEquals(12345, messages.get(0).getId());

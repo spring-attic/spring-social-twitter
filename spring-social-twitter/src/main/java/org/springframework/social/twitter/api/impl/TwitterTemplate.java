@@ -72,7 +72,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitte
 	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
 	 * Some operations, such as search, do not require OAuth authentication.
 	 * A TwitterTemplate created with this constructor will support those operations.
-	 * Those operations requiring authentication will throw {@link BadCredentialsException}.
+	 * Any operations requiring authentication will throw {@link IllegalStateException} .
 	 */
 	public TwitterTemplate() {
 		super();

@@ -27,18 +27,21 @@ public interface UserOperations {
 	/**
 	 * Retrieves the authenticated user's Twitter ID.
 	 * @return the user's ID at Twitter
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	long getProfileId();
 	
 	/**
 	 * Retrieves the authenticated user's Twitter screen name
 	 * @return the user's screen name
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String getScreenName();
 
 	/**
 	 * Retrieves the authenticated user's Twitter profile details.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile getUserProfile();
 
@@ -85,6 +88,7 @@ public interface UserOperations {
 	
 	/**
 	 * Searches for users that match a given query.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> searchForUsers(String query);
 	

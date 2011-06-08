@@ -27,6 +27,7 @@ public interface BlockOperations {
 	 * Blocks a user. If a friendship exists with the user, it will be destroyed.
 	 * @param userId the ID of the user to block.
 	 * @return The {@link TwitterProfile} of the blocked user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(long userId);
 	
@@ -34,6 +35,7 @@ public interface BlockOperations {
 	 * Blocks a user. If a friendship exists with the user, it will be destroyed.
 	 * @param screenName the screen name of the user to block.
 	 * @return The {@link TwitterProfile} of the blocked user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(String screenName);
 
@@ -41,6 +43,7 @@ public interface BlockOperations {
 	 * Unblocks a user.
 	 * @param userId the ID of the user to unblock.
 	 * @return The {@link TwitterProfile} of the unblocked user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile unblock(long userId);
 	
@@ -48,18 +51,21 @@ public interface BlockOperations {
 	 * Unblocks a user.
 	 * @param screenName the screen name of the user to unblock.
 	 * @return The {@link TwitterProfile} of the unblocked user.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile unblock(String screenName);
 	
 	/**
 	 * Retrieves a list of users that the authenticating user has blocked.
 	 * @return a list of {@link TwitterProfile}s for the users that are blocked.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getBlockedUsers();
 	
 	/**
 	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
 	 * @return a list of user IDs for the users that are blocked.
+	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getBlockedUserIds();
 
