@@ -128,6 +128,8 @@ public interface TimelineOperations {
 	/**
 	 * Updates the user's status.
 	 * @param status The status message
+	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws StatusLengthException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status);
@@ -136,6 +138,8 @@ public interface TimelineOperations {
 	 * Updates the user's status, including additional metadata concerning the status.
 	 * @param status The status message
 	 * @param details Metadata pertaining to the status
+	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws StatusLengthException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status, StatusDetails details);

@@ -15,16 +15,20 @@
  */
 package org.springframework.social.twitter.api;
 
-import org.springframework.social.SocialException;
+import org.springframework.social.ProviderApiException;
 
+/**
+ * Exception thrown when API calls are being rate-limited.
+ * @author Craig Walls
+ */
 @SuppressWarnings("serial")
-public class EnhanceYourCalmException extends SocialException {
-	
-	public EnhanceYourCalmException(String message) {
+public class RateLimitException extends ProviderApiException {
+	// TODO: Capture the rate limit details (retry after)?
+	public RateLimitException(String message) {
 		super(message);
 	}
 	
-	public EnhanceYourCalmException(String message, Throwable cause) {
+	public RateLimitException(String message, Throwable cause) {
 		super(message, cause);
 	}
 }

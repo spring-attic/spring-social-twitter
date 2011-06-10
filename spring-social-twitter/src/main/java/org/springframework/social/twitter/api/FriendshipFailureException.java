@@ -15,7 +15,7 @@
  */
 package org.springframework.social.twitter.api;
 
-import org.springframework.social.SocialException;
+import org.springframework.social.ProviderApiException;
 
 /**
  * An exception that is thrown when a follow or and unfollow fails usually because the authenticated user is already
@@ -23,7 +23,7 @@ import org.springframework.social.SocialException;
  * 
  * @author Gary Jarrel
  */
-public class FriendshipFailureException extends SocialException {
+public class FriendshipFailureException extends ProviderApiException {
 
     private static final long serialVersionUID = 1L;
     

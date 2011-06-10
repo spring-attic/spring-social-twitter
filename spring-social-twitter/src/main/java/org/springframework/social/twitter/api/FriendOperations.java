@@ -113,6 +113,7 @@ public interface FriendOperations {
 	 * @param userId The Twitter ID of the user to follow
 	 * @return the name of the followed user if successful
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user is already being followed).
 	 */
 	String follow(long userId);
 	
@@ -121,6 +122,7 @@ public interface FriendOperations {
 	 * @param screenName The screen name of the user to follow
 	 * @return the name of the followed user if successful
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user is already being followed).
 	 */
 	String follow(String screenName);
 
@@ -129,6 +131,7 @@ public interface FriendOperations {
 	 * @param userId the Twitter ID of the user to unfollow 
 	 * @return the name of the unfolloed user if successful 
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user isn't being followed).
 	 */
 	String unfollow(long userId);
 	
@@ -137,6 +140,7 @@ public interface FriendOperations {
 	 * @param screenName the screen name of the user to unfollow 
 	 * @return the name of the unfolloed user if successful 
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user isn't being followed).
 	 */
 	String unfollow(String screenName);
 	

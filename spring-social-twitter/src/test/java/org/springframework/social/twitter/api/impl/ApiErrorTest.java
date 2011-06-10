@@ -20,16 +20,17 @@ import static org.springframework.http.HttpMethod.*;
 import static org.springframework.social.test.client.RequestMatchers.*;
 import static org.springframework.social.test.client.ResponseCreators.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.BadCredentialsException;
-import org.springframework.social.twitter.api.EnhanceYourCalmException;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
+import org.springframework.social.ProviderApiException;
+import org.springframework.social.ProviderServerErrorException;
+import org.springframework.social.twitter.api.RateLimitException;
 
 public class ApiErrorTest extends AbstractTwitterApiTest {
 
-	@Test(expected=BadCredentialsException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void badOrMissingAccessToken() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
 			.andExpect(method(POST))
@@ -38,7 +39,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().updateStatus("Some message");		
 	}
 	
-	@Test(expected=EnhanceYourCalmException.class)
+	@Test(expected = RateLimitException.class)
 	public void enhanceYourCalm() {
 		mockServer.expect(requestTo("https://search.twitter.com/search.json?q=%23spring&rpp=50&page=1"))
 			.andExpect(method(GET))
@@ -46,63 +47,78 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.searchOperations().search("#spring");
 	}
 
-	@Test
+	@Test(expected = ProviderServerErrorException.class)
 	public void twitterIsBroken() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR, ""));
 			twitter.timelineOperations().getHomeTimeline();
-			fail();
-		} catch (HttpServerErrorException e) {
-			assertEquals("500 Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.", e.getMessage());
+		} catch (ProviderServerErrorException e) {
+			assertEquals("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.", e.getMessage());
+			throw e;
 		}
 	}
 	
-	@Test
+	@Test(expected = ProviderServerErrorException.class)
 	public void twitterIsDownOrBeingUpgraded() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.BAD_GATEWAY, ""));
 			twitter.timelineOperations().getHomeTimeline();
-			fail();
-		} catch (HttpServerErrorException e) {
-			assertEquals("502 Twitter is down or is being upgraded.", e.getMessage());
+		} catch (ProviderServerErrorException e) {
+			assertEquals("Twitter is down or is being upgraded.", e.getMessage());
+			throw e;
 		}
 	}
 	
-	@Test
+	@Test(expected = ProviderServerErrorException.class)
 	public void twitterIsOverloaded() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.SERVICE_UNAVAILABLE, ""));
 			twitter.timelineOperations().getHomeTimeline();
-			fail();
-		} catch (HttpServerErrorException e) {
-			assertEquals("503 Twitter is overloaded with requests. Try again later.", e.getMessage());
+		} catch (ProviderServerErrorException e) {
+			assertEquals("Twitter is overloaded with requests. Try again later.", e.getMessage());
+			throw e;
 		}
 	}
 
-	@Test
+	@Test(expected = ProviderApiException.class)
 	public void resourceNotFound() {
 		try {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/9876543210.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse("{\"error\":\"No status found with that ID.\", \"request\":\"/1/statuses/show/98765432109876.json\"}", responseHeaders, HttpStatus.NOT_FOUND, ""));
-		twitter.timelineOperations().getStatus(9876543210L);
-		} catch (HttpClientErrorException e) {
-			assertEquals("404 No status found with that ID.; Path: /1/statuses/show/98765432109876.json", e.getMessage());
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/9876543210.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse("{\"error\":\"No status found with that ID.\", \"request\":\"/1/statuses/show/98765432109876.json\"}", responseHeaders, HttpStatus.NOT_FOUND, ""));
+			twitter.timelineOperations().getStatus(9876543210L);
+		} catch (ProviderApiException e) {
+			assertEquals("Resource not found: No status found with that ID.; Path: /1/statuses/show/98765432109876.json", e.getMessage());
+			throw e;
 		}
 	}
 
-	@Test(expected = HttpClientErrorException.class)
-	public void defaultErrorHandlingWhenNonJSONResponse() {
+	@Test(expected = ProviderApiException.class)
+	public void nonJSONErrorResponse() {
+		try { 
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+				.andExpect(method(GET))
+				.andRespond(withResponse("<h1>HTML response</h1>", responseHeaders, HttpStatus.BAD_REQUEST, ""));
+			twitter.timelineOperations().getHomeTimeline();
+		} catch (ProviderApiException e) {
+			assertEquals("Error consuming Twitter REST API", e.getMessage());
+			throw e;
+		}
+	}
+	
+	@Test(expected = ProviderApiException.class)
+	@Ignore("TODO: Need to handle cases where there isn't an error, but the body is unparseable.")
+	public void unparseableSuccessResponse() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("<h1>HTML response</h1>", responseHeaders, HttpStatus.BAD_REQUEST, ""));
-		twitter.timelineOperations().getHomeTimeline();
+			.andRespond(withResponse("Unparseable {text}", responseHeaders, HttpStatus.OK, ""));
+		twitter.timelineOperations().getHomeTimeline();		
 	}
 	
 }

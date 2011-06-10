@@ -28,13 +28,14 @@ import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.BadCredentialsException;
 import org.springframework.social.OperationNotPermittedException;
+import org.springframework.social.ProviderApiException;
+import org.springframework.social.ProviderServerErrorException;
+import org.springframework.social.ResourceNotFoundException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
-import org.springframework.social.twitter.api.EnhanceYourCalmException;
 import org.springframework.social.twitter.api.InvalidMessageRecipientException;
+import org.springframework.social.twitter.api.RateLimitException;
 import org.springframework.social.twitter.api.StatusLengthException;
 import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 /**
  * Subclass of {@link DefaultResponseErrorHandler} that handles errors from Twitter's
@@ -53,8 +54,12 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			handleClientErrors(response);
 		}
 		
-		// if not otherwise handled, do default handling
-		super.handleError(response);
+		// if not otherwise handled, do default handling and wrap with ProviderApiException
+		try {
+			super.handleError(response);
+		} catch(Exception e) {
+			throw new ProviderApiException("Error consuming Twitter REST API", e);
+		}
 	}
 	
 	private void handleClientErrors(ClientHttpResponse response) throws IOException {
@@ -66,7 +71,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
 		if(errorMap == null) {
-			super.handleError(response);
+			return; // unexpected error body, can't be handled here
 		}
 		
 		String errorText = null;
@@ -88,19 +93,19 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 				throw new OperationNotPermittedException(errorText);
 			}			
 		} else if (statusCode == HttpStatus.NOT_FOUND) {
-			throw new HttpClientErrorException(statusCode, errorText + "; Path: " + errorMap.get("request"));
+			throw new ResourceNotFoundException("Resource not found: " + errorText + "; Path: " + errorMap.get("request"));
 		} else if (statusCode == HttpStatus.valueOf(ENHANCE_YOUR_CALM)) {
-			throw new EnhanceYourCalmException(errorText);
+			throw new RateLimitException(errorText);
 		}
 	}
 
 	private void handleServerErrors(HttpStatus statusCode) throws IOException {
 		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new HttpServerErrorException(statusCode, "Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
+			throw new ProviderServerErrorException("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
 		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
-			throw new HttpServerErrorException(statusCode, "Twitter is down or is being upgraded.");
+			throw new ProviderServerErrorException("Twitter is down or is being upgraded.");
 		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-			throw new HttpServerErrorException(statusCode, "Twitter is overloaded with requests. Try again later.");
+			throw new ProviderServerErrorException("Twitter is overloaded with requests. Try again later.");
 		}
 	}
 

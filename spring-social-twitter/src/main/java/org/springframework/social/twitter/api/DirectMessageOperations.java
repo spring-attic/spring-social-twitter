@@ -51,10 +51,8 @@ public interface DirectMessageOperations {
 	 *            the screen name of the recipient of the messages.
 	 * @param text
 	 *            the message text.
-	 * @throws InvalidMessageRecipientException
-	 *             if the recipient is not following the authenticating user.
-	 * @throws DuplicateTweetException
-	 *             if the message duplicates a previously sent message.
+	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
+	 * @throws DuplicateTweetException if the message duplicates a previously sent message.
 	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void sendDirectMessage(String toScreenName, String text);

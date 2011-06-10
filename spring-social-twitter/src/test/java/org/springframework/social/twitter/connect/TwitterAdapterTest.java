@@ -19,12 +19,14 @@ import static org.junit.Assert.*;
 
 import java.util.Date;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.social.connect.UserProfile;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserOperations;
+import org.springframework.web.client.ResourceAccessException;
 
 public class TwitterAdapterTest {
 
@@ -84,4 +86,12 @@ public class TwitterAdapterTest {
 		assertEquals("kdonald", profile.getUsername());
 	}
 	
+	@Test
+	@Ignore
+	public void fetchProfile_IOError() {
+		UserOperations userOperations = Mockito.mock(UserOperations.class);
+		Mockito.when(twitter.userOperations()).thenReturn(userOperations);
+		Mockito.when(userOperations.getUserProfile()).thenThrow(new ResourceAccessException("Resource access exception"));
+		apiAdapter.fetchUserProfile(twitter);
+	}
 }
