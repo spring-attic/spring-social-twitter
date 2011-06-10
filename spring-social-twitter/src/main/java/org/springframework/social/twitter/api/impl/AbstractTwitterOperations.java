@@ -17,6 +17,7 @@ package org.springframework.social.twitter.api.impl;
 
 import java.net.URI;
 
+import org.springframework.social.BadCredentialsException;
 import org.springframework.social.support.URIBuilder;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -31,7 +32,7 @@ class AbstractTwitterOperations {
 	
 	protected void requireUserAuthorization() {
 		if(!isAuthorizedForUser) {
-			throw new IllegalStateException("User authorization required: TwitterTemplate must be created with OAuth credentials to perform this operation.");
+			throw new BadCredentialsException("User authorization required: TwitterTemplate must be created with OAuth credentials to perform this operation.");
 		}
 	}
 	

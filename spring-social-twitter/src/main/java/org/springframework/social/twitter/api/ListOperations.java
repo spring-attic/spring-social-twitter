@@ -17,6 +17,9 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
+import org.springframework.social.BadCredentialsException;
+import org.springframework.social.ProviderApiException;
+
 
 /**
  * Interface defining the operations for working with a user's lists.
@@ -27,7 +30,8 @@ public interface ListOperations {
 	/**
 	 * Retrieves user lists for the authenticated user.
 	 * @return a list of {@link UserList}s for the specified user.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<UserList> getLists();
 	
@@ -35,6 +39,7 @@ public interface ListOperations {
 	 * Retrieves user lists for a given user.
 	 * @param userId the ID of the Twitter user.
 	 * @return a list of {@link UserList}s for the specified user.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<UserList> getLists(long userId);
 
@@ -42,6 +47,7 @@ public interface ListOperations {
 	 * Retrieves user lists for a given user.
 	 * @param screenName the screen name of the Twitter user.
 	 * @return a list of {@link UserList}s for the specified user.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<UserList> getLists(String screenName);
 
@@ -49,6 +55,7 @@ public interface ListOperations {
 	 * Retrieves a specific user list.
 	 * @param listId the ID of the list to retrieve.
 	 * @return the requested {@link UserList}
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	UserList getList(long listId);
 
@@ -57,6 +64,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the lists's slug
 	 * @return the requested {@link UserList}
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	UserList getList(String screenName, String listSlug);
 
@@ -64,6 +72,7 @@ public interface ListOperations {
 	 * Retrieves the timeline tweets for the given user list.
 	 * @param listId the ID of the list to retrieve.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getListStatuses(long listId);
 
@@ -72,6 +81,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the Twitter user.
 	 * @param listSlug the list's slug.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getListStatuses(String screenName, String listSlug);
 
@@ -81,7 +91,8 @@ public interface ListOperations {
 	 * @param description the list description.
 	 * @param isPublic if true, the list will be public; if false the list will be private.
 	 * @return the newly created {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList createList(String name, String description, boolean isPublic);
 
@@ -92,20 +103,23 @@ public interface ListOperations {
 	 * @param description the new list description.
 	 * @param isPublic if true, the list will be public; if false the list will be private.
 	 * @return the newly created {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList updateList(long listId, String name, String description, boolean isPublic);
 
 	/**
 	 * Removes a user list.
 	 * @param listId the ID of the list to be removed.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteList(long listId);
 	
 	/**
 	 * Retrieves a list of Twitter profiles whose users are members of the list.
 	 * @param listId the ID of the list.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @return a list of {@link TwitterProfile}
 	 */
 	List<TwitterProfile> getListMembers(long listId);
@@ -114,6 +128,7 @@ public interface ListOperations {
 	 * Retrieves a list of Twitter profiles whose users are members of the list.
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @return a list of {@link TwitterProfile}
 	 */
 	List<TwitterProfile> getListMembers(String screenName, String listSlug);
@@ -123,7 +138,8 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @param newMemberIds one or more profile IDs of the Twitter profiles to add to the list.
 	 * @return the {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList addToList(long listId, long... newMemberIds);
 
@@ -132,7 +148,8 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @param newMemberScreenNames one or more profile IDs of the Twitter profiles to add to the list.
 	 * @return the {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList addToList(long listId, String... newMemberScreenNames);
 
@@ -140,7 +157,8 @@ public interface ListOperations {
 	 * Removes a member from a user list.
 	 * @param listId the ID of the list.
 	 * @param memberId the ID of the member to be removed.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromList(long listId, long memberId);
 
@@ -148,7 +166,8 @@ public interface ListOperations {
 	 * Removes a member from a user list.
 	 * @param listId the ID of the list.
 	 * @param memberScreenName the ID of the member to be removed.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromList(long listId, String memberScreenName);
 
@@ -156,7 +175,8 @@ public interface ListOperations {
 	 * Subscribes the authenticating user to a list.
 	 * @param listId the ID of the list.
 	 * @return the {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList subscribe(long listId);
 
@@ -165,7 +185,8 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @return the {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList subscribe(String screenName, String listSlug);
 
@@ -173,7 +194,8 @@ public interface ListOperations {
 	 * Unsubscribes the authenticating user from a list.
 	 * @param listId the ID of the list.
 	 * @return the {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList unsubscribe(long listId);
 
@@ -182,7 +204,8 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @return the {@link UserList}
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList unsubscribe(String screenName, String listSlug);
 
@@ -191,6 +214,7 @@ public interface ListOperations {
 	 * @param userId the user ID of the list owner.
 	 * @param listId the ID of the list.
 	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<TwitterProfile> getListSubscribers(long userId, long listId);
 
@@ -199,6 +223,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<TwitterProfile> getListSubscribers(String screenName, String listSlug);
 
@@ -206,6 +231,7 @@ public interface ListOperations {
 	 * Retrieves the lists that a given user is a member of.
 	 * @param userId the user ID
 	 * @return a list of {@link UserList}s that the user is a member of.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<UserList> getMemberships(long userId);
 
@@ -213,6 +239,7 @@ public interface ListOperations {
 	 * Retrieves the lists that a given user is a member of.
 	 * @param screenName the user's screen name
 	 * @return a list of {@link UserList}s that the user is a member of.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<UserList> getMemberships(String screenName);
 
@@ -220,6 +247,7 @@ public interface ListOperations {
 	 * Retrieves the lists that a given user is subscribed to.
 	 * @param userId the user ID
 	 * @return a list of {@link UserList}s that the user is subscribed to.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<UserList> getSubscriptions(long userId);
 
@@ -227,6 +255,7 @@ public interface ListOperations {
 	 * Retrieves the lists that a given user is subscribed to.
 	 * @param screenName the user's screen name
 	 * @return a list of {@link UserList}s that the user is subscribed to.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<UserList> getSubscriptions(String screenName);
 
@@ -235,7 +264,8 @@ public interface ListOperations {
 	 * @param listId the list ID
 	 * @param memberId the user ID to check for membership
 	 * @return true if the user is a member of the list
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isMember(long listId, long memberId);
 	
@@ -245,7 +275,8 @@ public interface ListOperations {
 	 * @param listSlug the list's slug
 	 * @param memberScreenName the screenName to check for membership
 	 * @return true if the user is a member of the list
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isMember(String screenName, String listSlug, String memberScreenName);
 
@@ -254,6 +285,7 @@ public interface ListOperations {
 	 * @param listId the list ID
 	 * @param subscriberId the user ID to check for subscribership
 	 * @return true if the user is a member of the list
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	boolean isSubscriber(long listId, long subscriberId);
 	
@@ -263,6 +295,7 @@ public interface ListOperations {
 	 * @param listSlug the list's slug
 	 * @param subscriberScreenName the screenName to check for subscribership
 	 * @return true if the user is a member of the list
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	boolean isSubscriber(String screenName, String listSlug, String subscriberScreenName);
 

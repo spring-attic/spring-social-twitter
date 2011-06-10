@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.social.BadCredentialsException;
 import org.springframework.social.twitter.api.TwitterProfile;
 
 
@@ -44,7 +45,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", friends.get(1).getScreenName());
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getFriends_currentUser_unauthorized() {
 		unauthorizedTwitter.friendOperations().getFriends();
 	}
@@ -86,7 +87,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567L, (long) followerIds.get(2));
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getFriendIds_currentUser_unauthorized() {
 		unauthorizedTwitter.friendOperations().getFriendIds();
 	}
@@ -129,7 +130,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", followers.get(1).getScreenName());
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getFollowers_currentUser_unauthorized() {
 		unauthorizedTwitter.friendOperations().getFollowers();
 	}
@@ -171,7 +172,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567L, (long) followerIds.get(2));
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getFollowerIds_currentUser_unauthorized() {
 		unauthorizedTwitter.friendOperations().getFollowerIds();
 	}
@@ -214,7 +215,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	    mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void follow_byUserId_unauthorized() {
 		unauthorizedTwitter.friendOperations().follow(98765);
 	}
@@ -231,7 +232,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	    mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void follow_byScreenName_unauthorized() {
 		unauthorizedTwitter.friendOperations().follow("aizik2");
 	}
@@ -248,7 +249,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void unfollow_byUserId_unauthorized() {
 		unauthorizedTwitter.friendOperations().unfollow(98765);
 	}
@@ -265,7 +266,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void unfollow_byScreenName_unauthorized() {
 		unauthorizedTwitter.friendOperations().follow("aizik2");
 	}
@@ -280,7 +281,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void enableNotifications_byUserId_unauthorized() {
 		unauthorizedTwitter.friendOperations().enableNotifications(98765);
 	}
@@ -295,7 +296,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void enableNotifications_byScreenName_unauthorized() {
 		unauthorizedTwitter.friendOperations().enableNotifications("oizik2");
 	}
@@ -310,7 +311,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void disableNotifications_byUserId_unauthorized() {
 		unauthorizedTwitter.friendOperations().disableNotifications(98765);
 	}
@@ -325,7 +326,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
         mockServer.verify();
     }
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void disableNotifications_byScreenName_unauthorized() {
 		unauthorizedTwitter.friendOperations().disableNotifications("oizik2");
 	}
@@ -356,7 +357,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567, (long) friendships.get(2));
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getIncomingFriendships_unauthorized() {
 		unauthorizedTwitter.friendOperations().getIncomingFriendships();
 	}
@@ -374,7 +375,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567, (long) friendships.get(2));
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getOutgoingFriendships_unauthorized() {
 		unauthorizedTwitter.friendOperations().getOutgoingFriendships();
 	}

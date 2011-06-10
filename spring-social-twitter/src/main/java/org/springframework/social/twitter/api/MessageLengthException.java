@@ -18,9 +18,9 @@ package org.springframework.social.twitter.api;
 import org.springframework.social.ProviderApiException;
 
 @SuppressWarnings("serial")
-public class StatusLengthException extends ProviderApiException {
+public class MessageLengthException extends ProviderApiException {
 
-	public StatusLengthException(String message) {
+	public MessageLengthException(String message) {
 		super(message);
 	}
 	

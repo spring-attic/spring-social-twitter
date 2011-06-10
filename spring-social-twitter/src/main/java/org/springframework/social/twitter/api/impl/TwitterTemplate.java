@@ -41,7 +41,7 @@ import org.springframework.social.twitter.api.UserOperations;
  * OAuth <code>Authorization</code> header.
  * </p>
  * <p>
- * There are a few operations, such as searching, that do not require OAuth
+ * There are some operations, such as searching, that do not require OAuth
  * authentication. In those cases, you may use a {@link TwitterTemplate} that is
  * created through the default constructor and without any OAuth details.
  * Attempts to perform secured operations through such an instance, however,
@@ -72,7 +72,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitte
 	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
 	 * Some operations, such as search, do not require OAuth authentication.
 	 * A TwitterTemplate created with this constructor will support those operations.
-	 * Any operations requiring authentication will throw {@link IllegalStateException} .
+	 * Any operations requiring authentication will throw {@link BadCredentialsException} .
 	 */
 	public TwitterTemplate() {
 		super();

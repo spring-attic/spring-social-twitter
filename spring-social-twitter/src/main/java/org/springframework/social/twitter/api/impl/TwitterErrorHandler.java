@@ -34,7 +34,7 @@ import org.springframework.social.ResourceNotFoundException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.InvalidMessageRecipientException;
 import org.springframework.social.twitter.api.RateLimitException;
-import org.springframework.social.twitter.api.StatusLengthException;
+import org.springframework.social.twitter.api.MessageLengthException;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 
 /**
@@ -85,8 +85,8 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		if(statusCode == HttpStatus.FORBIDDEN) {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
 				throw new DuplicateTweetException(errorText);
-			} else if (errorText.equals(STATUS_TOO_LONG_TEXT)) {
-				throw new StatusLengthException(errorText);
+			} else if (errorText.equals(STATUS_TOO_LONG_TEXT) || errorText.contains(MESSAGE_TOO_LONG_TEXT)) {
+				throw new MessageLengthException(errorText);
 			} else if (errorText.equals(INVALID_MESSAGE_RECIPIENT_TEXT)) {
 				throw new InvalidMessageRecipientException(errorText);
 			} else {
@@ -120,6 +120,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 
 	private static final String INVALID_MESSAGE_RECIPIENT_TEXT = "You cannot send messages to users who are not following you.";
 	private static final String STATUS_TOO_LONG_TEXT = "Status is over 140 characters.";
+	private static final String MESSAGE_TOO_LONG_TEXT = "The text of your direct message is over 140 characters";
 	private static final String DUPLICATE_STATUS_TEXT = "Status is a duplicate.";
 	
 	private static final int ENHANCE_YOUR_CALM = 420;

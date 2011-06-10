@@ -24,7 +24,10 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.social.BadCredentialsException;
 import org.springframework.social.twitter.api.DirectMessage;
+import org.springframework.social.twitter.api.MessageLengthException;
 
 /**
  * @author Craig Walls
@@ -41,7 +44,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getDirectMessagesReceived_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().getDirectMessagesReceived();
 	}
@@ -56,7 +59,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getDirectMessagesSent_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().getDirectMessagesSent();
 	}
@@ -69,8 +72,17 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		twitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
 		mockServer.verify();
 	}
-	
-	@Test(expected = IllegalStateException.class)
+
+	@Test(expected = MessageLengthException.class)
+	public void sendDirectMessage_toScreenName_tooLong() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/new.json")).andExpect(method(POST))
+				.andExpect(body("screen_name=habuma&text=Really+long+message"))
+			.andRespond(withResponse("{\"error\":\"There was an error sending your message: The text of your direct message is over 140 characters.\"}", responseHeaders, HttpStatus.FORBIDDEN, ""));		
+		twitter.directMessageOperations().sendDirectMessage("habuma", "Really long message");
+		mockServer.verify();
+	}
+
+	@Test(expected = BadCredentialsException.class)
 	public void sendDirectMessaage_toScreenName_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
 	}
@@ -83,7 +95,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void sendDirectMessaage_toUserId_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().sendDirectMessage(112233, "Hello there!");
 	}
@@ -97,7 +109,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void deleteDirectMessage_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().deleteDirectMessage(42L);
 	}

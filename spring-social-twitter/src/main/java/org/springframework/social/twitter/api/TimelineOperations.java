@@ -17,6 +17,9 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
+import org.springframework.social.BadCredentialsException;
+import org.springframework.social.ProviderApiException;
+
 
 /**
  * Interface defining the operations for sending and retrieving tweets. 
@@ -36,6 +39,7 @@ public interface TimelineOperations {
 	 * </p>
 	 * 
 	 * @return a collection of {@link Tweet}s in the public timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getPublicTimeline();
 
@@ -45,92 +49,91 @@ public interface TimelineOperations {
 	 * tweets from the user's timeline and the timeline of anyone that they
 	 * follow.
 	 * 
-	 * @return a collection of {@link Tweet}s in the authenticating user's home
-	 *         timeline.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @return a collection of {@link Tweet}s in the authenticating user's home timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getHomeTimeline();
 
 	/**
-	 * <p>
 	 * Retrieves the 20 most recently posted tweets, excluding retweets, from
 	 * the authenticating user's home timeline. The friends timeline includes
 	 * tweets from the user's timeline and the timeline of anyone that they
 	 * follow, with the exception of any retweets.
-	 * </p>
 	 * 
-	 * @return a collection of {@link Tweet}s in the authenticating user's
-	 *         friends timeline.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @return a collection of {@link Tweet}s in the authenticating user's friends timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFriendsTimeline();
 
 	/**
 	 * Retrieves the 20 most recent tweets posted by the authenticating user.
-	 * 
-	 * @return a collection of {@link Tweet}s that have been posted by the
-	 *         authenticating user.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @return a collection of {@link Tweet}s that have been posted by the authenticating user.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getUserTimeline();
 
 	/**
 	 * Retrieves the 20 most recent tweets posted by the given user.
-	 * 
-	 * @param screenName
-	 *            The screen name of the user whose timeline is being requested.
-	 * @return a collection of {@link Tweet}s from the specified user's
-	 *         timeline.
+	 * @param screenName The screen name of the user whose timeline is being requested.
+	 * @return a collection of {@link Tweet}s from the specified user's timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getUserTimeline(String screenName);
 
 	/**
 	 * Retrieves the 20 most recent tweets posted by the given user.
-	 * 
-	 * @param userId
-	 *            The user ID of the user whose timeline is being requested.
-	 * @return a collection of {@link Tweet}s from the specified user's
-	 *         timeline.
+	 * @param userId The user ID of the user whose timeline is being requested.
+	 * @return a collection of {@link Tweet}s from the specified user's timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getUserTimeline(long userId);
 
 	/**
 	 * Retrieve the 20 most recent tweets that mention the authenticated user.
 	 * @return a collection of {@link Tweet} objects that mention the authenticated user.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getMentions();
 
 	/**
 	 * Retrieve the 20 most recent retweets posted by the authenticated user.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetedByMe();
 
 	/**
 	 * Retrieve the 20 most recent retweets posted by users the authenticating user follow.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetedToMe();
 
 	/**
 	 * Retrieve the 20 most recent tweets of the authenticated user that have been retweeted by others.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetsOfMe();
 
 	/**
 	 * Returns a single tweet.
 	 * @param tweetId the tweet's ID
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	Tweet getStatus(long tweetId);
 
 	/**
 	 * Updates the user's status.
 	 * @param status The status message
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
-	 * @throws StatusLengthException if the length of the status message exceeds Twitter's 140 character limit.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MessageLengthException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status);
 
@@ -138,65 +141,73 @@ public interface TimelineOperations {
 	 * Updates the user's status, including additional metadata concerning the status.
 	 * @param status The status message
 	 * @param details Metadata pertaining to the status
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
-	 * @throws StatusLengthException if the length of the status message exceeds Twitter's 140 character limit.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MessageLengthException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status, StatusDetails details);
 
 	/**
 	 * Removes a status entry.
 	 * @param tweetId the tweet's ID
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteStatus(long tweetId);
 
 	/**
 	 * Posts a retweet of an existing tweet.
 	 * @param tweetId The ID of the tweet to be retweeted
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void retweet(long tweetId);
 
 	/**
 	 * Retrieves up to 100 retweets of a specific tweet.
 	 * @param tweetId the tweet's ID
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getRetweets(long tweetId);
 
 	/**
 	 * Retrieves the profiles of up to 100 users how have retweeted a specific tweet.
 	 * @param id the tweet's ID
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<TwitterProfile> getRetweetedBy(long id);
 
 	/**
 	 * Retrieves the IDs of up to 100 users who have retweeted a specific tweet.
 	 * @param id the tweet's ID.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getRetweetedByIds(long id);
 
 	/**
 	 * Retrieves the 20 most recent tweets favorited by the given user.
 	 * 
-	 * @return a collection of {@link Tweet}s from the specified user's favorite
-	 *         timeline.
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFavorites();
 
 	/**
 	 * Adds a tweet to the user's collection of favorite tweets.
 	 * @param id the tweet's ID
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void addToFavorites(long id);
 
 	/**
 	 * Removes a tweet from the user's collection of favorite tweets.
 	 * @param id the tweet's ID
-	 * @throws IllegalStateException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromFavorites(long id);
 

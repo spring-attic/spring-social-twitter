@@ -26,10 +26,11 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.social.BadCredentialsException;
 import org.springframework.social.OperationNotPermittedException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.StatusDetails;
-import org.springframework.social.twitter.api.StatusLengthException;
+import org.springframework.social.twitter.api.MessageLengthException;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -57,7 +58,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getHomeTimeline_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getHomeTimeline();
 	}
@@ -71,7 +72,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getFriendsTimeline_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getFriendsTimeline();
 	}
@@ -85,7 +86,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getUserTimeline_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getUserTimeline();
 	}
@@ -117,7 +118,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(mentions);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getMentions_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getMentions();
 	}
@@ -131,7 +132,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);		
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getRetweetedByMe_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getRetweetedByMe();
 	}
@@ -145,7 +146,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);				
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getRetweetedToMe_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getRetweetedToMe();
 	}
@@ -159,7 +160,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);				
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getRetweetsOfMe_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getRetweetsOfMe();
 	}
@@ -186,7 +187,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void updateStatus_unauthorized() {
 		unauthorizedTwitter.timelineOperations().updateStatus("Shouldn't work");
 	}
@@ -205,7 +206,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void updateStatus_withLocation_unauthorized() {
 		StatusDetails details = new StatusDetails();
 		details.setLocation(123.1f, -111.2f);
@@ -222,7 +223,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().updateStatus("Test Message");
 	}
 	
-	@Test(expected=StatusLengthException.class)
+	@Test(expected=MessageLengthException.class)
 	public void updateStatus_tweetTooLong() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
 			.andExpect(method(POST))
@@ -250,7 +251,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void deleteStatus_unauthorized() {
 		unauthorizedTwitter.timelineOperations().deleteStatus(12345L);
 	}
@@ -266,7 +267,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void retweet_unauthorized() {
 		unauthorizedTwitter.timelineOperations().retweet(12345L);
 	}
@@ -323,7 +324,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(34567, (long) retweetedByIds.get(2));
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getRetweetedByIds_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getRetweetedByIds(12345L);
 	}
@@ -337,7 +338,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void getFavorites_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getFavorites();
 	}
@@ -351,7 +352,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void addToFavorites_unauthorized() {
 		unauthorizedTwitter.timelineOperations().addToFavorites(12345L);
 	}
@@ -365,7 +366,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = BadCredentialsException.class)
 	public void removeFromFavorites_unauthorized() {
 		unauthorizedTwitter.timelineOperations().removeFromFavorites(12345L);
 	}
