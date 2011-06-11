@@ -25,13 +25,13 @@ public class TwitterTemplateTest {
 	@Test
 	public void isAuthorizedForUser() {
 		TwitterTemplate twitter = new TwitterTemplate("API_KEY", "API_SECRET", "ACCESS_TOKEN", "ACCESS_TOKEN_SECRET");
-		assertTrue(twitter.isAuthorizedForUser());
+		assertTrue(twitter.isAuthorized());
 	}
 
 	@Test
 	public void isAuthorizedForUser_notAuthorized() {
 		TwitterTemplate twitter = new TwitterTemplate();
-		assertFalse(twitter.isAuthorizedForUser());
+		assertFalse(twitter.isAuthorized());
 	}
 
 }

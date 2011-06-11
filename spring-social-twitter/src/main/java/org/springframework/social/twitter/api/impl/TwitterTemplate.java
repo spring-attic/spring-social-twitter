@@ -21,7 +21,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.social.BadCredentialsException;
-import org.springframework.social.oauth1.AbstractOAuth1ApiTemplate;
+import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.DirectMessageOperations;
 import org.springframework.social.twitter.api.FriendOperations;
@@ -49,7 +49,7 @@ import org.springframework.social.twitter.api.UserOperations;
  * </p>
  * @author Craig Walls
  */
-public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitter {
+public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter {
 	
 	private TimelineOperations timelineOperations;
 
@@ -142,14 +142,14 @@ public class TwitterTemplate extends AbstractOAuth1ApiTemplate implements Twitte
 	}
 	
 	private void initSubApis() {
-		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.listOperations = new ListTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorizedForUser());
-		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorizedForUser());
+		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
+		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
+		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized());
+		this.listOperations = new ListTemplate(getRestTemplate(), isAuthorized());
+		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorized());
+		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorized());
+		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorized());
+		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorized());
 	}
 
 }

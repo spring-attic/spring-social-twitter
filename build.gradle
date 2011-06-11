@@ -99,7 +99,8 @@ configure(javaprojects) {
     junitVersion = '4.8.2'
     mockitoVersion = '1.8.5'
     springVersion = '3.1.0.M2'
-
+	springSecurityVersion = '3.1.0.CI-SNAPSHOT'
+	
     sourceSets {
         main {
             resources {
@@ -127,7 +128,6 @@ configure(javaprojects) {
     eclipseClasspath.variables = [:]
 }
 
-
 // -----------------------------------------------------------------------------
 // Configuration for each individual core java subproject
 //
@@ -140,7 +140,7 @@ project('spring-social-twitter') {
        compile "org.springframework.social:spring-social-core:$springSocialVersion"
        compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
        testCompile "org.springframework.social:spring-social-test:$springSocialVersion"
-       testCompile ("commons-codec:commons-codec:$commonsCodecVersion")
+       testCompile "org.springframework.security:spring-security-crypto:$springSecurityVersion"
     }
 }
 

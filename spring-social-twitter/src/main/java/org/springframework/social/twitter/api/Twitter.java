@@ -15,6 +15,8 @@
  */
 package org.springframework.social.twitter.api;
 
+import org.springframework.social.ApiBinding;
+
 
 /**
  * Interface specifying a basic set of operations for interacting with Twitter.
@@ -22,12 +24,7 @@ package org.springframework.social.twitter.api;
  *
  * @author Craig Walls
  */
-public interface Twitter {
-	
-	/**
-	 * Returns true if the Twitter API binding is configured to act on behalf of a user (eg., if it was created with OAuth credentials).
-	 */
-	boolean isAuthorizedForUser();
+public interface Twitter extends ApiBinding {
 	
 	/**
 	 * Returns the portion of the Twitter API containing the direct message operations.
