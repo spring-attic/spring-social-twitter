@@ -33,8 +33,8 @@ import org.springframework.social.ProviderServerErrorException;
 import org.springframework.social.ResourceNotFoundException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.InvalidMessageRecipientException;
-import org.springframework.social.twitter.api.RateLimitException;
 import org.springframework.social.twitter.api.MessageLengthException;
+import org.springframework.social.twitter.api.RateLimitException;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 
 /**
@@ -47,6 +47,8 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 	@Override
 	public void handleError(ClientHttpResponse response) throws IOException {
 		HttpStatus statusCode = response.getStatusCode();
+		
+		System.out.println("ERROR");
 		
 		if(statusCode.series() == Series.SERVER_ERROR) {
 			handleServerErrors(statusCode);

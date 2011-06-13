@@ -129,7 +129,6 @@ public interface FriendOperations {
 	 * @return the name of the followed user if successful
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
-	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user is already being followed).
 	 */
 	String follow(long userId);
 	
@@ -139,7 +138,6 @@ public interface FriendOperations {
 	 * @return the name of the followed user if successful
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
-	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user is already being followed).
 	 */
 	String follow(String screenName);
 
@@ -149,7 +147,6 @@ public interface FriendOperations {
 	 * @return the name of the unfolloed user if successful 
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
-	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user isn't being followed).
 	 */
 	String unfollow(long userId);
 	
@@ -159,7 +156,6 @@ public interface FriendOperations {
 	 * @return the name of the unfolloed user if successful 
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
-	 * @throws FriendshipFailureException if there is a problem following the specified user (often because the user isn't being followed).
 	 */
 	String unfollow(String screenName);
 	
