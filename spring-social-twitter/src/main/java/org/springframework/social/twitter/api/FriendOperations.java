@@ -17,7 +17,7 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.BadCredentialsException;
+import org.springframework.social.AuthorizationRequiredException;
 import org.springframework.social.ProviderApiException;
 
 
@@ -31,7 +31,7 @@ public interface FriendOperations {
 	 * Retrieves a list of users that the authenticated user follows.
 	 * @return a list of TwitterProfiles
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getFriends();
 
@@ -55,7 +55,7 @@ public interface FriendOperations {
 	 * Retrieves a list of IDs for the Twitter users that the authenticated user follows.
 	 * @return a list of user IDs
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getFriendIds();
 
@@ -79,7 +79,7 @@ public interface FriendOperations {
 	 * Retrieves a list of users that the authenticated user is being followed by
 	 * @return a list of TwitterProfiles
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getFollowers();
 
@@ -103,7 +103,7 @@ public interface FriendOperations {
 	 * Retrieves a list of IDs for the Twitter users that follow the authenticated user.
 	 * @return a list of user IDs
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getFollowerIds();
 
@@ -128,7 +128,7 @@ public interface FriendOperations {
 	 * @param userId The Twitter ID of the user to follow
 	 * @return the name of the followed user if successful
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String follow(long userId);
 	
@@ -137,7 +137,7 @@ public interface FriendOperations {
 	 * @param screenName The screen name of the user to follow
 	 * @return the name of the followed user if successful
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String follow(String screenName);
 
@@ -146,7 +146,7 @@ public interface FriendOperations {
 	 * @param userId the Twitter ID of the user to unfollow 
 	 * @return the name of the unfolloed user if successful 
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String unfollow(long userId);
 	
@@ -155,7 +155,7 @@ public interface FriendOperations {
 	 * @param screenName the screen name of the user to unfollow 
 	 * @return the name of the unfolloed user if successful 
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String unfollow(String screenName);
 	
@@ -164,7 +164,7 @@ public interface FriendOperations {
 	 * @param userId the Twitter ID of the user to receive notifications for. 
 	 * @return the TwitterProfile for the user
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile enableNotifications(long userId);
 
@@ -173,7 +173,7 @@ public interface FriendOperations {
 	 * @param screenName the Twitter screen name of the user to receive notifications for. 
 	 * @return the TwitterProfile for the user
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile enableNotifications(String screenName);
 
@@ -182,7 +182,7 @@ public interface FriendOperations {
 	 * @param userId the Twitter ID of the user to stop notifications for. 
 	 * @return the TwitterProfile for the user
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile disableNotifications(long userId);
 
@@ -191,7 +191,7 @@ public interface FriendOperations {
 	 * @param screenName the Twitter screen name of the user to stop notifications for. 
 	 * @return the TwitterProfile for the user
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile disableNotifications(String screenName);
 
@@ -206,14 +206,14 @@ public interface FriendOperations {
 	/**
 	 * Returns an array of numeric IDs for every user who has a pending request to follow the authenticating user.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getIncomingFriendships();
 
 	/**
 	 * Returns an array of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getOutgoingFriendships();
 }

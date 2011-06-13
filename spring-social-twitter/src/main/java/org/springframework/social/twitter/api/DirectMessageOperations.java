@@ -17,7 +17,7 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.BadCredentialsException;
+import org.springframework.social.AuthorizationRequiredException;
 import org.springframework.social.ProviderApiException;
 
 
@@ -30,7 +30,7 @@ public interface DirectMessageOperations {
 	/**
 	 * Retrieve the 20 most recently received direct messages for the authenticating user.
 	 * @return a collection of {@link DirectMessage} with the authenticating user as the recipient.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
 	 */
 	List<DirectMessage> getDirectMessagesReceived();
@@ -41,7 +41,7 @@ public interface DirectMessageOperations {
 	 * 
 	 * @return a collection of {@link DirectMessage} with the authenticating user as the sender.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<DirectMessage> getDirectMessagesSent();
 
@@ -57,7 +57,7 @@ public interface DirectMessageOperations {
 	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
 	 * @throws DuplicateTweetException if the message duplicates a previously sent message.
 	 * @throws MessageLengthException if the message length exceeds Twitter's 140 character limit.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void sendDirectMessage(String toScreenName, String text);
 
@@ -72,7 +72,7 @@ public interface DirectMessageOperations {
 	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
 	 * @throws DuplicateTweetException if the message duplicates a previously sent message.
 	 * @throws MessageLengthException if the message length exceeds Twitter's 140 character limit.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void sendDirectMessage(long toUserId, String text);
 	
@@ -80,7 +80,7 @@ public interface DirectMessageOperations {
 	 * Deletes a direct message for the authenticated user.
 	 * @param messageId the ID of the message to be removed.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteDirectMessage(long messageId);
 }

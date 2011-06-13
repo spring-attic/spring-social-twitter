@@ -25,7 +25,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
-import org.springframework.social.BadCredentialsException;
+import org.springframework.social.AuthorizationRequiredException;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -43,7 +43,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(161064614, twitter.userOperations().getProfileId());
 	}
 
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void getProfileId_unauthorized() {
 		unauthorizedTwitter.userOperations().getProfileId();
 	}
@@ -57,7 +57,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("artnames", twitter.userOperations().getScreenName());
 	}
 
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void getScreenName_unauthorized() {
 		unauthorizedTwitter.userOperations().getScreenName();
 	}
@@ -78,7 +78,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 	
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void getUserProfile_unauthorized() {
 		unauthorizedTwitter.userOperations().getUserProfile();
 	}
@@ -132,7 +132,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 	
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void searchForUsers_unauthorized() {
 		unauthorizedTwitter.userOperations().searchForUsers("some query");
 	}

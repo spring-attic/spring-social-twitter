@@ -17,7 +17,7 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.BadCredentialsException;
+import org.springframework.social.AuthorizationRequiredException;
 import org.springframework.social.ProviderApiException;
 
 /**
@@ -31,7 +31,7 @@ public interface BlockOperations {
 	 * @param userId the ID of the user to block.
 	 * @return The {@link TwitterProfile} of the blocked user.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(long userId);
 	
@@ -40,7 +40,7 @@ public interface BlockOperations {
 	 * @param screenName the screen name of the user to block.
 	 * @return The {@link TwitterProfile} of the blocked user.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(String screenName);
 
@@ -49,7 +49,7 @@ public interface BlockOperations {
 	 * @param userId the ID of the user to unblock.
 	 * @return The {@link TwitterProfile} of the unblocked user.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile unblock(long userId);
 	
@@ -58,7 +58,7 @@ public interface BlockOperations {
 	 * @param screenName the screen name of the user to unblock.
 	 * @return The {@link TwitterProfile} of the unblocked user.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile unblock(String screenName);
 	
@@ -66,7 +66,7 @@ public interface BlockOperations {
 	 * Retrieves a list of users that the authenticating user has blocked.
 	 * @return a list of {@link TwitterProfile}s for the users that are blocked.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getBlockedUsers();
 	
@@ -74,7 +74,7 @@ public interface BlockOperations {
 	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
 	 * @return a list of user IDs for the users that are blocked.
 	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws BadCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getBlockedUserIds();
 

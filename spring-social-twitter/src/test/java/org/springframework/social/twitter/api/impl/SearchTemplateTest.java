@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.social.BadCredentialsException;
+import org.springframework.social.AuthorizationRequiredException;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Trend;
@@ -92,7 +92,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(1, search2.getPosition());
 	}
 
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void getSavedSearches_unauthorized() {
 		unauthorizedTwitter.searchOperations().getSavedSearches();
 	}
@@ -109,7 +109,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(0, savedSearch.getPosition());
 	}
 	
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void getSavedSearch_unauthorized() {
 		unauthorizedTwitter.searchOperations().getSavedSearch(26897775);
 	}
@@ -124,7 +124,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void createSavedSearch_unauthorized() {
 		unauthorizedTwitter.searchOperations().createSavedSearch("#twitter");
 	}
@@ -138,7 +138,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = AuthorizationRequiredException.class)
 	public void deleteSavedSearch_unauthorized() {
 		unauthorizedTwitter.searchOperations().deleteSavedSearch(26897775);
 	}
