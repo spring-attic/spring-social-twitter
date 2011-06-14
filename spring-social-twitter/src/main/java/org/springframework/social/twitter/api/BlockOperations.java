@@ -17,8 +17,8 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.AuthorizationRequiredException;
-import org.springframework.social.ProviderApiException;
+import org.springframework.social.ApiException;
+import org.springframework.social.NotAuthorizedException;
 
 /**
  * Interface defining the operations for blocking and unblocking users
@@ -30,8 +30,8 @@ public interface BlockOperations {
 	 * Blocks a user. If a friendship exists with the user, it will be destroyed.
 	 * @param userId the ID of the user to block.
 	 * @return The {@link TwitterProfile} of the blocked user.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(long userId);
 	
@@ -39,8 +39,8 @@ public interface BlockOperations {
 	 * Blocks a user. If a friendship exists with the user, it will be destroyed.
 	 * @param screenName the screen name of the user to block.
 	 * @return The {@link TwitterProfile} of the blocked user.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(String screenName);
 
@@ -48,8 +48,8 @@ public interface BlockOperations {
 	 * Unblocks a user.
 	 * @param userId the ID of the user to unblock.
 	 * @return The {@link TwitterProfile} of the unblocked user.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile unblock(long userId);
 	
@@ -57,24 +57,24 @@ public interface BlockOperations {
 	 * Unblocks a user.
 	 * @param screenName the screen name of the user to unblock.
 	 * @return The {@link TwitterProfile} of the unblocked user.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile unblock(String screenName);
 	
 	/**
 	 * Retrieves a list of users that the authenticating user has blocked.
 	 * @return a list of {@link TwitterProfile}s for the users that are blocked.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getBlockedUsers();
 	
 	/**
 	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
 	 * @return a list of user IDs for the users that are blocked.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getBlockedUserIds();
 
@@ -82,7 +82,7 @@ public interface BlockOperations {
 	 * Determines if the user has blocked a specific user.
 	 * @param userId the ID of the user to check for a block.
 	 * @return true if the user is blocked; false otherwise
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	boolean isBlocking(long userId);
 	
@@ -90,7 +90,7 @@ public interface BlockOperations {
 	 * Determines if the user has blocked a specific user.
 	 * @param screenName the screen name of the user to check for a block.
 	 * @return true if the user is blocked; false otherwise
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	boolean isBlocking(String screenName);
 

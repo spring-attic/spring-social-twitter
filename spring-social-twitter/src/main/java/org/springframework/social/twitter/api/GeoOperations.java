@@ -17,7 +17,7 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.ProviderApiException;
+import org.springframework.social.ApiException;
 
 /**
  * Interface defining the Twitter operations for working with locations.
@@ -29,7 +29,7 @@ public interface GeoOperations {
 	 * Retrieves information about a plce
 	 * @param id the place ID
 	 * @return a {@link Place}
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	Place getPlace(String id);
 
@@ -38,7 +38,7 @@ public interface GeoOperations {
 	 * @param latitude the latitude
 	 * @param longitude the longitude
 	 * @return a list of {@link Place}s that the point is within
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Place> reverseGeoCode(double latitude, double longitude);
 
@@ -49,7 +49,7 @@ public interface GeoOperations {
 	 * @param granularity the minimal granularity of the places to return. If null, the default granularity (neighborhood) is assumed.
 	 * @param accuracy a radius of accuracy around the given point. If given a number, the value is assumed to be in meters. The number may be qualified with "ft" to indicate feet. If null, the default accuracy (0m) is assumed.
 	 * @return a list of {@link Place}s that the point is within
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Place> reverseGeoCode(double latitude, double longitude, PlaceType granularity, String accuracy);
 
@@ -58,7 +58,7 @@ public interface GeoOperations {
 	 * @param latitude the latitude
 	 * @param longitude the longitude
 	 * @return a list of {@link Place}s that the point is within
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Place> search(double latitude, double longitude);
 
@@ -70,7 +70,7 @@ public interface GeoOperations {
 	 * @param accuracy a radius of accuracy around the given point. If given a number, the value is assumed to be in meters. The number may be qualified with "ft" to indicate feet. If null, the default accuracy (0m) is assumed.
 	 * @param query a free form text value to help find places by name. If null, no query will be applied to the search.
 	 * @return a list of {@link Place}s that the point is within
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Place> search(double latitude, double longitude, PlaceType granularity, String accuracy, String query);
 
@@ -82,7 +82,7 @@ public interface GeoOperations {
 	 * @param longitude the longitude
 	 * @param name the name that the place is known as
 	 * @return a {@link SimilarPlacesResponse} collection, including a token that can be used to create a new place.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name);
 
@@ -96,7 +96,7 @@ public interface GeoOperations {
 	 * @param the place's street address. May be null.
 	 * @param the ID of the place that the plce is contained within
 	 * @return a {@link SimilarPlacesResponse} collection, including a token that can be used to create a new place.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name, String streetAddress, String containedWithin);
 
@@ -104,7 +104,7 @@ public interface GeoOperations {
 	 * Creates a new place.
 	 * @param placePrototype the place prototype returned in a {@link SimilarPlaces} from a call to findSimilarPlaces()
 	 * @return a {@link Place} object with the newly created place data
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	Place createPlace(PlacePrototype placePrototype);
 }

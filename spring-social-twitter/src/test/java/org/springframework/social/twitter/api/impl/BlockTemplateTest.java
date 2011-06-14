@@ -25,7 +25,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.social.AuthorizationRequiredException;
+import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.TwitterProfile;
 
 
@@ -45,7 +45,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void block_userId_unauthorized() {
 		unauthorizedTwitter.blockOperations().block(12345);
 	}
@@ -61,7 +61,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}	
 
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void block_screenName_unauthorized() {
 		unauthorizedTwitter.blockOperations().block("habuma");
 	}
@@ -77,7 +77,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void unblock_userId_unauthorized() {
 		unauthorizedTwitter.blockOperations().unblock(12345);
 	}
@@ -93,7 +93,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}	
 	
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void unblock_screenName_unauthorized() {
 		unauthorizedTwitter.blockOperations().unblock("habuma");
 	}
@@ -108,7 +108,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void getBlockedUsers_unauthorized() {
 		unauthorizedTwitter.blockOperations().getBlockedUsers();
 	}
@@ -123,7 +123,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void getBlockedUserIds_unauthorized() {
 		unauthorizedTwitter.blockOperations().getBlockedUserIds();
 	}

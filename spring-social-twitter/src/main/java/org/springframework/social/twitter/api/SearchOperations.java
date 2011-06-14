@@ -17,8 +17,8 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.AuthorizationRequiredException;
-import org.springframework.social.ProviderApiException;
+import org.springframework.social.ApiException;
+import org.springframework.social.NotAuthorizedException;
 
 
 /**
@@ -31,7 +31,7 @@ public interface SearchOperations {
 	 * Searches Twitter, returning the first 50 matching {@link Tweet}s
 	 * @param query The search query string
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -43,7 +43,7 @@ public interface SearchOperations {
 	 * @param page The page to return
 	 * @param pageSize The number of {@link Tweet}s per page
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -58,7 +58,7 @@ public interface SearchOperations {
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -67,8 +67,8 @@ public interface SearchOperations {
 	/**
 	 * Retrieves the authenticating user's saved searches.
 	 * @return a list of SavedSearch items
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<SavedSearch> getSavedSearches();
 	
@@ -76,31 +76,31 @@ public interface SearchOperations {
 	 * Retrieves a single saved search by the saved search's ID.
 	 * @param searchId the ID of the saved search
 	 * @return a SavedSearch
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	SavedSearch getSavedSearch(long searchId);
 
 	/**
 	 * Creates a new saved search for the authenticating user.
 	 * @param query the search query to save
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void createSavedSearch(String query);
 
 	/**
 	 * Deletes a saved search
 	 * @param searchId the ID of the saved search
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteSavedSearch(long searchId);
 
 	/**
 	 * Retrieves the current top 10 trending topics on Twitter, including hashtagged topics.
 	 * @return a Trends object containing a list of trending topics and the date/time that the list was created.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	Trends getCurrentTrends();
 
@@ -108,7 +108,7 @@ public interface SearchOperations {
 	 * Retrieves the current top 10 trending topics on Twitter.
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return a Trends object containing a list of trending topics and the date/time that the list was created.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	Trends getCurrentTrends(boolean excludeHashtags);
 
@@ -116,7 +116,7 @@ public interface SearchOperations {
 	 * Retrieves the top 20 trending topics, hourly for the past 24 hours.
 	 * This list includes hashtagged topics.
 	 * @return a list of Trends objects, one for each hour in the past 24 hours, ordered with the most recent hour first.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Trends> getDailyTrends();
 
@@ -124,7 +124,7 @@ public interface SearchOperations {
 	 * Retrieves the top 20 trending topics, hourly for the past 24 hours.
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return a list of Trends objects, one for each hour in the past 24 hours, ordered with the most recent hour first.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Trends> getDailyTrends(boolean excludeHashtags);
 	
@@ -133,7 +133,7 @@ public interface SearchOperations {
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @param startDate the date to start retrieving trending data for, in MM-DD-YYYY format.
 	 * @return a list of Trends objects, one for each hour in the given 24 hours, ordered with the most recent hour first.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Trends> getDailyTrends(boolean excludeHashtags, String startDate);
 
@@ -141,7 +141,7 @@ public interface SearchOperations {
 	 * Retrieves the top 30 trending topics for each day in the past week.
 	 * This list includes hashtagged topics.
 	 * @return a list of Trends objects, one for each day in the past week, ordered with the most recent day first.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Trends> getWeeklyTrends();
 
@@ -149,7 +149,7 @@ public interface SearchOperations {
 	 * Retrieves the top 30 trending topics for each day in the past week.
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return a list of Trends objects, one for each day in the past week, ordered with the most recent day first.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Trends> getWeeklyTrends(boolean excludeHashtags);
 	
@@ -158,7 +158,7 @@ public interface SearchOperations {
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @param startDate the date to start retrieving trending data for, in MM-DD-YYYY format.
 	 * @return a list of Trends objects, one for each day in the given week, ordered with the most recent day first.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Trends> getWeeklyTrends(boolean excludeHashtags, String startDate);
 
@@ -168,7 +168,7 @@ public interface SearchOperations {
 	 * See http://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @return A Trends object with the top 10 trending topics for the location.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	Trends getLocalTrends(long whereOnEarthId);
 
@@ -178,7 +178,7 @@ public interface SearchOperations {
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return A Trends object with the top 10 trending topics for the given location.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags);
 

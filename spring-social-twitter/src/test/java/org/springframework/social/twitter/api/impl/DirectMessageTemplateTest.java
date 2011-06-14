@@ -25,7 +25,7 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.social.AuthorizationRequiredException;
+import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.MessageLengthException;
 
@@ -44,7 +44,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 	
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void getDirectMessagesReceived_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().getDirectMessagesReceived();
 	}
@@ -59,7 +59,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void getDirectMessagesSent_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().getDirectMessagesSent();
 	}
@@ -82,7 +82,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void sendDirectMessaage_toScreenName_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
 	}
@@ -95,7 +95,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void sendDirectMessaage_toUserId_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().sendDirectMessage(112233, "Hello there!");
 	}
@@ -109,7 +109,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = AuthorizationRequiredException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void deleteDirectMessage_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().deleteDirectMessage(42L);
 	}

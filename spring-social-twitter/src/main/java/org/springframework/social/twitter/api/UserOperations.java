@@ -17,8 +17,8 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-import org.springframework.social.AuthorizationRequiredException;
-import org.springframework.social.ProviderApiException;
+import org.springframework.social.ApiException;
+import org.springframework.social.NotAuthorizedException;
 
 
 /**
@@ -30,24 +30,24 @@ public interface UserOperations {
 	/**
 	 * Retrieves the authenticated user's Twitter ID.
 	 * @return the user's ID at Twitter
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	long getProfileId();
 	
 	/**
 	 * Retrieves the authenticated user's Twitter screen name
 	 * @return the user's screen name
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String getScreenName();
 
 	/**
 	 * Retrieves the authenticated user's Twitter profile details.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile getUserProfile();
 
@@ -56,7 +56,7 @@ public interface UserOperations {
 	 * Note that this method does not require authentication.
 	 * @param screenName the screen name for the user whose details are to be retrieved.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	TwitterProfile getUserProfile(String screenName);
 
@@ -65,7 +65,7 @@ public interface UserOperations {
 	 * Note that this method does not require authentication.
 	 * @param userId the user ID for the user whose details are to be retrieved.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	TwitterProfile getUserProfile(long userId);
 
@@ -73,7 +73,7 @@ public interface UserOperations {
 	 * Retrieves the user's profile image. Returns the image in Twitter's "normal" size (48px x 48px).
 	 * @param screenName the screen name of the user
 	 * @return an array of bytes containing the user's profile image.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	byte[] getUserProfileImage(String screenName);
 
@@ -82,39 +82,39 @@ public interface UserOperations {
 	 * @param screenName the screen name of the user
 	 * @param size the size of the image
 	 * @return an array of bytes containing the user's profile image.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	byte[] getUserProfileImage(String screenName, ImageSize size);
 	
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of user IDs.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<TwitterProfile> getUsers(long... userIds);
 
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of screen names.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<TwitterProfile> getUsers(String... screenNames);
 	
 	/**
 	 * Searches for users that match a given query.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
-	 * @throws AuthorizationRequiredException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> searchForUsers(String query);
 	
 	/**
 	 * Retrieves a list of categories from which suggested users to follow may be found.
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<SuggestionCategory> getSuggestionCategories();
 
 	/**
 	 * Retrieves a list of suggestions of users to follow for a given category.
 	 * @param slug the category's slug
-	 * @throws ProviderApiException if there is an error while communicating with Twitter.
+	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<TwitterProfile> getSuggestions(String slug);
 

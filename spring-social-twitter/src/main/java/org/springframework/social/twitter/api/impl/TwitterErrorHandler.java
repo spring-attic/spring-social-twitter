@@ -26,9 +26,9 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.social.BadCredentialsException;
+import org.springframework.social.ApiException;
+import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.OperationNotPermittedException;
-import org.springframework.social.ProviderApiException;
 import org.springframework.social.ProviderServerErrorException;
 import org.springframework.social.ResourceNotFoundException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
@@ -60,7 +60,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		try {
 			super.handleError(response);
 		} catch(Exception e) {
-			throw new ProviderApiException("Error consuming Twitter REST API", e);
+			throw new ApiException("Error consuming Twitter REST API", e);
 		}
 	}
 	
@@ -68,7 +68,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		HttpStatus statusCode = response.getStatusCode();
 
 		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			throw new BadCredentialsException("Bad or missing access token.");
+			throw new NotAuthorizedException("Bad or missing access token.");
 		}
 		
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);

@@ -15,7 +15,7 @@
  */
 package org.springframework.social.twitter.api;
 
-import org.springframework.social.ProviderApiException;
+import org.springframework.social.ApiException;
 
 /**
  * Exception thrown when an attempt is made to send a direct message to an
@@ -24,7 +24,7 @@ import org.springframework.social.ProviderApiException;
  * 
  * @author Craig Walls
  */
-public class InvalidMessageRecipientException extends ProviderApiException {
+public class InvalidMessageRecipientException extends ApiException {
 	private static final long serialVersionUID = 1L;
 
 	public InvalidMessageRecipientException(String message) {

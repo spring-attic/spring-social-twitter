@@ -23,14 +23,14 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.social.BadCredentialsException;
-import org.springframework.social.ProviderApiException;
+import org.springframework.social.ApiException;
+import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.ProviderServerErrorException;
 import org.springframework.social.twitter.api.RateLimitException;
 
 public class ApiErrorTest extends AbstractTwitterApiTest {
 
-	@Test(expected = BadCredentialsException.class)
+	@Test(expected = NotAuthorizedException.class)
 	public void badOrMissingAccessToken() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
 			.andExpect(method(POST))
@@ -86,33 +86,33 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		}
 	}
 
-	@Test(expected = ProviderApiException.class)
+	@Test(expected = ApiException.class)
 	public void resourceNotFound() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/9876543210.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("{\"error\":\"No status found with that ID.\", \"request\":\"/1/statuses/show/98765432109876.json\"}", responseHeaders, HttpStatus.NOT_FOUND, ""));
 			twitter.timelineOperations().getStatus(9876543210L);
-		} catch (ProviderApiException e) {
+		} catch (ApiException e) {
 			assertEquals("Resource not found: No status found with that ID.; Path: /1/statuses/show/98765432109876.json", e.getMessage());
 			throw e;
 		}
 	}
 
-	@Test(expected = ProviderApiException.class)
+	@Test(expected = ApiException.class)
 	public void nonJSONErrorResponse() {
 		try { 
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("<h1>HTML response</h1>", responseHeaders, HttpStatus.BAD_REQUEST, ""));
 			twitter.timelineOperations().getHomeTimeline();
-		} catch (ProviderApiException e) {
+		} catch (ApiException e) {
 			assertEquals("Error consuming Twitter REST API", e.getMessage());
 			throw e;
 		}
 	}
 	
-	@Test(expected = ProviderApiException.class)
+	@Test(expected = ApiException.class)
 	@Ignore("TODO: Need to handle cases where there isn't an error, but the body is unparseable.")
 	public void unparseableSuccessResponse() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))

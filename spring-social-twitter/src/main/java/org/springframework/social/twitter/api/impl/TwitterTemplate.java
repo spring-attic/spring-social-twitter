@@ -20,7 +20,7 @@ import java.util.List;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
-import org.springframework.social.AuthorizationRequiredException;
+import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.DirectMessageOperations;
@@ -45,7 +45,7 @@ import org.springframework.social.twitter.api.UserOperations;
  * authentication. In those cases, you may use a {@link TwitterTemplate} that is
  * created through the default constructor and without any OAuth details.
  * Attempts to perform secured operations through such an instance, however,
- * will result in {@link AuthorizationRequiredException} being thrown.
+ * will result in {@link NotAuthorizedException} being thrown.
  * </p>
  * @author Craig Walls
  */
@@ -72,7 +72,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
 	 * Some operations, such as search, do not require OAuth authentication.
 	 * A TwitterTemplate created with this constructor will support those operations.
-	 * Any operations requiring authentication will throw {@link AuthorizationRequiredException} .
+	 * Any operations requiring authentication will throw {@link NotAuthorizedException} .
 	 */
 	public TwitterTemplate() {
 		super();
