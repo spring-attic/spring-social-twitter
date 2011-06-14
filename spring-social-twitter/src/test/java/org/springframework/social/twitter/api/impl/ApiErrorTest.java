@@ -87,19 +87,6 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	}
 
 	@Test(expected = ApiException.class)
-	public void resourceNotFound() {
-		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/9876543210.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse("{\"error\":\"No status found with that ID.\", \"request\":\"/1/statuses/show/98765432109876.json\"}", responseHeaders, HttpStatus.NOT_FOUND, ""));
-			twitter.timelineOperations().getStatus(9876543210L);
-		} catch (ApiException e) {
-			assertEquals("Resource not found: No status found with that ID.; Path: /1/statuses/show/98765432109876.json", e.getMessage());
-			throw e;
-		}
-	}
-
-	@Test(expected = ApiException.class)
 	public void nonJSONErrorResponse() {
 		try { 
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))

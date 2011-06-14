@@ -19,13 +19,15 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.social.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.twitter.api.ListOperations;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserList;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -234,8 +236,12 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		try {
 			restTemplate.getForObject(uri, String.class);
 			return true;
-		} catch (ResourceNotFoundException e) {
-			return false;
+		} catch (UncategorizedApiException e) {
+			Throwable cause = e.getCause();
+			if (cause instanceof HttpClientErrorException && ((HttpClientErrorException) cause).getStatusCode() == HttpStatus.NOT_FOUND) {
+				return false;
+			}
+			throw e;
 		}
 	}
 

@@ -15,14 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
-import org.springframework.social.OperationNotPermittedException;
+import org.springframework.social.ForbiddenException;
 
 /**
  * Exception thrown when a duplicate tweet is posted.
  * 
  * @author Craig Walls
  */
-public class DuplicateTweetException extends OperationNotPermittedException {
+public class DuplicateTweetException extends ForbiddenException {
 	private static final long serialVersionUID = 1L;
 
 	public DuplicateTweetException(String message) {

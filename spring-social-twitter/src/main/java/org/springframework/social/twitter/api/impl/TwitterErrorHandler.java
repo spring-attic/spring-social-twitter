@@ -26,11 +26,10 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.social.ApiException;
+import org.springframework.social.ForbiddenException;
 import org.springframework.social.NotAuthorizedException;
-import org.springframework.social.OperationNotPermittedException;
 import org.springframework.social.ProviderServerErrorException;
-import org.springframework.social.ResourceNotFoundException;
+import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.InvalidMessageRecipientException;
 import org.springframework.social.twitter.api.MessageLengthException;
@@ -46,21 +45,18 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		
 	@Override
 	public void handleError(ClientHttpResponse response) throws IOException {
-		HttpStatus statusCode = response.getStatusCode();
-		
-		System.out.println("ERROR");
-		
-		if(statusCode.series() == Series.SERVER_ERROR) {
+		HttpStatus statusCode = response.getStatusCode();		
+		if (statusCode.series() == Series.SERVER_ERROR) {
 			handleServerErrors(statusCode);
 		} else if (statusCode.series() == Series.CLIENT_ERROR) {
 			handleClientErrors(response);
 		}
 		
-		// if not otherwise handled, do default handling and wrap with ProviderApiException
+		// if not otherwise handled, do default handling and wrap with UncategorizedApiException
 		try {
 			super.handleError(response);
 		} catch(Exception e) {
-			throw new ApiException("Error consuming Twitter REST API", e);
+			throw new UncategorizedApiException("Error consuming Twitter REST API", e);
 		}
 	}
 	
@@ -72,19 +68,19 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		}
 		
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
-		if(errorMap == null) {
+		if (errorMap == null) {
 			return; // unexpected error body, can't be handled here
 		}
 		
 		String errorText = null;
-		if(errorMap.containsKey("error")) {
+		if (errorMap.containsKey("error")) {
 			errorText = (String) errorMap.get("error");
 		} else if(errorMap.containsKey("errors")) {
 			List<Map<String, String>> errors = (List<Map<String, String>>) errorMap.get("errors");
 			errorText = errors.get(0).get("message");
 		}
 		
-		if(statusCode == HttpStatus.FORBIDDEN) {
+		if (statusCode == HttpStatus.FORBIDDEN) {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
 				throw new DuplicateTweetException(errorText);
 			} else if (errorText.equals(STATUS_TOO_LONG_TEXT) || errorText.contains(MESSAGE_TOO_LONG_TEXT)) {
@@ -92,12 +88,16 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			} else if (errorText.equals(INVALID_MESSAGE_RECIPIENT_TEXT)) {
 				throw new InvalidMessageRecipientException(errorText);
 			} else {
-				throw new OperationNotPermittedException(errorText);
+				throw new ForbiddenException(errorText);
 			}			
-		} else if (statusCode == HttpStatus.NOT_FOUND) {
-			throw new ResourceNotFoundException("Resource not found: " + errorText + "; Path: " + errorMap.get("request"));
 		} else if (statusCode == HttpStatus.valueOf(ENHANCE_YOUR_CALM)) {
 			throw new RateLimitException(errorText);
+		}
+		
+		try {
+			super.handleError(response);
+		} catch (Exception e) {
+			throw new UncategorizedApiException(errorText, e);
 		}
 	}
 
