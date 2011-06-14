@@ -19,13 +19,11 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.social.UncategorizedApiException;
+import org.springframework.social.ResourceNotFoundException;
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -93,12 +91,8 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 		try {
 			restTemplate.getForObject(blockingExistsUri, String.class);
 			return true;
-		} catch (UncategorizedApiException e) {
-			Throwable cause = e.getCause();
-			if (cause instanceof HttpClientErrorException && ((HttpClientErrorException) cause).getStatusCode() == HttpStatus.NOT_FOUND) {
-				return false;
-			}
-			throw e;
+		} catch (ResourceNotFoundException e) {
+			return false;
 		}
 	}
 

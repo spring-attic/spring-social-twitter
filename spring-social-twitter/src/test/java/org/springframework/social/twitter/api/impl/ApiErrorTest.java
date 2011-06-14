@@ -24,9 +24,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.ApiException;
+import org.springframework.social.InternalServerErrorException;
 import org.springframework.social.NotAuthorizedException;
-import org.springframework.social.ProviderServerErrorException;
-import org.springframework.social.twitter.api.RateLimitException;
+import org.springframework.social.RateLimitExceededException;
+import org.springframework.social.ServerDownException;
+import org.springframework.social.ServerOverloadedException;
 
 public class ApiErrorTest extends AbstractTwitterApiTest {
 
@@ -39,7 +41,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().updateStatus("Some message");		
 	}
 	
-	@Test(expected = RateLimitException.class)
+	@Test(expected = RateLimitExceededException.class)
 	public void enhanceYourCalm() {
 		mockServer.expect(requestTo("https://search.twitter.com/search.json?q=%23spring&rpp=50&page=1"))
 			.andExpect(method(GET))
@@ -47,40 +49,40 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.searchOperations().search("#spring");
 	}
 
-	@Test(expected = ProviderServerErrorException.class)
+	@Test(expected = InternalServerErrorException.class)
 	public void twitterIsBroken() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR, ""));
 			twitter.timelineOperations().getHomeTimeline();
-		} catch (ProviderServerErrorException e) {
+		} catch (InternalServerErrorException e) {
 			assertEquals("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.", e.getMessage());
 			throw e;
 		}
 	}
 	
-	@Test(expected = ProviderServerErrorException.class)
+	@Test(expected = ServerDownException.class)
 	public void twitterIsDownOrBeingUpgraded() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.BAD_GATEWAY, ""));
 			twitter.timelineOperations().getHomeTimeline();
-		} catch (ProviderServerErrorException e) {
+		} catch (ServerDownException e) {
 			assertEquals("Twitter is down or is being upgraded.", e.getMessage());
 			throw e;
 		}
 	}
 	
-	@Test(expected = ProviderServerErrorException.class)
+	@Test(expected = ServerOverloadedException.class)
 	public void twitterIsOverloaded() {
 		try {
 			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.SERVICE_UNAVAILABLE, ""));
 			twitter.timelineOperations().getHomeTimeline();
-		} catch (ProviderServerErrorException e) {
+		} catch (ServerDownException e) {
 			assertEquals("Twitter is overloaded with requests. Try again later.", e.getMessage());
 			throw e;
 		}

@@ -26,14 +26,17 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.social.ForbiddenException;
+import org.springframework.social.InternalServerErrorException;
 import org.springframework.social.NotAuthorizedException;
-import org.springframework.social.ProviderServerErrorException;
+import org.springframework.social.OperationNotPermittedException;
+import org.springframework.social.RateLimitExceededException;
+import org.springframework.social.ResourceNotFoundException;
+import org.springframework.social.ServerDownException;
+import org.springframework.social.ServerOverloadedException;
 import org.springframework.social.UncategorizedApiException;
 import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.InvalidMessageRecipientException;
-import org.springframework.social.twitter.api.MessageLengthException;
-import org.springframework.social.twitter.api.RateLimitException;
+import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 
 /**
@@ -84,30 +87,27 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
 				throw new DuplicateTweetException(errorText);
 			} else if (errorText.equals(STATUS_TOO_LONG_TEXT) || errorText.contains(MESSAGE_TOO_LONG_TEXT)) {
-				throw new MessageLengthException(errorText);
+				throw new MessageTooLongException(errorText);
 			} else if (errorText.equals(INVALID_MESSAGE_RECIPIENT_TEXT)) {
 				throw new InvalidMessageRecipientException(errorText);
 			} else {
-				throw new ForbiddenException(errorText);
-			}			
+				throw new OperationNotPermittedException(errorText);
+			}
+		} else if (statusCode == HttpStatus.NOT_FOUND) {
+			throw new ResourceNotFoundException(errorText);
 		} else if (statusCode == HttpStatus.valueOf(ENHANCE_YOUR_CALM)) {
-			throw new RateLimitException(errorText);
+			throw new RateLimitExceededException();
 		}
-		
-		try {
-			super.handleError(response);
-		} catch (Exception e) {
-			throw new UncategorizedApiException(errorText, e);
-		}
+
 	}
 
 	private void handleServerErrors(HttpStatus statusCode) throws IOException {
 		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new ProviderServerErrorException("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
+			throw new InternalServerErrorException("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
 		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
-			throw new ProviderServerErrorException("Twitter is down or is being upgraded.");
+			throw new ServerDownException("Twitter is down or is being upgraded.");
 		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-			throw new ProviderServerErrorException("Twitter is overloaded with requests. Try again later.");
+			throw new ServerOverloadedException("Twitter is overloaded with requests. Try again later.");
 		}
 	}
 

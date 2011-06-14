@@ -15,20 +15,17 @@
  */
 package org.springframework.social.twitter.api;
 
-import org.springframework.social.ApiException;
+import org.springframework.social.OperationNotPermittedException;
 
 /**
- * Exception thrown when API calls are being rate-limited.
+ * Exception indicating that an attempt was made to post a status or send a direct message where the length exceeds Twitter's 140 character limit.
  * @author Craig Walls
  */
 @SuppressWarnings("serial")
-public class RateLimitException extends ApiException {
-	// TODO: Capture the rate limit details (retry after)?
-	public RateLimitException(String message) {
+public class MessageTooLongException extends OperationNotPermittedException {
+
+	public MessageTooLongException(String message) {
 		super(message);
 	}
 	
-	public RateLimitException(String message, Throwable cause) {
-		super(message, cause);
-	}
 }

@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api;
 import java.util.List;
 
 import org.springframework.social.ApiException;
-import org.springframework.social.NotAuthorizedException;
+import org.springframework.social.MissingCredentialsException;
 
 
 /**
@@ -31,7 +31,7 @@ public interface ListOperations {
 	 * Retrieves user lists for the authenticated user.
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<UserList> getLists();
 	
@@ -92,7 +92,7 @@ public interface ListOperations {
 	 * @param isPublic if true, the list will be public; if false the list will be private.
 	 * @return the newly created {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList createList(String name, String description, boolean isPublic);
 
@@ -104,7 +104,7 @@ public interface ListOperations {
 	 * @param isPublic if true, the list will be public; if false the list will be private.
 	 * @return the newly created {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList updateList(long listId, String name, String description, boolean isPublic);
 
@@ -112,7 +112,7 @@ public interface ListOperations {
 	 * Removes a user list.
 	 * @param listId the ID of the list to be removed.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteList(long listId);
 	
@@ -139,7 +139,7 @@ public interface ListOperations {
 	 * @param newMemberIds one or more profile IDs of the Twitter profiles to add to the list.
 	 * @return the {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList addToList(long listId, long... newMemberIds);
 
@@ -149,7 +149,7 @@ public interface ListOperations {
 	 * @param newMemberScreenNames one or more profile IDs of the Twitter profiles to add to the list.
 	 * @return the {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList addToList(long listId, String... newMemberScreenNames);
 
@@ -158,7 +158,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @param memberId the ID of the member to be removed.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromList(long listId, long memberId);
 
@@ -167,7 +167,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @param memberScreenName the ID of the member to be removed.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromList(long listId, String memberScreenName);
 
@@ -176,7 +176,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @return the {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList subscribe(long listId);
 
@@ -186,7 +186,7 @@ public interface ListOperations {
 	 * @param listSlug the slug of the list.
 	 * @return the {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList subscribe(String screenName, String listSlug);
 
@@ -195,7 +195,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @return the {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList unsubscribe(long listId);
 
@@ -205,7 +205,7 @@ public interface ListOperations {
 	 * @param listSlug the slug of the list.
 	 * @return the {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList unsubscribe(String screenName, String listSlug);
 
@@ -265,7 +265,7 @@ public interface ListOperations {
 	 * @param memberId the user ID to check for membership
 	 * @return true if the user is a member of the list
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isMember(long listId, long memberId);
 	
@@ -276,7 +276,7 @@ public interface ListOperations {
 	 * @param memberScreenName the screenName to check for membership
 	 * @return true if the user is a member of the list
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws NotAuthorizedException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isMember(String screenName, String listSlug, String memberScreenName);
 

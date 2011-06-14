@@ -27,7 +27,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.DirectMessage;
-import org.springframework.social.twitter.api.MessageLengthException;
+import org.springframework.social.twitter.api.MessageTooLongException;
 
 /**
  * @author Craig Walls
@@ -73,7 +73,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = MessageLengthException.class)
+	@Test(expected = MessageTooLongException.class)
 	public void sendDirectMessage_toScreenName_tooLong() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/new.json")).andExpect(method(POST))
 				.andExpect(body("screen_name=habuma&text=Really+long+message"))

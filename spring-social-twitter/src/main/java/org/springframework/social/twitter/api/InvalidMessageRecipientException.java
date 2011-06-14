@@ -15,7 +15,7 @@
  */
 package org.springframework.social.twitter.api;
 
-import org.springframework.social.ApiException;
+import org.springframework.social.OperationNotPermittedException;
 
 /**
  * Exception thrown when an attempt is made to send a direct message to an
@@ -24,14 +24,11 @@ import org.springframework.social.ApiException;
  * 
  * @author Craig Walls
  */
-public class InvalidMessageRecipientException extends ApiException {
+public class InvalidMessageRecipientException extends OperationNotPermittedException {
 	private static final long serialVersionUID = 1L;
 
 	public InvalidMessageRecipientException(String message) {
 		super(message);
 	}
 
-	public InvalidMessageRecipientException(String message, Throwable cause) {
-		super(message, cause);
-	}
 }
