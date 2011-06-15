@@ -38,7 +38,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<TwitterProfile> getFriends() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/friends.json", "cursor", "-1"), TwitterProfileUsersList.class).getList();
 	}
 
@@ -57,7 +57,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public List<Long> getFriendIds() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("friends/ids.json", "cursor", "-1"), LongIdsList.class).getList();
 	}
 
@@ -76,7 +76,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<TwitterProfile> getFollowers() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/followers.json", "cursor", "-1"), TwitterProfileUsersList.class).getList();
 	}
 
@@ -95,7 +95,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<Long> getFollowerIds() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("followers/ids.json", "cursor", "-1"), LongIdsList.class).getList();
 	}
 
@@ -114,42 +114,42 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public String follow(long userId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return (String) restTemplate.postForObject(buildUri("friendships/create.json", "user_id", String.valueOf(userId)), EMPTY_DATA, Map.class).get("screen_name");
 	}
 
 	public String follow(String screenName) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return (String) restTemplate.postForObject(buildUri("friendships/create.json", "screen_name", screenName), EMPTY_DATA, Map.class).get("screen_name");
 	}
 	
 	public String unfollow(long userId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return (String) restTemplate.postForObject(buildUri("friendships/destroy.json", "user_id", String.valueOf(userId)), EMPTY_DATA, Map.class).get("screen_name");
 	}
 
 	public String unfollow(String screenName) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return (String) restTemplate.postForObject(buildUri("friendships/destroy.json", "screen_name", screenName), EMPTY_DATA, Map.class).get("screen_name");
 	}
 	
 	public TwitterProfile enableNotifications(long userId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.postForObject(buildUri("notifications/follow.json", "user_id", String.valueOf(userId)), EMPTY_DATA, TwitterProfile.class);
 	}
 	
 	public TwitterProfile enableNotifications(String screenName) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.postForObject(buildUri("notifications/follow.json", "screen_name", screenName), EMPTY_DATA, TwitterProfile.class);
 	}
 
 	public TwitterProfile disableNotifications(long userId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.postForObject(buildUri("notifications/leave.json", "user_id", String.valueOf(userId)), EMPTY_DATA, TwitterProfile.class);
 	}
 	
 	public TwitterProfile disableNotifications(String screenName) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.postForObject(buildUri("notifications/leave.json", "screen_name", screenName), EMPTY_DATA, TwitterProfile.class);
 	}
 	
@@ -162,12 +162,12 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<Long> getIncomingFriendships() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("friendships/incoming.json"), LongIdsList.class).getList();
 	}
 
 	public List<Long> getOutgoingFriendships() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("friendships/outgoing.json"), LongIdsList.class).getList();
 	}
 

@@ -37,17 +37,17 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public List<DirectMessage> getDirectMessagesReceived() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("direct_messages.json"), DirectMessageList.class);
 	}
 
 	public List<DirectMessage> getDirectMessagesSent() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("direct_messages/sent.json"), DirectMessageList.class);
 	}
 
 	public void sendDirectMessage(String toScreenName, String text) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.add("screen_name", String.valueOf(toScreenName));
 		data.add("text", text);
@@ -55,7 +55,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public void sendDirectMessage(long toUserId, String text) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.add("user_id", String.valueOf(toUserId));
 		data.add("text", text);
@@ -63,7 +63,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public void deleteDirectMessage(long messageId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		restTemplate.delete(buildUri("direct_messages/destroy/" + messageId + ".json"));
 	}
 

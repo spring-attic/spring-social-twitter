@@ -66,24 +66,24 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public List<SavedSearch> getSavedSearches() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("saved_searches.json"), SavedSearchList.class);
 	}
 
 	public SavedSearch getSavedSearch(long searchId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("saved_searches/show/" + searchId + ".json"), SavedSearch.class);
 	}
 
 	public void createSavedSearch(String query) {		
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.set("query", query);
 		restTemplate.postForObject(buildUri("saved_searches/create.json"), data, String.class);
 	}
 
 	public void deleteSavedSearch(long searchId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		restTemplate.delete(buildUri("saved_searches/destroy/" + searchId + ".json"));
 	}
 	

@@ -40,40 +40,40 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 	}
 
 	public TwitterProfile block(long userId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("user_id", String.valueOf(userId));
 		return restTemplate.postForObject(buildUri("blocks/create.json"), request, TwitterProfile.class);
 	}
 	
 	public TwitterProfile block(String screenName) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("screen_name", screenName);
 		return restTemplate.postForObject(buildUri("blocks/create.json"), request, TwitterProfile.class);
 	}
 	
 	public TwitterProfile unblock(long userId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("user_id", String.valueOf(userId));
 		return restTemplate.postForObject(buildUri("blocks/destroy.json"), request, TwitterProfile.class);
 	}
 	
 	public TwitterProfile unblock(String screenName) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("screen_name", screenName);
 		return restTemplate.postForObject(buildUri("blocks/destroy.json"), request, TwitterProfile.class);
 	}
 	
 	public List<TwitterProfile> getBlockedUsers() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("blocks/blocking.json"), TwitterProfileList.class);
 	}
 	
 	public List<Long> getBlockedUserIds() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("blocks/blocking/ids.json"), LongList.class);
 	}
 	

@@ -40,17 +40,17 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public long getProfileId() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return getUserProfile().getId();
 	}
 
 	public String getScreenName() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return getUserProfile().getScreenName();
 	}
 
 	public TwitterProfile getUserProfile() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("account/verify_credentials.json"), TwitterProfile.class);
 	}
 
@@ -89,7 +89,7 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public List<TwitterProfile> searchForUsers(String query) {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("users/search.json", "q", query), TwitterProfileList.class);
 	}
 	

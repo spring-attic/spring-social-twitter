@@ -44,17 +44,17 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<Tweet> getHomeTimeline() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/home_timeline.json"), TweetList.class);
 	}
 
 	public List<Tweet> getFriendsTimeline() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/friends_timeline.json"), TweetList.class);
 	}
 
 	public List<Tweet> getUserTimeline() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/user_timeline.json"), TweetList.class);
 	}
 
@@ -67,22 +67,22 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<Tweet> getMentions() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/mentions.json"), TweetList.class);
 	}
 
 	public List<Tweet> getRetweetedByMe() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/retweeted_by_me.json"), TweetList.class);
 	}
 
 	public List<Tweet> getRetweetedToMe() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/retweeted_to_me.json"), TweetList.class);
 	}
 
 	public List<Tweet> getRetweetsOfMe() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/retweets_of_me.json"), TweetList.class);
 	}
 
@@ -95,7 +95,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public void updateStatus(String message, StatusDetails details) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
 		tweetParams.add("status", message);
 		tweetParams.putAll(details.toParameterMap());
@@ -103,12 +103,12 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public void deleteStatus(long tweetId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		restTemplate.delete(buildUri("statuses/destroy/" + tweetId + ".json"));
 	}
 
 	public void retweet(long tweetId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		restTemplate.postForObject(buildUri("statuses/retweet/" + tweetId + ".json"), data, String.class);
 	}
@@ -122,23 +122,23 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<Long> getRetweetedByIds(long tweetId) {
-		requireUserAuthorization(); // requires authentication, even though getRetweetedBy() does not.
+		requireAuthorization(); // requires authentication, even though getRetweetedBy() does not.
 		return restTemplate.getForObject(buildUri("statuses/" + tweetId + "/retweeted_by/ids.json"), LongList.class);
 	}
 
 	public List<Tweet> getFavorites() {
-		requireUserAuthorization();
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("favorites.json"), TweetList.class);
 	}
 
 	public void addToFavorites(long tweetId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		restTemplate.postForObject(buildUri("favorites/create/" + tweetId + ".json"), data, String.class);
 	}
 
 	public void removeFromFavorites(long tweetId) {
-		requireUserAuthorization();
+		requireAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		restTemplate.postForObject(buildUri("favorites/destroy/" + tweetId + ".json"), data, String.class);
 	}
