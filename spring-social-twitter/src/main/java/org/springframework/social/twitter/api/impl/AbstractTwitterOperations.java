@@ -24,14 +24,14 @@ import org.springframework.util.MultiValueMap;
 
 class AbstractTwitterOperations {
 	
-	private final boolean isAuthorizedForUser;
+	private final boolean isAuthorized;
 
-	public AbstractTwitterOperations(boolean isAuthorizedForUser) {
-		this.isAuthorizedForUser = isAuthorizedForUser;
+	public AbstractTwitterOperations(boolean isAuthorized) {
+		this.isAuthorized = isAuthorized;
 	}
 	
 	protected void requireAuthorization() {
-		if (!isAuthorizedForUser) {
+		if (!isAuthorized) {
 			throw new MissingAuthorizationException();
 		}
 	}
