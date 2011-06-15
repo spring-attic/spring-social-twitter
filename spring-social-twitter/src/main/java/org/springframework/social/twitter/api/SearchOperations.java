@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api;
 import java.util.List;
 
 import org.springframework.social.ApiException;
-import org.springframework.social.MissingCredentialsException;
+import org.springframework.social.MissingAuthorizationException;
 
 
 /**
@@ -68,7 +68,7 @@ public interface SearchOperations {
 	 * Retrieves the authenticating user's saved searches.
 	 * @return a list of SavedSearch items
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<SavedSearch> getSavedSearches();
 	
@@ -77,7 +77,7 @@ public interface SearchOperations {
 	 * @param searchId the ID of the saved search
 	 * @return a SavedSearch
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	SavedSearch getSavedSearch(long searchId);
 
@@ -85,7 +85,7 @@ public interface SearchOperations {
 	 * Creates a new saved search for the authenticating user.
 	 * @param query the search query to save
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void createSavedSearch(String query);
 
@@ -93,7 +93,7 @@ public interface SearchOperations {
 	 * Deletes a saved search
 	 * @param searchId the ID of the saved search
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteSavedSearch(long searchId);
 

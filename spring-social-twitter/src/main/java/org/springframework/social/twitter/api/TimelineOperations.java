@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api;
 import java.util.List;
 
 import org.springframework.social.ApiException;
-import org.springframework.social.MissingCredentialsException;
+import org.springframework.social.MissingAuthorizationException;
 
 
 /**
@@ -51,7 +51,7 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s in the authenticating user's home timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getHomeTimeline();
 
@@ -63,7 +63,7 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s in the authenticating user's friends timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFriendsTimeline();
 
@@ -71,7 +71,7 @@ public interface TimelineOperations {
 	 * Retrieves the 20 most recent tweets posted by the authenticating user.
 	 * @return a collection of {@link Tweet}s that have been posted by the authenticating user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getUserTimeline();
 
@@ -95,28 +95,28 @@ public interface TimelineOperations {
 	 * Retrieve the 20 most recent tweets that mention the authenticated user.
 	 * @return a collection of {@link Tweet} objects that mention the authenticated user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getMentions();
 
 	/**
 	 * Retrieve the 20 most recent retweets posted by the authenticated user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetedByMe();
 
 	/**
 	 * Retrieve the 20 most recent retweets posted by users the authenticating user follow.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetedToMe();
 
 	/**
 	 * Retrieve the 20 most recent tweets of the authenticated user that have been retweeted by others.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getRetweetsOfMe();
 
@@ -133,7 +133,7 @@ public interface TimelineOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status);
 
@@ -144,7 +144,7 @@ public interface TimelineOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status, StatusDetails details);
 
@@ -152,7 +152,7 @@ public interface TimelineOperations {
 	 * Removes a status entry.
 	 * @param tweetId the tweet's ID
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void deleteStatus(long tweetId);
 
@@ -160,7 +160,7 @@ public interface TimelineOperations {
 	 * Posts a retweet of an existing tweet.
 	 * @param tweetId The ID of the tweet to be retweeted
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void retweet(long tweetId);
 
@@ -182,7 +182,7 @@ public interface TimelineOperations {
 	 * Retrieves the IDs of up to 100 users who have retweeted a specific tweet.
 	 * @param id the tweet's ID.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getRetweetedByIds(long id);
 
@@ -191,7 +191,7 @@ public interface TimelineOperations {
 	 * 
 	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFavorites();
 
@@ -199,7 +199,7 @@ public interface TimelineOperations {
 	 * Adds a tweet to the user's collection of favorite tweets.
 	 * @param id the tweet's ID
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void addToFavorites(long id);
 
@@ -207,7 +207,7 @@ public interface TimelineOperations {
 	 * Removes a tweet from the user's collection of favorite tweets.
 	 * @param id the tweet's ID
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void removeFromFavorites(long id);
 

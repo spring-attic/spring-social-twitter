@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api;
 import java.util.List;
 
 import org.springframework.social.ApiException;
-import org.springframework.social.MissingCredentialsException;
+import org.springframework.social.MissingAuthorizationException;
 
 
 /**
@@ -31,7 +31,7 @@ public interface UserOperations {
 	 * Retrieves the authenticated user's Twitter ID.
 	 * @return the user's ID at Twitter
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	long getProfileId();
 	
@@ -39,7 +39,7 @@ public interface UserOperations {
 	 * Retrieves the authenticated user's Twitter screen name
 	 * @return the user's screen name
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	String getScreenName();
 
@@ -47,7 +47,7 @@ public interface UserOperations {
 	 * Retrieves the authenticated user's Twitter profile details.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile getUserProfile();
 
@@ -101,7 +101,7 @@ public interface UserOperations {
 	/**
 	 * Searches for users that match a given query.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingCredentialsException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> searchForUsers(String query);
 	
