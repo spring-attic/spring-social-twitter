@@ -27,10 +27,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.InternalServerErrorException;
+import org.springframework.social.InvalidAuthorizationException;
+import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.OperationNotPermittedException;
 import org.springframework.social.RateLimitExceededException;
 import org.springframework.social.ResourceNotFoundException;
+import org.springframework.social.RevokedAuthorizationException;
 import org.springframework.social.ServerDownException;
 import org.springframework.social.ServerOverloadedException;
 import org.springframework.social.UncategorizedApiException;
@@ -65,16 +68,11 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 	
 	private void handleClientErrors(ClientHttpResponse response) throws IOException {
 		HttpStatus statusCode = response.getStatusCode();
-
-		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			throw new NotAuthorizedException("Bad or missing access token.");
-		}
-		
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
 		if (errorMap == null) {
 			return; // unexpected error body, can't be handled here
 		}
-		
+
 		String errorText = null;
 		if (errorMap.containsKey("error")) {
 			errorText = (String) errorMap.get("error");
@@ -82,8 +80,20 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			List<Map<String, String>> errors = (List<Map<String, String>>) errorMap.get("errors");
 			errorText = errors.get(0).get("message");
 		}
-		
-		if (statusCode == HttpStatus.FORBIDDEN) {
+
+		if (statusCode == HttpStatus.UNAUTHORIZED) {
+			if(errorText == null) {
+				throw new NotAuthorizedException(response.getStatusText());
+			} else if (errorText.equals("Could not authenticate you.")) {
+				throw new MissingAuthorizationException();
+			} else if (errorText.equals("Could not authenticate with OAuth.")) { // revoked token
+				throw new RevokedAuthorizationException();
+			} else if (errorText.equals("Invalid / expired Token")) { // Note that Twitter doesn't actually expire tokens
+				throw new InvalidAuthorizationException(errorText);
+			} else {
+				throw new NotAuthorizedException(errorText);
+			}
+		} else if (statusCode == HttpStatus.FORBIDDEN) {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
 				throw new DuplicateTweetException(errorText);
 			} else if (errorText.equals(STATUS_TOO_LONG_TEXT) || errorText.contains(MESSAGE_TOO_LONG_TEXT)) {
