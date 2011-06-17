@@ -62,7 +62,7 @@ public interface SearchOperations {
 	 * @see SearchResults
 	 * @see Tweet
 	 */
-	SearchResults search(String query, int page, int pageSize, int sinceId, int maxId);
+	SearchResults search(String query, int page, int pageSize, long sinceId, long maxId);
 	
 	/**
 	 * Retrieves the authenticating user's saved searches.

@@ -48,7 +48,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		return search(query, page, resultsPerPage, 0, 0);
 	}
 
-	public SearchResults search(String query, int page, int resultsPerPage, int sinceId, int maxId) {
+	public SearchResults search(String query, int page, int resultsPerPage, long sinceId, long maxId) {
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("query", query);
 		parameters.put("rpp", String.valueOf(resultsPerPage));
