@@ -46,7 +46,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		long fromId = 0;
 		String fromImageUrl = null;
 		DateFormat dateFormat = TIMELINE_DATE_FORMAT;
-		if(fromUserNode != null) {
+		if (fromUserNode != null) {
 			fromScreenName = fromUserNode.get("screen_name").getValueAsText();
 			fromId = fromUserNode.get("id").getValueAsLong();
 			fromImageUrl = fromUserNode.get("profile_image_url").getValueAsText();

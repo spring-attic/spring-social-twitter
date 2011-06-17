@@ -34,6 +34,35 @@ public class TwitterProfile implements Serializable {
 	private final String description;
 	private final String location;
 	private final Date createdDate;
+	private String language;
+	private int statusesCount;
+	private int friendsCount;
+	private int followersCount;
+	private int favoritesCount;
+	private int listedCount;
+	private boolean following;
+	private boolean followRequestSent;
+	private boolean isProtected;
+	private boolean notificationsEnabled;
+	private boolean verified;
+	private boolean geoEnabled;
+	private boolean contributorsEnabled;
+	private boolean translator;
+	private String timeZone;
+	private int utcOffset;
+	private String sidebarBorderColor;
+	private String sidebarFillColor;
+	private String backgroundColor;
+	private boolean useBackgroundImage;
+	private String backgroundImageUrl;
+	private boolean backgroundImageTiled;
+	private String textColor;
+	private String linkColor;
+	private boolean showAllInlineMedia;
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	public TwitterProfile(long id, String screenName, String name, String url, String profileImageUrl, String description, String location, Date createdDate) {
 		this.id = id;
@@ -129,5 +158,184 @@ public class TwitterProfile implements Serializable {
 	 */
 	public Date getCreatedDate() {
 		return createdDate;
+	}
+	
+	/**
+	 * Whether or not the user has mobile notifications enabled.
+	 */
+	public boolean isNotificationsEnabled() {
+		return notificationsEnabled;
+	}
+	
+	/**
+	 * Whether or not the user is verified with Twitter.
+	 * See http://support.twitter.com/groups/31-twitter-basics/topics/111-features/articles/119135-about-verified-accounts.
+	 */
+	public boolean isVerified() {
+		return verified;
+	}
+	
+	/**
+	 * Whether or not the user has enabled their account with geo location.
+	 */
+	public boolean isGeoEnabled() {
+		return geoEnabled;
+	}
+	
+	/**
+	 * The user's preferred language.
+	 * @return
+	 */
+	public String getLanguage() {
+		return language;
+	}
+	
+	/**
+	 * The number of tweets this user has posted.
+	 */
+	public int getStatusesCount() {
+		return statusesCount;
+	}
+	
+	/**
+	 * The number of lists the user is listed on.
+	 */
+	public int getListedCount() {
+		return listedCount;
+	}
+	
+	/**
+	 * The number of friends the user has (the number of users this user follows).
+	 */
+	public int getFriendsCount() {
+		return friendsCount;
+	}
+
+	/**
+	 * The number of followers the user has.
+	 */
+	public int getFollowersCount() {
+		return followersCount;
+	}
+	
+	/**
+	 * Whether or not the authenticated user is following this user.
+	 */
+	public boolean isFollowing() {
+		return following;
+	}
+	
+	/**
+	 * Whether or not a request has been sent by the authenticating user to follow this user.
+	 */
+	public boolean isFollowRequestSent() {
+		return followRequestSent;
+	}
+	
+	/**
+	 * The number of tweets that the user has marked as favorites.
+	 */
+	public int getFavoritesCount() {
+		return favoritesCount;
+	}
+
+	/**
+	 * Whether or not the user's tweets are protected.
+	 */
+	public boolean isProtected() {
+		return isProtected;
+	}
+	
+	/**
+	 * The user's time zone.
+	 */
+	public String getTimeZone() {
+		return timeZone;
+	}
+	
+	/**
+	 * The user's UTC offset in seconds.
+	 */
+	public int getUtcOffset() {
+		return utcOffset;
+	}
+	
+	/**
+	 * Whether or not this profile is enabled for contributors.
+	 */
+	public boolean isContributorsEnabled() {
+		return contributorsEnabled;
+	}
+	
+	/**
+	 * Whether or not this user is a translator.
+	 */
+	public boolean isTranslator() {
+		return translator;
+	}
+	
+	/**
+	 * The color of the sidebar border on the user's Twitter profile page.
+	 */
+	public String getSidebarBorderColor() {
+		return sidebarBorderColor;
+	}
+
+	/**
+	 * The color of the sidebar fill on the user's Twitter profile page.
+	 */
+	public String getSidebarFillColor() {
+		return sidebarFillColor;
+	}
+
+	/**
+	 * The color of the background of the user's Twitter profile page.
+	 */
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	/**
+	 * Whether or not the user's Twitter profile page uses a background image.
+	 */
+	public boolean useBackgroundImage() {
+		return useBackgroundImage;
+	}
+
+	/**
+	 * The URL to a background image shown on the user's Twitter profile page.
+	 */
+	public String getBackgroundImageUrl() {
+		return backgroundImageUrl;
+	}
+
+	/**
+	 * Whether or not the background image is tiled.
+	 */
+	public boolean isBackgroundImageTiled() {
+		return backgroundImageTiled;
+	}
+
+	/**
+	 * The text color on the user's Twitter profile page.
+	 */
+	public String getTextColor() {
+		return textColor;
+	}
+
+	/**
+	 * The link color on the user's Twitter profile page.
+	 */
+	public String getLinkColor() {
+		return linkColor;
+	}
+	
+	/**
+	 * Whether or not the user has selected to see all inline media from everyone.
+	 * If false, they will only see inline media from the users they follow.
+	 * @return
+	 */
+	public boolean showAllInlineMedia() {
+		return showAllInlineMedia;
 	}
 }

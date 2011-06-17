@@ -76,6 +76,30 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Denton, TX", profile.getLocation());
 		assertEquals("http://www.springsource.org", profile.getUrl());
 		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
+		assertTrue(profile.isNotificationsEnabled());
+		assertFalse(profile.isVerified());
+		assertTrue(profile.isGeoEnabled());
+		assertTrue(profile.isContributorsEnabled());
+		assertTrue(profile.isTranslator());
+		assertTrue(profile.isFollowing());
+		assertTrue(profile.isFollowRequestSent());
+		assertTrue(profile.isProtected());
+		assertEquals("en", profile.getLanguage());
+		assertEquals(125, profile.getStatusesCount());
+		assertEquals(1001, profile.getListedCount());
+		assertEquals(14, profile.getFollowersCount());
+		assertEquals(194, profile.getFriendsCount());
+		assertEquals(4, profile.getFavoritesCount());
+		assertEquals("Mountain Time (US & Canada)", profile.getTimeZone());
+		assertEquals(-25200, profile.getUtcOffset());
+		assertTrue(profile.useBackgroundImage());
+		assertEquals("C0DEED", profile.getSidebarBorderColor());
+		assertEquals("DDEEF6", profile.getSidebarFillColor());
+		assertEquals("C0DEED", profile.getBackgroundColor());
+		assertEquals("http://a3.twimg.com/a/1301419075/images/themes/theme1/bg.png", profile.getBackgroundImageUrl());
+		assertFalse(profile.isBackgroundImageTiled());
+		assertEquals("333333", profile.getTextColor());
+		assertEquals("0084B4", profile.getLinkColor());
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
