@@ -39,7 +39,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("verify-credentials.json", getClass()), responseHeaders));
+				.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
 		assertEquals(161064614, twitter.userOperations().getProfileId());
 	}
 
@@ -53,7 +53,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("verify-credentials.json", getClass()), responseHeaders));
+				.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
 		assertEquals("artnames", twitter.userOperations().getScreenName());
 	}
 
@@ -66,7 +66,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getUserProfile() throws Exception {
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("verify-credentials.json", getClass()), responseHeaders));
+				.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile();
 		assertEquals(161064614, profile.getId());
@@ -90,13 +90,13 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile(12345);
-		assertEquals(12345, profile.getId());
-		assertEquals("habuma", profile.getScreenName());
-		assertEquals("Craig Walls", profile.getName());
-		assertEquals("Spring Guy", profile.getDescription());
-		assertEquals("Plano, TX", profile.getLocation());
+		assertEquals(161064614, profile.getId());
+		assertEquals("artnames", profile.getScreenName());
+		assertEquals("Art Names", profile.getName());
+		assertEquals("I'm just a normal kinda guy", profile.getDescription());
+		assertEquals("Denton, TX", profile.getLocation());
 		assertEquals("http://www.springsource.org", profile.getUrl());
-		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", profile.getProfileImageUrl());
+		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 	
 	@Test

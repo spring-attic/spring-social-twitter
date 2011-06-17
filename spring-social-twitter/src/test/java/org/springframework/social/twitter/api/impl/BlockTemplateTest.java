@@ -163,13 +163,13 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	// private helpers
 	
 	private void assertTwitterProfile(TwitterProfile blockedUser) {
-		assertEquals(12345, blockedUser.getId());
-		assertEquals("habuma", blockedUser.getScreenName());
-		assertEquals("Craig Walls", blockedUser.getName());
-		assertEquals("Spring Guy", blockedUser.getDescription());
-		assertEquals("Plano, TX", blockedUser.getLocation());
+		assertEquals(161064614, blockedUser.getId());
+		assertEquals("artnames", blockedUser.getScreenName());
+		assertEquals("Art Names", blockedUser.getName());
+		assertEquals("I'm just a normal kinda guy", blockedUser.getDescription());
+		assertEquals("Denton, TX", blockedUser.getLocation());
 		assertEquals("http://www.springsource.org", blockedUser.getUrl());
-		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", blockedUser.getProfileImageUrl());
+		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", blockedUser.getProfileImageUrl());
 	}	
 
 }
