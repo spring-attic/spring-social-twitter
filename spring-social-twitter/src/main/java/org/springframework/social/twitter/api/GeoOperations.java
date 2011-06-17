@@ -81,7 +81,7 @@ public interface GeoOperations {
 	 * @param latitude the latitude
 	 * @param longitude the longitude
 	 * @param name the name that the place is known as
-	 * @return a {@link SimilarPlacesResponse} collection, including a token that can be used to create a new place.
+	 * @return a {@link SimilarPlaces} collection, including a token that can be used to create a new place.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name);
@@ -93,9 +93,9 @@ public interface GeoOperations {
 	 * @param latitude the latitude
 	 * @param longitude the longitude
 	 * @param name the name that the place is known as
-	 * @param the place's street address. May be null.
-	 * @param the ID of the place that the plce is contained within
-	 * @return a {@link SimilarPlacesResponse} collection, including a token that can be used to create a new place.
+	 * @param streetAddress the place's street address. May be null.
+	 * @param containedWithin the ID of the place that the place is contained within
+	 * @return a {@link SimilarPlaces} collection, including a token that can be used to create a new place.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name, String streetAddress, String containedWithin);

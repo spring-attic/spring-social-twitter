@@ -17,7 +17,7 @@ package org.springframework.social.twitter.api;
 
 /**
  * Represents a new place that could be created. 
- * This is the type returned from calls to {@link GeoOperations#findSimilarPlaces(double, double, String, String)}.
+ * This is the type returned from calls to {@link GeoOperations#findSimilarPlaces(double, double, String)}.
  * It is the only type that can be given to {@link GeoOperations#createPlace(PlacePrototype)} to create a new place.
  * This guarantees consistency between the query performed when finding similar places and when creating a new place so that the create token will be valid. 
  * @author Craig Walls

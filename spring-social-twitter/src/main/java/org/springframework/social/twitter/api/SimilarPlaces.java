@@ -34,9 +34,8 @@ public class SimilarPlaces extends ArrayList<Place> {
 	}
 
 	/**
-	 * A prototype place that matches the criteria for the call to {@link GeoOperations#findSimilarPlaces(double, double, String, String)}, 
+	 * A prototype place that matches the criteria for the call to {@link GeoOperations#findSimilarPlaces(double, double, String)}, 
 	 * including a create token that can be used to create the place.
-	 * @return
 	 */
 	public PlacePrototype getPlacePrototype() {
 		return placePrototype;
