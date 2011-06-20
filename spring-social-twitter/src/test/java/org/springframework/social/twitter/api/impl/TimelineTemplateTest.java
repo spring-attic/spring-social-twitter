@@ -24,7 +24,6 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.OperationNotPermittedException;
@@ -44,7 +43,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getPublicTimeline() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/public_timeline.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getPublicTimeline();
 		assertTimelineTweets(timeline);
 	}
@@ -53,7 +52,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getHomeTimeline() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getHomeTimeline();
 		assertTimelineTweets(timeline);
 	}
@@ -67,7 +66,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getFriendsTimeline() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/friends_timeline.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getFriendsTimeline();
 		assertTimelineTweets(timeline);
 	}
@@ -81,7 +80,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getUserTimeline() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline();
 		assertTimelineTweets(timeline);
 	}
@@ -95,7 +94,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getUserTimeline_forScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?screen_name=habuma"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline("habuma");
 		assertTimelineTweets(timeline);
 	}
@@ -104,7 +103,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getUserTimeline_forUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?user_id=12345"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345);
 		assertTimelineTweets(timeline);
 	}
@@ -113,7 +112,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getMentions() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> mentions = twitter.timelineOperations().getMentions();
 		assertTimelineTweets(mentions);
 	}
@@ -127,7 +126,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getRetweetedByMe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByMe();
 		assertTimelineTweets(timeline);		
 	}
@@ -141,7 +140,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getRetweetedToMe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToMe();
 		assertTimelineTweets(timeline);				
 	}
@@ -155,7 +154,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getRetweetsOfMe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe();
 		assertTimelineTweets(timeline);				
 	}
@@ -169,7 +168,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/12345.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("status.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("status"), responseHeaders));
 		
 		Tweet tweet = twitter.timelineOperations().getStatus(12345);
 		assertSingleTweet(tweet);
@@ -294,7 +293,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getRetweets() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("timeline.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweets(42L);
 		assertTimelineTweets(timeline);						
 	}
@@ -303,7 +302,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getRetweetedBy() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("retweeted-by.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("retweeted-by"), responseHeaders));
 		List<TwitterProfile> retweetedBy = twitter.timelineOperations().getRetweetedBy(42L);
 		assertEquals(2, retweetedBy.size());
 		assertEquals("royclarkson", retweetedBy.get(0).getScreenName());
@@ -316,7 +315,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getRetweetedByIds() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by/ids.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("retweeted-by-ids.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("retweeted-by-ids"), responseHeaders));
 		List<Long> retweetedByIds = twitter.timelineOperations().getRetweetedByIds(42L);
 		assertEquals(3, retweetedByIds.size());
 		assertEquals(12345, (long) retweetedByIds.get(0));
@@ -333,7 +332,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void getFavorites() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("favorite.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("favorite"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getFavorites();
 		assertTimelineTweets(timeline);
 	}

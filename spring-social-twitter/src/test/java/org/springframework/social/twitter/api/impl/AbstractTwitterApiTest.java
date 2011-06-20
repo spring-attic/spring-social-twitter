@@ -20,6 +20,8 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.social.test.client.MockRestServiceServer;
@@ -44,6 +46,10 @@ public abstract class AbstractTwitterApiTest {
 		unauthorizedTwitter = new TwitterTemplate();
 		 // create a mock server just to avoid hitting real twitter if something gets past the authorization check
 		MockRestServiceServer.createServer(unauthorizedTwitter.getRestTemplate());
+	}
+	
+	protected Resource jsonResource(String filename) {
+		return new ClassPathResource(filename + ".json", getClass());
 	}
 
 	protected void assertSingleTweet(Tweet tweet) {

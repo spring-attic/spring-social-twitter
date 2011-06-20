@@ -23,7 +23,6 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.DirectMessage;
@@ -38,7 +37,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	public void getDirectMessagesReceived() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("messages.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
 
 		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesReceived();
 		assertDirectMessageListContents(messages);
@@ -53,7 +52,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	public void getDirectMessagesSent() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/sent.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(new ClassPathResource("messages.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
 
 		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesSent();
 		assertDirectMessageListContents(messages);
@@ -104,7 +103,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	public void deleteDirectMessage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/destroy/42.json"))
 				.andExpect(method(DELETE))
-				.andRespond(withResponse(new ClassPathResource("directMessage.json", getClass()), responseHeaders));
+				.andRespond(withResponse(jsonResource("directMessage"), responseHeaders));
 		twitter.directMessageOperations().deleteDirectMessage(42L);
 		mockServer.verify();
 	}

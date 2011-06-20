@@ -23,7 +23,6 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.PlacePrototype;
 import org.springframework.social.twitter.api.PlaceType;
@@ -35,7 +34,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void getPlace() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/id/0bba15b36bd9e8cc.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("geo-place.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("geo-place"), responseHeaders));
 		Place place = twitter.geoOperations().getPlace("0bba15b36bd9e8cc");
 		assertPlace(place);
 	}
@@ -44,7 +43,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void reverseGeoCode_pointOnly() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().reverseGeoCode(33.050278, -96.745833);
 		assertPlaces(places);
 	}
@@ -53,7 +52,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void reverseGeoCode_pointAndGranularity() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833&granularity=city"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().reverseGeoCode(33.050278, -96.745833, PlaceType.CITY, null);
 		assertPlaces(places);
 	}
@@ -62,7 +61,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void reverseGeoCode_pointAndPOIGranularity() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833&granularity=poi"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().reverseGeoCode(33.050278, -96.745833, PlaceType.POINT_OF_INTEREST, null);
 		assertPlaces(places);
 	}
@@ -71,7 +70,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void reverseGeoCode_pointGranularityAndAccuracy() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833&granularity=city&accuracy=5280ft"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().reverseGeoCode(33.050278, -96.745833, PlaceType.CITY, "5280ft");
 		assertPlaces(places);
 	}
@@ -80,7 +79,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void reverseGeoCode_pointAndAccuracy() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833&accuracy=5280ft"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().reverseGeoCode(33.050278, -96.745833, null, "5280ft");
 		assertPlaces(places);
 	}
@@ -89,7 +88,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void search_pointOnly() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/search.json?lat=33.050278&long=-96.745833"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833);
 		assertPlaces(places);
 	}
@@ -98,7 +97,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void search_pointAndGranularity() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/search.json?lat=33.050278&long=-96.745833&granularity=city"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833, PlaceType.CITY, null, null);
 		assertPlaces(places);
 	}
@@ -107,7 +106,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void search_pointAndPOIGranularity() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/search.json?lat=33.050278&long=-96.745833&granularity=poi"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833, PlaceType.POINT_OF_INTEREST, null, null);
 		assertPlaces(places);
 	}
@@ -116,7 +115,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void search_pointGranularityAndAccuracy() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/search.json?lat=33.050278&long=-96.745833&granularity=city&accuracy=5280ft"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833, PlaceType.CITY, "5280ft", null);
 		assertPlaces(places);
 	}
@@ -125,7 +124,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void search_pointAndAccuracy() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/search.json?lat=33.050278&long=-96.745833&accuracy=5280ft"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833, null, "5280ft", null);
 		assertPlaces(places);
 	}
@@ -134,7 +133,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void search_pointGranularityAccuracyAndQuery() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/search.json?lat=33.050278&long=-96.745833&granularity=city&accuracy=5280ft&query=Public+School"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("places-list.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("places-list"), responseHeaders));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833, PlaceType.CITY, "5280ft", "Public School");
 		assertPlaces(places);
 	}
@@ -143,7 +142,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	public void findSimilarPlaces() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/similar_places.json?lat=37.7821120598956&long=-122.400612831116&name=Twitter+HQ&attribute%3Astreet_address=795+Folsom+St&contained_within=2e056b6d9c0ff3cd"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("similar-places.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("similar-places"), responseHeaders));
 		SimilarPlaces similarPlaces = twitter.geoOperations().findSimilarPlaces(37.7821120598956, -122.400612831116, "Twitter HQ", "795 Folsom St", "2e056b6d9c0ff3cd");
 		assertEquals("9c8072b2a6788ee530e8c8cbb487107c", similarPlaces.getPlacePrototype().getCreateToken());
 		assertEquals(37.7821120598956, similarPlaces.getPlacePrototype().getLatitude(), 0.0000001);
@@ -172,7 +171,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/geo/place.json"))
 			.andExpect(method(POST))
 			.andExpect(body("lat=33.153661&long=-94.973045&name=Restaurant+Mexico&attribute%3Astreet_address=301+W+Ferguson+Rd&contained_within=2e056b6d9c0ff3cd&token=0b699bfda6514e84c7b69cf993c0c23e"))
-			.andRespond(withResponse(new ClassPathResource("geo-place.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("geo-place"), responseHeaders));
 		PlacePrototype placePrototype = new PlacePrototype("0b699bfda6514e84c7b69cf993c0c23e", 33.153661, -94.973045, "Restaurant Mexico", "301 W Ferguson Rd", "2e056b6d9c0ff3cd");
 		Place place = twitter.geoOperations().createPlace(placePrototype);
 		assertPlace(place);

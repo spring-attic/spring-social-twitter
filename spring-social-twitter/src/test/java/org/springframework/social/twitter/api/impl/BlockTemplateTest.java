@@ -23,7 +23,6 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.TwitterProfile;
@@ -39,7 +38,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/create.json"))
 			.andExpect(method(POST))
 			.andExpect(body("user_id=12345"))
-			.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
 		TwitterProfile blockedUser = twitter.blockOperations().block(12345);
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
@@ -55,7 +54,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/create.json"))
 			.andExpect(method(POST))
 			.andExpect(body("screen_name=habuma"))
-			.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
 		TwitterProfile blockedUser = twitter.blockOperations().block("habuma");
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
@@ -71,7 +70,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/destroy.json"))
 			.andExpect(method(POST))
 			.andExpect(body("user_id=12345"))
-			.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
 		TwitterProfile blockedUser = twitter.blockOperations().unblock(12345);
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
@@ -87,7 +86,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/destroy.json"))
 			.andExpect(method(POST))
 			.andExpect(body("screen_name=habuma"))
-			.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
 		TwitterProfile blockedUser = twitter.blockOperations().unblock("habuma");
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
@@ -102,7 +101,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	public void getBlockedUsers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("list-of-profiles.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 		List<TwitterProfile> blockedUsers = twitter.blockOperations().getBlockedUsers();
 		assertEquals(2, blockedUsers.size());
 		mockServer.verify();
@@ -117,7 +116,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	public void getBlockedUserIds() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking/ids.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("list-of-ids.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("list-of-ids"), responseHeaders));
 		List<Long> blockedUsers = twitter.blockOperations().getBlockedUserIds();
 		assertEquals(4, blockedUsers.size());
 		mockServer.verify();
@@ -132,7 +131,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	public void isBlocking_userId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/exists.json?user_id=12345"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
 		assertTrue(twitter.blockOperations().isBlocking(12345));		
 	}
 
@@ -148,7 +147,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	public void isBlocking_screenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/exists.json?screen_name=habuma"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("twitter-profile.json", getClass()), responseHeaders));
+			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
 		assertTrue(twitter.blockOperations().isBlocking("habuma"));		
 	}
 

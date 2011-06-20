@@ -22,7 +22,6 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.ApiException;
 import org.springframework.social.InternalServerErrorException;
@@ -50,7 +49,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	public void missingAccessToken() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("error-no-token.json", ApiErrorTest.class), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andRespond(withResponse(jsonResource("error-no-token"), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
 		unauthorizedTwitter.userOperations().getUserProfile();
 	}
 	
@@ -58,7 +57,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	public void badAccessToken() { // token is fabricated or fails signature validation
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("error-invalid-token.json", ApiErrorTest.class), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andRespond(withResponse(jsonResource("error-invalid-token"), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
 		twitter.userOperations().getUserProfile();
 	}
 	
@@ -66,7 +65,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	public void revokedToken() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("error-revoked-token.json", ApiErrorTest.class), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andRespond(withResponse(jsonResource("error-revoked-token"), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
 		twitter.userOperations().getUserProfile();		
 	}
 
