@@ -45,7 +45,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		String fromScreenName = null;
 		long fromId = 0;
 		String fromImageUrl = null;
-		DateFormat dateFormat = TIMELINE_DATE_FORMAT;
+		String dateFormat = TIMELINE_DATE_FORMAT;
 		if (fromUserNode != null) {
 			fromScreenName = fromUserNode.get("screen_name").getValueAsText();
 			fromId = fromUserNode.get("id").getValueAsLong();
@@ -56,7 +56,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 			fromImageUrl = tree.get("profile_image_url").getValueAsText();
 			dateFormat = SEARCH_DATE_FORMAT;
 		}
-		Date createdAt = toDate(tree.get("created_at").getValueAsText(), dateFormat);
+		Date createdAt = toDate(tree.get("created_at").getValueAsText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
 		String source = tree.get("source").getValueAsText();
 		JsonNode toUserIdNode = tree.get("in_reply_to_user_id");
 		Long toUserId = toUserIdNode != null ? toUserIdNode.getValueAsLong() : null;
@@ -80,8 +80,8 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
     }
 
 
-	private static final DateFormat TIMELINE_DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", Locale.ENGLISH);
+	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
-	private static final DateFormat SEARCH_DATE_FORMAT = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+	private static final String SEARCH_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
 
 }

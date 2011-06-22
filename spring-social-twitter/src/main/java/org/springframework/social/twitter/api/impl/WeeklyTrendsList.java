@@ -15,6 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +33,7 @@ class WeeklyTrendsList extends AbstractTrendsList {
 
 	@JsonCreator
 	public WeeklyTrendsList(@JsonProperty("trends") Map<String, List<Trend>> trends) {
-		super(trends, WEEKLY_TREND_DATE_FORMAT);
+		super(trends, new SimpleDateFormat("yyyy-MM-dd"));
 	}
 
 }

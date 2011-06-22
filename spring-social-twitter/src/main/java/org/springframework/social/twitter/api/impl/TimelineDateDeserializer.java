@@ -16,7 +16,6 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -37,12 +36,12 @@ class TimelineDateDeserializer extends JsonDeserializer<Date> {
 	public Date deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
         try {
-            return TIMELINE_DATE_FORMAT.parse(jp.getText());
+            return new SimpleDateFormat(TIMELINE_DATE_FORMAT, Locale.ENGLISH).parse(jp.getText());
         } catch (ParseException e) {
             return null;
         }
 	}
 
-	private static final DateFormat TIMELINE_DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy", Locale.ENGLISH);
+	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
 }

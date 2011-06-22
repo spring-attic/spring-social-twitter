@@ -17,7 +17,6 @@ package org.springframework.social.twitter.api.impl;
 
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,11 +66,5 @@ class AbstractTrendsList {
             return null;
         }
     }
-    
-	public static final DateFormat WEEKLY_TREND_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-
-	public static final DateFormat DAILY_TREND_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-	public static final DateFormat LOCAL_TREND_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd'T'HH:mm:ss'Z'");
 
 }

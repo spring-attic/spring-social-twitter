@@ -16,7 +16,6 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -59,11 +58,11 @@ class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 		throw ctxt.mappingException(LocalTrendsHolder.class);
 	}
 	
-	private static final DateFormat LOCAL_TREND_DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd'T'HH:mm:ss'Z'");
+	private static final String LOCAL_TREND_DATE_FORMAT = "yyyy-mm-dd'T'HH:mm:ss'Z'";
 
 	private static Date toDate(String dateString) {
 		try {
-			return LOCAL_TREND_DATE_FORMAT.parse(dateString);
+			return new SimpleDateFormat(LOCAL_TREND_DATE_FORMAT).parse(dateString);
 		} catch (ParseException e) {
 			return null;
 		}
