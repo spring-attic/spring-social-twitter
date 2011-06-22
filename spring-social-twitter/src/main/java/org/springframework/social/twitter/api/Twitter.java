@@ -37,6 +37,11 @@ public interface Twitter extends ApiBinding {
 	FriendOperations friendOperations();
 
 	/**
+	 * Returns the portion of the Twitter API containing the geo location operations.
+	 */
+	GeoOperations geoOperations();
+
+	/**
 	 * Returns the portion of the Twitter API containing the user list operations.
 	 */
 	ListOperations listOperations();
