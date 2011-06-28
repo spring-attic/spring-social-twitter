@@ -14,21 +14,20 @@
 	</para>
 	<programlisting language="java"><![CDATA[
 @Configuration
-public class ConnectionFactoryConfig {
+public class SocialConfig {
+
+    @Inject
+    private Environment environment;
 	
     @Bean
     public ConnectionFactoryLocator connectionFactoryLocator() {
         ConnectionFactoryRegistry registry = new ConnectionFactoryRegistry();
-        registry.addConnectionFactory(new TwitterConnectionFactory(twitterConsumerKey, twitterConsumerSecret));
+        registry.addConnectionFactory(new TwitterConnectionFactory(
+            environment.getProperty("twitter.consumerKey"),
+            environment.getProperty("twitter.consumerSecret")));
         return registry;
     }
 
-    @Value("${twitter.consumerKey}")
-    private String twitterConsumerKey;
-	
-    @Value("${twitter.consumerSecret}")
-    private String twitterConsumerSecret;
-	
 }
 ]]>
 	</programlisting>
@@ -36,8 +35,11 @@ public class ConnectionFactoryConfig {
 	<para>
 		Here, a Twitter connection factory is registered with <classname>ConnectionFactoryRegistry</classname> via the <methodname>addConnectionFactory()</methodname> method.
 		If we wanted to add support for connecting to other providers, we would simply register their connection factories here in the same way as <classname>TwitterConnectionFactory</classname>.
-		Because consumer keys and secrets may be different across environments (e.g., test, production, etc) it is recommended that these values be externalized.
-		Therefore, they are wired in with <code>@Value</code> as property placeholder values to be resolved by Spring's property placeholder support.
+	</para>
+	
+	<para>
+		Because consumer keys and secrets may be different across environments (e.g., test, production, etc) it is recommended that these values be externalized. 
+		As shown here, Spring 3.1's <interfacename>Environment</interfacename> is used to look up the application's consumer key and secret.
 	</para>	
 
 	<para>
@@ -60,6 +62,7 @@ public class ConnectionFactoryConfig {
 	<para>
 		This is functionally equivalent to the Java-based configuration of <classname>ConnectionFactoryRegistry</classname> shown before.
 		The only casual difference is that the connection factories are injected as a list into the <code>connectionFactories</code> property rather than with the <methodname>addConnectionFactory()</methodname> method.
+		As in the Java-based configuration, the application's consumer key and secret are externalized (shown here as property placeholders).
 	</para>	
 		
 	<para>

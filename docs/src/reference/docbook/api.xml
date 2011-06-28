@@ -29,7 +29,7 @@ Twitter twitter = new TwitterTemplate();]]>
 	
 	<para>
 		When constructed with the default constructor, <classname>TwitterTemplate</classname> will allow a few simple operations that do not require authorization, such as searching. 
-		Attempting other operations, such as tweeting will fail with an <classname>IllegalStateException</classname> being thrown.
+		Attempting other operations, such as tweeting will fail with an <classname>MissingAuthorizationException</classname> being thrown.
 	</para>
 	
 	<para>
@@ -38,13 +38,14 @@ Twitter twitter = new TwitterTemplate();]]>
 	</para>				
 	
 	<programlisting language="java"><![CDATA[
-Connection<Twitter> connection = connectionRepository.findPrimaryConnectionToApi(Twitter.class);
-Twitter twitter = connection.getApi();]]>
+Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
+Twitter twitter = connection != null ? connection.getApi() : new TwitterTemplate();]]>
 	</programlisting>
 	
 	<para>
-		Here, <interfacename>ConnectionRepository</interfacename> is being asked for the primary connections that the current user has with Twitter.
-		From that connection, it retrieves a <interfacename>Twitter</interfacename> instance that is configured with the connection details received when the connection was first established.
+		Here, <interfacename>ConnectionRepository</interfacename> is being asked for the primary connection that the current user has with Twitter.
+		If connection to Twitter is found, a call to <methodname>getApi()</methodname> retrieves a <interfacename>Twitter</interfacename> instance that is configured with the connection details received when the connection was first established.
+		If there is no connection, a default instance of <classname>TwitterTemplate</classname> is created.
 	</para>
 	
 	<para>
@@ -60,6 +61,8 @@ public interface Twitter {
    DirectMessageOperations directMessageOperations();
 
    FriendOperations friendOperations();
+
+   GeoOperations geoOperations();
 
    ListOperations listOperations();
 
@@ -104,8 +107,12 @@ public interface Twitter {
 					<entry>Retrieving a user's list of friends and followers and following/unfollowing users.</entry>
 				</row>
 				<row>
+					<entry>GeoOperations</entry>
+					<entry>Working with locations.</entry>
+				</row>
+				<row>
 					<entry>ListOperations</entry>
-					<entry>Maintaining, subscribing to, and unsubscripting from user lists</entry>
+					<entry>Maintaining, subscribing to, and unsubscribing from user lists</entry>
 				</row>
 				<row>
 					<entry>SearchOperations</entry>
