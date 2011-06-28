@@ -184,7 +184,6 @@ public class TwitterProfile implements Serializable {
 	
 	/**
 	 * The user's preferred language.
-	 * @return
 	 */
 	public String getLanguage() {
 		return language;
@@ -333,7 +332,6 @@ public class TwitterProfile implements Serializable {
 	/**
 	 * Whether or not the user has selected to see all inline media from everyone.
 	 * If false, they will only see inline media from the users they follow.
-	 * @return
 	 */
 	public boolean showAllInlineMedia() {
 		return showAllInlineMedia;
