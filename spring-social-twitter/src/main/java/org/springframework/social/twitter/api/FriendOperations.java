@@ -29,6 +29,9 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of users that the authenticated user follows.
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
+	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
+	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -37,6 +40,9 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of users that the given user follows.
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
+	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
+	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
 	 * @param userId The user's Twitter ID
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
@@ -45,6 +51,9 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of users that the given user follows.
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
+	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
+	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
 	 * @param screenName The user's Twitter screen name
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
@@ -77,6 +86,9 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of users that the authenticated user is being followed by
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
+	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
+	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -85,6 +97,9 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of users that the given user is being followed by
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
+	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
+	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
 	 * @param userId The user's Twitter ID
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
@@ -93,6 +108,9 @@ public interface FriendOperations {
 	
 	/**
 	 * Retrieves a list of users that the given user is being followed by
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
+	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
+	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
 	 * @param screenName The user's Twitter screen name
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.

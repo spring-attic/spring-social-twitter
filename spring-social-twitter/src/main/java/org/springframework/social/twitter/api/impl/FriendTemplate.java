@@ -15,6 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,22 +39,15 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<TwitterProfile> getFriends() {
-		requireAuthorization();
-		return restTemplate.getForObject(buildUri("statuses/friends.json", "cursor", "-1"), TwitterProfileUsersList.class).getList();
+		return getProfiles(getFriendIds());
 	}
 
 	public List<TwitterProfile> getFriends(long userId) {
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
-		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("statuses/friends.json", parameters), TwitterProfileUsersList.class).getList();
+		return getProfiles(getFriendIds(userId));
 	}
 
 	public List<TwitterProfile> getFriends(String screenName) {
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
-		parameters.set("screen_name", screenName);
-		return restTemplate.getForObject(buildUri("statuses/friends.json", parameters), TwitterProfileUsersList.class).getList();
+		return getProfiles(getFriendIds(screenName));
 	}
 	
 	public List<Long> getFriendIds() {
@@ -76,22 +70,15 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public List<TwitterProfile> getFollowers() {
-		requireAuthorization();
-		return restTemplate.getForObject(buildUri("statuses/followers.json", "cursor", "-1"), TwitterProfileUsersList.class).getList();
+		return getProfiles(getFollowerIds());
 	}
 
 	public List<TwitterProfile> getFollowers(long userId) {
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
-		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("statuses/followers.json", parameters), TwitterProfileUsersList.class).getList();
+		return getProfiles(getFollowerIds(userId));
 	}
 
 	public List<TwitterProfile> getFollowers(String screenName) {
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
-		parameters.set("screen_name", screenName);
-		return restTemplate.getForObject(buildUri("statuses/followers.json", parameters), TwitterProfileUsersList.class).getList();
+		return getProfiles(getFollowerIds(screenName));
 	}
 
 	public List<Long> getFollowerIds() {
@@ -171,6 +158,27 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		return restTemplate.getForObject(buildUri("friendships/outgoing.json"), LongIdsList.class).getList();
 	}
 
+	private List<TwitterProfile> getProfiles(List<Long> userIds) {
+		List<List<Long>> chunks = chunkList(userIds, 100);
+		List<TwitterProfile> users = new ArrayList<TwitterProfile>(userIds.size());
+		for (List<Long> userIdChunk : chunks) {
+			String joinedIds = ArrayUtils.join(userIdChunk.toArray());
+			users.addAll(restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class));
+		}
+		return users;
+	}
+	
+	private List<List<Long>> chunkList(List<Long> list, int chunkSize) {
+		List<List<Long>> chunkedList = new ArrayList<List<Long>>();
+		int start = 0;
+		while (start < list.size()) {
+			int end = Math.min(chunkSize + start, list.size());
+			chunkedList.add(list.subList(start, end));
+			start = end;
+		}
+		return chunkedList;
+	}
+	
 	private static final MultiValueMap<String, Object> EMPTY_DATA = new LinkedMultiValueMap<String, Object>();
 	
 }
