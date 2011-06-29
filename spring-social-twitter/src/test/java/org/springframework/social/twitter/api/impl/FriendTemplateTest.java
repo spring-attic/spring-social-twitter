@@ -83,6 +83,16 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void getFriends_currentUser_noFriends() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=-1"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("no-friend-or-follower-ids"), responseHeaders));
+
+		List<TwitterProfile> friends = twitter.friendOperations().getFriends();
+		assertEquals(0, friends.size());
+	}
+
+	@Test
 	public void getFriends_currentUser_manyFriends() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=-1"))
 			.andExpect(method(GET))
@@ -200,6 +210,16 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", followers.get(1).getScreenName());
 	}
 	
+	@Test
+	public void getFriends_currentUser_noFollowers() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=-1"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("no-friend-or-follower-ids"), responseHeaders));
+
+		List<TwitterProfile> friends = twitter.friendOperations().getFollowers();
+		assertEquals(0, friends.size());
+	}
+
 	@Test
 	public void getFollowers_currentUser_manyFollowers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=-1"))
