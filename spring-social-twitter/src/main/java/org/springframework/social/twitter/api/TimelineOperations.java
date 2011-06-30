@@ -56,18 +56,6 @@ public interface TimelineOperations {
 	List<Tweet> getHomeTimeline();
 
 	/**
-	 * Retrieves the 20 most recently posted tweets, excluding retweets, from
-	 * the authenticating user's home timeline. The friends timeline includes
-	 * tweets from the user's timeline and the timeline of anyone that they
-	 * follow, with the exception of any retweets.
-	 * 
-	 * @return a collection of {@link Tweet}s in the authenticating user's friends timeline.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
-	 */
-	List<Tweet> getFriendsTimeline();
-
-	/**
 	 * Retrieves the 20 most recent tweets posted by the authenticating user.
 	 * @return a collection of {@link Tweet}s that have been posted by the authenticating user.
 	 * @throws ApiException if there is an error while communicating with Twitter.

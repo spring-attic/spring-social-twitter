@@ -63,20 +63,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendsTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/friends_timeline.json"))
-				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
-		List<Tweet> timeline = twitter.timelineOperations().getFriendsTimeline();
-		assertTimelineTweets(timeline);
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getFriendsTimeline_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getFriendsTimeline();
-	}
-	
-	@Test
 	public void getUserTimeline() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json"))
 				.andExpect(method(GET))

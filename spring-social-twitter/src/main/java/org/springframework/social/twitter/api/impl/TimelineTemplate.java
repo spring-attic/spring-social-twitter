@@ -48,11 +48,6 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		return restTemplate.getForObject(buildUri("statuses/home_timeline.json"), TweetList.class);
 	}
 
-	public List<Tweet> getFriendsTimeline() {
-		requireAuthorization();
-		return restTemplate.getForObject(buildUri("statuses/friends_timeline.json"), TweetList.class);
-	}
-
 	public List<Tweet> getUserTimeline() {
 		requireAuthorization();
 		return restTemplate.getForObject(buildUri("statuses/user_timeline.json"), TweetList.class);
