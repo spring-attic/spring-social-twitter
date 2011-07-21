@@ -53,7 +53,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	
 	public List<Tweet> getHomeTimeline(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("statuses/home_timeline.json", parameters), TweetList.class);
 	}
 	
@@ -67,7 +67,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public List<Tweet> getUserTimeline(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("statuses/user_timeline.json", parameters), TweetList.class);
 	}
 
@@ -80,7 +80,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<Tweet> getUserTimeline(String screenName, int page, int pageSize, long sinceId, long maxId) {
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		parameters.set("screen_name", screenName);
 		return restTemplate.getForObject(buildUri("statuses/user_timeline.json", parameters), TweetList.class);
 	}
@@ -94,7 +94,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<Tweet> getUserTimeline(long userId, int page, int pageSize, long sinceId, long maxId) {
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		parameters.set("user_id", String.valueOf(userId));
 		return restTemplate.getForObject(buildUri("statuses/user_timeline.json", parameters), TweetList.class);
 	}
@@ -109,7 +109,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public List<Tweet> getMentions(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("statuses/mentions.json", parameters), TweetList.class);
 	}
 
@@ -123,7 +123,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	
 	public List<Tweet> getRetweetedByMe(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("statuses/retweeted_by_me.json", parameters), TweetList.class);
 	}
 
@@ -137,7 +137,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	
 	public List<Tweet> getRetweetedByUser(long userId, int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		parameters.set("user_id", String.valueOf(userId));
 		return restTemplate.getForObject(buildUri("statuses/retweeted_by_user.json", parameters), TweetList.class);
 	}
@@ -152,7 +152,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	
 	public List<Tweet> getRetweetedByUser(String screenName, int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		parameters.set("screen_name", screenName);
 		return restTemplate.getForObject(buildUri("statuses/retweeted_by_user.json", parameters), TweetList.class);
 	}
@@ -167,7 +167,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public List<Tweet> getRetweetedToMe(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("statuses/retweeted_to_me.json", parameters), TweetList.class);
 	}
 
@@ -181,7 +181,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	
 	public List<Tweet> getRetweetedToUser(long userId, int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		parameters.set("user_id", String.valueOf(userId));
 		return restTemplate.getForObject(buildUri("statuses/retweeted_to_user.json", parameters), TweetList.class);
 	}
@@ -196,7 +196,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	
 	public List<Tweet> getRetweetedToUser(String screenName, int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		parameters.set("screen_name", screenName);
 		return restTemplate.getForObject(buildUri("statuses/retweeted_to_user.json", parameters), TweetList.class);
 	}
@@ -211,7 +211,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public List<Tweet> getRetweetsOfMe(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("statuses/retweets_of_me.json", parameters), TweetList.class);
 	}
 
@@ -257,7 +257,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<TwitterProfile> getRetweetedBy(long tweetId, int page, int pageSize) {
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, 0, 0);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, 0, 0);
 		return restTemplate.getForObject(buildUri("statuses/" + tweetId + "/retweeted_by.json", parameters), TwitterProfileList.class);
 	}
 
@@ -267,7 +267,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public List<Long> getRetweetedByIds(long tweetId, int page, int pageSize) {
 		requireAuthorization(); // requires authentication, even though getRetweetedBy() does not.
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, 0, 0);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, 0, 0);
 		return restTemplate.getForObject(buildUri("statuses/" + tweetId + "/retweeted_by/ids.json", parameters), LongList.class);
 	}
 

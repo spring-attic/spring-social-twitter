@@ -46,7 +46,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 
 	public List<DirectMessage> getDirectMessagesReceived(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("direct_messages.json", parameters), DirectMessageList.class);
 	}
 
@@ -60,7 +60,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 
 	public List<DirectMessage> getDirectMessagesSent(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("direct_messages/sent.json", parameters), DirectMessageList.class);
 	}
 

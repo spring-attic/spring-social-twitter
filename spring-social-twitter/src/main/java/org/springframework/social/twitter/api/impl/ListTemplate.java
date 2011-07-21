@@ -66,11 +66,29 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<Tweet> getListStatuses(long listId) {
-		return restTemplate.getForObject(buildUri("lists/statuses.json", "list_id", String.valueOf(listId)), TweetList.class);
+		return getListStatuses(listId, 1, 20, 0, 0);
+	}
+
+	public List<Tweet> getListStatuses(long listId, int page, int pageSize) {
+		return getListStatuses(listId, page, pageSize, 0, 0);
+	}
+
+	public List<Tweet> getListStatuses(long listId, int page, int pageSize, long sinceId, long maxId) {
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, sinceId, maxId);
+		parameters.set("list_id", String.valueOf(listId));
+		return restTemplate.getForObject(buildUri("lists/statuses.json", parameters), TweetList.class);
 	}
 
 	public List<Tweet> getListStatuses(String screenName, String listSlug) {
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		return getListStatuses(screenName, listSlug, 1, 20, 0, 0);
+	}
+
+	public List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize) {
+		return getListStatuses(screenName, listSlug, page, pageSize, 0, 0);
+	}
+
+	public List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize, long sinceId, long maxId) {
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, sinceId, maxId);
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
 		return restTemplate.getForObject(buildUri("lists/statuses.json", parameters), TweetList.class);

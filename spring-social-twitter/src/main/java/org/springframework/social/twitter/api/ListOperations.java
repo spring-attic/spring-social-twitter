@@ -78,12 +78,58 @@ public interface ListOperations {
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
+	 * @param listId the ID of the list to retrieve.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link Tweet}s per page.
+	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	List<Tweet> getListStatuses(long listId, int page, int pageSize);
+
+	/**
+	 * Retrieves the timeline tweets for the given user list.
+	 * @param listId the ID of the list to retrieve.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link Tweet}s per page.
+	 * @param sinceId The minimum {@link Tweet} ID to return in the results
+	 * @param maxId The maximum {@link Tweet} ID to return in the results
+	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	List<Tweet> getListStatuses(long listId, int page, int pageSize, long sinceId, long maxId);
+
+	/**
+	 * Retrieves the timeline tweets for the given user list.
 	 * @param screenName the screen name of the Twitter user.
 	 * @param listSlug the list's slug.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
 	List<Tweet> getListStatuses(String screenName, String listSlug);
+
+	/**
+	 * Retrieves the timeline tweets for the given user list.
+	 * @param screenName the screen name of the Twitter user.
+	 * @param listSlug the list's slug.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link Tweet}s per page.
+	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize);
+
+	/**
+	 * Retrieves the timeline tweets for the given user list.
+	 * @param screenName the screen name of the Twitter user.
+	 * @param listSlug the list's slug.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link Tweet}s per page.
+	 * @param sinceId The minimum {@link Tweet} ID to return in the results
+	 * @param maxId The maximum {@link Tweet} ID to return in the results
+	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize, long sinceId, long maxId);
 
 	/**
 	 * Create a new user list
