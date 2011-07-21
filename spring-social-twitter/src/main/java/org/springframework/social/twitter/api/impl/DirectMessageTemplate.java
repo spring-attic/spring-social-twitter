@@ -37,13 +37,31 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public List<DirectMessage> getDirectMessagesReceived() {
+		return getDirectMessagesReceived(1, 20, 0, 0);
+	}
+
+	public List<DirectMessage> getDirectMessagesReceived(int page, int pageSize) {
+		return getDirectMessagesReceived(page, pageSize, 0, 0);
+	}
+
+	public List<DirectMessage> getDirectMessagesReceived(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("direct_messages.json"), DirectMessageList.class);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		return restTemplate.getForObject(buildUri("direct_messages.json", parameters), DirectMessageList.class);
 	}
 
 	public List<DirectMessage> getDirectMessagesSent() {
+		return getDirectMessagesSent(1, 20, 0, 0);
+	}
+
+	public List<DirectMessage> getDirectMessagesSent(int page, int pageSize) {
+		return getDirectMessagesSent(page, pageSize, 0, 0);
+	}
+
+	public List<DirectMessage> getDirectMessagesSent(int page, int pageSize, long sinceId, long maxId) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("direct_messages/sent.json"), DirectMessageList.class);
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParameters(page, pageSize, sinceId, maxId);
+		return restTemplate.getForObject(buildUri("direct_messages/sent.json", parameters), DirectMessageList.class);
 	}
 
 	public void sendDirectMessage(String toScreenName, String text) {

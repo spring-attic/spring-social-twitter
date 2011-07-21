@@ -35,7 +35,7 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getDirectMessagesReceived() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
 
@@ -43,6 +43,26 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 	
+	@Test
+	public void getDirectMessagesReceived_paged() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages.json?page=3&count=12"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
+
+		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesReceived(3, 12);
+		assertDirectMessageListContents(messages);
+	}
+
+	@Test
+	public void getDirectMessagesReceived_paged_withSinceIdAndMaxId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages.json?page=3&count=12&since_id=112233&max_id=332211"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
+
+		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesReceived(3, 12, 112233, 332211);
+		assertDirectMessageListContents(messages);
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getDirectMessagesReceived_unauthorized() {
 		unauthorizedTwitter.directMessageOperations().getDirectMessagesReceived();
@@ -50,11 +70,31 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getDirectMessagesSent() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/sent.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/sent.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
 
 		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesSent();
+		assertDirectMessageListContents(messages);
+	}
+
+	@Test
+	public void getDirectMessagesSent_paged() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/sent.json?page=3&count=25"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
+
+		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesSent(3, 25);
+		assertDirectMessageListContents(messages);
+	}
+
+	@Test
+	public void getDirectMessagesSent_paged_withSinceIdAndMaxId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/sent.json?page=3&count=25&since_id=2468&max_id=8642"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(jsonResource("messages"), responseHeaders));
+
+		List<DirectMessage> messages = twitter.directMessageOperations().getDirectMessagesSent(3, 25, 2468, 8642);
 		assertDirectMessageListContents(messages);
 	}
 

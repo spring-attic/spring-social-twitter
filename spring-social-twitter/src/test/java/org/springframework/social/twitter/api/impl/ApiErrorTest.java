@@ -80,7 +80,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = InternalServerErrorException.class)
 	public void twitterIsBroken() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR, ""));
 			twitter.timelineOperations().getHomeTimeline();
@@ -93,7 +93,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ServerDownException.class)
 	public void twitterIsDownOrBeingUpgraded() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.BAD_GATEWAY, ""));
 			twitter.timelineOperations().getHomeTimeline();
@@ -106,7 +106,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ServerOverloadedException.class)
 	public void twitterIsOverloaded() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.SERVICE_UNAVAILABLE, ""));
 			twitter.timelineOperations().getHomeTimeline();
@@ -119,7 +119,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ApiException.class)
 	public void nonJSONErrorResponse() {
 		try { 
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse("<h1>HTML response</h1>", responseHeaders, HttpStatus.BAD_REQUEST, ""));
 			twitter.timelineOperations().getHomeTimeline();

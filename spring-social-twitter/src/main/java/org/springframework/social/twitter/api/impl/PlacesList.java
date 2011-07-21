@@ -46,6 +46,7 @@ class PlacesList {
 	}
 
 	private static class PlacesDeserializer extends JsonDeserializer<List<Place>> {
+		@SuppressWarnings("unchecked")
 		@Override
 		public List<Place> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			ObjectMapper mapper = new ObjectMapper();

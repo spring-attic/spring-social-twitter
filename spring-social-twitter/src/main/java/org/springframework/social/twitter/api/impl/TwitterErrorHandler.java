@@ -77,6 +77,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		if (errorMap.containsKey("error")) {
 			errorText = (String) errorMap.get("error");
 		} else if(errorMap.containsKey("errors")) {
+			@SuppressWarnings("unchecked")
 			List<Map<String, String>> errors = (List<Map<String, String>>) errorMap.get("errors");
 			errorText = errors.get(0).get("message");
 		}

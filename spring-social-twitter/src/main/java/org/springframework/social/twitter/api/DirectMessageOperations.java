@@ -28,7 +28,7 @@ import org.springframework.social.MissingAuthorizationException;
 public interface DirectMessageOperations {
 
 	/**
-	 * Retrieve the 20 most recently received direct messages for the authenticating user.
+	 * Retrieve the 20 most recently received direct messages for the authenticating user. The most recently received messages are listed first.
 	 * @return a collection of {@link DirectMessage} with the authenticating user as the recipient.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @throws ApiException if there is an error while communicating with Twitter.
@@ -36,14 +36,56 @@ public interface DirectMessageOperations {
 	List<DirectMessage> getDirectMessagesReceived();
 
 	/**
-	 * Retrieve the 20 most recently sent direct messages for the authenticating
-	 * user.
-	 * 
+	 * Retrieve received direct messages for the authenticating user. The most recently received messages are listed first.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link DirectMessage}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
+	 * @return a collection of {@link DirectMessage} with the authenticating user as the recipient.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	List<DirectMessage> getDirectMessagesReceived(int page, int pageSize);
+
+	/**
+	 * Retrieve received direct messages for the authenticating user. The most recently received messages are listed first.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link DirectMessage}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
+	 * @param sinceId The minimum {@link DirectMessage} ID to return in the results
+	 * @param maxId The maximum {@link DirectMessage} ID to return in the results
+	 * @return a collection of {@link DirectMessage} with the authenticating user as the recipient.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	List<DirectMessage> getDirectMessagesReceived(int page, int pageSize, long sinceId, long maxId);
+
+	/**
+	 * Retrieve the 20 most recent direct messages sent by the authenticating user. The most recently sent messages are listed first.
 	 * @return a collection of {@link DirectMessage} with the authenticating user as the sender.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<DirectMessage> getDirectMessagesSent();
+
+	/**
+	 * Retrieve direct messages sent by the authenticating user. The most recently sent messages are listed first.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link DirectMessage}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
+	 * @return a collection of {@link DirectMessage} with the authenticating user as the sender.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<DirectMessage> getDirectMessagesSent(int page, int pageSize);
+
+	/**
+	 * Retrieve direct messages sent by the authenticating user. The most recently sent messages are listed first.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link DirectMessage}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
+	 * @param sinceId The minimum {@link DirectMessage} ID to return in the results
+	 * @param maxId The maximum {@link DirectMessage} ID to return in the results
+	 * @return a collection of {@link DirectMessage} with the authenticating user as the sender.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<DirectMessage> getDirectMessagesSent(int page, int pageSize, long sinceId, long maxId);
 
 	/**
 	 * Sends a direct message to another Twitter user. The recipient of the
