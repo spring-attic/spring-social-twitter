@@ -25,9 +25,9 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.OperationNotPermittedException;
-import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.Tweet;
@@ -198,7 +198,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		unauthorizedTwitter.timelineOperations().updateStatus("Test Message", details);
 	}
 
-	@Test(expected = DuplicateTweetException.class)
+	@Test(expected = DuplicateStatusException.class)
 	public void updateStatus_duplicateTweet() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
 				.andExpect(method(POST))
@@ -257,7 +257,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		unauthorizedTwitter.timelineOperations().retweet(12345L);
 	}
 
-	@Test(expected=DuplicateTweetException.class)
+	@Test(expected=DuplicateStatusException.class)
 	public void retweet_duplicateTweet() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweet/12345.json"))
 				.andExpect(method(POST))

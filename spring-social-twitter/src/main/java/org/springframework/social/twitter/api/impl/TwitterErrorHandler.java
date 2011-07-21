@@ -26,6 +26,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.InternalServerErrorException;
 import org.springframework.social.InvalidAuthorizationException;
 import org.springframework.social.MissingAuthorizationException;
@@ -37,7 +38,6 @@ import org.springframework.social.RevokedAuthorizationException;
 import org.springframework.social.ServerDownException;
 import org.springframework.social.ServerOverloadedException;
 import org.springframework.social.UncategorizedApiException;
-import org.springframework.social.twitter.api.DuplicateTweetException;
 import org.springframework.social.twitter.api.InvalidMessageRecipientException;
 import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.web.client.DefaultResponseErrorHandler;
@@ -95,7 +95,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			}
 		} else if (statusCode == HttpStatus.FORBIDDEN) {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
-				throw new DuplicateTweetException(errorText);
+				throw new DuplicateStatusException(errorText);
 			} else if (errorText.equals(STATUS_TOO_LONG_TEXT) || errorText.contains(MESSAGE_TOO_LONG_TEXT)) {
 				throw new MessageTooLongException(errorText);
 			} else if (errorText.equals(INVALID_MESSAGE_RECIPIENT_TEXT)) {
