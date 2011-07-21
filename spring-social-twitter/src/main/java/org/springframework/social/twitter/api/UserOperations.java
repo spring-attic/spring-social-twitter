@@ -99,12 +99,21 @@ public interface UserOperations {
 	List<TwitterProfile> getUsers(String... screenNames);
 	
 	/**
-	 * Searches for users that match a given query.
+	 * Searches for up to 20 users that match a given query.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> searchForUsers(String query);
-	
+
+	/**
+	 * Searches for users that match a given query.
+	 * @param page the page of search results to return
+	 * @param pageSize the number of {@link TwitterProfile}s per page. Maximum of 20 per page.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<TwitterProfile> searchForUsers(String query, int page, int pageSize);
+
 	/**
 	 * Retrieves a list of categories from which suggested users to follow may be found.
 	 * @throws ApiException if there is an error while communicating with Twitter.

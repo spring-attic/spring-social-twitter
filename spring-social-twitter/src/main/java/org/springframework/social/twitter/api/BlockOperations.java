@@ -69,7 +69,17 @@ public interface BlockOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getBlockedUsers();
-	
+
+	/**
+	 * Retrieves a list of users that the authenticating user has blocked.
+	 * @param page the page of blocked users to return
+	 * @param pageSize the number of users per page
+	 * @return a list of {@link TwitterProfile}s for the users that are blocked.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<TwitterProfile> getBlockedUsers(int page, int pageSize);
+
 	/**
 	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
 	 * @return a list of user IDs for the users that are blocked.

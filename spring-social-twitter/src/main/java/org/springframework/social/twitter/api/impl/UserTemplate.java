@@ -24,6 +24,7 @@ import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserOperations;
 import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -89,10 +90,16 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public List<TwitterProfile> searchForUsers(String query) {
-		requireAuthorization();
-		return restTemplate.getForObject(buildUri("users/search.json", "q", query), TwitterProfileList.class);
+		return searchForUsers(query, 1, 20);
 	}
-	
+
+	public List<TwitterProfile> searchForUsers(String query, int page, int pageSize) {
+		requireAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, 0, 0);
+		parameters.set("q", query);
+		return restTemplate.getForObject(buildUri("users/search.json", parameters), TwitterProfileList.class);
+	}
+
 	public List<SuggestionCategory> getSuggestionCategories() {
 		return restTemplate.getForObject(buildUri("users/suggestions.json"), SuggestionCategoryList.class);
 	}

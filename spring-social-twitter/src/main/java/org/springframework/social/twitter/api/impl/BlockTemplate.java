@@ -68,10 +68,15 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 	}
 	
 	public List<TwitterProfile> getBlockedUsers() {
-		requireAuthorization();
-		return restTemplate.getForObject(buildUri("blocks/blocking.json"), TwitterProfileList.class);
+		return getBlockedUsers(1, 20);
 	}
 	
+	public List<TwitterProfile> getBlockedUsers(int page, int pageSize) {
+		requireAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, 0, 0);
+		return restTemplate.getForObject(buildUri("blocks/blocking.json", parameters), TwitterProfileList.class);
+	}
+
 	public List<Long> getBlockedUserIds() {
 		requireAuthorization();
 		return restTemplate.getForObject(buildUri("blocks/blocking/ids.json"), LongList.class);

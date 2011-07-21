@@ -99,10 +99,20 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getBlockedUsers() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking.json?page=1&per_page=20"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 		List<TwitterProfile> blockedUsers = twitter.blockOperations().getBlockedUsers();
+		assertEquals(2, blockedUsers.size());
+		mockServer.verify();
+	}
+
+	@Test
+	public void getBlockedUsers_paged() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/blocks/blocking.json?page=3&per_page=25"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+		List<TwitterProfile> blockedUsers = twitter.blockOperations().getBlockedUsers(3, 25);
 		assertEquals(2, blockedUsers.size());
 		mockServer.verify();
 	}

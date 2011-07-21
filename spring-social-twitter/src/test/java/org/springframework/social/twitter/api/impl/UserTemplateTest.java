@@ -146,7 +146,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void searchForUsers() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?q=some+query"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?page=1&per_page=20&q=some+query"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query");
@@ -154,7 +154,18 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
-	
+
+	@Test
+	public void searchForUsers_paged() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?page=3&per_page=35&q=some+query"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query", 3, 35);
+		assertEquals(2, users.size());
+		assertEquals("royclarkson", users.get(0).getScreenName());
+		assertEquals("kdonald", users.get(1).getScreenName());
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void searchForUsers_unauthorized() {
 		unauthorizedTwitter.userOperations().searchForUsers("some query");
