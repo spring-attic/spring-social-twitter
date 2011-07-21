@@ -602,13 +602,24 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getFavorites() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json"))
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json?page=1&count=20"))
 				.andExpect(method(GET))
 				.andRespond(withResponse(jsonResource("favorite"), responseHeaders));
 		List<Tweet> timeline = twitter.timelineOperations().getFavorites();
 		assertTimelineTweets(timeline);
 	}
-	
+
+	@Test
+	public void getFavorites_paged() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json?page=3&count=50"))
+				.andExpect(method(GET))
+				.andRespond(withResponse(jsonResource("favorite"), responseHeaders));
+		List<Tweet> timeline = twitter.timelineOperations().getFavorites(3, 50);
+		assertTimelineTweets(timeline);
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getFavorites_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getFavorites();

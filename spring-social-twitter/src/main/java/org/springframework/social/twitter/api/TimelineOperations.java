@@ -494,13 +494,22 @@ public interface TimelineOperations {
 	List<Long> getRetweetedByIds(long tweetId, int page, int pageSize);
 
 	/**
-	 * Retrieves the 20 most recent tweets favorited by the given user.
-	 * 
+	 * Retrieves the 20 most recent tweets favorited by the authenticated user.
 	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getFavorites();
+
+	/**
+	 * Retrieves tweets favorited by the authenticated user.
+	 * @param page The page to return
+	 * @param pageSize The number of entries per page.
+	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<Tweet> getFavorites(int page, int pageSize);
 
 	/**
 	 * Adds a tweet to the user's collection of favorite tweets.

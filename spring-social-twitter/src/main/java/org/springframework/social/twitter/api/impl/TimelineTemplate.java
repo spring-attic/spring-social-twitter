@@ -272,8 +272,14 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public List<Tweet> getFavorites() {
+		return getFavorites(1, 20);
+	}
+
+	public List<Tweet> getFavorites(int page, int pageSize) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("favorites.json"), TweetList.class);
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, 0, 0);
+		return restTemplate.getForObject(buildUri("favorites.json", parameters), TweetList.class);
 	}
 
 	public void addToFavorites(long tweetId) {
