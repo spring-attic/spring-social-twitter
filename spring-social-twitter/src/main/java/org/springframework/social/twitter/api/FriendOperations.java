@@ -28,7 +28,7 @@ import org.springframework.social.MissingAuthorizationException;
 public interface FriendOperations {
 
 	/**
-	 * Retrieves a list of users that the authenticated user follows.
+	 * Retrieves a list of up to 5000 users that the authenticated user follows.
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
 	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
 	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
@@ -36,10 +36,22 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<TwitterProfile> getFriends();
+	CursoredList<TwitterProfile> getFriends();
 
 	/**
-	 * Retrieves a list of users that the given user follows.
+	 * Retrieves a list of up to 5000 users that the authenticated user follows.
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
+	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
+	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need.
+	 * @param cursor the cursor used to fetch the friend IDs 
+	 * @return a list of TwitterProfiles
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<TwitterProfile> getFriendsWithCursor(long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000 users that the given user follows.
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
 	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
 	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
@@ -47,10 +59,22 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<TwitterProfile> getFriends(long userId);
+	CursoredList<TwitterProfile> getFriends(long userId);
 
 	/**
-	 * Retrieves a list of users that the given user follows.
+	 * Retrieves a list of up to 5000 users that the given user follows.
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
+	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
+	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
+	 * @param userId The user's Twitter ID
+	 * @param cursor the cursor used to fetch the friend IDs 
+	 * @return a list of TwitterProfiles
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<TwitterProfile> getFriendsWithCursor(long userId, long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000 users that the given user follows.
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
 	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
 	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
@@ -58,7 +82,19 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<TwitterProfile> getFriends(String screenName);
+	CursoredList<TwitterProfile> getFriends(String screenName);
+
+	/**
+	 * Retrieves a list of up to 5000 users that the given user follows.
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
+	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
+	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
+	 * @param screenName The user's Twitter screen name
+	 * @param cursor the cursor used to fetch the friend IDs 
+	 * @return a list of TwitterProfiles
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<TwitterProfile> getFriendsWithCursor(String screenName, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the authenticated user follows.
@@ -113,7 +149,7 @@ public interface FriendOperations {
 	CursoredList<Long> getFriendIdsWithCursor(String screenName, long cursor);
 
 	/**
-	 * Retrieves a list of users that the authenticated user is being followed by
+	 * Retrieves a list of up to 5000 users that the authenticated user is being followed by
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
@@ -121,10 +157,22 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<TwitterProfile> getFollowers();
+	CursoredList<TwitterProfile> getFollowers();
 
 	/**
-	 * Retrieves a list of users that the given user is being followed by
+	 * Retrieves a list of up to 5000 users that the authenticated user is being followed by
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
+	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
+	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * @param cursor the cursor used to fetch the follower IDs 
+	 * @return a list of TwitterProfiles
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<TwitterProfile> getFollowersWithCursor(long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000 users that the given user is being followed by
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
@@ -132,10 +180,22 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<TwitterProfile> getFollowers(long userId);
-	
+	CursoredList<TwitterProfile> getFollowers(long userId);
+
 	/**
-	 * Retrieves a list of users that the given user is being followed by
+	 * Retrieves a list of up to 5000 users that the given user is being followed by
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
+	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
+	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * @param userId The user's Twitter ID
+	 * @param cursor the cursor used to fetch the follower IDs 
+	 * @return a list of TwitterProfiles
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<TwitterProfile> getFollowersWithCursor(long userId, long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000 users that the given user is being followed by
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
@@ -143,8 +203,20 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<TwitterProfile> getFollowers(String screenName);
-	
+	CursoredList<TwitterProfile> getFollowers(String screenName);
+
+	/**
+	 * Retrieves a list of up to 5000 users that the given user is being followed by
+	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
+	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
+	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * @param screenName The user's Twitter screen name
+	 * @param cursor the cursor used to fetch the follower IDs 
+	 * @return a list of TwitterProfiles
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<TwitterProfile> getFollowersWithCursor(String screenName, long cursor);
+
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the authenticated user.
 	 * @return a list of user IDs

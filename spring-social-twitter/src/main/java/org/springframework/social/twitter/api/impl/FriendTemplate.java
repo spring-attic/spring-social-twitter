@@ -39,16 +39,31 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		this.restTemplate = restTemplate;
 	}
 
-	public List<TwitterProfile> getFriends() {
-		return getProfiles(getFriendIds());
+	public CursoredList<TwitterProfile> getFriends() {
+		return getFriendsWithCursor(-1);
 	}
 
-	public List<TwitterProfile> getFriends(long userId) {
-		return getProfiles(getFriendIds(userId));
+	public CursoredList<TwitterProfile> getFriendsWithCursor(long cursor) {
+		CursoredList<Long> friendIds = getFriendIdsWithCursor(cursor);
+		return getCursoredProfileList(friendIds, friendIds.getPreviousCursor(), friendIds.getNextCursor());
 	}
 
-	public List<TwitterProfile> getFriends(String screenName) {
-		return getProfiles(getFriendIds(screenName));
+	public CursoredList<TwitterProfile> getFriends(long userId) {
+		return getFriendsWithCursor(userId, -1);
+	}
+
+	public CursoredList<TwitterProfile> getFriendsWithCursor(long userId, long cursor) {
+		CursoredList<Long> friendIds = getFriendIdsWithCursor(userId, cursor);
+		return getCursoredProfileList(friendIds, friendIds.getPreviousCursor(), friendIds.getNextCursor());
+	}
+
+	public CursoredList<TwitterProfile> getFriends(String screenName) {
+		return getFriendsWithCursor(screenName, -1);
+	}
+	
+	public CursoredList<TwitterProfile> getFriendsWithCursor(String screenName, long cursor) {
+		CursoredList<Long> friendIds = getFriendIdsWithCursor(screenName, cursor);
+		return getCursoredProfileList(friendIds, friendIds.getPreviousCursor(), friendIds.getNextCursor());
 	}
 	
 	public CursoredList<Long> getFriendIds() {
@@ -82,16 +97,31 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), CursoredLongList.class).getList();
 	}
 
-	public List<TwitterProfile> getFollowers() {
-		return getProfiles(getFollowerIds());
+	public CursoredList<TwitterProfile> getFollowers() {
+		return getFollowersWithCursor(-1);
+	}
+	
+	public CursoredList<TwitterProfile> getFollowersWithCursor(long cursor) {
+		CursoredList<Long> followerIds = getFollowerIdsWithCursor(cursor);
+		return getCursoredProfileList(followerIds, followerIds.getPreviousCursor(), followerIds.getNextCursor());
 	}
 
-	public List<TwitterProfile> getFollowers(long userId) {
-		return getProfiles(getFollowerIds(userId));
+	public CursoredList<TwitterProfile> getFollowers(long userId) {
+		return getFollowersWithCursor(userId, -1);
+	}
+	
+	public CursoredList<TwitterProfile> getFollowersWithCursor(long userId, long cursor) {
+		CursoredList<Long> followerIds = getFollowerIdsWithCursor(userId, cursor);
+		return getCursoredProfileList(followerIds, followerIds.getPreviousCursor(), followerIds.getNextCursor());
 	}
 
-	public List<TwitterProfile> getFollowers(String screenName) {
-		return getProfiles(getFollowerIds(screenName));
+	public CursoredList<TwitterProfile> getFollowers(String screenName) {
+		return getFollowersWithCursor(screenName, -1);
+	}
+	
+	public CursoredList<TwitterProfile> getFollowersWithCursor(String screenName, long cursor) {
+		CursoredList<Long> followerIds = getFollowerIdsWithCursor(screenName, cursor);
+		return getCursoredProfileList(followerIds, followerIds.getPreviousCursor(), followerIds.getNextCursor());
 	}
 
 	public CursoredList<Long> getFollowerIds() {
@@ -192,7 +222,17 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		}
 		return users;
 	}
-	
+
+	private CursoredList<TwitterProfile> getCursoredProfileList(List<Long> userIds, long previousCursor, long nextCursor) {
+		List<List<Long>> chunks = chunkList(userIds, 100);
+		CursoredList<TwitterProfile> users = new CursoredList<TwitterProfile>(userIds.size(), previousCursor, nextCursor);
+		for (List<Long> userIdChunk : chunks) {
+			String joinedIds = ArrayUtils.join(userIdChunk.toArray());
+			users.addAll(restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class));
+		}
+		return users;
+	}
+
 	private List<List<Long>> chunkList(List<Long> list, int chunkSize) {
 		List<List<Long>> chunkedList = new ArrayList<List<Long>>();
 		int start = 0;

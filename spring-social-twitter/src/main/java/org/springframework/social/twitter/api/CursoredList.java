@@ -35,7 +35,13 @@ public class CursoredList<T> extends ArrayList<T> {
 		this.previousCursor = previousCursor;
 		this.nextCursor = nextCursor;
 	}
-	
+
+	public CursoredList(int initialCapacity, long previousCursor, long nextCursor) {
+		super(initialCapacity);
+		this.previousCursor = previousCursor;
+		this.nextCursor = nextCursor;
+	}
+
 	/**
 	 * The cursor to retrieve the previous page of results.
 	 */
