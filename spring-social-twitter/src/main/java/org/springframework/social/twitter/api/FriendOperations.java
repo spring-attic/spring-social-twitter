@@ -15,8 +15,6 @@
  */
 package org.springframework.social.twitter.api;
 
-import java.util.List;
-
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 
@@ -353,12 +351,29 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<Long> getIncomingFriendships();
+	CursoredList<Long> getIncomingFriendships();
+
+	/**
+	 * Returns an array of numeric IDs for every user who has a pending request to follow the authenticating user.
+	 * @param cursor the cursor of the page to retrieve.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<Long> getIncomingFriendships(long cursor);
 
 	/**
 	 * Returns an array of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<Long> getOutgoingFriendships();
+	CursoredList<Long> getOutgoingFriendships();
+
+	/**
+	 * Returns an array of numeric IDs for every protected user for whom the authenticating user has a pending follow request.
+	 * @param cursor the cursor of the page to retrieve.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<Long> getOutgoingFriendships(long cursor);
+
 }

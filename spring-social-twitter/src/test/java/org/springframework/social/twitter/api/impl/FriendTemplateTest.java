@@ -558,17 +558,24 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getIncomingFriendships() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/incoming.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/incoming.json?cursor=-1"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("incoming-or-outgoing-friendships"), responseHeaders));
 
-		List<Long> friendships = twitter.friendOperations().getIncomingFriendships();
-		assertEquals(3, friendships.size());
-		assertEquals(12345, (long) friendships.get(0));
-		assertEquals(23456, (long) friendships.get(1));
-		assertEquals(34567, (long) friendships.get(2));
+		CursoredList<Long> friendships = twitter.friendOperations().getIncomingFriendships();
+		assertIncomingOutgoingFriendships(friendships);
 	}
-	
+
+	@Test
+	public void getIncomingFriendships_cursored() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/incoming.json?cursor=1234567"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("incoming-or-outgoing-friendships"), responseHeaders));
+
+		CursoredList<Long> friendships = twitter.friendOperations().getIncomingFriendships(1234567);
+		assertIncomingOutgoingFriendships(friendships);
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getIncomingFriendships_unauthorized() {
 		unauthorizedTwitter.friendOperations().getIncomingFriendships();
@@ -576,17 +583,24 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getOutgoingFriendships() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/outgoing.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/outgoing.json?cursor=-1"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("incoming-or-outgoing-friendships"), responseHeaders));
 
-		List<Long> friendships = twitter.friendOperations().getOutgoingFriendships();
-		assertEquals(3, friendships.size());
-		assertEquals(12345, (long) friendships.get(0));
-		assertEquals(23456, (long) friendships.get(1));
-		assertEquals(34567, (long) friendships.get(2));
+		CursoredList<Long> friendships = twitter.friendOperations().getOutgoingFriendships();
+		assertIncomingOutgoingFriendships(friendships);
 	}
-	
+
+	@Test
+	public void getOutgoingFriendships_cursored() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/friendships/outgoing.json?cursor=9876543"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("incoming-or-outgoing-friendships"), responseHeaders));
+
+		CursoredList<Long> friendships = twitter.friendOperations().getOutgoingFriendships(9876543);
+		assertIncomingOutgoingFriendships(friendships);
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getOutgoingFriendships_unauthorized() {
 		unauthorizedTwitter.friendOperations().getOutgoingFriendships();
@@ -606,6 +620,15 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", friends.get(1).getScreenName());
 		assertEquals(112233, friends.getPreviousCursor());
 		assertEquals(332211, friends.getNextCursor());
+	}
+
+	private void assertIncomingOutgoingFriendships(CursoredList<Long> friendships) {
+		assertEquals(3, friendships.size());
+		assertEquals(12345, (long) friendships.get(0));
+		assertEquals(23456, (long) friendships.get(1));
+		assertEquals(34567, (long) friendships.get(2));
+		assertEquals(1234567890, friendships.getPreviousCursor());
+		assertEquals(1357924680, friendships.getNextCursor());
 	}
 
 }

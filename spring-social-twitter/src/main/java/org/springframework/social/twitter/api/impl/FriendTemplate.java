@@ -203,27 +203,26 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		return restTemplate.getForObject(buildUri("friendships/exists.json", params), boolean.class);
 	}
 
-	public List<Long> getIncomingFriendships() {
+	public CursoredList<Long> getIncomingFriendships() {
+		return getIncomingFriendships(-1);
+	}
+	
+	public CursoredList<Long> getIncomingFriendships(long cursor) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("friendships/incoming.json"), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("friendships/incoming.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
 	}
 
-	public List<Long> getOutgoingFriendships() {
-		requireAuthorization();
-		return restTemplate.getForObject(buildUri("friendships/outgoing.json"), LongIdsList.class).getList();
+	public CursoredList<Long> getOutgoingFriendships() {
+		return getOutgoingFriendships(-1);
 	}
-
-	private List<TwitterProfile> getProfiles(List<Long> userIds) {
-		List<List<Long>> chunks = chunkList(userIds, 100);
-		List<TwitterProfile> users = new ArrayList<TwitterProfile>(userIds.size());
-		for (List<Long> userIdChunk : chunks) {
-			String joinedIds = ArrayUtils.join(userIdChunk.toArray());
-			users.addAll(restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class));
-		}
-		return users;
+	
+	public CursoredList<Long> getOutgoingFriendships(long cursor) {
+		requireAuthorization();
+		return restTemplate.getForObject(buildUri("friendships/outgoing.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
 	}
 
 	private CursoredList<TwitterProfile> getCursoredProfileList(List<Long> userIds, long previousCursor, long nextCursor) {
+		// TODO: Would be good to figure out how to retrieve profiles in a tighter-than-cursor granularity.
 		List<List<Long>> chunks = chunkList(userIds, 100);
 		CursoredList<TwitterProfile> users = new CursoredList<TwitterProfile>(userIds.size(), previousCursor, nextCursor);
 		for (List<Long> userIdChunk : chunks) {

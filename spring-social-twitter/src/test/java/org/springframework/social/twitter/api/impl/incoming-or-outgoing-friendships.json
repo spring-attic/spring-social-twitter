@@ -1,7 +1,7 @@
 {
-   "previous_cursor":0,
-   "next_cursor_str":"0",
-   "previous_cursor_str":"0",
+   "previous_cursor":1234567890,
+   "next_cursor_str":"1357924680",
+   "previous_cursor_str":"1234567890",
    "ids":[12345, 23456, 34567],
-   "next_cursor":0
+   "next_cursor":1357924680
 }
