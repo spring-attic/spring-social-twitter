@@ -61,28 +61,56 @@ public interface FriendOperations {
 	List<TwitterProfile> getFriends(String screenName);
 
 	/**
-	 * Retrieves a list of IDs for the Twitter users that the authenticated user follows.
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that the authenticated user follows.
+	 * Call getFriendIdsForCursor() with a cursor value to get the next/previous page of entries.
+	 * @return a cursored list of user IDs
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<Long> getFriendIds();
+
+	/**
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that the authenticated user follows.
+	 * @param cursor The cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<Long> getFriendIds();
+	CursoredList<Long> getFriendIdsWithCursor(long cursor);
 
 	/**
-	 * Retrieves a list of IDs for the Twitter users that the given user follows.
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
 	 * @param userId the user's Twitter ID
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Long> getFriendIds(long userId);
+	CursoredList<Long> getFriendIds(long userId);
 
 	/**
-	 * Retrieves a list of IDs for the Twitter users that the given user follows.
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
+	 * @param userId the user's Twitter ID
+	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
+	 * @return a list of user IDs
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<Long> getFriendIdsWithCursor(long userId, long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
 	 * @param screenName the user's Twitter screen name
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Long> getFriendIds(String screenName);
+	CursoredList<Long> getFriendIds(String screenName);
+
+	/**
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
+	 * @param screenName the user's Twitter screen name
+	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
+	 * @return a list of user IDs
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<Long> getFriendIdsWithCursor(String screenName, long cursor);
 
 	/**
 	 * Retrieves a list of users that the authenticated user is being followed by
@@ -118,28 +146,55 @@ public interface FriendOperations {
 	List<TwitterProfile> getFollowers(String screenName);
 	
 	/**
-	 * Retrieves a list of IDs for the Twitter users that follow the authenticated user.
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the authenticated user.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<Long> getFollowerIds();
+	CursoredList<Long> getFollowerIds();
 
 	/**
-	 * Retrieves a list of IDs for the Twitter users that follow the given user.
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the authenticated user.
+	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
+	 * @return a list of user IDs
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<Long> getFollowerIdsWithCursor(long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000IDs for the Twitter users that follow the given user.
 	 * @param userId the user's Twitter ID
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Long> getFollowerIds(long userId);
+	CursoredList<Long> getFollowerIds(long userId);
 
 	/**
-	 * Retrieves a list of IDs for the Twitter users that follow the given user.
+	 * Retrieves a list of up to 5000IDs for the Twitter users that follow the given user.
+	 * @param userId the user's Twitter ID
+	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
+	 * @return a list of user IDs
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<Long> getFollowerIdsWithCursor(long userId, long cursor);
+
+	/**
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the given user.
 	 * @param screenName the user's Twitter screen name
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Long> getFollowerIds(String screenName);
+	CursoredList<Long> getFollowerIds(String screenName);
+
+	/**
+	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the given user.
+	 * @param screenName the user's Twitter screen name
+	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
+	 * @return a list of user IDs
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<Long> getFollowerIdsWithCursor(String screenName, long cursor);
 
 	/**
 	 * Allows the authenticated user to follow (create a friendship) with another user.

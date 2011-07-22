@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.FriendOperations;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.util.LinkedMultiValueMap;
@@ -50,23 +51,35 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		return getProfiles(getFriendIds(screenName));
 	}
 	
-	public List<Long> getFriendIds() {
+	public CursoredList<Long> getFriendIds() {
+		return getFriendIdsWithCursor(-1);
+	}
+	
+	public CursoredList<Long> getFriendIdsWithCursor(long cursor) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("friends/ids.json", "cursor", "-1"), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("friends/ids.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
 	}
 
-	public List<Long> getFriendIds(long userId) {
+	public CursoredList<Long> getFriendIds(long userId) {
+		return getFriendIdsWithCursor(userId, -1);
+	}
+	
+	public CursoredList<Long> getFriendIdsWithCursor(long userId, long cursor) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
+		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), CursoredLongList.class).getList();
 	}
 
-	public List<Long> getFriendIds(String screenName) {
+	public CursoredList<Long> getFriendIds(String screenName) {
+		return getFriendIdsWithCursor(screenName, -1);
+	}
+	
+	public CursoredList<Long> getFriendIdsWithCursor(String screenName, long cursor) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
+		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("screen_name", screenName);
-		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), CursoredLongList.class).getList();
 	}
 
 	public List<TwitterProfile> getFollowers() {
@@ -81,23 +94,35 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 		return getProfiles(getFollowerIds(screenName));
 	}
 
-	public List<Long> getFollowerIds() {
+	public CursoredList<Long> getFollowerIds() {
+		return getFollowerIdsWithCursor(-1);
+	}
+	
+	public CursoredList<Long> getFollowerIdsWithCursor(long cursor) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("followers/ids.json", "cursor", "-1"), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("followers/ids.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
 	}
 
-	public List<Long> getFollowerIds(long userId) {
+	public CursoredList<Long> getFollowerIds(long userId) {
+		return getFollowerIdsWithCursor(userId, -1);
+	}
+	
+	public CursoredList<Long> getFollowerIdsWithCursor(long userId, long cursor) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
+		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("followers/ids.json", parameters), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("followers/ids.json", parameters), CursoredLongList.class).getList();
 	}
 
-	public List<Long> getFollowerIds(String screenName) {
+	public CursoredList<Long> getFollowerIds(String screenName) {
+		return getFollowerIdsWithCursor(screenName, -1);
+	}
+	
+	public CursoredList<Long> getFollowerIdsWithCursor(String screenName, long cursor) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", "-1");
+		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("screen_name", screenName);
-		return restTemplate.getForObject(buildUri("followers/ids.json", parameters), LongIdsList.class).getList();
+		return restTemplate.getForObject(buildUri("followers/ids.json", parameters), CursoredLongList.class).getList();
 	}
 
 	public String follow(long userId) {
