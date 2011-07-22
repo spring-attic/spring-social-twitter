@@ -102,9 +102,9 @@
             "id":40841803
         }
      ],
-     "next_cursor":0,
-     "previous_cursor":0,
-     "next_cursor_str":"0",
-     "previous_cursor_str":"0"
+     "next_cursor":234567,
+     "previous_cursor":123456,
+     "next_cursor_str":"234567",
+     "previous_cursor_str":"123456"
 }
 

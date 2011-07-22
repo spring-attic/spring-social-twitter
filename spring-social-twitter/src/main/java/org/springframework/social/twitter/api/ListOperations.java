@@ -33,15 +33,33 @@ public interface ListOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<UserList> getLists();
-	
+	CursoredList<UserList> getLists();
+
+	/**
+	 * Retrieves user lists for the authenticated user.
+	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
+	 * @return a list of {@link UserList}s for the specified user.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	CursoredList<UserList> getListsInCursor(long cursor);
+
 	/**
 	 * Retrieves user lists for a given user.
 	 * @param userId the ID of the Twitter user.
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<UserList> getLists(long userId);
+	CursoredList<UserList> getLists(long userId);
+
+	/**
+	 * Retrieves user lists for a given user.
+	 * @param userId the ID of the Twitter user.
+	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
+	 * @return a list of {@link UserList}s for the specified user.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<UserList> getListsInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves user lists for a given user.
@@ -49,7 +67,16 @@ public interface ListOperations {
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<UserList> getLists(String screenName);
+	CursoredList<UserList> getLists(String screenName);
+
+	/**
+	 * Retrieves user lists for a given user.
+	 * @param screenName the screen name of the Twitter user.
+	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
+	 * @return a list of {@link UserList}s for the specified user.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 */
+	CursoredList<UserList> getListsInCursor(String screenName, long cursor);
 
 	/**
 	 * Retrieves a specific user list.
@@ -279,7 +306,7 @@ public interface ListOperations {
 	 * @return a list of {@link UserList}s that the user is a member of.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<UserList> getMemberships(long userId);
+	CursoredList<UserList> getMemberships(long userId);
 
 	/**
 	 * Retrieves the lists that a given user is a member of.
@@ -287,7 +314,7 @@ public interface ListOperations {
 	 * @return a list of {@link UserList}s that the user is a member of.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<UserList> getMemberships(String screenName);
+	CursoredList<UserList> getMemberships(String screenName);
 
 	/**
 	 * Retrieves the lists that a given user is subscribed to.
@@ -295,7 +322,7 @@ public interface ListOperations {
 	 * @return a list of {@link UserList}s that the user is subscribed to.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<UserList> getSubscriptions(long userId);
+	CursoredList<UserList> getSubscriptions(long userId);
 
 	/**
 	 * Retrieves the lists that a given user is subscribed to.
@@ -303,7 +330,7 @@ public interface ListOperations {
 	 * @return a list of {@link UserList}s that the user is subscribed to.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<UserList> getSubscriptions(String screenName);
+	CursoredList<UserList> getSubscriptions(String screenName);
 
 	/**
 	 * Checks to see if a given user is a member of a given list.

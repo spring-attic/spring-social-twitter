@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.ResourceNotFoundException;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.ListOperations;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
@@ -41,17 +42,35 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		this.restTemplate = restTemplate;
 	}
 
-	public List<UserList> getLists() {
+	public CursoredList<UserList> getLists() {
+		return getListsInCursor(-1);
+	}
+
+	public CursoredList<UserList> getListsInCursor(long cursor) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("lists.json"), UserListList.class).getList();
+		return restTemplate.getForObject(buildUri("lists.json", "cursor", String.valueOf(cursor)), UserListList.class).getList();
 	}
 
-	public List<UserList> getLists(long userId) {
-		return restTemplate.getForObject(buildUri("lists.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
+	public CursoredList<UserList> getLists(long userId) {
+		return getListsInCursor(userId, -1);
+	}
+	
+	public CursoredList<UserList> getListsInCursor(long userId, long cursor) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("user_id", String.valueOf(userId));
+		parameters.set("cursor", String.valueOf(cursor));
+		return restTemplate.getForObject(buildUri("lists.json", parameters), UserListList.class).getList();
 	}
 
-	public List<UserList> getLists(String screenName) {
-		return restTemplate.getForObject(buildUri("lists.json", "screen_name", screenName), UserListList.class).getList();
+	public CursoredList<UserList> getLists(String screenName) {
+		return getListsInCursor(screenName, -1);
+	}
+	
+	public CursoredList<UserList> getListsInCursor(String screenName, long cursor) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("screen_name", screenName);
+		parameters.set("cursor", String.valueOf(cursor));
+		return restTemplate.getForObject(buildUri("lists.json", parameters), UserListList.class).getList();
 	}
 
 	public UserList getList(long listId) {
@@ -197,19 +216,19 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		return restTemplate.postForObject(buildUri("lists/subscribers/destroy.json"), request, UserList.class);
 	}
 
-	public List<UserList> getMemberships(long userId) {
+	public CursoredList<UserList> getMemberships(long userId) {
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
-	public List<UserList> getMemberships(String screenName) {
+	public CursoredList<UserList> getMemberships(String screenName) {
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
-	public List<UserList> getSubscriptions(long userId) {
+	public CursoredList<UserList> getSubscriptions(long userId) {
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
-	public List<UserList> getSubscriptions(String screenName) {
+	public CursoredList<UserList> getSubscriptions(String screenName) {
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
