@@ -47,7 +47,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendsWithCursor_currentUser() {
+	public void getFriendsInCursor_currentUser() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=987654321"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
@@ -55,7 +55,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
-		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriendsWithCursor(987654321);
+		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriendsInCursor(987654321);
 		assertFriendsFollowers(friends);
 	}
 
@@ -78,7 +78,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendsWithCursor_byUserId() {
+	public void getFriendsInCursor_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=987654321&user_id=98765"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
@@ -86,7 +86,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
-		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriendsWithCursor(98765L, 987654321);
+		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriendsInCursor(98765L, 987654321);
 		assertFriendsFollowers(friends);
 	}
 
@@ -104,7 +104,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendsWithCursor_byScreenName() {
+	public void getFriendsInCursor_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=987654321&screen_name=habuma"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
@@ -112,7 +112,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
-		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriendsWithCursor("habuma", 987654321);
+		CursoredList<TwitterProfile> friends = twitter.friendOperations().getFriendsInCursor("habuma", 987654321);
 		assertFriendsFollowers(friends);
 	}
 
@@ -169,12 +169,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendIdsWithCursor_currentUser() {
+	public void getFriendIdsInCursor_currentUser() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=123456"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
 		
-		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIdsWithCursor(123456);
+		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIdsInCursor(123456);
 		assertFriendFollowerIdsList(friendIds);
 	}
 
@@ -189,12 +189,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendIdsWithCursor_byUserId() {
+	public void getFriendIdsInCursor_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=123456&user_id=98765"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
 		
-		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIdsWithCursor(98765L, 123456);
+		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIdsInCursor(98765L, 123456);
 		assertFriendFollowerIdsList(friendIds);
 	}
 
@@ -209,12 +209,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFriendIdsWithCursor_byScreenName() {
+	public void getFriendIdsInCursor_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/friends/ids.json?cursor=123456&screen_name=habuma"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
 		
-		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIdsWithCursor("habuma", 123456);
+		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIdsInCursor("habuma", 123456);
 		assertFriendFollowerIdsList(friendIds);
 	}
 
@@ -234,7 +234,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test 
-	public void getFollowersWithCursor_currentUser() {
+	public void getFollowersInCursor_currentUser() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=24680"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
@@ -242,7 +242,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
-		List<TwitterProfile> followers = twitter.friendOperations().getFollowersWithCursor(24680);
+		List<TwitterProfile> followers = twitter.friendOperations().getFollowersInCursor(24680);
 		assertEquals(2, followers.size());
 		assertEquals("royclarkson", followers.get(0).getScreenName());
 		assertEquals("kdonald", followers.get(1).getScreenName());
@@ -269,7 +269,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test 
-	public void getFollowersWithCursor_byUserId() {
+	public void getFollowersInCursor_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=13579&user_id=98765"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
@@ -277,7 +277,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 
-		List<TwitterProfile> followers = twitter.friendOperations().getFollowersWithCursor(98765L, 13579);
+		List<TwitterProfile> followers = twitter.friendOperations().getFollowersInCursor(98765L, 13579);
 		assertEquals(2, followers.size());
 		assertEquals("royclarkson", followers.get(0).getScreenName());
 		assertEquals("kdonald", followers.get(1).getScreenName());
@@ -299,7 +299,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test 
-	public void getFollowersWithCursor_byScreenName() {
+	public void getFollowersInCursor_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=12357&screen_name=oizik"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
@@ -307,7 +307,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
 	    
-		List<TwitterProfile> followers = twitter.friendOperations().getFollowersWithCursor("oizik", 12357);
+		List<TwitterProfile> followers = twitter.friendOperations().getFollowersInCursor("oizik", 12357);
 		assertEquals(2, followers.size());
 		assertEquals("royclarkson", followers.get(0).getScreenName());
 		assertEquals("kdonald", followers.get(1).getScreenName());
@@ -361,12 +361,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFollowerIdsWithCursor_currentUser() {
+	public void getFollowerIdsInCursor_currentUser() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=24680"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
 		
-		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsWithCursor(24680);
+		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsInCursor(24680);
 		assertFriendFollowerIdsList(followerIds);
 	}
 
@@ -386,12 +386,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFollowerIdsWithCursor_byUserId() {
+	public void getFollowerIdsInCursor_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=24680&user_id=98765"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
 		
-		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsWithCursor(98765L, 24680);
+		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsInCursor(98765L, 24680);
 		assertFriendFollowerIdsList(followerIds);
 	}
 
@@ -406,12 +406,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFollowerIdsWithCursor_byScreenName() {
+	public void getFollowerIdsInCursor_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/followers/ids.json?cursor=24680&screen_name=habuma"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("friend-or-follower-ids"), responseHeaders));
 		
-		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsWithCursor("habuma", 24680);
+		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsInCursor("habuma", 24680);
 		assertFriendFollowerIdsList(followerIds);
 	}
 

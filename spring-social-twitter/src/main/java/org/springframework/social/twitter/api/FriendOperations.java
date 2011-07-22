@@ -46,7 +46,7 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	CursoredList<TwitterProfile> getFriendsWithCursor(long cursor);
+	CursoredList<TwitterProfile> getFriendsInCursor(long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 users that the given user follows.
@@ -69,7 +69,7 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<TwitterProfile> getFriendsWithCursor(long userId, long cursor);
+	CursoredList<TwitterProfile> getFriendsInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 users that the given user follows.
@@ -92,7 +92,7 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<TwitterProfile> getFriendsWithCursor(String screenName, long cursor);
+	CursoredList<TwitterProfile> getFriendsInCursor(String screenName, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the authenticated user follows.
@@ -110,7 +110,7 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	CursoredList<Long> getFriendIdsWithCursor(long cursor);
+	CursoredList<Long> getFriendIdsInCursor(long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
@@ -127,7 +127,7 @@ public interface FriendOperations {
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<Long> getFriendIdsWithCursor(long userId, long cursor);
+	CursoredList<Long> getFriendIdsInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
@@ -144,7 +144,7 @@ public interface FriendOperations {
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<Long> getFriendIdsWithCursor(String screenName, long cursor);
+	CursoredList<Long> getFriendIdsInCursor(String screenName, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 users that the authenticated user is being followed by
@@ -167,7 +167,7 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	CursoredList<TwitterProfile> getFollowersWithCursor(long cursor);
+	CursoredList<TwitterProfile> getFollowersInCursor(long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 users that the given user is being followed by
@@ -190,7 +190,7 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<TwitterProfile> getFollowersWithCursor(long userId, long cursor);
+	CursoredList<TwitterProfile> getFollowersInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 users that the given user is being followed by
@@ -213,7 +213,7 @@ public interface FriendOperations {
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<TwitterProfile> getFollowersWithCursor(String screenName, long cursor);
+	CursoredList<TwitterProfile> getFollowersInCursor(String screenName, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the authenticated user.
@@ -230,7 +230,7 @@ public interface FriendOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	CursoredList<Long> getFollowerIdsWithCursor(long cursor);
+	CursoredList<Long> getFollowerIdsInCursor(long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000IDs for the Twitter users that follow the given user.
@@ -247,7 +247,7 @@ public interface FriendOperations {
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<Long> getFollowerIdsWithCursor(long userId, long cursor);
+	CursoredList<Long> getFollowerIdsInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the given user.
@@ -264,7 +264,7 @@ public interface FriendOperations {
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<Long> getFollowerIdsWithCursor(String screenName, long cursor);
+	CursoredList<Long> getFollowerIdsInCursor(String screenName, long cursor);
 
 	/**
 	 * Allows the authenticated user to follow (create a friendship) with another user.
