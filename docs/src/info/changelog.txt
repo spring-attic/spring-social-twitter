@@ -2,7 +2,7 @@ Spring Social Twitter 1.0.0 RC1 (July 25, 2011)
 ===============================================
 Improvements:
    * Support for paging and cursoring for operations that return
-     paged or cursored data lists. (SOCIALTW-5)
+     paged or cursored data lists. (SOCIALTW-5 and SOCIALTW-4)
 
 Compatibility Note:
    * DuplicateTwitterException has been removed in favor of the more
