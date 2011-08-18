@@ -24,6 +24,8 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.NotAuthorizedException;
@@ -428,7 +430,18 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	public void updateStatus_unauthorized() {
 		unauthorizedTwitter.timelineOperations().updateStatus("Shouldn't work");
 	}
-	
+
+	@Test
+	public void updateStatus_withImage() {
+		mockServer.expect(requestTo("https://upload.twitter.com/1/statuses/update_with_media.json"))
+				.andExpect(method(POST))
+				.andRespond(withResponse("{}", responseHeaders));
+		// TODO: Match body content to ensure fields and photo are included
+		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
+		twitter.timelineOperations().updateStatus("Test Message", photo);
+		mockServer.verify();
+	}
+
 	@Test
 	public void updateStatus_withLocation() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
@@ -442,7 +455,20 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 		mockServer.verify();
 	}
-	
+
+	@Test
+	public void updateStatus_withImageAndLocation() {
+		mockServer.expect(requestTo("https://upload.twitter.com/1/statuses/update_with_media.json"))
+				.andExpect(method(POST))
+				.andRespond(withResponse("{}", responseHeaders));
+		// TODO: Match body content to ensure fields and photo are included
+		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
+		StatusDetails details = new StatusDetails();
+		details.setLocation(123.1f, -111.2f);
+		twitter.timelineOperations().updateStatus("Test Message", photo, details);
+		mockServer.verify();
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void updateStatus_withLocation_unauthorized() {
 		StatusDetails details = new StatusDetails();
@@ -651,6 +677,16 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	@Test(expected = NotAuthorizedException.class)
 	public void removeFromFavorites_unauthorized() {
 		unauthorizedTwitter.timelineOperations().removeFromFavorites(12345L);
+	}
+	
+	// private helper
+	private Resource getUploadResource(final String filename, String content) {
+		Resource resource = new ByteArrayResource(content.getBytes()) {
+			public String getFilename() throws IllegalStateException {
+				return filename;
+			};
+		};
+		return resource;
 	}
 	
 }

@@ -17,8 +17,12 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.OperationNotPermittedException;
 
 
 /**
@@ -418,6 +422,18 @@ public interface TimelineOperations {
 	void updateStatus(String status);
 
 	/**
+	 * Updates the user's status along with a picture.
+	 * @param status The status message
+	 * @param photo A {@link Resource} for the photo data. The given Resource must implement the getFilename() method (such as {@link FileSystemResource} or {@link ClassPathResource}) and must contain GIF, JPG, or PNG data.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	void updateStatus(String status, Resource photo);
+
+	/**
 	 * Updates the user's status, including additional metadata concerning the status.
 	 * @param status The status message
 	 * @param details Metadata pertaining to the status
@@ -427,6 +443,19 @@ public interface TimelineOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	void updateStatus(String status, StatusDetails details);
+
+	/**
+	 * Updates the user's status, including a picture and additional metadata concerning the status.
+	 * @param status The status message
+	 * @param photo A {@link Resource} for the photo data. The given Resource must implement the getFilename() method (such as {@link FileSystemResource} or {@link ClassPathResource}) and must contain GIF, JPG, or PNG data.
+	 * @param details Metadata pertaining to the status
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	void updateStatus(String status, Resource photo, StatusDetails details);
 
 	/**
 	 * Removes a status entry.

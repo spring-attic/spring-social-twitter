@@ -18,6 +18,7 @@ package org.springframework.social.twitter.api.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.core.io.Resource;
 import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Tweet;
@@ -223,12 +224,25 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		updateStatus(message, new StatusDetails());
 	}
 
+	public void updateStatus(String message, Resource media) {
+		updateStatus(message, media, new StatusDetails());
+	}
+
 	public void updateStatus(String message, StatusDetails details) {
 		requireAuthorization();
 		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
 		tweetParams.add("status", message);
 		tweetParams.putAll(details.toParameterMap());
 		restTemplate.postForObject(buildUri("statuses/update.json"), tweetParams, String.class);
+	}
+
+	public void updateStatus(String message, Resource media, StatusDetails details) {
+		requireAuthorization();
+		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
+		tweetParams.add("status", message);
+		tweetParams.add("media", media);
+		tweetParams.putAll(details.toParameterMap());
+		restTemplate.postForObject("https://upload.twitter.com/1/statuses/update_with_media.json", tweetParams, String.class);
 	}
 
 	public void deleteStatus(long tweetId) {
