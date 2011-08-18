@@ -419,7 +419,7 @@ public interface TimelineOperations {
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	void updateStatus(String status);
+	Tweet updateStatus(String status);
 
 	/**
 	 * Updates the user's status along with a picture.
@@ -431,7 +431,7 @@ public interface TimelineOperations {
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	void updateStatus(String status, Resource photo);
+	Tweet updateStatus(String status, Resource photo);
 
 	/**
 	 * Updates the user's status, including additional metadata concerning the status.
@@ -442,7 +442,7 @@ public interface TimelineOperations {
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	void updateStatus(String status, StatusDetails details);
+	Tweet updateStatus(String status, StatusDetails details);
 
 	/**
 	 * Updates the user's status, including a picture and additional metadata concerning the status.
@@ -455,7 +455,7 @@ public interface TimelineOperations {
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	void updateStatus(String status, Resource photo, StatusDetails details);
+	Tweet updateStatus(String status, Resource photo, StatusDetails details);
 
 	/**
 	 * Removes a status entry.

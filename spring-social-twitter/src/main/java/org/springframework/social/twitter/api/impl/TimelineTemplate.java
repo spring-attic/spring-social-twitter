@@ -220,29 +220,29 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		return restTemplate.getForObject(buildUri("statuses/show/" + tweetId + ".json"), Tweet.class);
 	}
 
-	public void updateStatus(String message) {
-		updateStatus(message, new StatusDetails());
+	public Tweet updateStatus(String message) {
+		return updateStatus(message, new StatusDetails());
 	}
 
-	public void updateStatus(String message, Resource media) {
-		updateStatus(message, media, new StatusDetails());
+	public Tweet updateStatus(String message, Resource media) {
+		return updateStatus(message, media, new StatusDetails());
 	}
 
-	public void updateStatus(String message, StatusDetails details) {
+	public Tweet updateStatus(String message, StatusDetails details) {
 		requireAuthorization();
 		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
 		tweetParams.add("status", message);
 		tweetParams.putAll(details.toParameterMap());
-		restTemplate.postForObject(buildUri("statuses/update.json"), tweetParams, String.class);
+		return restTemplate.postForObject(buildUri("statuses/update.json"), tweetParams, Tweet.class);
 	}
 
-	public void updateStatus(String message, Resource media, StatusDetails details) {
+	public Tweet updateStatus(String message, Resource media, StatusDetails details) {
 		requireAuthorization();
 		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
 		tweetParams.add("status", message);
 		tweetParams.add("media", media);
 		tweetParams.putAll(details.toParameterMap());
-		restTemplate.postForObject("https://upload.twitter.com/1/statuses/update_with_media.json", tweetParams, String.class);
+		return restTemplate.postForObject("https://upload.twitter.com/1/statuses/update_with_media.json", tweetParams, Tweet.class);
 	}
 
 	public void deleteStatus(long tweetId) {
