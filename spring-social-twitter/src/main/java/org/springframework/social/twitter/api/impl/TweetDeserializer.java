@@ -63,6 +63,9 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		JsonNode languageCodeNode = tree.get("iso_language_code");
 		String languageCode = languageCodeNode != null ? languageCodeNode.getTextValue() : null;
 		Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
+		JsonNode inReplyToStatusIdNode = tree.get("in_reply_to_status_id");
+		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.getLongValue() : null;
+		tweet.setInReplyToStatusId(inReplyToStatusId);
 		jp.skipChildren();
 		return tweet;
 	}

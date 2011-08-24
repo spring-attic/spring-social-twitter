@@ -457,6 +457,20 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void updateStatus_withInReplyToStatus() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
+				.andExpect(method(POST))
+				.andExpect(body("status=Test+Message+in+reply+to+%40someone&in_reply_to_status_id=123456"))
+				.andRespond(withResponse(jsonResource("status"), responseHeaders));
+
+		StatusDetails details = new StatusDetails();
+		details.setInReplyToStatusId(123456);
+		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message in reply to @someone", details);
+		assertSingleTweet(tweet);
+		mockServer.verify();
+	}
+
+	@Test
 	public void updateStatus_withImageAndLocation() {
 		mockServer.expect(requestTo("https://upload.twitter.com/1/statuses/update_with_media.json"))
 				.andExpect(method(POST))

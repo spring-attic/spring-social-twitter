@@ -25,10 +25,26 @@ import org.springframework.util.MultiValueMap;
  * @author Craig Walls
  */
 public class StatusDetails {
+	
+	private Long inReplyToStatusId;
+	
 	private Float latitude;
+	
 	private Float longitude;
+	
 	private boolean displayCoordinates;
 
+	/**
+	 * Sets the ID of an existing status that this status is in reply to.
+	 * Will be ignored unless the text of this status includes the author of the existing status (e.g., "@author"). 
+	 * @param inReplyToStatusId the ID of an existing status that this status is in reply to.
+	 * @return the {@link StatusDetails} object
+	 */
+	public StatusDetails setInReplyToStatusId(long inReplyToStatusId) {
+		this.inReplyToStatusId = inReplyToStatusId;
+		return this;
+	}
+	
 	/**
 	 * Sets the location of the status update in latitude and longitude.
 	 * Latitude values must be between -90.0 (south) and +90.0 (north).
@@ -85,6 +101,11 @@ public class StatusDetails {
 		if (displayCoordinates) {
 			parameterMap.set("display_coordinates", "true");
 		}
+		
+		if (inReplyToStatusId != null) {
+			parameterMap.set("in_reply_to_status_id", inReplyToStatusId.toString());
+		}
+		
 		return parameterMap;
 	}
 }

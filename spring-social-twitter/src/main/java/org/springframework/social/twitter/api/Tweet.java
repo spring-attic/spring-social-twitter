@@ -28,6 +28,7 @@ public class Tweet {
 	private String fromUser;
 	private String profileImageUrl;
 	private Long toUserId;
+	private Long inReplyToStatusId;
 	private long fromUserId;
 	private String languageCode;
 	private String source;
@@ -94,6 +95,14 @@ public class Tweet {
 
 	public long getFromUserId() {
 		return fromUserId;
+	}
+	
+	public void setInReplyToStatusId(Long inReplyToStatusId) {
+		this.inReplyToStatusId = inReplyToStatusId;
+	}
+	
+	public Long getInReplyToStatusId() {
+		return inReplyToStatusId;
 	}
 
 	public void setFromUserId(long fromUserId) {
