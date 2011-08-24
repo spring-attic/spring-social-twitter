@@ -6,6 +6,8 @@ Improvements:
    * Changed signature of TimelineOperations.updateStatus() to return
      a Tweet object for the newly created status; previously it returned
      void. (SOCIALTW-8)
+   * Added an inReplyToStatusId property to StatusDetails so that tweets
+     may be posted that are in reply to an existing tweet.
 
 Spring Social Twitter 1.0.0 RC1 (July 26, 2011)
 ===============================================
