@@ -69,9 +69,8 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	
 	public byte[] getUserProfileImage(String screenName, ImageSize size) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("screen_name", screenName);
 		parameters.set("size", size.toString().toLowerCase());
-		ResponseEntity<byte[]> response = restTemplate.getForEntity(buildUri("users/profile_image", parameters), byte[].class);
+		ResponseEntity<byte[]> response = restTemplate.getForEntity(buildUri("users/profile_image/"+screenName, parameters), byte[].class);
 		if(response.getStatusCode() == HttpStatus.FOUND) {
 			throw new UnsupportedOperationException("Attempt to fetch image resulted in a redirect which could not be followed. Add Apache HttpComponents HttpClient to the classpath " +
 					"to be able to follow redirects.");

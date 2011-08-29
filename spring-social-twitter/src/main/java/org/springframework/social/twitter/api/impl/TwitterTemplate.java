@@ -18,6 +18,7 @@ package org.springframework.social.twitter.api.impl;
 import java.util.List;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
@@ -125,6 +126,13 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	public GeoOperations geoOperations() {
 		return geoOperations;
+	}
+	
+	@Override
+	protected List<HttpMessageConverter<?>> getMessageConverters() {
+		List<HttpMessageConverter<?>> messageConverters = super.getMessageConverters();
+		messageConverters.add(new ByteArrayHttpMessageConverter());
+		return messageConverters;
 	}
 		
 	// private helper 
