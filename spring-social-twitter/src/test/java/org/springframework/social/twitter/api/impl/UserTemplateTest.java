@@ -23,8 +23,11 @@ import static org.springframework.social.test.client.ResponseCreators.*;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.social.NotAuthorizedException;
+import org.springframework.social.twitter.api.ImageSize;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -123,6 +126,38 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	@Test
+	public void getUserProfileImage() throws Exception {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
+		mockServer.expect(requestTo("https://api.twitter.com/1/users/profile_image/tinyrod?size=normal"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("tinyrod.jpg", getClass()), responseHeaders));
+		
+		byte[] imageBytes = twitter.userOperations().getUserProfileImage("tinyrod");
+		assertEquals(201091, imageBytes.length);
+	}
+
+	@Test
+	public void getUserProfileImage_mini() throws Exception {
+		getUserProfileImageBySize(ImageSize.MINI);
+	}
+
+	@Test
+	public void getUserProfileImage_normal() throws Exception {
+		getUserProfileImageBySize(ImageSize.NORMAL);
+	}
+
+	@Test
+	public void getUserProfileImage_original() throws Exception {
+		getUserProfileImageBySize(ImageSize.ORIGINAL);
+	}
+
+	@Test
+	public void getUserProfileImage_bigger() throws Exception {
+		getUserProfileImageBySize(ImageSize.BIGGER);
+	}
+
+	@Test
 	public void getUsers_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/lookup.json?user_id=14846645%2C14718006"))
 			.andExpect(method(GET))
@@ -203,4 +238,16 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
+
+	private void getUserProfileImageBySize(ImageSize imageSize) {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
+		mockServer.expect(requestTo("https://api.twitter.com/1/users/profile_image/tinyrod?size=" + imageSize.name().toLowerCase()))
+			.andExpect(method(GET))
+			.andRespond(withResponse(new ClassPathResource("tinyrod.jpg", getClass()), responseHeaders));
+		
+		byte[] imageBytes = twitter.userOperations().getUserProfileImage("tinyrod", imageSize);
+		assertEquals(201091, imageBytes.length);
+	}
+
 }
