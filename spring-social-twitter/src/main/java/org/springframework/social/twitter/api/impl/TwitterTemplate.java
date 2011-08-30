@@ -15,11 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.List;
-
 import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.converter.ByteArrayHttpMessageConverter;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
@@ -77,7 +73,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate() {
 		super();
-		registerTwitterJsonModule();
 		getRestTemplate().setErrorHandler(new TwitterErrorHandler());
 		initSubApis();
 	}
@@ -91,7 +86,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret) {
 		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-		registerTwitterJsonModule();
 		getRestTemplate().setErrorHandler(new TwitterErrorHandler());
 		initSubApis();
 	}
@@ -127,28 +121,16 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	public GeoOperations geoOperations() {
 		return geoOperations;
 	}
-	
+
 	@Override
-	protected List<HttpMessageConverter<?>> getMessageConverters() {
-		List<HttpMessageConverter<?>> messageConverters = super.getMessageConverters();
-		messageConverters.add(new ByteArrayHttpMessageConverter());
-		return messageConverters;
+	protected void configureJsonMessageConverter(MappingJacksonHttpMessageConverter converter) {
+		ObjectMapper objectMapper = new ObjectMapper();				
+		objectMapper.registerModule(new TwitterModule());
+		converter.setObjectMapper(objectMapper);
 	}
-		
+	
 	// private helper 
 
-	private void registerTwitterJsonModule() {
-		List<HttpMessageConverter<?>> converters = getRestTemplate().getMessageConverters();
-		for (HttpMessageConverter<?> converter : converters) {
-			if(converter instanceof MappingJacksonHttpMessageConverter) {
-				MappingJacksonHttpMessageConverter jsonConverter = (MappingJacksonHttpMessageConverter) converter;
-				ObjectMapper objectMapper = new ObjectMapper();				
-				objectMapper.registerModule(new TwitterModule());
-				jsonConverter.setObjectMapper(objectMapper);
-			}
-		}
-	}
-	
 	private void initSubApis() {
 		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
