@@ -28,6 +28,7 @@ import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.UserOperations;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * This is the central class for interacting with Twitter.
@@ -73,7 +74,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate() {
 		super();
-		getRestTemplate().setErrorHandler(new TwitterErrorHandler());
 		initSubApis();
 	}
 
@@ -86,7 +86,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret) {
 		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-		getRestTemplate().setErrorHandler(new TwitterErrorHandler());
 		initSubApis();
 	}
 	
@@ -122,11 +121,18 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 		return geoOperations;
 	}
 
+	// AbstractOAuth1ApiBinding hooks
+	
 	@Override
 	protected void configureJsonMessageConverter(MappingJacksonHttpMessageConverter converter) {
 		ObjectMapper objectMapper = new ObjectMapper();				
 		objectMapper.registerModule(new TwitterModule());
 		converter.setObjectMapper(objectMapper);
+	}
+	
+	@Override
+	protected void configureRestTemplate(RestTemplate restTemplate) {
+		restTemplate.setErrorHandler(new TwitterErrorHandler());
 	}
 	
 	// private helper 
