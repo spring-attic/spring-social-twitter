@@ -124,10 +124,12 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	// AbstractOAuth1ApiBinding hooks
 	
 	@Override
-	protected void configureJsonMessageConverter(MappingJacksonHttpMessageConverter converter) {
+	protected MappingJacksonHttpMessageConverter getJsonMessageConverter() {
+		MappingJacksonHttpMessageConverter converter = super.getJsonMessageConverter();
 		ObjectMapper objectMapper = new ObjectMapper();				
 		objectMapper.registerModule(new TwitterModule());
-		converter.setObjectMapper(objectMapper);
+		converter.setObjectMapper(objectMapper);		
+		return converter;
 	}
 	
 	@Override
