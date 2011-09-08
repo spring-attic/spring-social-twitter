@@ -1,3 +1,9 @@
+Spring Social Twitter 1.0.0 (September 8, 2011)
+===============================================
+Bug Fixes:
+   * Added a byte array message converter to fix errors when fetching
+     images from Twitter.
+
 Spring Social Twitter 1.0.0.RC3 (August 25, 2011)
 =================================================
 Improvements:
