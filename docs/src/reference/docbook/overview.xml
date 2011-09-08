@@ -54,20 +54,6 @@
 	</para>
 	
 	<para>
-		Spring Social Twitter uses Spring Social's <classname>OAuth1Template</classname> to add OAuth 1.0a authorization headers to requests sent to Twitter.
-		<classname>OAuth1Template</classname> uses the <ulink url="http://commons.apache.org/codec/">Commons Codec</ulink> library when calculating request signatures.
-		Therefore, you'll also need Commons Codec in your project:
-	</para>
-	
-    <programlisting language="xml"><![CDATA[
-<dependency>
-  <groupId>commons-codec</groupId>
-  <artifactId>commons-codec</artifactId>
-  <version>1.5</version>
-</dependency>]]>
-    </programlisting>
-	
-	<para>
 		Consult <ulink url="http://static.springsource.org/spring-social/docs/1.0.x/reference/html/overview.html#overview-howtoget">Spring Social's reference documentation</ulink> for more information on Spring Social dependencies.
 	</para>
   </section>
