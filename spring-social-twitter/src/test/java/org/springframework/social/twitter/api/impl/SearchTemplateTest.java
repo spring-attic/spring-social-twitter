@@ -143,30 +143,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	@Test
-	public void getCurrentTrends() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/trends/current.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("current-trends"), responseHeaders));
-		Trends currentTrends = twitter.searchOperations().getCurrentTrends();
-		List<Trend> trends = currentTrends.getTrends();
-		assertEquals(2, trends.size());
-		assertEquals("Cool Stuff", trends.get(0).getName());
-		assertEquals("Cool Stuff", trends.get(0).getQuery());
-		assertEquals("#springsocial", trends.get(1).getName());
-		assertEquals("#springsocial", trends.get(1).getQuery());
-	}
-	
-	@Test
-	public void getCurrentTrends_excludeHashtags() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/trends/current.json?exclude=hashtags"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("current-trends"), responseHeaders));
-		Trends currentTrends = twitter.searchOperations().getCurrentTrends(true);
-		List<Trend> trends = currentTrends.getTrends();
-		assertEquals(2, trends.size());
-	}
-	
-	@Test
 	public void getDailyTrends() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/trends/daily.json"))
 			.andExpect(method(GET))

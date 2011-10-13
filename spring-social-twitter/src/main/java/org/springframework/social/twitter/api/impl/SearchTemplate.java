@@ -89,15 +89,6 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	
 	// Trends
 
-	public Trends getCurrentTrends() {
-		return getCurrentTrends(false);
-	}
-
-	public Trends getCurrentTrends(boolean excludeHashtags) {
-		String path = makeTrendPath("trends/current.json", excludeHashtags, null);
-		return restTemplate.getForObject(buildUri(path), DailyTrendsList.class).getList().get(0);
-	}
-
 	public List<Trends> getDailyTrends() {
 		return getDailyTrends(false, null);
 	}

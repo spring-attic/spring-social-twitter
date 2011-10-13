@@ -98,21 +98,6 @@ public interface SearchOperations {
 	void deleteSavedSearch(long searchId);
 
 	/**
-	 * Retrieves the current top 10 trending topics on Twitter, including hashtagged topics.
-	 * @return a Trends object containing a list of trending topics and the date/time that the list was created.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	Trends getCurrentTrends();
-
-	/**
-	 * Retrieves the current top 10 trending topics on Twitter.
-	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
-	 * @return a Trends object containing a list of trending topics and the date/time that the list was created.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	Trends getCurrentTrends(boolean excludeHashtags);
-
-	/**
 	 * Retrieves the top 20 trending topics, hourly for the past 24 hours.
 	 * This list includes hashtagged topics.
 	 * @return a list of Trends objects, one for each hour in the past 24 hours, ordered with the most recent hour first.
