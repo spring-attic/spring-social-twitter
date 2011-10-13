@@ -33,7 +33,7 @@ class DailyTrendsList extends AbstractTrendsList {
 
 	@JsonCreator
 	public DailyTrendsList(@JsonProperty("trends") Map<String, List<Trend>> trends) {
-		super(trends, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
+		super(trends, new SimpleDateFormat("yyyy-MM-dd HH:mm"));
 	}
 
 }
