@@ -77,9 +77,14 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		if (errorMap.containsKey("error")) {
 			errorText = (String) errorMap.get("error");
 		} else if(errorMap.containsKey("errors")) {
-			@SuppressWarnings("unchecked")
-			List<Map<String, String>> errors = (List<Map<String, String>>) errorMap.get("errors");
-			errorText = errors.get(0).get("message");
+			Object errors = errorMap.get("errors");			
+			if (errors instanceof List) {
+				@SuppressWarnings("unchecked")
+				List<Map<String, String>> errorsList = (List<Map<String, String>>) errors;
+				errorText = errorsList.get(0).get("message");
+			} else if (errors instanceof String ) {
+				errorText = (String) errors;
+			}
 		}
 
 		if (statusCode == HttpStatus.UNAUTHORIZED) {
