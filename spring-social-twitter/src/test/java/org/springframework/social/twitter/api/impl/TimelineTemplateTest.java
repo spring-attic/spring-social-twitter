@@ -565,6 +565,15 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 		twitter.timelineOperations().retweet(12345);
 	}
+
+	@Test(expected = OperationNotPermittedException.class)
+	public void retweet_sharingNotAllowed() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweet/12345.json"))
+				.andExpect(method(POST))
+				.andRespond(withResponse(jsonResource("error-sharing-notallowed"), responseHeaders, FORBIDDEN, ""));
+
+		twitter.timelineOperations().retweet(12345);
+	}
 	
 	@Test
 	public void getRetweets() {
