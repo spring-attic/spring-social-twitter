@@ -19,6 +19,7 @@ import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.module.SimpleModule;
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.Place;
+import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.SuggestionCategory;
@@ -49,5 +50,6 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(SearchResults.class, SearchResultsMixin.class);
 		context.setMixInAnnotations(Place.class, PlaceMixin.class);
 		context.setMixInAnnotations(SimilarPlacesResponse.class, SimilarPlacesMixin.class);
+		context.setMixInAnnotations(RateLimitStatus.class, RateLimitStatusMixin.class);
 	}
 }
