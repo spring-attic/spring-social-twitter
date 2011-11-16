@@ -20,6 +20,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.social.twitter.api.ImageSize;
+import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserOperations;
@@ -107,4 +108,7 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		return restTemplate.getForObject(buildUri("users/suggestions/" + slug + ".json"), TwitterProfileUsersList.class).getList();
 	}
 
+	public RateLimitStatus getRateLimitStatus() {
+		return restTemplate.getForObject(buildUri("account/rate_limit_status.json"), RateLimitStatus.class);
+	}
 }
