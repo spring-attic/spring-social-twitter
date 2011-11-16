@@ -29,6 +29,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.ImageSize;
+import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -239,6 +240,20 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
+	
+	@Test
+	public void getUnauthenticatedRateLimit() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/account/rate_limit_status.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("rate-limit-status-unauthenticated"), responseHeaders));
+		
+		RateLimitStatus status = twitter.userOperations().getRateLimitStatus();
+		assertEquals(150, status.getHourlyLimit());
+		assertEquals(1321296055, status.getResetTimeInSeconds());
+		assertEquals(149, status.getRemainingHits());
+	}
+	
+	
 
 	private void getUserProfileImageBySize(ImageSize imageSize) throws IOException {
 		HttpHeaders responseHeaders = new HttpHeaders();

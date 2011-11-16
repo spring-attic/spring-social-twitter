@@ -127,4 +127,11 @@ public interface UserOperations {
 	 */
 	List<TwitterProfile> getSuggestions(String slug);
 
+	/**
+	 * Retrieves the rate limit status.
+	 * Can be used with either either an authorized or unauthorized TwitterTemplate.
+	 * If the TwitterTemplate is authorized, the rate limits apply to the authenticated user.
+	 * If the TwitterTemplate is unauthorized, the rate limits apply to the IP address from with the request is made. 
+	 */
+	RateLimitStatus getRateLimitStatus();
 }
