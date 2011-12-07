@@ -39,29 +39,29 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 	@Override
 	public Tweet deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 		JsonNode tree = jp.readValueAsTree();
-		long id = tree.get("id").getLongValue();
-		String text = tree.get("text").getTextValue();
+		long id = tree.get("id").asLong();
+		String text = tree.get("text").asText();
 		JsonNode fromUserNode = tree.get("user");
 		String fromScreenName = null;
 		long fromId = 0;
 		String fromImageUrl = null;
 		String dateFormat = TIMELINE_DATE_FORMAT;
 		if (fromUserNode != null) {
-			fromScreenName = fromUserNode.get("screen_name").getTextValue();
-			fromId = fromUserNode.get("id").getLongValue();
-			fromImageUrl = fromUserNode.get("profile_image_url").getTextValue();
+			fromScreenName = fromUserNode.get("screen_name").asText();
+			fromId = fromUserNode.get("id").asLong();
+			fromImageUrl = fromUserNode.get("profile_image_url").asText();
 		} else {
-			fromScreenName = tree.get("from_user").getTextValue();
-			fromId = tree.get("from_user_id").getLongValue();
-			fromImageUrl = tree.get("profile_image_url").getTextValue();
+			fromScreenName = tree.get("from_user").asText();
+			fromId = tree.get("from_user_id").asLong();
+			fromImageUrl = tree.get("profile_image_url").asText();
 			dateFormat = SEARCH_DATE_FORMAT;
 		}
-		Date createdAt = toDate(tree.get("created_at").getTextValue(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
-		String source = tree.get("source").getTextValue();
+		Date createdAt = toDate(tree.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
+		String source = tree.get("source").asText();
 		JsonNode toUserIdNode = tree.get("in_reply_to_user_id");
 		Long toUserId = toUserIdNode != null ? toUserIdNode.getLongValue() : null;
 		JsonNode languageCodeNode = tree.get("iso_language_code");
-		String languageCode = languageCodeNode != null ? languageCodeNode.getTextValue() : null;
+		String languageCode = languageCodeNode != null ? languageCodeNode.asText() : null;
 		Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
 		JsonNode inReplyToStatusIdNode = tree.get("in_reply_to_status_id");
 		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.getLongValue() : null;

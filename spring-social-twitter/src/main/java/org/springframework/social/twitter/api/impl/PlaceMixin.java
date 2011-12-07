@@ -45,7 +45,7 @@ class PlaceMixin {
 		@Override
 		public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			JsonNode tree = jp.readValueAsTree();
-			return tree.has("street_address") ? tree.get("street_address").getTextValue() : null;
+			return tree.has("street_address") ? tree.get("street_address").asText() : null;
 		}
 	}
 }
