@@ -44,12 +44,12 @@ class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 		Iterator<JsonNode> dayIt = tree.iterator();
 		if(dayIt.hasNext()) {
 			JsonNode day = dayIt.next();
-			Date createdAt = toDate(day.get("created_at").getValueAsText());
+			Date createdAt = toDate(day.get("created_at").asText());
 			JsonNode trendNodes = day.get("trends");
 			List<Trend> trends = new ArrayList<Trend>();
 			for(Iterator<JsonNode> trendsIt = trendNodes.iterator(); trendsIt.hasNext(); ) {
 				JsonNode trendNode = trendsIt.next();
-				trends.add(new Trend(trendNode.get("name").getValueAsText(), trendNode.get("query").getValueAsText()));
+				trends.add(new Trend(trendNode.get("name").asText(), trendNode.get("query").getTextValue()));
 			}
 			jp.skipChildren();
 			return new LocalTrendsHolder(new Trends(createdAt, trends));
