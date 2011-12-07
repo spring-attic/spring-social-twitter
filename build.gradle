@@ -94,11 +94,11 @@ configure(javaprojects) {
     apply from: "$buildSrcDir/schema-publication.gradle"
 
     springSocialVersion = '1.0.1.BUILD-SNAPSHOT'
-    jacksonVersion = '1.8.5'
+    jacksonVersion = '1.9.2'
     junitVersion = '4.9'
     mockitoVersion = '1.8.5'
-    springVersion = '3.1.0.RC1'
-    springSecurityCryptoVersion = '3.1.0.RC3'
+    springVersion = '3.1.0.BUILD-SNAPSHOT'
+    springSecurityCryptoVersion = '3.1.0.RELEASE'
 	
     sourceSets {
         main {
@@ -138,8 +138,8 @@ project('spring-social-twitter') {
     dependencies {
        compile "org.springframework.social:spring-social-core:$springSocialVersion"
        compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
+       compile "org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion"
        testCompile "org.springframework.social:spring-social-test:$springSocialVersion"
-       testCompile "org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion"
     }
 }
 
