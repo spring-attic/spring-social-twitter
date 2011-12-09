@@ -33,6 +33,8 @@ public class StatusDetails {
 	private Float longitude;
 	
 	private boolean displayCoordinates;
+	
+	private boolean wrapLinks;
 
 	/**
 	 * Sets the ID of an existing status that this status is in reply to.
@@ -85,6 +87,11 @@ public class StatusDetails {
 		return this;
 	}
 
+	public StatusDetails setWrapLinks(boolean wrapLinks) {
+		this.wrapLinks = wrapLinks;
+		return this;
+	}
+	
 	/**
 	 * Maps the {@link StatusDetails} values to a Map of Twitter parameters.
 	 * 
@@ -104,6 +111,10 @@ public class StatusDetails {
 		
 		if (inReplyToStatusId != null) {
 			parameterMap.set("in_reply_to_status_id", inReplyToStatusId.toString());
+		}
+		
+		if (wrapLinks) {
+			parameterMap.set("wrap_links", "true");
 		}
 		
 		return parameterMap;
