@@ -1,3 +1,23 @@
+Spring Social Twitter 1.0.1 (??? ?, 2011)
+=========================================
+Bug Fixes:
+   * Fixed the date format for daily trends (SOCIALTW-14)
+   * Check for a list of errors vs. a single string error when
+     consuming errors from Twitter's REST API (SOCIALTW-17)
+
+Improvement:
+   * Added UserOperations.getRateLimitStatus() to API binding
+     to fetch the rate limit data. (SOCIALTW-16)
+   * Added restOperations() to Twitter interface to enable
+     consumption of Twitter endpoints that aren't yet covered
+     by the API binding (SOCIALTW-13)
+
+Compatibility Note:
+   * Twitter deprecated the current trends endpoint, and now 
+     returns and HTTP 410 if you attempt to use it. Therefore,
+     SearchOperations.getCurrentTrends() has been removed from the
+     API binding.
+
 Spring Social Twitter 1.0.0 (September 8, 2011)
 ===============================================
 Bug Fixes:
