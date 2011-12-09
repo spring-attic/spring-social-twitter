@@ -16,6 +16,7 @@
 package org.springframework.social.twitter.api;
 
 import org.springframework.social.ApiBinding;
+import org.springframework.web.client.RestOperations;
 
 
 /**
@@ -60,5 +61,11 @@ public interface Twitter extends ApiBinding {
 	 * Returns the portion of the Twitter API containing the user operations.
 	 */
 	UserOperations userOperations();
+
+	/**
+	 * Returns the underlying {@link RestOperations} object allowing for consumption of Twitter endpoints that may not be otherwise covered by the API binding.
+	 * The RestOperations object returned is configured to include an OAuth "Authorization" header on all requests.
+	 */
+	RestOperations restOperations();
 
 }
