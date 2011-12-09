@@ -457,6 +457,21 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void updateStatus_withLocationAndDisplayCoordinates() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
+				.andExpect(method(POST))
+				.andExpect(body("status=Test+Message&lat=123.1&long=-111.2&display_coordinates=true"))
+				.andRespond(withResponse(jsonResource("status"), responseHeaders));
+
+		StatusDetails details = new StatusDetails();
+		details.setLocation(123.1f, -111.2f);
+		details.setDisplayCoordinates(true);
+		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", details);
+		assertSingleTweet(tweet);
+		mockServer.verify();
+	}
+
+	@Test
 	public void updateStatus_withInReplyToStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
 				.andExpect(method(POST))
@@ -466,6 +481,20 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		StatusDetails details = new StatusDetails();
 		details.setInReplyToStatusId(123456);
 		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message in reply to @someone", details);
+		assertSingleTweet(tweet);
+		mockServer.verify();
+	}
+
+	@Test
+	public void updateStatus_withWrapLinks() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
+				.andExpect(method(POST))
+				.andExpect(body("status=Test+Message&wrap_links=true"))
+				.andRespond(withResponse(jsonResource("status"), responseHeaders));
+
+		StatusDetails details = new StatusDetails();
+		details.setWrapLinks(true);
+		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", details);
 		assertSingleTweet(tweet);
 		mockServer.verify();
 	}
