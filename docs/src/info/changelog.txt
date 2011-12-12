@@ -4,6 +4,10 @@ Bug Fixes:
    * Fixed the date format for daily trends (SOCIALTW-14)
    * Check for a list of errors vs. a single string error when
      consuming errors from Twitter's REST API (SOCIALTW-17)
+   * Fixed UserList.isPublic() to be bound to "mode" property in
+     JSON response (SOCIALTW-18)
+   * Exposed BlockOperations through Twitter interface
+     (SOCIALTW-20)
 
 Improvement:
    * Added UserOperations.getRateLimitStatus() to API binding
@@ -11,12 +15,23 @@ Improvement:
    * Added restOperations() to Twitter interface to enable
      consumption of Twitter endpoints that aren't yet covered
      by the API binding (SOCIALTW-13)
+   * Removed unused userId parameter from ListOperations.
+     getListSubscribers(). (SOCIALTW-19)
+   * SearchOperations.createSavedSearch now returns the newly
+     created SavedSearch object. (SOCIALTW-21)
+   * DirectMessageOperations.sendDirectMessage() returns the
+     sent DirectMessage object. (SOCIALTW-22)
+   * Added getDirectMessage(id) method to DirectMessageOperations
+     (SOCIALTW-23)
 
 Compatibility Note:
    * Twitter deprecated the current trends endpoint, and now 
      returns and HTTP 410 if you attempt to use it. Therefore,
      SearchOperations.getCurrentTrends() has been removed from the
      API binding.
+   * ListOperations.getListSubscribers() previous accepted a
+     userId parameter that was unused. That parameter has now been
+     removed.
 
 Spring Social Twitter 1.0.0 (September 8, 2011)
 ===============================================
