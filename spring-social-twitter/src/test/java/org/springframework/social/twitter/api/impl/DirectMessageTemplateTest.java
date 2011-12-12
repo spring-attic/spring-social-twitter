@@ -104,6 +104,15 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void getDirectMessage() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/show/23456.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse(jsonResource("directMessage"), responseHeaders));
+		DirectMessage message = twitter.directMessageOperations().getDirectMessage(23456);
+		assertSingleDirectMessage(message);
+	}
+	
+	@Test
 	public void sendDirectMessage_toScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/new.json")).andExpect(method(POST))
 				.andExpect(body("screen_name=habuma&text=Hello+there%21"))

@@ -88,6 +88,15 @@ public interface DirectMessageOperations {
 	List<DirectMessage> getDirectMessagesSent(int page, int pageSize, long sinceId, long maxId);
 
 	/**
+	 * Gets a direct message by its ID. The message must be readable by the authenticating user.
+	 * @param id the message ID
+	 * @return the direct message
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	DirectMessage getDirectMessage(long id);
+	
+	/**
 	 * Sends a direct message to another Twitter user. The recipient of the
 	 * message must follow the authenticated user in order for the message to be
 	 * delivered. If the recipient is not following the authenticated user, an

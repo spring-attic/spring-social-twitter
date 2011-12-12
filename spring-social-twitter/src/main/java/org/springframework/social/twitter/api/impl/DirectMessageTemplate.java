@@ -63,6 +63,11 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("direct_messages/sent.json", parameters), DirectMessageList.class);
 	}
+	
+	public DirectMessage getDirectMessage(long id) {
+		requireAuthorization();
+		return restTemplate.getForObject(buildUri("direct_messages/show/" + id + ".json"), DirectMessage.class);
+	}
 
 	public DirectMessage sendDirectMessage(String toScreenName, String text) {
 		requireAuthorization();
