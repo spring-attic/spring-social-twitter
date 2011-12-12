@@ -107,8 +107,9 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	public void sendDirectMessage_toScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/new.json")).andExpect(method(POST))
 				.andExpect(body("screen_name=habuma&text=Hello+there%21"))
-				.andRespond(withResponse("{}", responseHeaders));
-		twitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
+				.andRespond(withResponse(jsonResource("directMessage"), responseHeaders));
+		DirectMessage message = twitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
+		assertSingleDirectMessage(message);
 		mockServer.verify();
 	}
 
@@ -129,9 +130,20 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	public void sendDirectMessage_toUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/direct_messages/new.json")).andExpect(method(POST))
-				.andExpect(body("user_id=11223&text=Hello+there%21")).andRespond(withResponse("{}", responseHeaders));
-		twitter.directMessageOperations().sendDirectMessage(11223, "Hello there!");
+				.andExpect(body("user_id=11223&text=Hello+there%21"))
+				.andRespond(withResponse(jsonResource("directMessage"), responseHeaders));
+		DirectMessage message = twitter.directMessageOperations().sendDirectMessage(11223, "Hello there!");
+		assertSingleDirectMessage(message);
 		mockServer.verify();
+	}
+
+	private void assertSingleDirectMessage(DirectMessage message) {
+		assertEquals(23456, message.getId());
+		assertEquals("Back at ya", message.getText());
+		assertEquals(13579, message.getSender().getId());
+		assertEquals("kdonald", message.getSender().getScreenName());
+		assertEquals(24680, message.getRecipient().getId());
+		assertEquals("rclarkson", message.getRecipient().getScreenName());
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
