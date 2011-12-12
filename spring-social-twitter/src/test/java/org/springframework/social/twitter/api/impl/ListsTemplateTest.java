@@ -247,7 +247,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers.json?list_id=40841803"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-members"), responseHeaders));
-		assertListMembers(twitter.listOperations().getListSubscribers(161064614, 40841803));
+		assertListMembers(twitter.listOperations().getListSubscribers(40841803));
 	}
 
 	@Test

@@ -289,7 +289,7 @@ public interface ListOperations {
 	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<TwitterProfile> getListSubscribers(long userId, long listId);
+	List<TwitterProfile> getListSubscribers(long listId);
 
 	/**
 	 * Retrieves the subscribers to a list.
