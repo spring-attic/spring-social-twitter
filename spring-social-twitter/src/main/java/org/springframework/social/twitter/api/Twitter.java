@@ -28,6 +28,11 @@ import org.springframework.web.client.RestOperations;
 public interface Twitter extends ApiBinding {
 	
 	/**
+	 * Returns the portion of the Twitter API containing the block operations.
+	 */
+	BlockOperations blockOperations();
+	
+	/**
 	 * Returns the portion of the Twitter API containing the direct message operations.
 	 */
 	DirectMessageOperations directMessageOperations();

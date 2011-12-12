@@ -118,8 +118,12 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/saved_searches/create.json"))
 			.andExpect(method(POST))
 			.andExpect(body("query=%23twitter"))
-			.andRespond(withResponse("{}", responseHeaders));
-		twitter.searchOperations().createSavedSearch("#twitter");
+			.andRespond(withResponse(jsonResource("saved-search"), responseHeaders));
+		SavedSearch savedSearch = twitter.searchOperations().createSavedSearch("#twitter");
+		assertEquals(26897775, savedSearch.getId());
+		assertEquals("#springsocial", savedSearch.getQuery());
+		assertEquals("#springsocial", savedSearch.getName());
+		assertEquals(0, savedSearch.getPosition());
 		mockServer.verify();
 	}
 

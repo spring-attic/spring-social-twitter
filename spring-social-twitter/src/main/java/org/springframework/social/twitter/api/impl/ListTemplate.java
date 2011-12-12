@@ -174,7 +174,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		restTemplate.postForObject(buildUri("lists/members/destroy.json"), request, String.class);
 	}
 
-	public List<TwitterProfile> getListSubscribers(long userId, long listId) {
+	public List<TwitterProfile> getListSubscribers(long listId) {
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 
