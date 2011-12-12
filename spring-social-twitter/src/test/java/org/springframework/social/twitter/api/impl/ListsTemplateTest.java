@@ -247,7 +247,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers.json?list_id=40841803"))
 			.andExpect(method(GET))
 			.andRespond(withResponse(jsonResource("list-members"), responseHeaders));
-		assertListMembers(twitter.listOperations().getListSubscribers(161064614, 40841803));
+		assertListMembers(twitter.listOperations().getListSubscribers(40841803));
 	}
 
 	@Test
@@ -464,6 +464,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(22, list.getMemberCount());
 		assertEquals(100, list.getSubscriberCount());
 		assertEquals("/habuma/forfun", list.getUriPath());
+		assertFalse(list.isPublic());
 	}
 
 	private void assertListOfLists(CursoredList<UserList> lists) {
@@ -477,6 +478,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(3, list1.getMemberCount());
 		assertEquals(0, list1.getSubscriberCount());
 		assertEquals("/habuma/forfun2", list1.getUriPath());
+		assertTrue(list1.isPublic());
 		UserList list2 = lists.get(1);
 		assertEquals(40841803, list2.getId());
 		assertEquals("forFun", list2.getName());
@@ -486,6 +488,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(22, list2.getMemberCount());
 		assertEquals(100, list2.getSubscriberCount());
 		assertEquals("/habuma/forfun", list2.getUriPath());
+		assertFalse(list2.isPublic());
 		assertEquals(123456, lists.getPreviousCursor());
 		assertEquals(234567, lists.getNextCursor());
 	}

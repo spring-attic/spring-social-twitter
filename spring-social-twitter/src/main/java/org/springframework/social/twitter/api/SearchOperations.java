@@ -84,10 +84,11 @@ public interface SearchOperations {
 	/**
 	 * Creates a new saved search for the authenticating user.
 	 * @param query the search query to save
+	 * @return the SavedSearch
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	void createSavedSearch(String query);
+	SavedSearch createSavedSearch(String query);
 
 	/**
 	 * Deletes a saved search
