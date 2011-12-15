@@ -1,5 +1,5 @@
-Spring Social Twitter 1.0.1 (??? ?, 2011)
-=========================================
+Spring Social Twitter 1.0.1 (December 15, 2011)
+===============================================
 Bug Fixes:
    * Fixed the date format for daily trends (SOCIALTW-14)
    * Check for a list of errors vs. a single string error when
