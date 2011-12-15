@@ -28,7 +28,7 @@ Compatibility Note:
    * Twitter deprecated the current trends endpoint, and now 
      returns and HTTP 410 if you attempt to use it. Therefore,
      SearchOperations.getCurrentTrends() has been removed from the
-     API binding.
+     API binding. (SOCIALTW-15)
    * ListOperations.getListSubscribers() previous accepted a
      userId parameter that was unused. That parameter has now been
      removed.
