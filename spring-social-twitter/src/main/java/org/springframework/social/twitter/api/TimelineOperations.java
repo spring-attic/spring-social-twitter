@@ -15,14 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
-import java.util.List;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.OperationNotPermittedException;
+
+import java.util.List;
 
 
 /**
@@ -521,6 +521,14 @@ public interface TimelineOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getRetweetedByIds(long tweetId, int page, int pageSize);
+
+    /**
+     * Retrieves the list of related tweets, given a specific tweet.
+     * @param tweetId the tweet's ID.
+     * @throws ApiException if there is an error while communicating with Twitter.
+     * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+     */
+    RelatedResultList getRelated(long tweetId);
 
 	/**
 	 * Retrieves the 20 most recent tweets favorited by the authenticated user.
