@@ -15,10 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.SearchResults;
@@ -27,6 +23,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * Implementation of {@link SearchOperations}, providing a binding to Twitter's search and trend-oriented REST resources.
  * @author Craig Walls
@@ -34,10 +34,14 @@ import org.springframework.web.client.RestTemplate;
 class SearchTemplate extends AbstractTwitterOperations implements SearchOperations {
 
 	private final RestTemplate restTemplate;
+
+    private final boolean includeEntities;
+
 		
-	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
+	public SearchTemplate(final RestTemplate restTemplate, final boolean isAuthorizedForUser, final boolean includeEntities) {
 		super(isAuthorizedForUser);
 		this.restTemplate = restTemplate;
+        this.includeEntities = includeEntities;
 	}
 
 	public SearchResults search(String query) {
@@ -62,6 +66,10 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 			searchUrl += "&max_id={max}";
 			parameters.put("max", String.valueOf(maxId));
 		}
+        if (this.includeEntities)
+        {
+            parameters.put("include_entities", "true");
+        }
 		return restTemplate.getForObject(searchUrl, SearchResults.class, parameters);
 	}
 
