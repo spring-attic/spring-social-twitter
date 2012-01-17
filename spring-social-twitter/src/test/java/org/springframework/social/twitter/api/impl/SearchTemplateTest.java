@@ -281,7 +281,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 	// test helpers
 
 	private void assertSearchTweets(List<Tweet> tweets) {
-		assertTimelineTweets(tweets);
+		assertTimelineTweets(tweets, true);
 		assertEquals("en", tweets.get(0).getLanguageCode());
 		assertEquals("de", tweets.get(1).getLanguageCode());
 	}
