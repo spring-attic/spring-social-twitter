@@ -10,6 +10,7 @@
 		},
 		"source" : "Spring Social Showcase",
 		"in_reply_to_user_id" : "332211",
+		"retweet_count" : 12,
 		"created_at" : "Tue Jul 13 17:38:21 +0000 2010"
 	},
 	{
@@ -22,6 +23,7 @@
 		},
 		"source" : "Twitter",
 		"in_reply_to_user_id" : "112233",
+		"retweet_count" : 0,
 		"created_at" : "Tue Jul 20 19:38:21 +0000 2010"
 	}
 ]

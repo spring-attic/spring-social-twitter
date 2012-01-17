@@ -53,6 +53,10 @@ public abstract class AbstractTwitterApiTest {
 	}
 
 	protected void assertSingleTweet(Tweet tweet) {
+		assertSingleTweet(tweet, false);
+	}
+	
+	protected void assertSingleTweet(Tweet tweet, boolean isSearchResult) {
 		assertEquals(12345, tweet.getId());
 		assertEquals("Tweet 1", tweet.getText());
 		assertEquals("habuma", tweet.getFromUser());
@@ -60,12 +64,21 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet.getProfileImageUrl());
 		assertEquals("Spring Social Showcase", tweet.getSource());
 		assertEquals(1279042701000L, tweet.getCreatedAt().getTime());
-		assertEquals(Long.valueOf(123123123123L), tweet.getInReplyToStatusId());
+		assertEquals(Long.valueOf(123123123123L), tweet.getInReplyToStatusId());		
+		if (!isSearchResult) {
+			assertEquals(12, tweet.getRetweetCount().intValue());
+		} else {
+			assertNull(tweet.getRetweetCount());
+		}
 	}
 	
 	protected void assertTimelineTweets(List<Tweet> tweets) {
+		assertTimelineTweets(tweets, false);
+	}
+	
+	protected void assertTimelineTweets(List<Tweet> tweets, boolean isSearchResult) {
 		assertEquals(2, tweets.size());
-		assertSingleTweet(tweets.get(0));
+		assertSingleTweet(tweets.get(0), isSearchResult);
 		Tweet tweet2 = tweets.get(1);
 		assertEquals(54321, tweet2.getId());
 		assertEquals("Tweet 2", tweet2.getText());
@@ -74,5 +87,10 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet2.getProfileImageUrl());
 		assertEquals("Twitter", tweet2.getSource());
 		assertEquals(1279654701000L, tweet2.getCreatedAt().getTime());
+		if (!isSearchResult) {
+			assertEquals(0, tweet2.getRetweetCount().intValue());
+		} else {
+			assertNull(tweet2.getRetweetCount());
+		}
 	}
 }
