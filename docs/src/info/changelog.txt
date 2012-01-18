@@ -1,3 +1,13 @@
+Spring Social Twitter 1.0.2 (January ??, 2011)
+===============================================
+Bug Fixes:
+   * Throw RateLimitExceededException when a user exceeds their
+     daily status update limit. (It was throwing
+     OperationNotPermittedException.) SOCIALTW-27
+
+Improvements:
+   * Capture "retweet_count" property on a Tweet object. SOCIALTW_26
+
 Spring Social Twitter 1.0.1 (December 15, 2011)
 ===============================================
 Bug Fixes:
