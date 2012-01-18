@@ -138,4 +138,13 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().getHomeTimeline();		
 	}
 	
+	@Test(expected = RateLimitExceededException.class)
+	public void dailyStatusLimitExceeded() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
+			.andExpect(method(POST))
+			.andExpect(body("status=Some+message"))
+			.andRespond(withResponse("{\"error\":\"User is over daily status update limit.\", \"request\":\"/1/statuses/update.json\"}", responseHeaders, HttpStatus.FORBIDDEN, ""));
+		twitter.timelineOperations().updateStatus("Some message");				
+	}
+
 }
