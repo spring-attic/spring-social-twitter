@@ -67,7 +67,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 	}
 	
 	private void handleClientErrors(ClientHttpResponse response) throws IOException {
-		HttpStatus statusCode = response.getStatusCode();
+		HttpStatus statusCode = response.getStatusCode();		
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
 		if (errorMap == null) {
 			return; // unexpected error body, can't be handled here
@@ -106,6 +106,8 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 				throw new MessageTooLongException(errorText);
 			} else if (errorText.equals(INVALID_MESSAGE_RECIPIENT_TEXT)) {
 				throw new InvalidMessageRecipientException(errorText);
+			} else if (errorText.equals(DAILY_RATE_LIMIT_TEXT)) {
+				throw new RateLimitExceededException();
 			} else {
 				throw new OperationNotPermittedException(errorText);
 			}
@@ -140,6 +142,8 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 	private static final String STATUS_TOO_LONG_TEXT = "Status is over 140 characters.";
 	private static final String MESSAGE_TOO_LONG_TEXT = "The text of your direct message is over 140 characters";
 	private static final String DUPLICATE_STATUS_TEXT = "Status is a duplicate.";
+	private static final String DAILY_RATE_LIMIT_TEXT = "User is over daily status update limit.";
+
 	
 	private static final int ENHANCE_YOUR_CALM = 420;
 }
