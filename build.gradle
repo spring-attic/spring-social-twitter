@@ -93,7 +93,7 @@ configure(javaprojects) {
     // add tasks for finding and publishing .xsd files
     apply from: "$buildSrcDir/schema-publication.gradle"
 
-    springSocialVersion = '1.0.2.BUILD-SNAPSHOT'
+    springSocialVersion = '1.0.2.RELEASE'
     jacksonVersion = '1.9.3'
     junitVersion = '4.10'
     mockitoVersion = '1.9.0'
