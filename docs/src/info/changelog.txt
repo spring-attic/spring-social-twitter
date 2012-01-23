@@ -1,4 +1,4 @@
-Spring Social Twitter 1.0.2 (January ??, 2011)
+Spring Social Twitter 1.0.2 (January 23, 2012)
 ===============================================
 Bug Fixes:
    * Throw RateLimitExceededException when a user exceeds their
