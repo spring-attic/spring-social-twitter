@@ -87,8 +87,12 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			}
 		}
 
-		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			if(errorText == null) {
+		if (statusCode == HttpStatus.BAD_REQUEST) {
+			if (errorText.contains("Rate limit exceeded.")) {
+				throw new RateLimitExceededException();
+			}
+		} else if (statusCode == HttpStatus.UNAUTHORIZED) {
+			if (errorText == null) {
 				throw new NotAuthorizedException(response.getStatusText());
 			} else if (errorText.equals("Could not authenticate you.")) {
 				throw new MissingAuthorizationException();
