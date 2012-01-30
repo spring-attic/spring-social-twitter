@@ -147,4 +147,11 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().updateStatus("Some message");				
 	}
 
+	@Test(expected = RateLimitExceededException.class)
+	public void hourlyRateLimitExceeded() {
+		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+			.andExpect(method(GET))
+			.andRespond(withResponse("{\"error\":\"Rate limit exceeded. Clients may not make more than 350 requests per hour.\"}", responseHeaders, HttpStatus.BAD_REQUEST, ""));
+		twitter.userOperations().getUserProfile();
+	}
 }
