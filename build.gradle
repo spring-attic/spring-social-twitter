@@ -99,6 +99,7 @@ configure(javaprojects) {
     mockitoVersion = '1.9.0'
     springVersion = '3.1.0.RELEASE'
     springSecurityCryptoVersion = '3.1.0.RELEASE'
+    springTestMvcVersion = "1.0.0.BUILD-SNAPSHOT"
 	
     sourceSets {
         main {
@@ -139,7 +140,7 @@ project('spring-social-twitter') {
        compile "org.springframework.social:spring-social-core:$springSocialVersion"
        compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
        compile "org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion"
-       testCompile "org.springframework.social:spring-social-test:$springSocialVersion"
+       testCompile "org.springframework:spring-test-mvc:$springTestMvcVersion"
     }
 }
 
