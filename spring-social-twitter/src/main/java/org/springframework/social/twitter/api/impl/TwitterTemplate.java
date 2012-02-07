@@ -74,9 +74,10 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 * Any operations requiring authentication will throw {@link NotAuthorizedException} .
 	 */
 	public TwitterTemplate() {
-		super();
-		initSubApis();
+        super();
+        initSubApis(false);
 	}
+
 
 	/**
 	 * Create a new instance of TwitterTemplate.
@@ -86,10 +87,24 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 * @param accessTokenSecret an access token secret acquired through OAuth authentication with Twitter
 	 */
 	public TwitterTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret) {
-		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-		initSubApis();
+		this(consumerKey, consumerSecret, accessToken, accessTokenSecret, false);
 	}
-	
+
+
+    /**
+     * Create a new instance of TwitterTemplate.
+     * @param consumerKey the application's API key
+     * @param consumerSecret the application's API secret
+     * @param accessToken an access token acquired through OAuth authentication with Twitter
+     * @param accessTokenSecret an access token secret acquired through OAuth authentication with Twitter
+     * @param includeEntities include timeline entities, see https://dev.twitter.com/docs/tweet-entities
+     */
+    public TwitterTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret, boolean includeEntities) {
+        super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
+        initSubApis(includeEntities);
+    }
+
+
 	public TimelineOperations timelineOperations() {
 		return timelineOperations;
 	}
@@ -144,15 +159,14 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	// private helper 
 
-	private void initSubApis() {
+	private void initSubApis(final boolean includeEntities) {
 		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
 		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized());
 		this.listOperations = new ListTemplate(getRestTemplate(), isAuthorized());
-		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorized());
-		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorized());
+		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorized(), includeEntities);
+		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorized(), includeEntities);
 		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorized());
 		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorized());
 	}
-
 }

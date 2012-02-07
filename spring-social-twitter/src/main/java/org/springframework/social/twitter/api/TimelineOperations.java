@@ -15,14 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
-import java.util.List;
-
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.OperationNotPermittedException;
+
+import java.util.List;
 
 
 /**
@@ -521,6 +521,7 @@ public interface TimelineOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Long> getRetweetedByIds(long tweetId, int page, int pageSize);
+
 
 	/**
 	 * Retrieves the 20 most recent tweets favorited by the authenticated user.
