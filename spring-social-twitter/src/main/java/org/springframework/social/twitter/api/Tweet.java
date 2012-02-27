@@ -33,6 +33,7 @@ public class Tweet {
 	private String languageCode;
 	private String source;
 	private Integer retweetCount;
+	private boolean retweeted;
 	
 	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
@@ -137,5 +138,13 @@ public class Tweet {
 	 */
 	public Integer getRetweetCount() {
 		return retweetCount;
+	}
+	
+	public void setRetweeted(boolean retweeted) {
+		this.retweeted = retweeted;
+	}
+
+	public boolean isRetweeted() {
+		return retweeted;
 	}
 }

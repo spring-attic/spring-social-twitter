@@ -64,9 +64,10 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet.getProfileImageUrl());
 		assertEquals("Spring Social Showcase", tweet.getSource());
 		assertEquals(1279042701000L, tweet.getCreatedAt().getTime());
-		assertEquals(Long.valueOf(123123123123L), tweet.getInReplyToStatusId());		
+		assertEquals(Long.valueOf(123123123123L), tweet.getInReplyToStatusId());
 		if (!isSearchResult) {
 			assertEquals(12, tweet.getRetweetCount().intValue());
+			assertTrue(tweet.isRetweeted());
 		} else {
 			assertNull(tweet.getRetweetCount());
 		}
