@@ -11,7 +11,8 @@
 		"source" : "Spring Social Showcase",
 		"in_reply_to_user_id" : "332211",
 		"retweet_count" : 12,
-		"created_at" : "Tue Jul 13 17:38:21 +0000 2010"
+		"created_at" : "Tue Jul 13 17:38:21 +0000 2010",
+		"retweeted" : true
 	},
 	{
 		"id" : "54321",

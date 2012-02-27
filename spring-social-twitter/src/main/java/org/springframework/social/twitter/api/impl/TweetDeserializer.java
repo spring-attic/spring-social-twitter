@@ -69,6 +69,9 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		JsonNode retweetCountNode = tree.get("retweet_count");
 		Integer retweetCount = retweetCountNode != null && !retweetCountNode.isNull() ? retweetCountNode.getIntValue() : null;
 		tweet.setRetweetCount(retweetCount);
+		JsonNode retweetedNode = tree.get("retweeted");
+		boolean retweeted = retweetedNode != null && !retweetedNode.isNull() ? retweetedNode.getBooleanValue() : false;
+		tweet.setRetweeted(retweeted);
 		jp.skipChildren();
 		return tweet;
 	}
