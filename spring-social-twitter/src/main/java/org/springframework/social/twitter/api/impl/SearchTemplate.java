@@ -34,10 +34,13 @@ import org.springframework.web.client.RestTemplate;
 class SearchTemplate extends AbstractTwitterOperations implements SearchOperations {
 
 	private final RestTemplate restTemplate;
+
+    private final boolean includeEntities;
 		
-	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
+	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, final boolean includeEntities) {
 		super(isAuthorizedForUser);
 		this.restTemplate = restTemplate;
+        this.includeEntities = includeEntities;
 	}
 
 	public SearchResults search(String query) {
@@ -62,6 +65,10 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 			searchUrl += "&max_id={max}";
 			parameters.put("max", String.valueOf(maxId));
 		}
+        if (this.includeEntities)
+        {
+            parameters.put("include_entities", "true");
+        }
 		return restTemplate.getForObject(searchUrl, SearchResults.class, parameters);
 	}
 
