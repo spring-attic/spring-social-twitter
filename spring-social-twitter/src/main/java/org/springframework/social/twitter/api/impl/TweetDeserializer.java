@@ -29,6 +29,7 @@ import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.TwitterProfile;
 
 /**
  * Custom Jackson deserializer for tweets. Tweets can't be simply mapped like other Twitter model objects because the JSON structure
@@ -90,6 +91,8 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
         tweet.setRetweetedStatus(retweetedStatus);
         Entities entities = toEntities(tree.get("entities"));
         tweet.setEntities(entities);
+        TwitterProfile user = toProfile(fromUserNode);
+        tweet.setUser(user);
 		return tweet;
 	}
 
@@ -120,6 +123,16 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
         }
         final ObjectMapper mapper = this.createMapper();
         return mapper.readValue(node, Entities.class);
+    }
+
+    private TwitterProfile toProfile(final JsonNode node) throws IOException
+    {
+        if (null == node || node.isNull() || node.isMissingNode())
+        {
+            return null;
+        }
+        final ObjectMapper mapper = this.createMapper();
+        return mapper.readValue(node, TwitterProfile.class);
     }
 
 

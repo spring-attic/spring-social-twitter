@@ -36,6 +36,7 @@ public class Tweet {
 	private boolean retweeted;
     private Tweet retweetedStatus;
     private Entities entities;
+    private TwitterProfile user;
 	
 	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
@@ -204,5 +205,15 @@ public class Tweet {
             return false;
         }
         return !this.entities.getTags().isEmpty();
+    }
+    
+    public TwitterProfile getUser()
+    {
+        return this.user;
+    }
+    
+    public void setUser(final TwitterProfile prof)
+    {
+        this.user = prof;
     }
 }
