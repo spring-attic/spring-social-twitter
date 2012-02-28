@@ -67,7 +67,8 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		}
         if (this.includeEntities)
         {
-            parameters.put("include_entities", "true");
+            searchUrl += "&include_entities={entities}";
+            parameters.put("entities", "true");
         }
 		return restTemplate.getForObject(searchUrl, SearchResults.class, parameters);
 	}
