@@ -160,6 +160,11 @@ public class Tweet {
     {
         this.retweetedStatus = tweet;
     }
+    
+    public boolean isRetweet()
+    {
+        return this.retweetedStatus != null;
+    }
 
     public Entities getEntities()
     {
