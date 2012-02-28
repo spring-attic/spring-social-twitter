@@ -21,12 +21,13 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.Tweet;
 
 /**
@@ -87,8 +88,17 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		tweet.setRetweeted(retweeted);
         Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedNode) : null;
         tweet.setRetweetedStatus(retweetedStatus);
+        Entities entities = toEntities(tree.get("entities"));
+        tweet.setEntities(entities);
 		return tweet;
 	}
+
+    private ObjectMapper createMapper()
+    {
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new TwitterModule());
+        return mapper;
+    }
 	
     private Date toDate(String dateString, DateFormat dateFormat) {
         if (dateString == null) {
@@ -100,6 +110,16 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
         } catch (ParseException e) {
             return null;
         }
+    }
+
+    private Entities toEntities(final JsonNode node) throws IOException
+    {
+        if (null == node || node.isNull() || node.isMissingNode())
+        {
+            return null;
+        }
+        final ObjectMapper mapper = this.createMapper();
+        return mapper.readValue(node, Entities.class);
     }
 
 

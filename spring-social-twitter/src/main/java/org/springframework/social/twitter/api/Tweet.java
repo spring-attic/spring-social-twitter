@@ -35,6 +35,7 @@ public class Tweet {
 	private Integer retweetCount;
 	private boolean retweeted;
     private Tweet retweetedStatus;
+    private Entities entities;
 	
 	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
@@ -157,5 +158,51 @@ public class Tweet {
     public void setRetweetedStatus(final Tweet tweet)
     {
         this.retweetedStatus = tweet;
+    }
+
+    public Entities getEntities()
+    {
+        return this.entities;
+    }
+    
+    public void setEntities(final Entities ent)
+    {
+        this.entities = ent;
+    }
+
+    public boolean hasMentions()
+    {
+        if (this.entities == null)
+        {
+            return false;
+        }
+        return !this.entities.getMentions().isEmpty();
+    }
+
+    public boolean hasMedia()
+    {
+        if (this.entities == null)
+        {
+            return false;
+        }
+        return !this.entities.getMedia().isEmpty();
+    }
+
+    public boolean hasUrls()
+    {
+        if (this.entities == null)
+        {
+            return false;
+        }
+        return !this.entities.getUrls().isEmpty();
+    }
+
+    public boolean hasTags()
+    {
+        if (this.entities == null)
+        {
+            return false;
+        }
+        return !this.entities.getTags().isEmpty();
     }
 }
