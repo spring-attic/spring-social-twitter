@@ -34,6 +34,7 @@ public class Tweet {
 	private String source;
 	private Integer retweetCount;
 	private boolean retweeted;
+    private Tweet retweetedStatus;
 	
 	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
@@ -147,4 +148,14 @@ public class Tweet {
 	public boolean isRetweeted() {
 		return retweeted;
 	}
+
+    public Tweet getRetweetedStatus()
+    {
+        return this.retweetedStatus;
+    }
+
+    public void setRetweetedStatus(final Tweet tweet)
+    {
+        this.retweetedStatus = tweet;
+    }
 }

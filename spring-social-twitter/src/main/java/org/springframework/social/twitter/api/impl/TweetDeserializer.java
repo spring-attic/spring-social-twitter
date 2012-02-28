@@ -36,9 +36,21 @@ import org.springframework.social.twitter.api.Tweet;
  */
 class TweetDeserializer extends JsonDeserializer<Tweet> {
 
-	@Override
-	public Tweet deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		JsonNode tree = jp.readValueAsTree();
+    @Override
+    public Tweet deserialize(final JsonParser jp, final DeserializationContext ctx) throws IOException
+    {
+        final JsonNode tree = jp.readValueAsTree();
+        if (null == tree || tree.isMissingNode() || tree.isNull())
+        {
+            return null;
+        }
+        final Tweet tweet = this.deserialize(tree);
+        jp.skipChildren();
+        return tweet;
+    }
+
+
+    public Tweet deserialize(JsonNode tree) throws IOException, JsonProcessingException {
 		long id = tree.get("id").asLong();
 		String text = tree.get("text").asText();
 		JsonNode fromUserNode = tree.get("user");
@@ -70,9 +82,11 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		Integer retweetCount = retweetCountNode != null && !retweetCountNode.isNull() ? retweetCountNode.getIntValue() : null;
 		tweet.setRetweetCount(retweetCount);
 		JsonNode retweetedNode = tree.get("retweeted");
+        JsonNode retweetedStatusNode = tree.get("retweeted_status");
 		boolean retweeted = retweetedNode != null && !retweetedNode.isNull() ? retweetedNode.getBooleanValue() : false;
 		tweet.setRetweeted(retweeted);
-		jp.skipChildren();
+        Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedNode) : null;
+        tweet.setRetweetedStatus(retweetedStatus);
 		return tweet;
 	}
 	
