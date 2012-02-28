@@ -15,13 +15,16 @@
  */
 package org.springframework.social.twitter.api;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Represents a Twitter status update (e.g., a "tweet").
  * @author Craig Walls
  */
-public class Tweet {
+public class Tweet implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 	private long id;
 	private String text;
 	private Date createdAt;
