@@ -84,6 +84,10 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		JsonNode inReplyToStatusIdNode = tree.get("in_reply_to_status_id");
 		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.getLongValue() : null;
 		tweet.setInReplyToStatusId(inReplyToStatusId);
+        JsonNode inReplyToUserIdNode = tree.get("in_reply_to_user_id");
+        Long inReplyUsersId = inReplyToUserIdNode != null && !inReplyToUserIdNode.isNull() ? inReplyToUserIdNode.getLongValue() : null;
+        tweet.setInReplyToUserId(inReplyUsersId);
+        tweet.setInReplyToScreenName(tree.path("in_reply_to_screen_name").getTextValue());
 		JsonNode retweetCountNode = tree.get("retweet_count");
 		Integer retweetCount = retweetCountNode != null && !retweetCountNode.isNull() ? retweetCountNode.getIntValue() : null;
 		tweet.setRetweetCount(retweetCount);

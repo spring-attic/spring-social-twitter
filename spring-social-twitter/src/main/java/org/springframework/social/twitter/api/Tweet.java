@@ -32,6 +32,8 @@ public class Tweet implements Serializable {
 	private String profileImageUrl;
 	private Long toUserId;
 	private Long inReplyToStatusId;
+    private Long inReplyToUserId;
+    private String inReplyToScreenName;
 	private long fromUserId;
 	private String languageCode;
 	private String source;
@@ -40,7 +42,7 @@ public class Tweet implements Serializable {
     private Tweet retweetedStatus;
     private Entities entities;
     private TwitterProfile user;
-	
+
 	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
 		this.text = text;
@@ -225,6 +227,26 @@ public class Tweet implements Serializable {
         this.user = prof;
     }
 
+    public Long getInReplyToUserId()
+    {
+        return inReplyToUserId;
+    }
+
+    public void setInReplyToUserId(final Long inReplyToUserId)
+    {
+        this.inReplyToUserId = inReplyToUserId;
+    }
+
+    public String getInReplyToScreenName()
+    {
+        return inReplyToScreenName;
+    }
+
+    public void setInReplyToScreenName(final String inReplyToScreenName)
+    {
+        this.inReplyToScreenName = inReplyToScreenName;
+    }
+
     @Override
     public boolean equals(Object o)
     {
@@ -263,7 +285,15 @@ public class Tweet implements Serializable {
         {
             return false;
         }
+        if (inReplyToScreenName != null ? !inReplyToScreenName.equals(tweet.inReplyToScreenName) : tweet.inReplyToScreenName != null)
+        {
+            return false;
+        }
         if (inReplyToStatusId != null ? !inReplyToStatusId.equals(tweet.inReplyToStatusId) : tweet.inReplyToStatusId != null)
+        {
+            return false;
+        }
+        if (inReplyToUserId != null ? !inReplyToUserId.equals(tweet.inReplyToUserId) : tweet.inReplyToUserId != null)
         {
             return false;
         }
@@ -303,7 +333,6 @@ public class Tweet implements Serializable {
         return true;
     }
 
-
     @Override
     public int hashCode()
     {
@@ -314,6 +343,8 @@ public class Tweet implements Serializable {
         result = 31 * result + (profileImageUrl != null ? profileImageUrl.hashCode() : 0);
         result = 31 * result + (toUserId != null ? toUserId.hashCode() : 0);
         result = 31 * result + (inReplyToStatusId != null ? inReplyToStatusId.hashCode() : 0);
+        result = 31 * result + (inReplyToUserId != null ? inReplyToUserId.hashCode() : 0);
+        result = 31 * result + (inReplyToScreenName != null ? inReplyToScreenName.hashCode() : 0);
         result = 31 * result + (int) (fromUserId ^ (fromUserId >>> 32));
         result = 31 * result + (languageCode != null ? languageCode.hashCode() : 0);
         result = 31 * result + (source != null ? source.hashCode() : 0);
