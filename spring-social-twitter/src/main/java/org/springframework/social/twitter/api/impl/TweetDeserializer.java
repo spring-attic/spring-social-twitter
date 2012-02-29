@@ -53,8 +53,12 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 
 
     public Tweet deserialize(JsonNode tree) throws IOException, JsonProcessingException {
-		long id = tree.get("id").asLong();
-		String text = tree.get("text").asText();
+		final long id = tree.path("id").asLong();
+        final String text = tree.path("text").asText();
+        if (id <= 0 || text == null || text.isEmpty())
+        {
+            return null;
+        }
 		JsonNode fromUserNode = tree.get("user");
 		String fromScreenName = null;
 		long fromId = 0;
@@ -87,7 +91,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
         JsonNode retweetedStatusNode = tree.get("retweeted_status");
 		boolean retweeted = retweetedNode != null && !retweetedNode.isNull() ? retweetedNode.getBooleanValue() : false;
 		tweet.setRetweeted(retweeted);
-        Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedNode) : null;
+        Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedStatusNode) : null;
         tweet.setRetweetedStatus(retweetedStatus);
         Entities entities = toEntities(tree.get("entities"));
         tweet.setEntities(entities);
