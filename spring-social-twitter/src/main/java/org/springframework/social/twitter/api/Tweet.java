@@ -25,9 +25,9 @@ import java.util.Date;
 public class Tweet implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	private long id;
-	private String text;
-	private Date createdAt;
+	private final long id;
+	private final String text;
+	private final Date createdAt;
 	private String fromUser;
 	private String profileImageUrl;
 	private Long toUserId;
@@ -59,16 +59,8 @@ public class Tweet implements Serializable {
 		return text;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
 	public Date getCreatedAt() {
 		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
 	}
 
 	public String getFromUser() {
@@ -81,10 +73,6 @@ public class Tweet implements Serializable {
 
 	public long getId() {
 		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getProfileImageUrl() {
