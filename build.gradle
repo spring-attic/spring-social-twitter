@@ -101,7 +101,7 @@ project('spring-social-twitter') {
 }
 
 configure(rootProject) {
-    description = 'Spring Social'
+    description = 'Spring Social Twitter'
 
     apply plugin: 'docbook-reference'
 
