@@ -1,4 +1,4 @@
-Spring Social Twitter
+Spring Social Twitter ${version}
 -----------------------------------------------------------
 Spring Social Twitter is an extension to Spring Social to enable connectivity with Twitter.
 
