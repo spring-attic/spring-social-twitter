@@ -1,17 +1,9 @@
 ============================= Spring Social Twitter ===========================
 To check out the project and build from source, do the following:
 
- git clone --recursive git://github.com/SpringSource/spring-social-twitter.git
+ git clone git://github.com/SpringSource/spring-social-twitter.git
  cd spring-social-twitter
  ./gradlew build
-
-Note: the --recursive switch above is important, as spring-social uses
-git submodules, which must themselves be cloned and initialized. If --recursive
-is omitted, doing so becomes a multi-step process of: 
-
-git clone git://github.com/SpringSource/spring-social-twitter.git
-git submodule init
-git submodule update
 
 -------------------------------------------------------------------------------
 To generate Eclipse metadata (.classpath and .project files), do the following:
