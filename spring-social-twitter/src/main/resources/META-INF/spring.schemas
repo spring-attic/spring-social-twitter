@@ -1,0 +1,2 @@
+http\://www.springframework.org/schema/social/spring-social-twitter.xsd=org/springframework/social/twitter/config/xml/spring-social-twitter-1.1.xsd
+http\://www.springframework.org/schema/social/spring-social-twitter-1.1.xsd=org/springframework/social/twitter/config/xml/spring-social-twitter-1.1.xsd
