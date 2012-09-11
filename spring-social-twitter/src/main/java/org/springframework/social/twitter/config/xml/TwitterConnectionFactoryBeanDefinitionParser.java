@@ -17,7 +17,7 @@ package org.springframework.social.twitter.config.xml;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.social.config.xml.AbstractConnectionFactoryBeanDefinitionParser;
+import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitionParser;
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.config.xml.UserIdSource;
 import org.springframework.social.connect.Connection;
@@ -30,7 +30,7 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
  * Implementation of {@link AbstractConnectionFactoryBeanDefinitionParser} that creates a {@link TwitterConnectionFactory}.
  * @author Craig Walls
  */
-class TwitterConnectionFactoryBeanDefinitionParser extends AbstractConnectionFactoryBeanDefinitionParser {
+class TwitterConnectionFactoryBeanDefinitionParser extends AbstractProviderConfigBeanDefinitionParser {
 
 	public TwitterConnectionFactoryBeanDefinitionParser() {
 		super(TwitterConnectionFactory.class, TwitterApiHelper.class);
