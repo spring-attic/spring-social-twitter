@@ -30,9 +30,9 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
  * Implementation of {@link AbstractConnectionFactoryBeanDefinitionParser} that creates a {@link TwitterConnectionFactory}.
  * @author Craig Walls
  */
-class TwitterConnectionFactoryBeanDefinitionParser extends AbstractProviderConfigBeanDefinitionParser {
+class TwitterConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefinitionParser {
 
-	public TwitterConnectionFactoryBeanDefinitionParser() {
+	public TwitterConfigBeanDefinitionParser() {
 		super(TwitterConnectionFactory.class, TwitterApiHelper.class);
 	}
 
