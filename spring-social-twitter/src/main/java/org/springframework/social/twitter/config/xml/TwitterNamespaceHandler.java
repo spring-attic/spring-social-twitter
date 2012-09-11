@@ -28,7 +28,7 @@ public class TwitterNamespaceHandler extends AbstractProviderConfigNamespaceHand
 
 	@Override
 	protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
-		return new TwitterConnectionFactoryBeanDefinitionParser();
+		return new TwitterConfigBeanDefinitionParser();
 	}
 
 }
