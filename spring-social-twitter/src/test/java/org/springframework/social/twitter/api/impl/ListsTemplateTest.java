@@ -17,13 +17,14 @@ package org.springframework.social.twitter.api.impl;
 
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.client.match.RequestMatchers.*;
 import static org.springframework.test.web.client.response.ResponseCreators.*;
 
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
@@ -39,7 +40,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getLists_currentUser() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists.json?cursor=-1"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getLists());
 	}
 
@@ -47,7 +48,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListsInCursor_currentUser() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists.json?cursor=11223344"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getListsInCursor(11223344));
 	}
 
@@ -60,7 +61,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getLists_byId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists.json?user_id=161064614&cursor=-1"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getLists(161064614));
 	}
 
@@ -68,7 +69,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListsInCursor_byId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists.json?user_id=161064614&cursor=44332211"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getListsInCursor(161064614, 44332211));
 	}
 
@@ -76,7 +77,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getLists_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists.json?screen_name=habuma&cursor=-1"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getLists("habuma"));
 	}
 
@@ -84,7 +85,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListsInCursor_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists.json?screen_name=habuma&cursor=11335577"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getListsInCursor("habuma", 11335577));
 	}
 
@@ -92,7 +93,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getList_byListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/show.json?list_id=40841803"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		assertSingleList(twitter.listOperations().getList(40841803));
 	}
 	
@@ -100,8 +101,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void createList_publicListForUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/create.json"))
 			.andExpect(method(POST))
-			.andExpect(body("name=forfun&description=Just+for+Fun&mode=public"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("name=forfun&description=Just+for+Fun&mode=public"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		assertSingleList(twitter.listOperations().createList("forfun", "Just for Fun", true));
 	}
 
@@ -109,8 +110,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void createList_privateListForUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/create.json"))
 			.andExpect(method(POST))
-			.andExpect(body("name=forfun2&description=Just+for+Fun%2C+too&mode=private"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("name=forfun2&description=Just+for+Fun%2C+too&mode=private"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		assertSingleList(twitter.listOperations().createList("forfun2", "Just for Fun, too", false));
 	}
 	
@@ -123,8 +124,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void updateList_publicListForUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/update.json"))
 			.andExpect(method(POST))
-			.andExpect(body("name=forfun&description=Just+for+Fun&mode=public&list_id=40841803"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("name=forfun&description=Just+for+Fun&mode=public&list_id=40841803"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		assertSingleList(twitter.listOperations().updateList(40841803, "forfun", "Just for Fun", true));
 	}
 
@@ -132,8 +133,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void updateList_privateListForUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/update.json"))
 			.andExpect(method(POST))
-			.andExpect(body("name=forfun2&description=Just+for+Fun%2C+too&mode=private&list_id=40841803"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("name=forfun2&description=Just+for+Fun%2C+too&mode=private&list_id=40841803"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		assertSingleList(twitter.listOperations().updateList(40841803, "forfun2", "Just for Fun, too", false));
 	}
 
@@ -146,7 +147,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void deleteList_forUserIdByListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/destroy.json?list_id=40841803"))
 			.andExpect(method(DELETE))
-			.andRespond(withResponse("{}", responseHeaders));
+			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.listOperations().deleteList(40841803);
 		mockServer.verify();
 	}
@@ -160,7 +161,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListMembers_byUserIdAndListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members.json?list_id=40841803"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-members"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListMembers(40841803));
 	}
 
@@ -168,7 +169,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListMembers_byScreenNameAndListSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members.json?owner_screen_name=habuma&slug=forfun"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-members"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListMembers("habuma", "forfun"));
 	}
 	
@@ -176,8 +177,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void addToList_forUserIdListIdSingle() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/create_all.json"))
 			.andExpect(method(POST))
-			.andExpect(body("user_id=123456&list_id=40841803"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));		
+			.andExpect(content().string("user_id=123456&list_id=40841803"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 
 		assertSingleList(twitter.listOperations().addToList(40841803, 123456));
 	}
@@ -186,8 +187,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void addToList_forUserIdListIdMultiple() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/create_all.json"))
 			.andExpect(method(POST))
-			.andExpect(body("user_id=123456%2C234567%2C345678&list_id=40841803"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));		
+			.andExpect(content().string("user_id=123456%2C234567%2C345678&list_id=40841803"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 
 		assertSingleList(twitter.listOperations().addToList(40841803, 123456, 234567, 345678));
 	}
@@ -201,8 +202,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void addToList_forScreenNameMultiple() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/create_all.json"))
 			.andExpect(method(POST))
-			.andExpect(body("screen_name=habuma%2Croyclarkson&list_id=40841803"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));		
+			.andExpect(content().string("screen_name=habuma%2Croyclarkson&list_id=40841803"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 
 		assertSingleList(twitter.listOperations().addToList(40841803, "habuma", "royclarkson"));
 	}
@@ -216,8 +217,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void removeFromList_ownerIdListIdMemberId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/destroy.json"))
 			.andExpect(method(POST))
-			.andExpect(body("user_id=12345&list_id=40841803"))
-			.andRespond(withResponse("{}", responseHeaders));
+			.andExpect(content().string("user_id=12345&list_id=40841803"))
+			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.listOperations().removeFromList(40841803, 12345);
 		mockServer.verify();
 	}
@@ -231,8 +232,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void removeFromList_screenName() {		
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/destroy.json"))
 			.andExpect(method(POST))
-			.andExpect(body("screen_name=habuma&list_id=40841803"))
-			.andRespond(withResponse("{}", responseHeaders));
+			.andExpect(content().string("screen_name=habuma&list_id=40841803"))
+			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.listOperations().removeFromList(40841803, "habuma");
 		mockServer.verify();
 	}
@@ -246,7 +247,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListSubscribers_byUserIdAndListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers.json?list_id=40841803"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-members"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListSubscribers(40841803));
 	}
 
@@ -254,7 +255,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListSubscribers_byScreenNameAndListSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers.json?owner_screen_name=habuma&slug=forfun"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-members"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListSubscribers("habuma", "forfun"));
 	}
 
@@ -262,7 +263,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getMemberships_forUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/memberships.json?user_id=161064614"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getMemberships(161064614));
 	}
 
@@ -270,7 +271,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getMemberships_forScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/memberships.json?screen_name=habuma"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getMemberships("habuma"));
 	}
 
@@ -278,7 +279,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getSubscriptions_forUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscriptions.json?user_id=161064614"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getSubscriptions(161064614));
 	}
 
@@ -286,7 +287,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getSubscriptions_forScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscriptions.json?screen_name=habuma"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-lists"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getSubscriptions("habuma"));
 	}
 	
@@ -294,10 +295,10 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void isMember_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/show.json?list_id=40841803&user_id=123456"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/show.json?list_id=40841803&user_id=987654"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("{}", responseHeaders, HttpStatus.NOT_FOUND, ""));
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
 		assertTrue(twitter.listOperations().isMember(40841803, 123456));
 		assertFalse(twitter.listOperations().isMember(40841803, 987654));
 	}
@@ -306,10 +307,10 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void isMember_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/show.json?owner_screen_name=habuma&slug=forfun&screen_name=royclarkson"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/members/show.json?owner_screen_name=habuma&slug=forfun&screen_name=kdonald"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("{}", responseHeaders, HttpStatus.NOT_FOUND, ""));
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
 		assertTrue(twitter.listOperations().isMember("habuma", "forfun", "royclarkson"));
 		assertFalse(twitter.listOperations().isMember("habuma", "forfun", "kdonald"));
 	}
@@ -318,10 +319,10 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void isSubscriber_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/show.json?list_id=40841803&user_id=123456"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/show.json?list_id=40841803&user_id=987654"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("{}", responseHeaders, HttpStatus.NOT_FOUND, ""));
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
 		assertTrue(twitter.listOperations().isSubscriber(40841803, 123456));
 		assertFalse(twitter.listOperations().isSubscriber(40841803, 987654));
 	}
@@ -330,10 +331,10 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void isSubscriber_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/show.json?owner_screen_name=habuma&slug=forfun&screen_name=royclarkson"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/show.json?owner_screen_name=habuma&slug=forfun&screen_name=kdonald"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("{}", responseHeaders, HttpStatus.NOT_FOUND, ""));
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
 		assertTrue(twitter.listOperations().isSubscriber("habuma", "forfun", "royclarkson"));
 		assertFalse(twitter.listOperations().isSubscriber("habuma", "forfun", "kdonald"));
 	}
@@ -342,8 +343,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void subscribe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/create.json"))
 			.andExpect(method(POST))
-			.andExpect(body("list_id=54321"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("list_id=54321"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		UserList list = twitter.listOperations().subscribe(54321);
 		assertSingleList(list);
 	}
@@ -357,8 +358,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void subscribe_usernameAndSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/create.json"))
 		.andExpect(method(POST))
-		.andExpect(body("owner_screen_name=habuma&slug=somelist"))
-		.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+		.andExpect(content().string("owner_screen_name=habuma&slug=somelist"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		UserList list = twitter.listOperations().subscribe("habuma", "somelist");
 		assertSingleList(list);
 	}
@@ -372,8 +373,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void unsubscribe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/destroy.json"))
 			.andExpect(method(POST))
-			.andExpect(body("list_id=54321"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("list_id=54321"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		UserList list = twitter.listOperations().unsubscribe(54321);
 		assertSingleList(list);
 		mockServer.verify();
@@ -388,8 +389,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void unsubscribe_usernameAndSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/subscribers/destroy.json"))
 			.andExpect(method(POST))
-			.andExpect(body("owner_screen_name=habuma&slug=somelist"))
-			.andRespond(withResponse(jsonResource("single-list"), responseHeaders));
+			.andExpect(content().string("owner_screen_name=habuma&slug=somelist"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		twitter.listOperations().unsubscribe("habuma", "somelist");
 		mockServer.verify();
 	}
@@ -403,7 +404,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListStatuses_listId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=1&per_page=20&list_id=1234"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234);
 		assertTimelineTweets(timeline);
 	}
@@ -412,7 +413,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListStatuses_listId_paged() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&list_id=1234"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234, 3, 30);
 		assertTimelineTweets(timeline);
 	}
@@ -421,7 +422,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListStatuses_listId_paged_withSinceIdAndMaxId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&since_id=12345&max_id=54321&list_id=1234"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234, 3, 30, 12345, 54321);
 		assertTimelineTweets(timeline);
 	}
@@ -430,7 +431,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListStatuses_slug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=1&per_page=20&owner_screen_name=habuma&slug=mylist"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist");
 		assertTimelineTweets(timeline);
 	}
@@ -439,7 +440,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListStatuses_slug_paged() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&owner_screen_name=habuma&slug=mylist"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist", 3, 30);
 		assertTimelineTweets(timeline);
 	}
@@ -448,7 +449,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getListStatuses_slug_paged_withSinceIdAndMaxId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&since_id=12345&max_id=54321&owner_screen_name=habuma&slug=mylist"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("timeline"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist", 3, 30, 12345, 54321);
 		assertTimelineTweets(timeline);
 	}
