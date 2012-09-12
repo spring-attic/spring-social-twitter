@@ -17,6 +17,7 @@ package org.springframework.social.twitter.api.impl;
 
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
+import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.client.match.RequestMatchers.*;
 import static org.springframework.test.web.client.response.ResponseCreators.*;
 
@@ -25,8 +26,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.ImageSize;
 import org.springframework.social.twitter.api.RateLimitStatus;
@@ -40,10 +39,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getProfileId() {
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		assertEquals(161064614, twitter.userOperations().getProfileId());
 	}
 
@@ -54,10 +52,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getScreenName() {
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		assertEquals("artnames", twitter.userOperations().getScreenName());
 	}
 
@@ -70,7 +67,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getUserProfile() throws Exception {
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile();
 		assertEquals(161064614, profile.getId());
@@ -115,7 +112,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getUserProfile_userId() throws Exception {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/show.json?user_id=12345"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile(12345);
 		assertEquals(161064614, profile.getId());
@@ -129,11 +126,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getUserProfileImage() throws Exception {
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/profile_image/tinyrod?size=normal"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("tinyrod.jpg", getClass()), responseHeaders));
+			.andRespond(withSuccess(new ClassPathResource("tinyrod.jpg", getClass()), IMAGE_JPEG));
 		
 		twitter.userOperations().getUserProfileImage("tinyrod");
 		// TODO: Fix ResponseCreators to handle binary data so that we can assert the contents/size of the image bytes. 
@@ -163,7 +158,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getUsers_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/lookup.json?user_id=14846645%2C14718006"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().getUsers(14846645, 14718006);
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
@@ -174,7 +169,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getUsers_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/lookup.json?screen_name=royclarkson%2Ckdonald"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().getUsers("royclarkson", "kdonald");
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
@@ -185,7 +180,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void searchForUsers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?page=1&per_page=20&q=some+query"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query");
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
@@ -196,7 +191,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void searchForUsers_paged() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?page=3&per_page=35&q=some+query"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query", 3, 35);
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
@@ -212,7 +207,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getSuggestionCategories() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/suggestions.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("suggestion-categories"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("suggestion-categories"), APPLICATION_JSON));
 		List<SuggestionCategory> categories = twitter.userOperations().getSuggestionCategories();
 		assertEquals(4, categories.size());
 		assertEquals("Art & Design", categories.get(0).getName());
@@ -233,7 +228,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getSuggestions() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/suggestions/springsource.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("suggestions"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("suggestions"), APPLICATION_JSON));
 
 		List<TwitterProfile> users = twitter.userOperations().getSuggestions("springsource");
 		assertEquals(2, users.size());
@@ -245,7 +240,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	public void getUnauthenticatedRateLimit() {
 		mockServer.expect(requestTo("https://api.twitter.com/1/account/rate_limit_status.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("rate-limit-status-unauthenticated"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("rate-limit-status-unauthenticated"), APPLICATION_JSON));
 		
 		RateLimitStatus status = twitter.userOperations().getRateLimitStatus();
 		assertEquals(150, status.getHourlyLimit());
@@ -256,11 +251,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	
 
 	private void getUserProfileImageBySize(ImageSize imageSize) throws IOException {
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
 		mockServer.expect(requestTo("https://api.twitter.com/1/users/profile_image/habuma?size=" + imageSize.name().toLowerCase()))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("tinyrod.jpg", getClass()), responseHeaders));
+			.andRespond(withSuccess(new ClassPathResource("tinyrod.jpg", getClass()), IMAGE_JPEG));
 		twitter.userOperations().getUserProfileImage("habuma", imageSize);
 		// TODO: Fix ResponseCreators to handle binary data so that we can assert the contents/size of the image bytes. 
 	}

@@ -22,8 +22,6 @@ import java.util.List;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.test.web.client.MockRestServiceServer;
 
@@ -35,14 +33,10 @@ public abstract class AbstractTwitterApiTest {
 
 	protected MockRestServiceServer mockServer;
 
-	protected HttpHeaders responseHeaders;
-
 	@Before
 	public void setup() {
 		twitter = new TwitterTemplate("API_KEY", "API_SECRET", "ACCESS_TOKEN", "ACCESS_TOKEN_SECRET");
 		mockServer = MockRestServiceServer.createServer(twitter.getRestTemplate());
-		responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
 		unauthorizedTwitter = new TwitterTemplate();
 		 // create a mock server just to avoid hitting real twitter if something gets past the authorization check
 		MockRestServiceServer.createServer(unauthorizedTwitter.getRestTemplate());
