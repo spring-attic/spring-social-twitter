@@ -15,12 +15,11 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.social.ResourceNotFoundException;
 import org.springframework.social.twitter.api.BlockOperations;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -67,38 +66,38 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 		return restTemplate.postForObject(buildUri("blocks/destroy.json"), request, TwitterProfile.class);
 	}
 	
-	public List<TwitterProfile> getBlockedUsers() {
-		return getBlockedUsers(1, 20);
+	public CursoredList<TwitterProfile> getBlockedUsers() {
+		return getBlockedUsersInCursor(-1);
 	}
 	
-	public List<TwitterProfile> getBlockedUsers(int page, int pageSize) {
+	public CursoredList<TwitterProfile> getBlockedUsersInCursor(long cursor) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, 0, 0);
-		return restTemplate.getForObject(buildUri("blocks/blocking.json", parameters), TwitterProfileList.class);
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		CursoredList<Long> blockedUserIds = restTemplate.getForObject(buildUri("blocks/list.json", parameters), CursoredLongList.class).getList();
+		return getCursoredProfileList(blockedUserIds, blockedUserIds.getPreviousCursor(), blockedUserIds.getNextCursor());
 	}
 
-	public List<Long> getBlockedUserIds() {
+	public CursoredList<Long> getBlockedUserIds() {
+		return getBlockedUserIdsInCursor(-1);
+	}
+	
+	public CursoredList<Long> getBlockedUserIdsInCursor(long cursor) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("blocks/blocking/ids.json"), LongList.class);
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		return restTemplate.getForObject(buildUri("blocks/ids.json", parameters), CursoredLongList.class).getList();
 	}
 	
-	public boolean isBlocking(long userId) {
-		return isBlocking(buildUri("blocks/exists.json", "user_id", String.valueOf(userId)));
-	}
-
-	public boolean isBlocking(String screenName) {
-		return isBlocking(buildUri("blocks/exists.json", "screen_name", screenName));
-	}
-
-	// private helpers
-	
-	private boolean isBlocking(URI blockingExistsUri) {
-		try {
-			restTemplate.getForObject(blockingExistsUri, String.class);
-			return true;
-		} catch (ResourceNotFoundException e) {
-			return false;
+	private CursoredList<TwitterProfile> getCursoredProfileList(List<Long> userIds, long previousCursor, long nextCursor) {
+		// TODO: Would be good to figure out how to retrieve profiles in a tighter-than-cursor granularity.
+		List<List<Long>> chunks = CursorUtils.chunkList(userIds, 100);
+		CursoredList<TwitterProfile> users = new CursoredList<TwitterProfile>(userIds.size(), previousCursor, nextCursor);
+		for (List<Long> userIdChunk : chunks) {
+			String joinedIds = ArrayUtils.join(userIdChunk.toArray());
+			users.addAll(restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class));
 		}
+		return users;
 	}
 
 	@SuppressWarnings("serial")

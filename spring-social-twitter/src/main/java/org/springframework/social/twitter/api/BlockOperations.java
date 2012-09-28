@@ -68,17 +68,16 @@ public interface BlockOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<TwitterProfile> getBlockedUsers();
+	CursoredList<TwitterProfile> getBlockedUsers();
 
 	/**
 	 * Retrieves a list of users that the authenticating user has blocked.
-	 * @param page the page of blocked users to return
-	 * @param pageSize the number of users per page
+	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
 	 * @return a list of {@link TwitterProfile}s for the users that are blocked.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<TwitterProfile> getBlockedUsers(int page, int pageSize);
+	CursoredList<TwitterProfile> getBlockedUsersInCursor(long cursor);
 
 	/**
 	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
@@ -86,22 +85,15 @@ public interface BlockOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	List<Long> getBlockedUserIds();
-
-	/**
-	 * Determines if the user has blocked a specific user.
-	 * @param userId the ID of the user to check for a block.
-	 * @return true if the user is blocked; false otherwise
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	boolean isBlocking(long userId);
+	CursoredList<Long> getBlockedUserIds();
 	
 	/**
-	 * Determines if the user has blocked a specific user.
-	 * @param screenName the screen name of the user to check for a block.
-	 * @return true if the user is blocked; false otherwise
+	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
+	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
+	 * @return a list of user IDs for the users that are blocked.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	boolean isBlocking(String screenName);
+	CursoredList<Long> getBlockedUserIdsInCursor(long cursor);
 
 }
