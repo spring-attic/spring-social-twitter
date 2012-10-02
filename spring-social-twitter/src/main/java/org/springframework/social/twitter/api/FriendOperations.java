@@ -339,14 +339,6 @@ public interface FriendOperations {
 	TwitterProfile disableNotifications(String screenName);
 
 	/**
-	 * Checks for a friendship between two users. Returns true if userA follows userB.
-	 * @param userA the screen name of userA
-	 * @param userB the screen name of userB
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	boolean friendshipExists(String userA, String userB);
-
-	/**
 	 * Returns an array of numeric IDs for every user who has a pending request to follow the authenticating user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.

@@ -80,6 +80,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<Long> getFriendIdsInCursor(long userId, long cursor) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("user_id", String.valueOf(userId));
@@ -91,6 +92,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<Long> getFriendIdsInCursor(String screenName, long cursor) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("screen_name", screenName);
@@ -138,6 +140,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<Long> getFollowerIdsInCursor(long userId, long cursor) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("user_id", String.valueOf(userId));
@@ -149,6 +152,7 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<Long> getFollowerIdsInCursor(String screenName, long cursor) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
 		parameters.set("screen_name", screenName);
@@ -177,30 +181,34 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public TwitterProfile enableNotifications(long userId) {
 		requireAuthorization();
-		return restTemplate.postForObject(buildUri("notifications/follow.json", "user_id", String.valueOf(userId)), EMPTY_DATA, TwitterProfile.class);
+		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		params.set("user_id", String.valueOf(userId));
+		params.set("device", "true");
+		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
 	}
 	
 	public TwitterProfile enableNotifications(String screenName) {
 		requireAuthorization();
-		return restTemplate.postForObject(buildUri("notifications/follow.json", "screen_name", screenName), EMPTY_DATA, TwitterProfile.class);
+		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		params.set("screen_name", screenName);
+		params.set("device", "true");
+		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
 	}
 
 	public TwitterProfile disableNotifications(long userId) {
 		requireAuthorization();
-		return restTemplate.postForObject(buildUri("notifications/leave.json", "user_id", String.valueOf(userId)), EMPTY_DATA, TwitterProfile.class);
+		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
+		params.set("user_id", String.valueOf(userId));
+		params.set("device", "false");
+		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
 	}
 	
 	public TwitterProfile disableNotifications(String screenName) {
 		requireAuthorization();
-		return restTemplate.postForObject(buildUri("notifications/leave.json", "screen_name", screenName), EMPTY_DATA, TwitterProfile.class);
-	}
-	
-	// doesn't require authentication
-	public boolean friendshipExists(String userA, String userB) {
 		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.set("user_a", userA);
-		params.set("user_b", userB);
-		return restTemplate.getForObject(buildUri("friendships/exists.json", params), boolean.class);
+		params.set("screen_name", screenName);
+		params.set("device", "false");
+		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
 	}
 
 	public CursoredList<Long> getIncomingFriendships() {
