@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -337,193 +337,157 @@ public class TwitterProfile implements Serializable {
 		return showAllInlineMedia;
 	}
 
-    @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass())
-        {
-            return false;
-        }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
-        TwitterProfile that = (TwitterProfile) o;
+		TwitterProfile that = (TwitterProfile) o;
 
-        if (backgroundImageTiled != that.backgroundImageTiled)
-        {
-            return false;
-        }
-        if (contributorsEnabled != that.contributorsEnabled)
-        {
-            return false;
-        }
-        if (favoritesCount != that.favoritesCount)
-        {
-            return false;
-        }
-        if (followRequestSent != that.followRequestSent)
-        {
-            return false;
-        }
-        if (followersCount != that.followersCount)
-        {
-            return false;
-        }
-        if (following != that.following)
-        {
-            return false;
-        }
-        if (friendsCount != that.friendsCount)
-        {
-            return false;
-        }
-        if (geoEnabled != that.geoEnabled)
-        {
-            return false;
-        }
-        if (id != that.id)
-        {
-            return false;
-        }
-        if (isProtected != that.isProtected)
-        {
-            return false;
-        }
-        if (listedCount != that.listedCount)
-        {
-            return false;
-        }
-        if (notificationsEnabled != that.notificationsEnabled)
-        {
-            return false;
-        }
-        if (showAllInlineMedia != that.showAllInlineMedia)
-        {
-            return false;
-        }
-        if (statusesCount != that.statusesCount)
-        {
-            return false;
-        }
-        if (translator != that.translator)
-        {
-            return false;
-        }
-        if (useBackgroundImage != that.useBackgroundImage)
-        {
-            return false;
-        }
-        if (utcOffset != that.utcOffset)
-        {
-            return false;
-        }
-        if (verified != that.verified)
-        {
-            return false;
-        }
-        if (backgroundColor != null ? !backgroundColor.equals(that.backgroundColor) : that.backgroundColor != null)
-        {
-            return false;
-        }
-        if (backgroundImageUrl != null ? !backgroundImageUrl.equals(that.backgroundImageUrl) : that.backgroundImageUrl != null)
-        {
-            return false;
-        }
-        if (createdDate != null ? !createdDate.equals(that.createdDate) : that.createdDate != null)
-        {
-            return false;
-        }
-        if (description != null ? !description.equals(that.description) : that.description != null)
-        {
-            return false;
-        }
-        if (language != null ? !language.equals(that.language) : that.language != null)
-        {
-            return false;
-        }
-        if (linkColor != null ? !linkColor.equals(that.linkColor) : that.linkColor != null)
-        {
-            return false;
-        }
-        if (location != null ? !location.equals(that.location) : that.location != null)
-        {
-            return false;
-        }
-        if (name != null ? !name.equals(that.name) : that.name != null)
-        {
-            return false;
-        }
-        if (profileImageUrl != null ? !profileImageUrl.equals(that.profileImageUrl) : that.profileImageUrl != null)
-        {
-            return false;
-        }
-        if (screenName != null ? !screenName.equals(that.screenName) : that.screenName != null)
-        {
-            return false;
-        }
-        if (sidebarBorderColor != null ? !sidebarBorderColor.equals(that.sidebarBorderColor) : that.sidebarBorderColor != null)
-        {
-            return false;
-        }
-        if (sidebarFillColor != null ? !sidebarFillColor.equals(that.sidebarFillColor) : that.sidebarFillColor != null)
-        {
-            return false;
-        }
-        if (textColor != null ? !textColor.equals(that.textColor) : that.textColor != null)
-        {
-            return false;
-        }
-        if (timeZone != null ? !timeZone.equals(that.timeZone) : that.timeZone != null)
-        {
-            return false;
-        }
-        if (url != null ? !url.equals(that.url) : that.url != null)
-        {
-            return false;
-        }
+		if (backgroundImageTiled != that.backgroundImageTiled) {
+			return false;
+		}
+		if (contributorsEnabled != that.contributorsEnabled) {
+			return false;
+		}
+		if (favoritesCount != that.favoritesCount) {
+			return false;
+		}
+		if (followRequestSent != that.followRequestSent) {
+			return false;
+		}
+		if (followersCount != that.followersCount) {
+			return false;
+		}
+		if (following != that.following) {
+			return false;
+		}
+		if (friendsCount != that.friendsCount) {
+			return false;
+		}
+		if (geoEnabled != that.geoEnabled) {
+			return false;
+		}
+		if (id != that.id) {
+			return false;
+		}
+		if (isProtected != that.isProtected) {
+			return false;
+		}
+		if (listedCount != that.listedCount) {
+			return false;
+		}
+		if (notificationsEnabled != that.notificationsEnabled) {
+			return false;
+		}
+		if (showAllInlineMedia != that.showAllInlineMedia) {
+			return false;
+		}
+		if (statusesCount != that.statusesCount) {
+			return false;
+		}
+		if (translator != that.translator) {
+			return false;
+		}
+		if (useBackgroundImage != that.useBackgroundImage) {
+			return false;
+		}
+		if (utcOffset != that.utcOffset) {
+			return false;
+		}
+		if (verified != that.verified) {
+			return false;
+		}
+		if (backgroundColor != null ? !backgroundColor.equals(that.backgroundColor) : that.backgroundColor != null) {
+			return false;
+		}
+		if (backgroundImageUrl != null ? !backgroundImageUrl.equals(that.backgroundImageUrl) : that.backgroundImageUrl != null) {
+			return false;
+		}
+		if (createdDate != null ? !createdDate.equals(that.createdDate) : that.createdDate != null) {
+			return false;
+		}
+		if (description != null ? !description.equals(that.description) : that.description != null) {
+			return false;
+		}
+		if (language != null ? !language.equals(that.language) : that.language != null) {
+			return false;
+		}
+		if (linkColor != null ? !linkColor.equals(that.linkColor) : that.linkColor != null) {
+			return false;
+		}
+		if (location != null ? !location.equals(that.location) : that.location != null) {
+			return false;
+		}
+		if (name != null ? !name.equals(that.name) : that.name != null) {
+			return false;
+		}
+		if (profileImageUrl != null ? !profileImageUrl.equals(that.profileImageUrl) : that.profileImageUrl != null) {
+			return false;
+		}
+		if (screenName != null ? !screenName.equals(that.screenName) : that.screenName != null) {
+			return false;
+		}
+		if (sidebarBorderColor != null ? !sidebarBorderColor.equals(that.sidebarBorderColor) : that.sidebarBorderColor != null) {
+			return false;
+		}
+		if (sidebarFillColor != null ? !sidebarFillColor.equals(that.sidebarFillColor) : that.sidebarFillColor != null) {
+			return false;
+		}
+		if (textColor != null ? !textColor.equals(that.textColor) : that.textColor != null) {
+			return false;
+		}
+		if (timeZone != null ? !timeZone.equals(that.timeZone) : that.timeZone != null) {
+			return false;
+		}
+		if (url != null ? !url.equals(that.url) : that.url != null) {
+			return false;
+		}
 
-        return true;
-    }
+		return true;
+	}
 
 
-    @Override
-    public int hashCode()
-    {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (screenName != null ? screenName.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (url != null ? url.hashCode() : 0);
-        result = 31 * result + (profileImageUrl != null ? profileImageUrl.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
-        result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
-        result = 31 * result + (language != null ? language.hashCode() : 0);
-        result = 31 * result + statusesCount;
-        result = 31 * result + friendsCount;
-        result = 31 * result + followersCount;
-        result = 31 * result + favoritesCount;
-        result = 31 * result + listedCount;
-        result = 31 * result + (following ? 1 : 0);
-        result = 31 * result + (followRequestSent ? 1 : 0);
-        result = 31 * result + (isProtected ? 1 : 0);
-        result = 31 * result + (notificationsEnabled ? 1 : 0);
-        result = 31 * result + (verified ? 1 : 0);
-        result = 31 * result + (geoEnabled ? 1 : 0);
-        result = 31 * result + (contributorsEnabled ? 1 : 0);
-        result = 31 * result + (translator ? 1 : 0);
-        result = 31 * result + (timeZone != null ? timeZone.hashCode() : 0);
-        result = 31 * result + utcOffset;
-        result = 31 * result + (sidebarBorderColor != null ? sidebarBorderColor.hashCode() : 0);
-        result = 31 * result + (sidebarFillColor != null ? sidebarFillColor.hashCode() : 0);
-        result = 31 * result + (backgroundColor != null ? backgroundColor.hashCode() : 0);
-        result = 31 * result + (useBackgroundImage ? 1 : 0);
-        result = 31 * result + (backgroundImageUrl != null ? backgroundImageUrl.hashCode() : 0);
-        result = 31 * result + (backgroundImageTiled ? 1 : 0);
-        result = 31 * result + (textColor != null ? textColor.hashCode() : 0);
-        result = 31 * result + (linkColor != null ? linkColor.hashCode() : 0);
-        result = 31 * result + (showAllInlineMedia ? 1 : 0);
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (screenName != null ? screenName.hashCode() : 0);
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (url != null ? url.hashCode() : 0);
+		result = 31 * result + (profileImageUrl != null ? profileImageUrl.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (location != null ? location.hashCode() : 0);
+		result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
+		result = 31 * result + (language != null ? language.hashCode() : 0);
+		result = 31 * result + statusesCount;
+		result = 31 * result + friendsCount;
+		result = 31 * result + followersCount;
+		result = 31 * result + favoritesCount;
+		result = 31 * result + listedCount;
+		result = 31 * result + (following ? 1 : 0);
+		result = 31 * result + (followRequestSent ? 1 : 0);
+		result = 31 * result + (isProtected ? 1 : 0);
+		result = 31 * result + (notificationsEnabled ? 1 : 0);
+		result = 31 * result + (verified ? 1 : 0);
+		result = 31 * result + (geoEnabled ? 1 : 0);
+		result = 31 * result + (contributorsEnabled ? 1 : 0);
+		result = 31 * result + (translator ? 1 : 0);
+		result = 31 * result + (timeZone != null ? timeZone.hashCode() : 0);
+		result = 31 * result + utcOffset;
+		result = 31 * result + (sidebarBorderColor != null ? sidebarBorderColor.hashCode() : 0);
+		result = 31 * result + (sidebarFillColor != null ? sidebarFillColor.hashCode() : 0);
+		result = 31 * result + (backgroundColor != null ? backgroundColor.hashCode() : 0);
+		result = 31 * result + (useBackgroundImage ? 1 : 0);
+		result = 31 * result + (backgroundImageUrl != null ? backgroundImageUrl.hashCode() : 0);
+		result = 31 * result + (backgroundImageTiled ? 1 : 0);
+		result = 31 * result + (textColor != null ? textColor.hashCode() : 0);
+		result = 31 * result + (linkColor != null ? linkColor.hashCode() : 0);
+		result = 31 * result + (showAllInlineMedia ? 1 : 0);
+		return result;
+	}
+
 }

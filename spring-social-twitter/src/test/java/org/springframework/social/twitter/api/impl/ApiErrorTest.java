@@ -82,7 +82,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = InternalServerErrorException.class)
 	public void twitterIsBroken() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withServerError().body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
@@ -95,7 +95,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ServerDownException.class)
 	public void twitterIsDownOrBeingUpgraded() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withStatus(BAD_GATEWAY).body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
@@ -108,7 +108,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ServerOverloadedException.class)
 	public void twitterIsOverloaded() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withStatus(SERVICE_UNAVAILABLE).body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
@@ -121,7 +121,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ApiException.class)
 	public void nonJSONErrorResponse() {
 		try { 
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withBadRequest().body("<h1>HTML response</h1>").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();

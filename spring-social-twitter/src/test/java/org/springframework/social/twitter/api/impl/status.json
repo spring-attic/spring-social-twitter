@@ -11,5 +11,49 @@
 	"in_reply_to_user_id" : "332211",
 	"retweet_count" : 12,
 	"created_at" : "Tue Jul 13 17:38:21 +0000 2010",
-	"retweeted" : true
+	"retweeted" : true,
+	"entities": {
+		"hashtags": [
+		{
+			"indices": [
+				89, 
+				98
+			], 
+			"text": "testhash"
+		}
+		], 
+		"urls": [
+			{
+				"display_url": "fb.me/t35tur1", 
+				"expanded_url": "http://fb.me/t35tur1", 
+				"indices": [
+					10, 
+					30
+				], 
+				"url": "http://t.co/t35tur1"
+			}
+		],
+		"user_mentions": [
+			{
+				"id": 11223344, 
+				"id_str": "11223344", 
+				"indices": [
+					3, 
+					18
+				], 
+				"name": "Bucky Greenhorn", 
+				"screen_name": "ukuleleman"
+			}, 
+			{
+				"id": 44332211, 
+				"id_str": "44332211", 
+				"indices": [
+					23, 
+					37
+				], 
+				"name": "Jack Diamond", 
+				"screen_name": "jackdiamond"
+			}
+		]
+	}
 }
