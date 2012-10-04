@@ -402,7 +402,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getListStatuses_listId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=1&per_page=20&list_id=1234"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=1&per_page=20&list_id=1234&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234);
@@ -411,7 +411,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getListStatuses_listId_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&list_id=1234"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&list_id=1234&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234, 3, 30);
@@ -420,7 +420,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getListStatuses_listId_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&since_id=12345&max_id=54321&list_id=1234"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&since_id=12345&max_id=54321&list_id=1234&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234, 3, 30, 12345, 54321);
@@ -429,7 +429,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getListStatuses_slug() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=1&per_page=20&owner_screen_name=habuma&slug=mylist"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=1&per_page=20&owner_screen_name=habuma&slug=mylist&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist");
@@ -438,7 +438,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getListStatuses_slug_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&owner_screen_name=habuma&slug=mylist"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&owner_screen_name=habuma&slug=mylist&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist", 3, 30);
@@ -447,7 +447,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getListStatuses_slug_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&since_id=12345&max_id=54321&owner_screen_name=habuma&slug=mylist"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/lists/statuses.json?page=3&per_page=30&since_id=12345&max_id=54321&owner_screen_name=habuma&slug=mylist&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist", 3, 30, 12345, 54321);

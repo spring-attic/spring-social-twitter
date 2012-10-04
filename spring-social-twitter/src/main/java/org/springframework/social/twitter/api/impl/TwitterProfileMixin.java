@@ -27,7 +27,6 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-@SuppressWarnings("unused")
 abstract class TwitterProfileMixin {
 	@JsonCreator
 	TwitterProfileMixin(

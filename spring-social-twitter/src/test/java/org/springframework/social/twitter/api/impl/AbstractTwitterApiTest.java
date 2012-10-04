@@ -22,7 +22,11 @@ import java.util.List;
 import org.junit.Before;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.social.twitter.api.Entities;
+import org.springframework.social.twitter.api.HashTagEntity;
+import org.springframework.social.twitter.api.MentionEntity;
 import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.UrlEntity;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 public abstract class AbstractTwitterApiTest {
@@ -65,6 +69,37 @@ public abstract class AbstractTwitterApiTest {
 		} else {
 			assertNull(tweet.getRetweetCount());
 		}
+		Entities entities = tweet.getEntities();
+		List<HashTagEntity> hashtags = entities.getHashTags();
+		assertEquals(1,  hashtags.size());
+		assertEquals(2, hashtags.get(0).getIndices().length);
+		assertEquals(89, hashtags.get(0).getIndices()[0]);
+		assertEquals(98, hashtags.get(0).getIndices()[1]);
+		assertEquals("testhash", hashtags.get(0).getText());
+		List<UrlEntity> urls = entities.getUrls();
+		assertEquals(1, urls.size());
+		assertEquals(2, urls.get(0).getIndices().length);
+		assertEquals(10, urls.get(0).getIndices()[0]);
+		assertEquals(30, urls.get(0).getIndices()[1]);
+		assertEquals("fb.me/t35tur1", urls.get(0).getDisplayUrl());
+		assertEquals("http://fb.me/t35tur1", urls.get(0).getExpandedUrl());
+		assertEquals("http://t.co/t35tur1", urls.get(0).getUrl());
+		List<MentionEntity> mentions = entities.getMentions();
+		assertEquals(2, mentions.size());
+		MentionEntity mention1 = mentions.get(0);
+		assertEquals(11223344, mention1.getId());
+		assertEquals("Bucky Greenhorn", mention1.getName());
+		assertEquals("ukuleleman", mention1.getScreenName());
+		assertEquals(2, mention1.getIndices().length);
+		assertEquals(3, mention1.getIndices()[0]);
+		assertEquals(18, mention1.getIndices()[1]);
+		MentionEntity mention2 = mentions.get(1);
+		assertEquals(44332211, mention2.getId());
+		assertEquals("Jack Diamond", mention2.getName());
+		assertEquals("jackdiamond", mention2.getScreenName());
+		assertEquals(2, mention2.getIndices().length);
+		assertEquals(23, mention2.getIndices()[0]);
+		assertEquals(37, mention2.getIndices()[1]);
 	}
 	
 	protected void assertTimelineTweets(List<Tweet> tweets) {
@@ -87,5 +122,7 @@ public abstract class AbstractTwitterApiTest {
 		} else {
 			assertNull(tweet2.getRetweetCount());
 		}
+		Entities entities = tweet2.getEntities();
+		assertEquals(0, entities.getHashTags().size());
 	}
 }
