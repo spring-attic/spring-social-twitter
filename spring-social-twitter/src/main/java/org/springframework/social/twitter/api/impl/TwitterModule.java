@@ -18,6 +18,10 @@ package org.springframework.social.twitter.api.impl;
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.module.SimpleModule;
 import org.springframework.social.twitter.api.DirectMessage;
+import org.springframework.social.twitter.api.Entities;
+import org.springframework.social.twitter.api.HashTagEntity;
+import org.springframework.social.twitter.api.MediaEntity;
+import org.springframework.social.twitter.api.MentionEntity;
 import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SavedSearch;
@@ -27,12 +31,14 @@ import org.springframework.social.twitter.api.Trend;
 import org.springframework.social.twitter.api.Trends;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
+import org.springframework.social.twitter.api.UrlEntity;
 import org.springframework.social.twitter.api.UserList;
 
 /**
  * Jackson module for registering mixin annotations against Twitter model classes.
  */
 class TwitterModule extends SimpleModule {
+
 	public TwitterModule() {
 		super("TwitterModule", new Version(1, 0, 0, null));
 	}
@@ -51,5 +57,11 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(Place.class, PlaceMixin.class);
 		context.setMixInAnnotations(SimilarPlacesResponse.class, SimilarPlacesMixin.class);
 		context.setMixInAnnotations(RateLimitStatus.class, RateLimitStatusMixin.class);
+		context.setMixInAnnotations(Entities.class, EntitiesMixin.class);
+		context.setMixInAnnotations(HashTagEntity.class, HashTagEntityMixin.class);
+		context.setMixInAnnotations(MediaEntity.class, MediaEntityMixin.class);
+		context.setMixInAnnotations(MentionEntity.class, MentionEntityMixin.class);
+		context.setMixInAnnotations(UrlEntity.class, UrlEntityMixin.class);
 	}
+
 }

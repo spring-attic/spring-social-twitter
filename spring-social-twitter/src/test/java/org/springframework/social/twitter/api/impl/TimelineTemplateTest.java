@@ -43,7 +43,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getPublicTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/public_timeline.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/public_timeline.json?include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getPublicTimeline();
@@ -52,7 +52,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getHomeTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getHomeTimeline();
@@ -61,7 +61,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getHomeTimeline_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=3&count=100"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=3&count=100&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getHomeTimeline(3, 100);
@@ -70,7 +70,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getHomeTimeline_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=3&count=100&since_id=1234567&max_id=7654321"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=3&count=100&since_id=1234567&max_id=7654321&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getHomeTimeline(3, 100, 1234567, 7654321);
@@ -84,7 +84,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline();
@@ -93,7 +93,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=2&count=15"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=2&count=15&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(2, 15);
@@ -102,7 +102,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=2&count=15&since_id=123456&max_id=654321"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=2&count=15&since_id=123456&max_id=654321&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(2, 15, 123456, 654321);
@@ -116,7 +116,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getUserTimeline_forScreenName() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=1&count=20&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=1&count=20&screen_name=habuma&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline("habuma");
@@ -125,7 +125,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_forScreenName_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&screen_name=habuma&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline("habuma", 6, 24);
@@ -134,7 +134,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_forScreenName_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&since_id=112233&max_id=332211&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&since_id=112233&max_id=332211&screen_name=habuma&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline("habuma", 6, 24, 112233, 332211);
@@ -143,7 +143,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_forUserId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=1&count=20&user_id=12345"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=1&count=20&user_id=12345&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345);
@@ -152,7 +152,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_forUserId_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&user_id=12345"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&user_id=12345&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345, 6, 24);
@@ -161,7 +161,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserTimeline_forUserId_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&since_id=112233&max_id=332211&user_id=12345"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/user_timeline.json?page=6&count=24&since_id=112233&max_id=332211&user_id=12345&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345, 6, 24, 112233, 332211);
@@ -170,7 +170,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getMentions() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> mentions = twitter.timelineOperations().getMentions();
@@ -179,7 +179,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getMentions_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json?page=3&count=50"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json?page=3&count=50&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> mentions = twitter.timelineOperations().getMentions(3, 50);
@@ -188,7 +188,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getMentions_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json?page=3&count=50&since_id=112233&max_id=332211"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/mentions.json?page=3&count=50&since_id=112233&max_id=332211&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> mentions = twitter.timelineOperations().getMentions(3, 50, 112233, 332211);
@@ -202,7 +202,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByMe() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json?page=1&count=20&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByMe();
@@ -211,7 +211,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByMe_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json?page=5&count=42"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json?page=5&count=42&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByMe(5, 42);
@@ -220,7 +220,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByMe_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json?page=5&count=42&since_id=24680&max_id=86420"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_me.json?page=5&count=42&since_id=24680&max_id=86420&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByMe(5, 42, 24680, 86420);
@@ -229,7 +229,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByUser_userId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=1&count=20&user_id=12345678"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=1&count=20&user_id=12345678&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByUser(12345678);
@@ -238,7 +238,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByUser_userId_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&user_id=12345678"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&user_id=12345678&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByUser(12345678, 5, 42);
@@ -247,7 +247,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByUser_userId_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&since_id=24680&max_id=86420&user_id=12345678"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&since_id=24680&max_id=86420&user_id=12345678&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByUser(12345678, 5, 42, 24680, 86420);
@@ -256,7 +256,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByUser_screenName() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=1&count=20&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=1&count=20&screen_name=habuma&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByUser("habuma");
@@ -265,7 +265,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByUser_screenName_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&screen_name=habuma&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByUser("habuma", 5, 42);
@@ -274,7 +274,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByUser_screenName_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&since_id=24680&max_id=86420&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_by_user.json?page=5&count=42&since_id=24680&max_id=86420&screen_name=habuma&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedByUser("habuma", 5, 42, 24680, 86420);
@@ -288,7 +288,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getRetweetedToMe() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json?page=1&count=20&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToMe();
@@ -297,7 +297,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToMe_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json?page=4&count=40"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json?page=4&count=40&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToMe(4, 40);
@@ -306,7 +306,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToMe_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json?page=4&count=40&since_id=12345&max_id=54321"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_me.json?page=4&count=40&since_id=12345&max_id=54321&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToMe(4, 40, 12345, 54321);
@@ -320,7 +320,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToUser_userId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=1&count=20&user_id=12345678"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=1&count=20&user_id=12345678&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToUser(12345678);
@@ -329,7 +329,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToUser_userId_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&user_id=12345678"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&user_id=12345678&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToUser(12345678, 5, 42);
@@ -338,7 +338,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToUser_userId_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&since_id=24680&max_id=86420&user_id=12345678"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&since_id=24680&max_id=86420&user_id=12345678&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToUser(12345678, 5, 42, 24680, 86420);
@@ -347,7 +347,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToUser_screenName() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=1&count=20&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=1&count=20&screen_name=habuma&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToUser("habuma");
@@ -356,7 +356,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToUser_screenName_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&screen_name=habuma&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToUser("habuma", 5, 42);
@@ -365,7 +365,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedToUser_screenName_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&since_id=24680&max_id=86420&screen_name=habuma"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweeted_to_user.json?page=5&count=42&since_id=24680&max_id=86420&screen_name=habuma&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetedToUser("habuma", 5, 42, 24680, 86420);
@@ -374,7 +374,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getRetweetsOfMe() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json?page=1&count=20&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe();
@@ -383,7 +383,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetsOfMe_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json?page=7&count=25"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json?page=7&count=25&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe(7, 25);
@@ -392,7 +392,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetsOfMe_paged_withSinceIdAndMaxId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json?page=7&count=25&since_id=2345&max_id=3456"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets_of_me.json?page=7&count=25&since_id=2345&max_id=3456&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe(7, 25, 2345, 3456);
@@ -406,7 +406,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getStatus() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/12345.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/show/12345.json?include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
 		
@@ -606,7 +606,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getRetweets() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json?count=100"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json?count=100&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweets(42L);
@@ -615,7 +615,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweets_withCount() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json?count=12"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/retweets/42.json?count=12&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getRetweets(42L, 12);
@@ -624,7 +624,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedBy() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by.json?page=1&count=100"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by.json?page=1&count=100&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("retweeted-by"), APPLICATION_JSON));
 		List<TwitterProfile> retweetedBy = twitter.timelineOperations().getRetweetedBy(42L);
@@ -637,7 +637,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedBy_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by.json?page=2&count=25"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by.json?page=2&count=25&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("retweeted-by"), APPLICATION_JSON));
 		List<TwitterProfile> retweetedBy = twitter.timelineOperations().getRetweetedBy(42L, 2, 25);
@@ -650,7 +650,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByIds() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by/ids.json?page=1&count=100"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by/ids.json?page=1&count=100&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("retweeted-by-ids"), APPLICATION_JSON));
 		List<Long> retweetedByIds = twitter.timelineOperations().getRetweetedByIds(42L);
@@ -662,7 +662,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getRetweetedByIds_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by/ids.json?page=3&count=60"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/42/retweeted_by/ids.json?page=3&count=60&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("retweeted-by-ids"), APPLICATION_JSON));
 		List<Long> retweetedByIds = twitter.timelineOperations().getRetweetedByIds(42L, 3, 60);
@@ -680,7 +680,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	public void getFavorites() {
 		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
-		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json?page=1&count=20"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json?page=1&count=20&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getFavorites();
@@ -690,7 +690,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	public void getFavorites_paged() {
 		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
-		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json?page=3&count=50"))
+		mockServer.expect(requestTo("https://api.twitter.com/1/favorites.json?page=3&count=50&include_entities=true"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getFavorites(3, 50);
