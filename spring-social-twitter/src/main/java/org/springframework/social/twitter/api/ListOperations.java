@@ -28,38 +28,12 @@ import org.springframework.social.MissingAuthorizationException;
 public interface ListOperations {
 
 	/**
-	 * Retrieves user lists for the authenticated user.
-	 * @return a list of {@link UserList}s for the specified user.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
-	 */
-	CursoredList<UserList> getLists();
-
-	/**
-	 * Retrieves user lists for the authenticated user.
-	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
-	 * @return a list of {@link UserList}s for the specified user.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
-	 */
-	CursoredList<UserList> getListsInCursor(long cursor);
-
-	/**
 	 * Retrieves user lists for a given user.
 	 * @param userId the ID of the Twitter user.
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<UserList> getLists(long userId);
-
-	/**
-	 * Retrieves user lists for a given user.
-	 * @param userId the ID of the Twitter user.
-	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
-	 * @return a list of {@link UserList}s for the specified user.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	CursoredList<UserList> getListsInCursor(long userId, long cursor);
+	List<UserList> getLists(long userId);
 
 	/**
 	 * Retrieves user lists for a given user.
@@ -67,16 +41,7 @@ public interface ListOperations {
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	CursoredList<UserList> getLists(String screenName);
-
-	/**
-	 * Retrieves user lists for a given user.
-	 * @param screenName the screen name of the Twitter user.
-	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
-	 * @return a list of {@link UserList}s for the specified user.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	CursoredList<UserList> getListsInCursor(String screenName, long cursor);
+	List<UserList> getLists(String screenName);
 
 	/**
 	 * Retrieves a specific user list.
@@ -106,24 +71,22 @@ public interface ListOperations {
 	/**
 	 * Retrieves the timeline tweets for the given user list.
 	 * @param listId the ID of the list to retrieve.
-	 * @param page The page to return
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Tweet> getListStatuses(long listId, int page, int pageSize);
+	List<Tweet> getListStatuses(long listId, int pageSize);
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
 	 * @param listId the ID of the list to retrieve.
-	 * @param page The page to return
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Tweet> getListStatuses(long listId, int page, int pageSize, long sinceId, long maxId);
+	List<Tweet> getListStatuses(long listId, int pageSize, long sinceId, long maxId);
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
@@ -138,25 +101,23 @@ public interface ListOperations {
 	 * Retrieves the timeline tweets for the given user list.
 	 * @param screenName the screen name of the Twitter user.
 	 * @param listSlug the list's slug.
-	 * @param page The page to return
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize);
+	List<Tweet> getListStatuses(String screenName, String listSlug, int pageSize);
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
 	 * @param screenName the screen name of the Twitter user.
 	 * @param listSlug the list's slug.
-	 * @param page The page to return
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 */
-	List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize, long sinceId, long maxId);
+	List<Tweet> getListStatuses(String screenName, String listSlug, int pageSize, long sinceId, long maxId);
 
 	/**
 	 * Create a new user list
