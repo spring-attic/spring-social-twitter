@@ -41,33 +41,30 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(String query) {
-		return search(query, 1, DEFAULT_RESULTS_PER_PAGE, 0, 0);
+		return search(query, DEFAULT_RESULTS_PER_PAGE, 0, 0);
 	}
 
-	public SearchResults search(String query, int page, int resultsPerPage) {
-		return search(query, page, resultsPerPage, 0, 0);
+	public SearchResults search(String query, int resultsPerPage) {
+		return search(query, resultsPerPage, 0, 0);
 	}
 
-	public SearchResults search(String query, int page, int resultsPerPage, long sinceId, long maxId) {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("query", query);
-		parameters.put("rpp", String.valueOf(resultsPerPage));
-		parameters.put("page", String.valueOf(page));
-		String searchUrl = SEARCH_URL;
+	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
+		requireAuthorization();
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("q", query);
+		parameters.set("count", String.valueOf(resultsPerPage));
 		if (sinceId > 0) {
-			searchUrl += "&since_id={since}";
-			parameters.put("since", String.valueOf(sinceId));
+			parameters.set("since_id", String.valueOf(sinceId));
 		}
 		if (maxId > 0) {
-			searchUrl += "&max_id={max}";
-			parameters.put("max", String.valueOf(maxId));
+			parameters.set("max_id", String.valueOf(maxId));
 		}
-		return restTemplate.getForObject(searchUrl, SearchResults.class, parameters);
+		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
 
 	public List<SavedSearch> getSavedSearches() {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("saved_searches.json"), SavedSearchList.class);
+		return restTemplate.getForObject(buildUri("saved_searches/list.json"), SavedSearchList.class);
 	}
 
 	public SavedSearch getSavedSearch(long searchId) {
@@ -89,54 +86,18 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	
 	// Trends
 
-	public List<Trends> getDailyTrends() {
-		return getDailyTrends(false, null);
-	}
-
-	public List<Trends> getDailyTrends(boolean excludeHashtags) {
-		return getDailyTrends(excludeHashtags, null);
-	}
-
-	public List<Trends> getDailyTrends(boolean excludeHashtags, String startDate) {
-		String path = makeTrendPath("trends/daily.json", excludeHashtags, startDate);
-		return restTemplate.getForObject(buildUri(path), DailyTrendsList.class).getList();
-	}
-	
-	public List<Trends> getWeeklyTrends() {
-		return getWeeklyTrends(false, null);
-	}
-	
-	public List<Trends> getWeeklyTrends(boolean excludeHashtags) {
-		return getWeeklyTrends(excludeHashtags, null);
-	}
-	
-	public List<Trends> getWeeklyTrends(boolean excludeHashtags, String startDate) {
-		String path = makeTrendPath("trends/weekly.json", excludeHashtags, startDate);
-		return restTemplate.getForObject(buildUri(path), WeeklyTrendsList.class).getList();
-	}
-
 	public Trends getLocalTrends(long whereOnEarthId) {
 		return getLocalTrends(whereOnEarthId, false);
 	}
 
 	public Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("id",String.valueOf(whereOnEarthId));
 		if(excludeHashtags) {
 			parameters.set("exclude", "hashtags");
 		}
-		return restTemplate.getForObject(buildUri("trends/" + whereOnEarthId + ".json", parameters), LocalTrendsHolder.class).getTrends();
-	}
-
-	private String makeTrendPath(String basePath, boolean excludeHashtags, String startDate) {
-		String url = basePath + (excludeHashtags || startDate != null ? "?" : "");
-		url += excludeHashtags ? "exclude=hashtags" : "";
-		url += excludeHashtags && startDate != null ? "&" : "";
-		url += startDate != null ? "date=" + startDate : "";
-		return url;
+		return restTemplate.getForObject(buildUri("trends/place.json", parameters), LocalTrendsHolder.class).getTrends();
 	}
 
 	static final int DEFAULT_RESULTS_PER_PAGE = 50;
-
-	private static final String SEARCH_API_URL_BASE = "https://search.twitter.com";
-	private static final String SEARCH_URL = SEARCH_API_URL_BASE + "/search.json?q={query}&rpp={rpp}&page={page}";
 }

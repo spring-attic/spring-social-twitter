@@ -58,20 +58,10 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 			return null;
 		}
 		JsonNode fromUserNode = tree.get("user");
-		String fromScreenName = null;
-		long fromId = 0;
-		String fromImageUrl = null;
 		String dateFormat = TIMELINE_DATE_FORMAT;
-		if (fromUserNode != null) {
-			fromScreenName = fromUserNode.get("screen_name").asText();
-			fromId = fromUserNode.get("id").asLong();
-			fromImageUrl = fromUserNode.get("profile_image_url").asText();
-		} else {
-			fromScreenName = tree.get("from_user").asText();
-			fromId = tree.get("from_user_id").asLong();
-			fromImageUrl = tree.get("profile_image_url").asText();
-			dateFormat = SEARCH_DATE_FORMAT;
-		}
+		String fromScreenName = fromUserNode.get("screen_name").asText();
+		long fromId = fromUserNode.get("id").asLong();
+		String fromImageUrl = fromUserNode.get("profile_image_url").asText(); 
 		Date createdAt = toDate(tree.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
 		String source = tree.get("source").asText();
 		JsonNode toUserIdNode = tree.get("in_reply_to_user_id");
