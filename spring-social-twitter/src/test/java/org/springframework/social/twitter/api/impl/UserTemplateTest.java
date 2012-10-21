@@ -21,17 +21,14 @@ import static org.springframework.http.MediaType.*;
 import static org.springframework.test.web.client.match.RequestMatchers.*;
 import static org.springframework.test.web.client.response.ResponseCreators.*;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.social.NotAuthorizedException;
-import org.springframework.social.twitter.api.ImageSize;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
-import org.springframework.util.MultiValueMap;
 
 /**
  * @author Craig Walls
@@ -233,7 +230,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("rate-limit-status"), APPLICATION_JSON));
 		
-		MultiValueMap<String, RateLimitStatus> statuses = twitter.userOperations().getRateLimitStatus("help","search");
+		Map<String, List<RateLimitStatus>> statuses = twitter.userOperations().getRateLimitStatus("help","search");
 		assertTrue(statuses.containsKey("search"));
 		assertTrue(statuses.containsKey("help"));
 		assertEquals(1, statuses.get("search").size());

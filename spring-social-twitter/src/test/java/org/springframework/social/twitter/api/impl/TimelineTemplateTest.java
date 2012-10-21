@@ -15,7 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.*;
@@ -33,7 +32,6 @@ import org.springframework.social.OperationNotPermittedException;
 import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.Tweet;
-import org.springframework.social.twitter.api.TwitterProfile;
 
 
 /**

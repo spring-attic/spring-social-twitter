@@ -16,6 +16,7 @@
 package org.springframework.social.twitter.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
@@ -123,5 +124,5 @@ public interface UserOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials. 
 	 */
-	MultiValueMap<String,RateLimitStatus> getRateLimitStatus(String... resources);
+	Map<String, List<RateLimitStatus>> getRateLimitStatus(String... resources);
 }

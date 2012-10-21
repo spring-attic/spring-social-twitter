@@ -15,13 +15,15 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.springframework.social.twitter.api.RateLimitStatus;
-import org.springframework.util.MultiValueMap;
 
 /**
- * Holds a MultiValueMap<String,RateLimitStatus> object deserialized from Twitter's rate limit status
+ * Holds a Map<String,List<RateLimitStatus>> object deserialized from Twitter's rate limit status
  * JSON structure.
  * @author Jeremy Appel
  */
@@ -29,17 +31,17 @@ import org.springframework.util.MultiValueMap;
 @JsonDeserialize(using = RateLimitStatusDeserializer.class)
 public class RateLimitStatusHolder {
 	
-	private final MultiValueMap<String, RateLimitStatus> rateLimitsResultMap;
+	private final Map<String, List<RateLimitStatus>> rateLimitsResultMap;
 
-	public RateLimitStatusHolder(MultiValueMap<String, RateLimitStatus> rateLimitsResultMap) {
+	public RateLimitStatusHolder(Map<String, List<RateLimitStatus>> rateLimitsResultMap) {
 		this.rateLimitsResultMap = rateLimitsResultMap;
 	}
 	
 	/**
 	 * The map of rate limit statuses per resource family
-	 * @return
+	 * @return Map<String, List<RateLimitStatus>>
 	 */
-	public MultiValueMap<String, RateLimitStatus> getRateLimits() {
+	public Map<String, List<RateLimitStatus>> getRateLimits() {
 		return rateLimitsResultMap;
 	}
 

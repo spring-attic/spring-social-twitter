@@ -32,6 +32,7 @@ public interface ListOperations {
 	 * @param userId the ID of the Twitter user.
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<UserList> getLists(long userId);
 
@@ -40,6 +41,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the Twitter user.
 	 * @return a list of {@link UserList}s for the specified user.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<UserList> getLists(String screenName);
 
@@ -48,6 +50,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list to retrieve.
 	 * @return the requested {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList getList(long listId);
 
@@ -57,6 +60,7 @@ public interface ListOperations {
 	 * @param listSlug the lists's slug
 	 * @return the requested {@link UserList}
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	UserList getList(String screenName, String listSlug);
 
@@ -65,6 +69,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list to retrieve.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getListStatuses(long listId);
 
@@ -74,6 +79,7 @@ public interface ListOperations {
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getListStatuses(long listId, int pageSize);
 
@@ -85,6 +91,7 @@ public interface ListOperations {
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getListStatuses(long listId, int pageSize, long sinceId, long maxId);
 
@@ -94,6 +101,7 @@ public interface ListOperations {
 	 * @param listSlug the list's slug.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getListStatuses(String screenName, String listSlug);
 
@@ -104,6 +112,7 @@ public interface ListOperations {
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getListStatuses(String screenName, String listSlug, int pageSize);
 
@@ -116,6 +125,7 @@ public interface ListOperations {
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Tweet> getListStatuses(String screenName, String listSlug, int pageSize, long sinceId, long maxId);
 
@@ -154,6 +164,7 @@ public interface ListOperations {
 	 * Retrieves a list of Twitter profiles whose users are members of the list.
 	 * @param listId the ID of the list.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @return a list of {@link TwitterProfile}
 	 */
 	List<TwitterProfile> getListMembers(long listId);
@@ -163,6 +174,7 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @return a list of {@link TwitterProfile}
 	 */
 	List<TwitterProfile> getListMembers(String screenName, String listSlug);
@@ -248,6 +260,7 @@ public interface ListOperations {
 	 * @param listId the ID of the list.
 	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getListSubscribers(long listId);
 
@@ -257,6 +270,7 @@ public interface ListOperations {
 	 * @param listSlug the slug of the list.
 	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getListSubscribers(String screenName, String listSlug);
 
@@ -265,6 +279,7 @@ public interface ListOperations {
 	 * @param userId the user ID
 	 * @return a list of {@link UserList}s that the user is a member of.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<UserList> getMemberships(long userId);
 
@@ -273,6 +288,7 @@ public interface ListOperations {
 	 * @param screenName the user's screen name
 	 * @return a list of {@link UserList}s that the user is a member of.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<UserList> getMemberships(String screenName);
 
@@ -281,6 +297,7 @@ public interface ListOperations {
 	 * @param userId the user ID
 	 * @return a list of {@link UserList}s that the user is subscribed to.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<UserList> getSubscriptions(long userId);
 
@@ -289,6 +306,7 @@ public interface ListOperations {
 	 * @param screenName the user's screen name
 	 * @return a list of {@link UserList}s that the user is subscribed to.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<UserList> getSubscriptions(String screenName);
 
@@ -319,6 +337,7 @@ public interface ListOperations {
 	 * @param subscriberId the user ID to check for subscribership
 	 * @return true if the user is a member of the list
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isSubscriber(long listId, long subscriberId);
 	
@@ -329,6 +348,7 @@ public interface ListOperations {
 	 * @param subscriberScreenName the screenName to check for subscribership
 	 * @return true if the user is a member of the list
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	boolean isSubscriber(String screenName, String listSlug, String subscriberScreenName);
 

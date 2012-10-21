@@ -26,7 +26,6 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.social.NotAuthorizedException;
-import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserList;
@@ -395,8 +394,8 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	public void subscribe_usernameAndSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/create.json"))
-		.andExpect(method(POST))
-		.andExpect(content().string("owner_screen_name=habuma&slug=somelist"))
+			.andExpect(method(POST))
+			.andExpect(content().string("owner_screen_name=habuma&slug=somelist"))
 			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		UserList list = twitter.listOperations().subscribe("habuma", "somelist");
 		assertSingleList(list);

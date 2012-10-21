@@ -15,7 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.social.twitter.api.BlockOperations;
@@ -100,7 +99,5 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 		return users;
 	}
 
-	@SuppressWarnings("serial")
-	private static class LongList extends ArrayList<Long>{}
 
 }

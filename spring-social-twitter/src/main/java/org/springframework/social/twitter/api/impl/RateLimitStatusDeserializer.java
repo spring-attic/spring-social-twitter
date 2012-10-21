@@ -17,6 +17,10 @@ package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.codehaus.jackson.JsonNode;
@@ -25,9 +29,11 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.springframework.social.twitter.api.RateLimitStatus;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
+/**
+ * Deserializer to read rate limit status information into MultiValueMap
+ * @author Jeremy Appel
+ */
 public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatusHolder> {
 
 	@Override
@@ -37,14 +43,16 @@ public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatu
 			return null;
 		}
 		JsonNode resources = tree.get("resources");
-		MultiValueMap<String, RateLimitStatus> rateLimits = new LinkedMultiValueMap<String, RateLimitStatus>();
+		Map<String, List<RateLimitStatus>> rateLimits = new LinkedHashMap<String, List<RateLimitStatus>>();
 		for (Iterator<Entry<String,JsonNode>> resourceFamilyIt = resources.getFields(); resourceFamilyIt.hasNext();) {
 			Entry<String,JsonNode> resourceFamilyNode = resourceFamilyIt.next();
+			List<RateLimitStatus> rateLimitsList = new LinkedList<RateLimitStatus>();
 			for (Iterator<Entry<String,JsonNode>> resourceEndpointIt = resourceFamilyNode.getValue().getFields(); resourceEndpointIt.hasNext();) {
 				Entry<String,JsonNode> endpointNode = resourceEndpointIt.next();
 				RateLimitStatus endpointLimit = new RateLimitStatus(endpointNode.getKey(), endpointNode.getValue().get("limit").asInt(), endpointNode.getValue().get("remaining").asInt(), endpointNode.getValue().get("reset").asInt());
-				rateLimits.add(resourceFamilyNode.getKey(), endpointLimit);
+				rateLimitsList.add(endpointLimit);
 			}
+			rateLimits.put(resourceFamilyNode.getKey(), rateLimitsList);
 		}
 		return new RateLimitStatusHolder(rateLimits);
 	}

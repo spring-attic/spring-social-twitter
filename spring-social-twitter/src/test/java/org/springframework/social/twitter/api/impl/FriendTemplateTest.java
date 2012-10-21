@@ -438,14 +438,14 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void follow_byUserId() {
-	    mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/create.json?user_id=98765"))
-	        .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/create.json?user_id=98765"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
-	    
+		
 		String followedScreenName = twitter.friendOperations().follow(98765);
-	    assertEquals("oizik2", followedScreenName);
-	    
-	    mockServer.verify();
+		assertEquals("oizik2", followedScreenName);
+		
+		mockServer.verify();
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
@@ -455,14 +455,13 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void follow_byScreenName() {
-	    mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/create.json?screen_name=oizik2"))
-	        .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/create.json?screen_name=oizik2"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
-	    
 		String followedScreenName = twitter.friendOperations().follow("oizik2");
-	    assertEquals("oizik2", followedScreenName);
+		assertEquals("oizik2", followedScreenName);
 	    
-	    mockServer.verify();
+		mockServer.verify();
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
@@ -472,14 +471,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void unfollow_byUserId() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/destroy.json?user_id=98765"))
-            .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/destroy.json?user_id=98765"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("unfollow"), APPLICATION_JSON));
-        
 		String unFollowedScreenName = twitter.friendOperations().unfollow(98765);
-        assertEquals("oizik2", unFollowedScreenName);
-        
-        mockServer.verify();
+		assertEquals("oizik2", unFollowedScreenName);
+		mockServer.verify();
     }
 
 	@Test(expected = NotAuthorizedException.class)
@@ -489,14 +486,13 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void unfollow_byScreenName() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/destroy.json?screen_name=oizik2"))
-            .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/destroy.json?screen_name=oizik2"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("unfollow"), APPLICATION_JSON));
         
 		String unFollowedScreenName = twitter.friendOperations().unfollow("oizik2");
-        assertEquals("oizik2", unFollowedScreenName);
-        
-        mockServer.verify();
+		assertEquals("oizik2", unFollowedScreenName);
+		mockServer.verify();
     }
 	
 	@Test(expected = NotAuthorizedException.class)
@@ -506,11 +502,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void enableNotifications_byUserId() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?user_id=98765&device=true"))
-            .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?user_id=98765&device=true"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications(98765);
-        assertEquals("oizik2", unFollowedUser.getScreenName());
+		assertEquals("oizik2", unFollowedUser.getScreenName());
         mockServer.verify();
     }
 
@@ -521,11 +517,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void enableNotifications_byScreenName() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?screen_name=oizik2&device=true"))
-            .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?screen_name=oizik2&device=true"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications("oizik2");
-        assertEquals("oizik2", unFollowedUser.getScreenName());
+		assertEquals("oizik2", unFollowedUser.getScreenName());
         mockServer.verify();
     }
 
@@ -536,11 +532,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void disableNotifications_byUserId() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?user_id=98765&device=false"))
-            .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?user_id=98765&device=false"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("unfollow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications(98765);
-        assertEquals("oizik2", unFollowedUser.getScreenName());
+		assertEquals("oizik2", unFollowedUser.getScreenName());
         mockServer.verify();
     }
 
@@ -551,12 +547,12 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void disableNotifications_byScreenName() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?screen_name=oizik2&device=false"))
-            .andExpect(method(POST))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?screen_name=oizik2&device=false"))
+			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("unfollow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications("oizik2");
-        assertEquals("oizik2", unFollowedUser.getScreenName());
-        mockServer.verify();
+		assertEquals("oizik2", unFollowedUser.getScreenName());
+		mockServer.verify();
     }
 	
 	@Test(expected = NotAuthorizedException.class)

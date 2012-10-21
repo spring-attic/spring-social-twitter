@@ -68,15 +68,13 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 		requireAuthorization();
 		MultiValueMap<String, String> parameters = buildPlaceParameters(latitude, longitude, name, streetAddress, containedWithin);
 		SimilarPlacesResponse response = restTemplate.getForObject(buildUri("geo/similar_places.json", parameters), SimilarPlacesResponse.class);
-		PlacePrototype placePrototype = new PlacePrototype(response.getToken(), latitude, longitude, name, streetAddress, containedWithin);
-		
+		PlacePrototype placePrototype = new PlacePrototype(response.getToken(), latitude, longitude, name, streetAddress, containedWithin);	
 		return new SimilarPlaces(response.getPlaces(), placePrototype);
 	}
 	
 	public Place createPlace(PlacePrototype placePrototype) {
 		requireAuthorization();
-		MultiValueMap<String, String> request = buildPlaceParameters(
-				placePrototype.getLatitude(), placePrototype.getLongitude(), placePrototype.getName(), placePrototype.getStreetAddress(), placePrototype.getContainedWithin());
+		MultiValueMap<String, String> request = buildPlaceParameters(placePrototype.getLatitude(), placePrototype.getLongitude(), placePrototype.getName(), placePrototype.getStreetAddress(), placePrototype.getContainedWithin());
 		request.set("token", placePrototype.getCreateToken());
 		return restTemplate.postForObject("https://api.twitter.com/1.1/geo/place.json", request, Place.class);		
 	}
@@ -99,8 +97,7 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 		return parameters;
 	}
 	
-	private MultiValueMap<String, String> buildPlaceParameters(double latitude,
-			double longitude, String name, String streetAddress, String containedWithin) {
+	private MultiValueMap<String, String> buildPlaceParameters(double latitude, double longitude, String name, String streetAddress, String containedWithin) {
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("lat", String.valueOf(latitude));
 		parameters.set("long", String.valueOf(longitude));

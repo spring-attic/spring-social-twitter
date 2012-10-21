@@ -18,11 +18,16 @@ package org.springframework.social.twitter.api.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Convenience utility class for cursor related functionality
+ * @author Jeremy Appel
+ */
 public class CursorUtils {
 	
 	private CursorUtils() {}
 	
-	public static  List<List<Long>> chunkList(List<Long> list, int chunkSize) {
+	public static List<List<Long>> chunkList(List<Long> list, int chunkSize) {
 		List<List<Long>> chunkedList = new ArrayList<List<Long>>();
 		int start = 0;
 		while (start < list.size()) {
@@ -32,7 +37,4 @@ public class CursorUtils {
 		}
 		return chunkedList;
 	}
-	
-	
-
 }

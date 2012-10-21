@@ -32,6 +32,7 @@ public interface SearchOperations {
 	 * @param query The search query string
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -43,6 +44,7 @@ public interface SearchOperations {
 	 * @param pageSize The number of {@link Tweet}s per query
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -57,6 +59,7 @@ public interface SearchOperations {
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -103,6 +106,7 @@ public interface SearchOperations {
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @return A Trends object with the top 10 trending topics for the location.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Trends getLocalTrends(long whereOnEarthId);
 
@@ -113,6 +117,7 @@ public interface SearchOperations {
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return A Trends object with the top 10 trending topics for the given location.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags);
 

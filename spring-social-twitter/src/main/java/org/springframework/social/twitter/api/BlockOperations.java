@@ -15,8 +15,6 @@
  */
 package org.springframework.social.twitter.api;
 
-import java.util.List;
-
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 
@@ -43,7 +41,7 @@ public interface BlockOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile block(String screenName);
-
+	
 	/**
 	 * Unblocks a user.
 	 * @param userId the ID of the user to unblock.
@@ -69,7 +67,7 @@ public interface BlockOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getBlockedUsers();
-
+	
 	/**
 	 * Retrieves a list of users that the authenticating user has blocked.
 	 * @param cursor the cursor to retrieve results from. -1 will retrieve the first cursored page of results.
@@ -78,7 +76,7 @@ public interface BlockOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getBlockedUsersInCursor(long cursor);
-
+	
 	/**
 	 * Retrieves a list of user IDs for the users that the authenticating user has blocked.
 	 * @return a list of user IDs for the users that are blocked.
