@@ -27,6 +27,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -230,22 +231,22 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("rate-limit-status"), APPLICATION_JSON));
 		
-		Map<String, List<RateLimitStatus>> statuses = twitter.userOperations().getRateLimitStatus("help","search");
-		assertTrue(statuses.containsKey("search"));
-		assertTrue(statuses.containsKey("help"));
-		assertEquals(1, statuses.get("search").size());
-		assertEquals(4, statuses.get("help").size());
-		assertEquals("/help/privacy", statuses.get("help").get(0).getEndpoint());
-		assertEquals(15, statuses.get("help").get(0).getQuarterOfHourLimit());
-		assertEquals("/help/languages", statuses.get("help").get(3).getEndpoint());
-		assertEquals(15, statuses.get("help").get(0).getQuarterOfHourLimit());
-		assertEquals("/search/tweets", statuses.get("search").get(0).getEndpoint());
-		assertEquals(180, statuses.get("search").get(0).getQuarterOfHourLimit());
+		Map<ResourceFamily, List<RateLimitStatus>> statuses = twitter.userOperations().getRateLimitStatus(ResourceFamily.HELP,ResourceFamily.SEARCH);
+		assertTrue(statuses.containsKey(ResourceFamily.SEARCH));
+		assertTrue(statuses.containsKey(ResourceFamily.HELP));
+		assertEquals(1, statuses.get(ResourceFamily.SEARCH).size());
+		assertEquals(4, statuses.get(ResourceFamily.HELP).size());
+		assertEquals("/help/privacy", statuses.get(ResourceFamily.HELP).get(0).getEndpoint());
+		assertEquals(15, statuses.get(ResourceFamily.HELP).get(0).getQuarterOfHourLimit());
+		assertEquals("/help/languages", statuses.get(ResourceFamily.HELP).get(3).getEndpoint());
+		assertEquals(15, statuses.get(ResourceFamily.HELP).get(0).getQuarterOfHourLimit());
+		assertEquals("/search/tweets", statuses.get(ResourceFamily.SEARCH).get(0).getEndpoint());
+		assertEquals(180, statuses.get(ResourceFamily.SEARCH).get(0).getQuarterOfHourLimit());
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
 	public void getRateLimit_unauthorized() {
-		unauthorizedTwitter.userOperations().getRateLimitStatus("help","search");
+		unauthorizedTwitter.userOperations().getRateLimitStatus(ResourceFamily.HELP,ResourceFamily.SEARCH);
 	}
 
 }

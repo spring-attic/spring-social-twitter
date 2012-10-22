@@ -20,7 +20,6 @@ import java.util.Map;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
-import org.springframework.util.MultiValueMap;
 
 
 /**
@@ -124,5 +123,5 @@ public interface UserOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials. 
 	 */
-	Map<String, List<RateLimitStatus>> getRateLimitStatus(String... resources);
+	Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources);
 }

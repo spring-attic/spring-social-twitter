@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserOperations;
@@ -96,7 +97,7 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		return restTemplate.getForObject(buildUri("users/suggestions/" + slug + ".json"), TwitterProfileUsersList.class).getList();
 	}
 
-	public Map<String, List<RateLimitStatus>> getRateLimitStatus(String... resources) {
+	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources) {
 		requireAuthorization();
 		String joinedResources = ArrayUtils.join(resources);
 		return restTemplate.getForObject(buildUri("account/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();

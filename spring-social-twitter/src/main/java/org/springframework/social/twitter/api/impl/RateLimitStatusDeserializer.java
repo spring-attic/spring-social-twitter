@@ -29,6 +29,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 
 /**
  * Deserializer to read rate limit status information into MultiValueMap
@@ -43,7 +44,7 @@ public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatu
 			return null;
 		}
 		JsonNode resources = tree.get("resources");
-		Map<String, List<RateLimitStatus>> rateLimits = new LinkedHashMap<String, List<RateLimitStatus>>();
+		Map<ResourceFamily, List<RateLimitStatus>> rateLimits = new LinkedHashMap<ResourceFamily, List<RateLimitStatus>>();
 		for (Iterator<Entry<String,JsonNode>> resourceFamilyIt = resources.getFields(); resourceFamilyIt.hasNext();) {
 			Entry<String,JsonNode> resourceFamilyNode = resourceFamilyIt.next();
 			List<RateLimitStatus> rateLimitsList = new LinkedList<RateLimitStatus>();
@@ -52,7 +53,7 @@ public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatu
 				RateLimitStatus endpointLimit = new RateLimitStatus(endpointNode.getKey(), endpointNode.getValue().get("limit").asInt(), endpointNode.getValue().get("remaining").asInt(), endpointNode.getValue().get("reset").asInt());
 				rateLimitsList.add(endpointLimit);
 			}
-			rateLimits.put(resourceFamilyNode.getKey(), rateLimitsList);
+			rateLimits.put(ResourceFamily.getResourceFamily(resourceFamilyNode.getKey()), rateLimitsList);
 		}
 		return new RateLimitStatusHolder(rateLimits);
 	}

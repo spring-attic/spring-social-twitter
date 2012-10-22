@@ -21,9 +21,10 @@ import java.util.Map;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 
 /**
- * Holds a Map<String,List<RateLimitStatus>> object deserialized from Twitter's rate limit status
+ * Holds a Map<ResourceFamily, List<RateLimitStatus>> object deserialized from Twitter's rate limit status
  * JSON structure.
  * @author Jeremy Appel
  */
@@ -31,17 +32,17 @@ import org.springframework.social.twitter.api.RateLimitStatus;
 @JsonDeserialize(using = RateLimitStatusDeserializer.class)
 public class RateLimitStatusHolder {
 	
-	private final Map<String, List<RateLimitStatus>> rateLimitsResultMap;
+	private final Map<ResourceFamily, List<RateLimitStatus>> rateLimitsResultMap;
 
-	public RateLimitStatusHolder(Map<String, List<RateLimitStatus>> rateLimitsResultMap) {
+	public RateLimitStatusHolder(Map<ResourceFamily, List<RateLimitStatus>> rateLimitsResultMap) {
 		this.rateLimitsResultMap = rateLimitsResultMap;
 	}
 	
 	/**
 	 * The map of rate limit statuses per resource family
-	 * @return Map<String, List<RateLimitStatus>>
+	 * @return Map<ResourceFamily, List<RateLimitStatus>>
 	 */
-	public Map<String, List<RateLimitStatus>> getRateLimits() {
+	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimits() {
 		return rateLimitsResultMap;
 	}
 
