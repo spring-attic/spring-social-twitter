@@ -66,7 +66,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	
 	public DirectMessage getDirectMessage(long id) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("direct_messages/show/" + id + ".json"), DirectMessage.class);
+		return restTemplate.getForObject(buildUri("direct_messages/show.json", "id", String.valueOf(id)), DirectMessage.class);
 	}
 
 	public DirectMessage sendDirectMessage(String toScreenName, String text) {
@@ -87,7 +87,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 
 	public void deleteDirectMessage(long messageId) {
 		requireAuthorization();
-		restTemplate.delete(buildUri("direct_messages/destroy/" + messageId + ".json"));
+		restTemplate.delete(buildUri("direct_messages/destroy.json","id",String.valueOf(messageId)));
 	}
 
 }

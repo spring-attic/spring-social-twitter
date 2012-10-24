@@ -17,8 +17,6 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
-
-
 /**
  * Represents the results of a Twitter search, including matching {@link Tweet}s
  * and any metadata associated with that search.
@@ -27,18 +25,16 @@ import java.util.List;
  */
 public class SearchResults {
 	private List<Tweet> tweets;
-	private long maxId;
-	private long sinceId;
+    private SearchMetadata metadata;
 	private boolean lastPage;
 
-	public SearchResults(List<Tweet> tweets, long maxId, long sinceId) {
-		this(tweets, maxId, sinceId, false);
+	public SearchResults(List<Tweet> tweets, SearchMetadata metaData) {
+		this(tweets, metaData, false);
 	}
 	
-	public SearchResults(List<Tweet> tweets, long maxId, long sinceId, boolean lastPage) {
+	public SearchResults(List<Tweet> tweets, SearchMetadata metaData, boolean lastPage) {
 		this.tweets = tweets;
-		this.maxId = maxId;
-		this.sinceId = sinceId;
+        this.metadata = metaData;
 		this.lastPage = lastPage;
 	}
 
@@ -48,20 +44,13 @@ public class SearchResults {
 	public List<Tweet> getTweets() {
 		return tweets;
 	}
-
+	
 	/**
-	 * Returns the maximum {@link Tweet} ID in the search results
+	 * Returns the {@link SearchMetadata} associated with a
+	 * particular search
 	 */
-	public long getMaxId() {
-		return maxId;
-	}
-
-	/**
-	 * Returns the {@link Tweet} ID after which all of the matching
-	 * {@link Tweet}s were created
-	 */
-	public long getSinceId() {
-		return sinceId;
+	public SearchMetadata getSearchMetadata() {
+		return metadata;
 	}
 
 	/**
