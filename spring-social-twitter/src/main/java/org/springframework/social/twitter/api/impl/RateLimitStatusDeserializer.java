@@ -16,8 +16,8 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
+import java.util.EnumMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +44,7 @@ public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatu
 			return null;
 		}
 		JsonNode resources = tree.get("resources");
-		Map<ResourceFamily, List<RateLimitStatus>> rateLimits = new LinkedHashMap<ResourceFamily, List<RateLimitStatus>>();
+		Map<ResourceFamily, List<RateLimitStatus>> rateLimits = new EnumMap<ResourceFamily, List<RateLimitStatus>>(ResourceFamily.class);
 		for (Iterator<Entry<String,JsonNode>> resourceFamilyIt = resources.getFields(); resourceFamilyIt.hasNext();) {
 			Entry<String,JsonNode> resourceFamilyNode = resourceFamilyIt.next();
 			List<RateLimitStatus> rateLimitsList = new LinkedList<RateLimitStatus>();
