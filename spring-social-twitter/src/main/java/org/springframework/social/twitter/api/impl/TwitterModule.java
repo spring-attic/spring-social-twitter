@@ -23,7 +23,6 @@ import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.MediaEntity;
 import org.springframework.social.twitter.api.MentionEntity;
 import org.springframework.social.twitter.api.Place;
-import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.SuggestionCategory;

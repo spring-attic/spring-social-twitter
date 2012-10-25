@@ -129,6 +129,4 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 
 	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
-	private static final String SEARCH_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
-
 }

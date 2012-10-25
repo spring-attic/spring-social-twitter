@@ -197,8 +197,5 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	@SuppressWarnings("serial")
-	private static class LongList extends ArrayList<Long>{}
-	
-	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet> {}
 }
