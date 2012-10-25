@@ -15,22 +15,26 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
- * Mixin class for adding Jackson annotations to RateLimitStatus.
- * @author Craig Walls
+ * Convenience utility class for cursor related functionality
+ * @author Jeremy Appel
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
-class RateLimitStatusMixin {
+public class CursorUtils {
 	
-	@JsonCreator
-	RateLimitStatusMixin(
-			@JsonProperty("hourly_limit") int hourlyLimit,
-			@JsonProperty("remaining_hits") int remainingHits,
-			@JsonProperty("reset_time_in_seconds") long resetTimeInSeconds
-			) {}
-
+	private CursorUtils() {}
+	
+	public static List<List<Long>> chunkList(List<Long> list, int chunkSize) {
+		List<List<Long>> chunkedList = new ArrayList<List<Long>>();
+		int start = 0;
+		while (start < list.size()) {
+			int end = Math.min(chunkSize + start, list.size());
+			chunkedList.add(list.subList(start, end));
+			start = end;
+		}
+		return chunkedList;
+	}
 }

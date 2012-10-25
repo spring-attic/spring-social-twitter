@@ -23,7 +23,6 @@ import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.MediaEntity;
 import org.springframework.social.twitter.api.MentionEntity;
 import org.springframework.social.twitter.api.Place;
-import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.SuggestionCategory;
@@ -56,7 +55,6 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(SearchResults.class, SearchResultsMixin.class);
 		context.setMixInAnnotations(Place.class, PlaceMixin.class);
 		context.setMixInAnnotations(SimilarPlacesResponse.class, SimilarPlacesMixin.class);
-		context.setMixInAnnotations(RateLimitStatus.class, RateLimitStatusMixin.class);
 		context.setMixInAnnotations(Entities.class, EntitiesMixin.class);
 		context.setMixInAnnotations(HashTagEntity.class, HashTagEntityMixin.class);
 		context.setMixInAnnotations(MediaEntity.class, MediaEntityMixin.class);

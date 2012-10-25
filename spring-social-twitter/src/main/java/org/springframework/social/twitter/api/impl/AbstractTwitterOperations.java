@@ -50,7 +50,7 @@ class AbstractTwitterOperations {
 		return URIBuilder.fromUri(API_URL_BASE + path).queryParams(parameters).build();
 	}
 	
-	private static final String API_URL_BASE = "https://api.twitter.com/1/";
+	private static final String API_URL_BASE = "https://api.twitter.com/1.1/";
 
 	private static final LinkedMultiValueMap<String, String> EMPTY_PARAMETERS = new LinkedMultiValueMap<String, String>();
 

@@ -16,24 +16,34 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.util.List;
+import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.springframework.social.twitter.api.SearchMetadata;
-import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 
 /**
- * Mixin class for adding Jackson annotations to SearchResults.
- * @author Craig Walls
+ * Holds a Map<ResourceFamily, List<RateLimitStatus>> object deserialized from Twitter's rate limit status
+ * JSON structure.
+ * @author Jeremy Appel
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class SearchResultsMixin {
-
-	@JsonCreator
-	SearchResultsMixin(
-			@JsonProperty("statuses") List<Tweet> tweets, 
-			@JsonProperty("search_metadata") @JsonDeserialize(using = SearchMetadataDeserializer.class) SearchMetadata metadata) {}
+@JsonDeserialize(using = RateLimitStatusDeserializer.class)
+public class RateLimitStatusHolder {
 	
+	private final Map<ResourceFamily, List<RateLimitStatus>> rateLimitsResultMap;
+
+	public RateLimitStatusHolder(Map<ResourceFamily, List<RateLimitStatus>> rateLimitsResultMap) {
+		this.rateLimitsResultMap = rateLimitsResultMap;
+	}
+	
+	/**
+	 * The map of rate limit statuses per resource family
+	 * @return Map<ResourceFamily, List<RateLimitStatus>>
+	 */
+	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimits() {
+		return rateLimitsResultMap;
+	}
+
 }
