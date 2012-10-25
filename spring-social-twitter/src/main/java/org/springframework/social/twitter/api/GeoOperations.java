@@ -18,6 +18,7 @@ package org.springframework.social.twitter.api;
 import java.util.List;
 
 import org.springframework.social.ApiException;
+import org.springframework.social.MissingAuthorizationException;
 
 /**
  * Interface defining the Twitter operations for working with locations.
@@ -30,6 +31,7 @@ public interface GeoOperations {
 	 * @param id the place ID
 	 * @return a {@link Place}
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Place getPlace(String id);
 
@@ -39,6 +41,7 @@ public interface GeoOperations {
 	 * @param longitude the longitude
 	 * @return a list of {@link Place}s that the point is within
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Place> reverseGeoCode(double latitude, double longitude);
 
@@ -50,6 +53,7 @@ public interface GeoOperations {
 	 * @param accuracy a radius of accuracy around the given point. If given a number, the value is assumed to be in meters. The number may be qualified with "ft" to indicate feet. If null, the default accuracy (0m) is assumed.
 	 * @return a list of {@link Place}s that the point is within
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Place> reverseGeoCode(double latitude, double longitude, PlaceType granularity, String accuracy);
 
@@ -59,6 +63,7 @@ public interface GeoOperations {
 	 * @param longitude the longitude
 	 * @return a list of {@link Place}s that the point is within
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Place> search(double latitude, double longitude);
 
@@ -71,6 +76,7 @@ public interface GeoOperations {
 	 * @param query a free form text value to help find places by name. If null, no query will be applied to the search.
 	 * @return a list of {@link Place}s that the point is within
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<Place> search(double latitude, double longitude, PlaceType granularity, String accuracy, String query);
 
@@ -83,6 +89,7 @@ public interface GeoOperations {
 	 * @param name the name that the place is known as
 	 * @return a {@link SimilarPlaces} collection, including a token that can be used to create a new place.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name);
 
@@ -97,6 +104,7 @@ public interface GeoOperations {
 	 * @param containedWithin the ID of the place that the place is contained within
 	 * @return a {@link SimilarPlaces} collection, including a token that can be used to create a new place.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name, String streetAddress, String containedWithin);
 
@@ -105,6 +113,7 @@ public interface GeoOperations {
 	 * @param placePrototype the place prototype returned in a {@link SimilarPlaces} from a call to findSimilarPlaces()
 	 * @return a {@link Place} object with the newly created place data
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Place createPlace(PlacePrototype placePrototype);
 }

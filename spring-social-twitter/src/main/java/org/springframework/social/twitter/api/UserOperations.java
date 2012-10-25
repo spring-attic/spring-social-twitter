@@ -16,6 +16,7 @@
 package org.springframework.social.twitter.api;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
@@ -57,6 +58,7 @@ public interface UserOperations {
 	 * @param screenName the screen name for the user whose details are to be retrieved.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile getUserProfile(String screenName);
 
@@ -66,35 +68,21 @@ public interface UserOperations {
 	 * @param userId the user ID for the user whose details are to be retrieved.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile getUserProfile(long userId);
-
-	/**
-	 * Retrieves the user's profile image. Returns the image in Twitter's "normal" size (48px x 48px).
-	 * @param screenName the screen name of the user
-	 * @return an array of bytes containing the user's profile image.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	byte[] getUserProfileImage(String screenName);
-
-	/**
-	 * Retrieves the user's profile image. Returns the image in Twitter's "normal" type.
-	 * @param screenName the screen name of the user
-	 * @param size the size of the image
-	 * @return an array of bytes containing the user's profile image.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	byte[] getUserProfileImage(String screenName, ImageSize size);
 	
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of user IDs.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getUsers(long... userIds);
 
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of screen names.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getUsers(String... screenNames);
 	
@@ -117,6 +105,7 @@ public interface UserOperations {
 	/**
 	 * Retrieves a list of categories from which suggested users to follow may be found.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<SuggestionCategory> getSuggestionCategories();
 
@@ -124,14 +113,15 @@ public interface UserOperations {
 	 * Retrieves a list of suggestions of users to follow for a given category.
 	 * @param slug the category's slug
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	List<TwitterProfile> getSuggestions(String slug);
 
 	/**
-	 * Retrieves the rate limit status.
-	 * Can be used with either either an authorized or unauthorized TwitterTemplate.
-	 * If the TwitterTemplate is authorized, the rate limits apply to the authenticated user.
-	 * If the TwitterTemplate is unauthorized, the rate limits apply to the IP address from with the request is made. 
+	 * Retrieves the rate limit statuses for each of the resource families passed as arguments
+	 * @param resources the list of resource families to inquire about
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials. 
 	 */
-	RateLimitStatus getRateLimitStatus();
+	Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources);
 }
