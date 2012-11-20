@@ -16,6 +16,7 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.DirectMessageOperations;
@@ -87,7 +88,9 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 
 	public void deleteDirectMessage(long messageId) {
 		requireAuthorization();
-		restTemplate.delete(buildUri("direct_messages/destroy.json","id",String.valueOf(messageId)));
+		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
+		data.add("id", String.valueOf(messageId));
+		restTemplate.postForObject(buildUri("direct_messages/destroy.json"), data, DirectMessage.class);
 	}
-
+	
 }

@@ -163,8 +163,9 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void deleteDirectMessage() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/destroy.json?id=42"))
-				.andExpect(method(DELETE))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/destroy.json"))
+				.andExpect(method(POST))
+				.andExpect(content().string("id=42"))
 				.andRespond(withSuccess(jsonResource("directMessage"), APPLICATION_JSON));
 		twitter.directMessageOperations().deleteDirectMessage(42L);
 		mockServer.verify();
