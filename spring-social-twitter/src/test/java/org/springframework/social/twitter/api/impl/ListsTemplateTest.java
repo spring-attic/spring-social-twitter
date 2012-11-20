@@ -122,8 +122,9 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void deleteList_forUserIdByListId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/destroy.json?list_id=40841803"))
-			.andExpect(method(DELETE))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/destroy.json"))
+			.andExpect(method(POST))
+			.andExpect(content().string("list_id=40841803"))
 			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.listOperations().deleteList(40841803);
 		mockServer.verify();
