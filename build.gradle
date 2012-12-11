@@ -3,7 +3,7 @@ buildscript {
         maven { url 'http://repo.springsource.org/plugins-release' }
     }
     dependencies {
-        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.1.3'
+        classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.2'
     }
 }
 
@@ -18,7 +18,7 @@ configure(allprojects) {
     targetCompatibility=1.5
 
     ext {
-      springSocialVersion = '1.1.0.M1'
+      springSocialVersion = '1.1.0.BUILD-SNAPSHOT'
       hamcrestVersion = '1.3'
       jacksonVersion = '1.9.9'
       junitVersion = '4.10'
@@ -39,10 +39,10 @@ configure(allprojects) {
     }
 
     dependencies {
-        testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
-        testCompile "junit:junit-dep:$junitVersion"
-        testCompile "org.mockito:mockito-core:$mockitoVersion"
-        testCompile "org.springframework:spring-test:$springVersion"
+        testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
+        testCompile ("junit:junit-dep:$junitVersion")
+        testCompile ("org.mockito:mockito-core:$mockitoVersion")
+        testCompile ("org.springframework:spring-test:$springVersion")
     }
 
     // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
@@ -94,11 +94,11 @@ configure(subprojects) { subproject ->
 project('spring-social-twitter') {
     description = 'Twitter API'
     dependencies {
-       compile "org.springframework.social:spring-social-core:$springSocialVersion"
-       compile "org.springframework.social:spring-social-config:$springSocialVersion"
-       compile "org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion"
-       compile "org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion"
-       testCompile "org.springframework:spring-test-mvc:$springTestMvcVersion"
+       compile ("org.springframework.social:spring-social-core:$springSocialVersion")
+       compile ("org.springframework.social:spring-social-config:$springSocialVersion")
+       compile ("org.codehaus.jackson:jackson-mapper-asl:$jacksonVersion")
+       compile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
+       testCompile ("org.springframework:spring-test-mvc:$springTestMvcVersion")
     }
 }
 
@@ -229,7 +229,7 @@ configure(rootProject) {
 
     task wrapper(type: Wrapper) {
         description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '1.1'
+        gradleVersion = '1.3'
     }
 
 }

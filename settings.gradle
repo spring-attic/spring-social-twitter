@@ -16,5 +16,4 @@
 
 rootProject.name = 'spring-social-twitter'
 
-include 'docs'
 include 'spring-social-twitter'
