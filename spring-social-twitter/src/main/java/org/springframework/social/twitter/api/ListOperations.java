@@ -26,6 +26,14 @@ import org.springframework.social.MissingAuthorizationException;
  * @author Craig Walls
  */
 public interface ListOperations {
+	
+	/**
+	 * Retrieves user lists for the authenticated user.
+	 * @return a list of {@link UserList}s for the authenticated user.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<UserList> getLists();
 
 	/**
 	 * Retrieves user lists for a given user.
