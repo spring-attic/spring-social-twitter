@@ -18,8 +18,8 @@ package org.springframework.social.twitter.api.impl;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.*;
-import static org.springframework.test.web.client.match.RequestMatchers.*;
-import static org.springframework.test.web.client.response.ResponseCreators.*;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
 import java.util.List;
 
