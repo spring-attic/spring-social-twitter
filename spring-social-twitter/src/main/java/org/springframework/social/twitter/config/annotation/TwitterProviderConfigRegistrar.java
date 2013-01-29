@@ -26,6 +26,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} for configuring a {@link TwitterConnectionFactory} bean and a request-scoped {@link Twitter} bean.
@@ -34,7 +35,7 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 public class TwitterProviderConfigRegistrar extends ProviderConfigRegistrarSupport {
 
 	public TwitterProviderConfigRegistrar() {
-		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterApiHelper.class);
+		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterAuthenticationService.class.getName(), TwitterApiHelper.class);
 	}
 	
 	static class TwitterApiHelper implements ApiHelper<Twitter> {
