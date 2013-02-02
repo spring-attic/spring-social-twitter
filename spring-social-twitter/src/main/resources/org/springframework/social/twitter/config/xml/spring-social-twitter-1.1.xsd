@@ -7,6 +7,7 @@
 		<xs:complexType>
 			<xs:attribute name="app-id" use="required" type="xs:string" />
 			<xs:attribute name="app-secret" use="required" type="xs:string" />
+			<xs:attribute name="authentication-service-class" use="optional" type="xs:string" />
 		</xs:complexType>
 	</xs:element>
 

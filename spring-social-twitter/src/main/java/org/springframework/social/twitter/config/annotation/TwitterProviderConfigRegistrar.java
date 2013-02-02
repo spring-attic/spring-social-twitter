@@ -18,24 +18,28 @@ package org.springframework.social.twitter.config.annotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.social.config.annotation.ProviderConfigRegistrarSupport;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.config.annotation.AbstractProviderConfigRegistrarSupport;
 import org.springframework.social.config.xml.ApiHelper;
-import org.springframework.social.config.xml.UserIdSource;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
-import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} for configuring a {@link TwitterConnectionFactory} bean and a request-scoped {@link Twitter} bean.
  * @author Craig Walls
  */
-public class TwitterProviderConfigRegistrar extends ProviderConfigRegistrarSupport {
+public class TwitterProviderConfigRegistrar extends AbstractProviderConfigRegistrarSupport {
 
 	public TwitterProviderConfigRegistrar() {
-		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterAuthenticationService.class.getName(), TwitterApiHelper.class);
+		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterApiHelper.class);
+		try {
+			setAuthenticationServiceClass("org.springframework.social.twitter.security.TwitterAuthenticationService");
+		} catch (ClassNotFoundException shouldntHappen) {
+			// Shouldn't happen unless the class name or package are refactored.
+		}
 	}
 	
 	static class TwitterApiHelper implements ApiHelper<Twitter> {
