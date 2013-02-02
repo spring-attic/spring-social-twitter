@@ -19,7 +19,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.social.UserIdSource;
-import org.springframework.social.config.annotation.ProviderConfigRegistrarSupport;
+import org.springframework.social.config.annotation.AbstractProviderConfigRegistrarSupport;
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
@@ -31,7 +31,7 @@ import org.springframework.social.twitter.connect.TwitterConnectionFactory;
  * {@link ImportBeanDefinitionRegistrar} for configuring a {@link TwitterConnectionFactory} bean and a request-scoped {@link Twitter} bean.
  * @author Craig Walls
  */
-public class TwitterProviderConfigRegistrar extends ProviderConfigRegistrarSupport {
+public class TwitterProviderConfigRegistrar extends AbstractProviderConfigRegistrarSupport {
 
 	public TwitterProviderConfigRegistrar() {
 		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterApiHelper.class);

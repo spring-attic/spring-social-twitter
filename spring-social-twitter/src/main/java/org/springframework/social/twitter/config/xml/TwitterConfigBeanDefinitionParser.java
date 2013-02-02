@@ -34,6 +34,11 @@ class TwitterConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefini
 
 	public TwitterConfigBeanDefinitionParser() {
 		super(TwitterConnectionFactory.class, TwitterApiHelper.class);
+		try {
+			setAuthenticationServiceClass("org.springframework.social.twitter.security.TwitterAuthenticationService");
+		} catch (ClassNotFoundException shouldntHappen) {
+			// Shouldn't happen unless the class name or package are refactored.
+		}
 	}
 
 	static class TwitterApiHelper implements ApiHelper<Twitter> {
