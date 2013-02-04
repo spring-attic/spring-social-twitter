@@ -22,9 +22,11 @@ import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitio
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
 /**
  * Implementation of {@link AbstractConnectionFactoryBeanDefinitionParser} that creates a {@link TwitterConnectionFactory}.
@@ -34,11 +36,11 @@ class TwitterConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefini
 
 	public TwitterConfigBeanDefinitionParser() {
 		super(TwitterConnectionFactory.class, TwitterApiHelper.class);
-		try {
-			setAuthenticationServiceClass("org.springframework.social.twitter.security.TwitterAuthenticationService");
-		} catch (ClassNotFoundException shouldntHappen) {
-			// Shouldn't happen unless the class name or package are refactored.
-		}
+	}
+
+	@Override
+	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
+		return TwitterAuthenticationService.class;
 	}
 
 	static class TwitterApiHelper implements ApiHelper<Twitter> {
