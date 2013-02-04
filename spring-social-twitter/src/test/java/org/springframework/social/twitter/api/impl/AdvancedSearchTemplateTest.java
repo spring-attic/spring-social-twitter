@@ -20,10 +20,13 @@ import static org.junit.Assert.*;
 import org.springframework.social.twitter.api.AdvancedSearchOperations;
 import org.springframework.social.twitter.api.GeoCode;
 import org.springframework.social.twitter.api.SearchResults;
+import org.springframework.social.twitter.api.Tweet;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
@@ -44,6 +47,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
         SearchResults searchResults = twitter.advancedSearchOperations().search("#spring");
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -58,6 +62,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
                 .search("#spring");
 
         assertEquals("37.781157,-122.39872,10mi", aso.getGeoCode().toString());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -70,6 +75,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setLang("nl").search("#spring");
 
         assertEquals("nl", aso.getLang());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -82,6 +88,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setLocale("ja").search("#spring");
 
         assertEquals("ja", aso.getLocale());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -94,6 +101,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setResultType(AdvancedSearchOperations.ResultType.POPULAR).search("#spring");
 
         assertEquals(AdvancedSearchOperations.ResultType.POPULAR, aso.getResultType());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -106,6 +114,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setCount(25).search("#spring");
 
         assertEquals(25, aso.getCount());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -119,6 +128,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
                 .search("#spring");
 
         assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"), aso.getUntil());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -131,6 +141,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setSinceId(10).search("#spring");
 
         assertEquals(10, aso.getSinceId());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -143,6 +154,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setMaxId(999).search("#spring");
 
         assertEquals(999, aso.getMaxId());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -155,6 +167,7 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
         SearchResults searchResults = aso.setIncludeEntities(false).search("#spring");
 
         assertFalse(aso.isIncludeEntities());
+        assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
@@ -176,5 +189,13 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
                 .setMaxId(999)
                 .setIncludeEntities(false)
                 .search("#spring");
+
+        assertSearchTweets(searchResults.getTweets());
+    }
+
+    private void assertSearchTweets(List<Tweet> tweets) {
+        assertTimelineTweets(tweets, true);
+        assertEquals("en", tweets.get(0).getLanguageCode());
+        assertEquals("de", tweets.get(1).getLanguageCode());
     }
 }
