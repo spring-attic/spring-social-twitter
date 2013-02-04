@@ -26,6 +26,7 @@ import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} for configuring a {@link TwitterConnectionFactory} bean and a request-scoped {@link Twitter} bean.
@@ -35,13 +36,13 @@ public class TwitterProviderConfigRegistrar extends AbstractProviderConfigRegist
 
 	public TwitterProviderConfigRegistrar() {
 		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterApiHelper.class);
-		try {
-			setAuthenticationServiceClass("org.springframework.social.twitter.security.TwitterAuthenticationService");
-		} catch (ClassNotFoundException shouldntHappen) {
-			// Shouldn't happen unless the class name or package are refactored.
-		}
 	}
-	
+
+	@Override
+	protected Class<?> getAuthenticationServiceClass() {
+		return TwitterAuthenticationService.class;
+	}
+
 	static class TwitterApiHelper implements ApiHelper<Twitter> {
 		
 		private final UsersConnectionRepository usersConnectionRepository;
