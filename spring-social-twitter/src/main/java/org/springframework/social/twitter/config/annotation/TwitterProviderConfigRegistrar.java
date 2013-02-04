@@ -23,6 +23,7 @@ import org.springframework.social.config.annotation.AbstractProviderConfigRegist
 import org.springframework.social.config.xml.ApiHelper;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
@@ -39,7 +40,7 @@ public class TwitterProviderConfigRegistrar extends AbstractProviderConfigRegist
 	}
 
 	@Override
-	protected Class<?> getAuthenticationServiceClass() {
+	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
 		return TwitterAuthenticationService.class;
 	}
 
