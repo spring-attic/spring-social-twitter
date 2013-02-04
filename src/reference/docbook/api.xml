@@ -72,6 +72,8 @@ public interface Twitter {
 
    UserOperations userOperations();
 
+   AdvancedSearchOperations advancedSearchOperations();
+
 }]]>
 	</programlisting>		
 	
@@ -118,6 +120,10 @@ public interface Twitter {
 					<entry>SearchOperations</entry>
 					<entry>Searching tweets and viewing search trends</entry>
 				</row>
+                <row>
+                    <entry>AdvancedSearchOperations</entry>
+                    <entry>Advanced tweets searching</entry>
+                </row>
 				<row>
 					<entry>TimelineOperations</entry>
 					<entry>Reading timelines and posting tweets.</entry>
@@ -443,7 +449,37 @@ SearchResults results = twitter.searchOperations().search("#spring", 2, 10, 1459
 		</para>
 	</section>
 
-	<section id="twitter-directMessages">
+    <section id="twitter-advanced-search">
+        <title>Using advanced search</title>
+
+        <para>
+            <interfacename>AdvancedSearchOperations</interfacename> provides you with more enhanced search feature. It allows you to add one or more search parameters.
+        </para>
+
+        <para>
+            For example, searching tweets containing "#spring" keyword in Dutch language:
+        </para>
+
+        <programlisting language="java"><![CDATA[
+SearchResults results = twitter.advancedSearchOperations().setLang("nl").search("#spring");]]>
+        </programlisting>
+
+        <para>
+            It is also possible to combine search parameters in any combination:
+        </para>
+
+        <programlisting language="java"><![CDATA[
+SearchResults searchResults = twitterTemplate.advancedSearchOperations()
+                .setGeoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE))
+                .setLang("nl")
+                .setResultType(AdvancedSearchOperations.ResultType.RECENT)
+                .setCount(25)
+                .setIncludeEntities(false)
+                .search("#spring");]]>
+        </programlisting>
+    </section>
+
+    <section id="twitter-directMessages">
 		<title>Sending and receiving direct messages</title>
 		
 		<para>
