@@ -13,174 +13,219 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter.api;
+package org.springframework.social.twitter.api.impl;
 
+import org.springframework.social.twitter.api.GeoCode;
 import java.util.Date;
 
 /**
- * Interface defining the advanced search operations for Twitter.
+ * Twitter search parameters.
  * See specifications: https://dev.twitter.com/docs/api/1.1/get/search/tweets
  *
  * @author Rosty Kerei
  */
-public interface AdvancedSearchOperations {
+public class SearchParameters  {
+
+    private String query;
+    private GeoCode geoCode;
+    private String lang;
+    private String locale;
+    private ResultType resultType;
+    private Integer count;
+    private Date untilDate;
+    private Long sinceId;
+    private Long maxId;
+    private boolean includeEntities = true;
 
     /**
-     * Searches Twitter
+     * Constructs SearchParameter object
      *
-     * @param query The search query string
-     * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
-     * @throws org.springframework.social.ApiException if there is an error while communicating with Twitter.
-     * @throws org.springframework.social.MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
-     * @see SearchResults
-     * @see Tweet
+     * @param query Search keywords
      */
-    SearchResults search(String query);
+    public SearchParameters(String query) {
+        this.query = query;
+    }
 
     /**
      * Sets optional <code>geocode</code> parameter. Restricts tweets by users located within a given radius
      * of the given latitude/longitude.
      *
      * @param geoCode GeoCode object stuffed with coordinates and radius
-     * @return
      * @see GeoCode
      */
-    <T extends AdvancedSearchOperations> T setGeoCode(GeoCode geoCode);
+    public void setGeoCode(GeoCode geoCode) {
+        this.geoCode = geoCode;
+    }
 
     /**
      * Sets optional <code>lang</code> parameter. Restricts tweets to the given language, given by an ISO 639-1 code.
      *
      * @param lang an ISO 639-1 language code
-     * @return
      */
-    <T extends AdvancedSearchOperations> T setLang(String lang);
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
 
     /**
      * Sets optional <code>locale</code> parameter. Specify the language of the query you are sending
      * (only ja is currently effective).
      *
      * @param locale locale
-     * @return
      */
-    <T extends AdvancedSearchOperations> T setLocale(String locale);
+    public void setLocale(String locale) {
+        this.locale = locale;
+    }
 
     /**
      * Sets optional <code>result_type</code> parameter. Specifies what type of search results. Default is <code>mixed</code>.
      *
      * @param resultType type of preferred result type
-     * @return
      * @see ResultType
      */
-    <T extends AdvancedSearchOperations> T setResultType(ResultType resultType);
+    public void setResultType(ResultType resultType) {
+        this.resultType = resultType;
+    }
 
     /**
      * Sets optional <code>count</code> parameter. Restricts the number of tweets to return, up to a maximum of 100.
      * Defaults to 15.
      *
      * @param count number of tweets to return
-     * @return
      */
-    <T extends AdvancedSearchOperations> T setCount(int count);
+    public void setCount(int count) {
+        this.count = count;
+    }
 
     /**
      * Sets optional <code>until</code> parameter. Restricts search to tweets generated before the given date.
      *
      * @param untilDate date to search until
-     * @return
      */
-    <T extends AdvancedSearchOperations> T setUntil(Date untilDate);
+    public void setUntil(Date untilDate) {
+        this.untilDate = untilDate;
+    }
 
     /**
      * Sets optional <code>since_id</code> parameter. Restricts search results with an ID greater than the specified one.
      *
-     * @param sinceId The minimum {@link Tweet} ID to return in the results
-     * @return
+     * @param sinceId The minimum {@link org.springframework.social.twitter.api.Tweet} ID to return in the results
      */
-    <T extends AdvancedSearchOperations> T setSinceId(long sinceId);
+    public void setSinceId(long sinceId) {
+        this.sinceId = sinceId;
+    }
 
     /**
      * Sets optional <code>max_id</code> parameter. Restricts search results with an ID less or equel than the specified one.
      *
-     * @param maxId The maximum {@link Tweet} ID to return in the results
-     * @return
+     * @param maxId The maximum {@link org.springframework.social.twitter.api.Tweet} ID to return in the results
      */
-    <T extends AdvancedSearchOperations> T setMaxId(long maxId);
+    public void setMaxId(long maxId) {
+        this.maxId = maxId;
+    }
 
     /**
      * Sets optional <code>include_entities</code> parameter. The entities node will be excluded when set to false.
      *
-     * @param includeEntities
-     * @return
+     * @param includeEntities Include entities node
      */
-    <T extends AdvancedSearchOperations> T setIncludeEntities(boolean includeEntities);
+    public void setIncludeEntities(boolean includeEntities) {
+        this.includeEntities = includeEntities;
+    }
+
+    /**
+     * Returns query, <code>q</code> parameter
+     *
+     * @return query
+     */
+    public String getQuery() {
+        return this.query;
+    }
 
     /**
      * Returns <code>geo_code</code> search parameter
      *
      * @return geoCode
      */
-    GeoCode getGeoCode();
+    public GeoCode getGeoCode() {
+        return this.geoCode;
+    }
 
     /**
      * Returns <code>lang</code> search parameter
      *
      * @return lang
      */
-    String getLang();
+    public String getLang() {
+        return this.lang;
+    }
 
     /**
      * Returns <code>locale</code> search parameter
      *
      * @return locale
      */
-    String getLocale();
+    public String getLocale() {
+        return this.locale;
+    }
 
     /**
      * Returns <code>result_type</code> search parameter
      *
      * @return result_type
      */
-    ResultType getResultType();
+    public ResultType getResultType() {
+        return this.resultType;
+    }
 
     /**
      * Returns <code>count</code> search parameter
      *
      * @return count
      */
-    int getCount();
+    public Integer getCount() {
+        return this.count;
+    }
 
     /**
      * Returns <code>until</code> search parameter
      *
      * @return until
      */
-    Date getUntil();
+    public Date getUntil() {
+        return this.untilDate;
+    }
 
     /**
      * Returns <code>since_id</code> search parameter
      *
      * @return since_id
      */
-    long getSinceId();
+    public Long getSinceId() {
+        return this.sinceId;
+    }
 
     /**
      * Returns <code>max_id</code> search parameter
      *
      * @return max_id
      */
-    long getMaxId();
+    public Long getMaxId() {
+        return this.maxId;
+    }
 
     /**
      * Returns <code>include_entities</code> search parameter
      *
      * @return include_entities
      */
-    boolean isIncludeEntities();
+    public boolean isIncludeEntities() {
+        return this.includeEntities;
+    }
 
     /**
      * ResultType enumeration. Used by setResultType/getResultType
      */
-    public enum ResultType {
+    public static enum ResultType {
         MIXED("mixed"), RECENT("recent"), POPULAR("popular");
 
         private String resultType;

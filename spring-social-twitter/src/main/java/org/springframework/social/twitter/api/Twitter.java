@@ -73,8 +73,4 @@ public interface Twitter extends ApiBinding {
 	 */
 	RestOperations restOperations();
 
-    /**
-     * Returns the portion of the Twitter API containing the advanced search operations.
-     */
-    AdvancedSearchOperations advancedSearchOperations();
 }

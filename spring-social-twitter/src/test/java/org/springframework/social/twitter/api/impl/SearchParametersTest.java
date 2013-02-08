@@ -17,7 +17,6 @@ package org.springframework.social.twitter.api.impl;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.springframework.social.twitter.api.AdvancedSearchOperations;
 import org.springframework.social.twitter.api.GeoCode;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Tweet;
@@ -34,73 +33,83 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 /**
- * Unit tests for advanced search
+ * Unit tests for advanced search using SearchParameter
  *
  * @author Rosty Kerei
  */
-public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
+public class SearchParametersTest extends AbstractTwitterApiTest {
 
     @Test
     public void testSimple() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        SearchResults searchResults = twitter.advancedSearchOperations().search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals("#spring", p.getQuery());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testGeoCode() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&geocode=37.781157%2C-122.39872%2C10mi"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&geocode=37.781157%2C-122.39872%2C10mi&count=50"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
+        SearchParameters p = new SearchParameters("#spring");
+        p.setGeoCode(new GeoCode(37.781157, -122.39872, 10, GeoCode.Unit.MILE));
 
-        SearchResults searchResults = aso.setGeoCode(new GeoCode(37.781157, -122.39872, 10, GeoCode.Unit.MILE))
-                .search("#spring");
+        SearchResults searchResults = twitter.searchOperations().search(p);
 
-        assertEquals("37.781157,-122.39872,10mi", aso.getGeoCode().toString());
+        assertEquals("37.781157,-122.39872,10mi", p.getGeoCode().toString());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testLang() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&lang=nl"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&lang=nl&count=50"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setLang("nl").search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setLang("nl");
 
-        assertEquals("nl", aso.getLang());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals("nl", p.getLang());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testLocale() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&locale=ja"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&locale=ja&count=50"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setLocale("ja").search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setLocale("ja");
 
-        assertEquals("ja", aso.getLocale());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals("ja", p.getLocale());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testResultType() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&result_type=popular"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&result_type=popular&count=50"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setResultType(AdvancedSearchOperations.ResultType.POPULAR).search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setResultType(SearchParameters.ResultType.POPULAR);
 
-        assertEquals(AdvancedSearchOperations.ResultType.POPULAR, aso.getResultType());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals(SearchParameters.ResultType.POPULAR, p.getResultType());
         assertSearchTweets(searchResults.getTweets());
     }
 
@@ -110,63 +119,72 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setCount(25).search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setCount(25);
 
-        assertEquals(25, aso.getCount());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals(new Integer(25), p.getCount());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testUntil() throws ParseException {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&until=2012-01-31"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50&until=2012-01-31"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setUntil(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"))
-                .search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setUntil(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"));
 
-        assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"), aso.getUntil());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"), p.getUntil());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testSinceId() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&since_id=10"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50&since_id=10"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setSinceId(10).search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setSinceId(10);
 
-        assertEquals(10, aso.getSinceId());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals(new Long(10), p.getSinceId());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testMaxId() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&max_id=999"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50&max_id=999"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setMaxId(999).search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setMaxId(999);
 
-        assertEquals(999, aso.getMaxId());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertEquals(new Long(999), p.getMaxId());
         assertSearchTweets(searchResults.getTweets());
     }
 
     @Test
     public void testIncludeEntities() {
-        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&include_entities=false"))
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50&include_entities=false"))
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        AdvancedSearchOperations aso = twitter.advancedSearchOperations();
-        SearchResults searchResults = aso.setIncludeEntities(false).search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setIncludeEntities(false);
 
-        assertFalse(aso.isIncludeEntities());
+        SearchResults searchResults = twitter.searchOperations().search(p);
+
+        assertFalse(p.isIncludeEntities());
         assertSearchTweets(searchResults.getTweets());
     }
 
@@ -178,17 +196,18 @@ public class AdvancedSearchTemplateTest extends AbstractTwitterApiTest {
                 .andExpect(method(GET))
                 .andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 
-        SearchResults searchResults = twitter.advancedSearchOperations()
-                .setGeoCode(new GeoCode(37.781157, -122.398720, 10, GeoCode.Unit.MILE))
-                .setLang("nl")
-                .setLocale("ja")
-                .setResultType(AdvancedSearchOperations.ResultType.POPULAR)
-                .setCount(25)
-                .setUntil(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"))
-                .setSinceId(10)
-                .setMaxId(999)
-                .setIncludeEntities(false)
-                .search("#spring");
+        SearchParameters p = new SearchParameters("#spring");
+        p.setGeoCode(new GeoCode(37.781157, -122.398720, 10, GeoCode.Unit.MILE));
+        p.setLang("nl");
+        p.setLocale("ja");
+        p.setResultType(SearchParameters.ResultType.POPULAR);
+        p.setCount(25);
+        p.setUntil(new SimpleDateFormat("yyyy-MM-dd").parse("2012-01-31"));
+        p.setSinceId(10);
+        p.setMaxId(999);
+        p.setIncludeEntities(false);
+
+        SearchResults searchResults = twitter.searchOperations().search(p);
 
         assertSearchTweets(searchResults.getTweets());
     }

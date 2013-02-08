@@ -28,7 +28,6 @@ import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.UserOperations;
-import org.springframework.social.twitter.api.AdvancedSearchOperations;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -128,10 +127,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	public RestOperations restOperations() {
 		return getRestTemplate();
 	}
-
-    public AdvancedSearchOperations advancedSearchOperations() {
-        return new AdvancedSearchTemplate(getRestTemplate(), isAuthorized());
-    }
 
 	// AbstractOAuth1ApiBinding hooks
 	
