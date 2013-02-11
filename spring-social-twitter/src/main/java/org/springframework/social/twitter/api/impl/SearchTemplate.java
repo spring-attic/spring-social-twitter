@@ -41,75 +41,29 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(String query) {
-        return this.search(new SearchParameters(query));
+		return this.search(new SearchParameters(query));
 	}
 
 	public SearchResults search(String query, int resultsPerPage) {
-        SearchParameters p = new SearchParameters(query);
-        p.setCount(resultsPerPage);
-
-        return this.search(p);
+		SearchParameters p = new SearchParameters(query);
+		p.setCount(resultsPerPage);
+		return this.search(p);
 	}
 
 	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
-        SearchParameters p = new SearchParameters(query);
-        p.setCount(resultsPerPage);
-        p.setSinceId(sinceId);
-        p.setMaxId(maxId);
-
-        return this.search(p);
+		SearchParameters p = new SearchParameters(query);
+		p.setCount(resultsPerPage);
+		p.setSinceId(sinceId);
+		p.setMaxId(maxId);
+		return this.search(p);
 	}
 
-    public SearchResults search(SearchParameters searchParameters) {
-        requireAuthorization();
-
-        Assert.notNull(searchParameters);
-
-        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-
-        parameters.set("q", searchParameters.getQuery());
-
-        if (searchParameters.getGeoCode() != null) {
-            parameters.set("geocode", searchParameters.getGeoCode().toString());
-        }
-
-        if (searchParameters.getLang() != null) {
-            parameters.set("lang", searchParameters.getLang());
-        }
-
-        if (searchParameters.getLocale() != null) {
-            parameters.set("locale", searchParameters.getLocale());
-        }
-
-        if (searchParameters.getResultType() != null) {
-            parameters.set("result_type", searchParameters.getResultType().toString());
-        }
-
-        if (searchParameters.getCount() != null) {
-            parameters.set("count", String.valueOf(searchParameters.getCount()));
-        }
-        else {
-            parameters.set("count", String.valueOf(DEFAULT_RESULTS_PER_PAGE));
-        }
-
-        if (searchParameters.getUntil() != null) {
-            parameters.set("until", new SimpleDateFormat("yyyy-MM-dd").format(searchParameters.getUntil()));
-        }
-
-        if (searchParameters.getSinceId() != null) {
-            parameters.set("since_id", String.valueOf(searchParameters.getSinceId()));
-        }
-
-        if (searchParameters.getMaxId() != null) {
-            parameters.set("max_id", String.valueOf(searchParameters.getMaxId()));
-        }
-
-        if (!searchParameters.isIncludeEntities()) {
-            parameters.set("include_entities", "false");
-        }
-
-        return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
-    }
+	public SearchResults search(SearchParameters searchParameters) {
+		requireAuthorization();
+		Assert.notNull(searchParameters);
+		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
+		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
+	}
 
 	public List<SavedSearch> getSavedSearches() {
 		requireAuthorization();
@@ -148,5 +102,38 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		return restTemplate.getForObject(buildUri("trends/place.json", parameters), LocalTrendsHolder.class).getTrends();
 	}
 
-    static final int DEFAULT_RESULTS_PER_PAGE = 50;
+	// private helpers
+
+	private MultiValueMap<String, String> buildQueryParametersFromSearchParameters(SearchParameters searchParameters) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("q", searchParameters.getQuery());
+		if (searchParameters.getGeoCode() != null) {
+			parameters.set("geocode", searchParameters.getGeoCode().toString());
+		}
+		if (searchParameters.getLang() != null) {
+			parameters.set("lang", searchParameters.getLang());
+		}
+		if (searchParameters.getLocale() != null) {
+			parameters.set("locale", searchParameters.getLocale());
+		}
+		if (searchParameters.getResultType() != null) {
+			parameters.set("result_type", searchParameters.getResultType().toString());
+		}
+		parameters.set("count", searchParameters.getCount() != null ? String.valueOf(searchParameters.getCount()) : String.valueOf(DEFAULT_RESULTS_PER_PAGE));
+		if (searchParameters.getUntil() != null) {
+			parameters.set("until", new SimpleDateFormat("yyyy-MM-dd").format(searchParameters.getUntil()));
+		}
+		if (searchParameters.getSinceId() != null) {
+			parameters.set("since_id", String.valueOf(searchParameters.getSinceId()));
+		}
+		if (searchParameters.getMaxId() != null) {
+			parameters.set("max_id", String.valueOf(searchParameters.getMaxId()));
+		}
+		if (!searchParameters.isIncludeEntities()) {
+			parameters.set("include_entities", "false");
+		}
+		return parameters;
+	}
+
+	static final int DEFAULT_RESULTS_PER_PAGE = 50;
 }

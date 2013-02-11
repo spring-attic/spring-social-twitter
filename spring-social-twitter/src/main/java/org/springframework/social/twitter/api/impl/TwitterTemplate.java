@@ -91,7 +91,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 		initSubApis();
 	}
 
-
 	public TimelineOperations timelineOperations() {
 		return timelineOperations;
 	}

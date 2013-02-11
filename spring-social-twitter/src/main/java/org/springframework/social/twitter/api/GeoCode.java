@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,52 +20,52 @@ package org.springframework.social.twitter.api;
  */
 public class GeoCode {
 
-    private double latitude;
-    private double longitude;
-    private int radius;
-    private Unit unit;
+	private double latitude;
+	private double longitude;
+	private int radius;
+	private Unit unit;
 
-    /**
-     * Creates GeoCode object with the default unit of measure is Unit.KILOMETER
-     *
-     * @param latitude
-     * @param longitude
-     * @param radius
-     */
-    public GeoCode(double latitude, double longitude, int radius) {
-        this(latitude, longitude, radius, Unit.KILOMETER);
-    }
+	/**
+	 * Creates GeoCode object with the default unit of measure is Unit.KILOMETER
+	 *
+	 * @param latitude
+	 * @param longitude
+	 * @param radius
+	 */
+	public GeoCode(double latitude, double longitude, int radius) {
+		this(latitude, longitude, radius, Unit.KILOMETER);
+	}
 
-    public GeoCode(double latitude, double longitude, int radius, Unit unit) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.radius = radius;
-        this.unit = unit;
-    }
+	public GeoCode(double latitude, double longitude, int radius, Unit unit) {
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.radius = radius;
+		this.unit = unit;
+	}
 
-    @Override
-    public String toString() {
-        return new StringBuilder()
-                        .append(this.latitude).append(",")
-                        .append(this.longitude).append(",")
-                        .append(this.radius)
-                        .append(this.unit.toString())
-                        .toString();
-    }
+	@Override
+	public String toString() {
+		return new StringBuilder()
+						.append(this.latitude).append(",")
+						.append(this.longitude).append(",")
+						.append(this.radius)
+						.append(this.unit.toString())
+						.toString();
+	}
 
-    public enum Unit {
-        KILOMETER("km"), MILE("mi");
+	public enum Unit {
+		KILOMETER("km"), MILE("mi");
 
-        private String unit;
+		private String unit;
 
-        private Unit(String unit) {
-            this.unit = unit;
-        }
+		private Unit(String unit) {
+			this.unit = unit;
+		}
 
-        @Override
-        public String toString() {
-            return this.unit;
-        }
-    }
+		@Override
+		public String toString() {
+			return this.unit;
+		}
+	}
 
 }

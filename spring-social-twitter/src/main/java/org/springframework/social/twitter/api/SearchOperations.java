@@ -66,16 +66,16 @@ public interface SearchOperations {
 	 */
 	SearchResults search(String query, int pageSize, long sinceId, long maxId);
 
-    /**
-     * Searches Twitter, returning a set of results
-     * @param searchParameters The search parameters
-     * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
-     * @throws ApiException if there is an error while communicating with Twitter.
-     * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
-     * @see SearchResults
-     * @see Tweet
-     */
-    SearchResults search(SearchParameters searchParameters);
+	/**
+	 * Searches Twitter, returning a set of results
+	 * @param searchParameters The search parameters
+	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @see SearchResults
+	 * @see Tweet
+	 */
+	SearchResults search(SearchParameters searchParameters);
 	/**
 	 * Retrieves the authenticating user's saved searches.
 	 * @return a list of SavedSearch items

@@ -72,8 +72,6 @@ public interface Twitter {
 
    UserOperations userOperations();
 
-   AdvancedSearchOperations advancedSearchOperations();
-
 }]]>
 	</programlisting>		
 	
@@ -120,10 +118,6 @@ public interface Twitter {
 					<entry>SearchOperations</entry>
 					<entry>Searching tweets and viewing search trends</entry>
 				</row>
-                <row>
-                    <entry>AdvancedSearchOperations</entry>
-                    <entry>Advanced tweets searching</entry>
-                </row>
 				<row>
 					<entry>TimelineOperations</entry>
 					<entry>Reading timelines and posting tweets.</entry>
