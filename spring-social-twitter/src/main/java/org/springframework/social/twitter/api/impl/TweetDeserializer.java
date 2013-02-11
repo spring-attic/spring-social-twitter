@@ -85,6 +85,9 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		tweet.setRetweeted(retweeted);
 		Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedStatusNode) : null;
 		tweet.setRetweetedStatus(retweetedStatus);
+		JsonNode favoritedNode = tree.get("favorited");
+		boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.getBooleanValue() : false;
+		tweet.setFavorited(favorited);
 		Entities entities = toEntities(tree.get("entities"));
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);

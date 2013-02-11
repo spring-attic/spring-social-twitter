@@ -11,6 +11,7 @@ Miscellaneous
 Improvements
    * Added ability to perform advanced searches, including searches that
      specify the language of the Tweet. (SOCIALTW-41)
+   * Added favorited field to Tweet object. (SOCIALTW-43)
 
 Spring Social 1.1.0 Milestone 1 (November 26, 2012)
 ==================================================
