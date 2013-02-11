@@ -4,6 +4,10 @@ Miscellaneous
    * Changes to support Spring Social/Spring Security integration.
      (SOCIAL-232)
 
+ Bug Fixes
+  * Set character set to UTF-8 for string parts of multipart messages to allow for
+    Korean and other characters to be posted in status updates. (SOCIALTW-37)
+
 Improvements
    * Added ability to perform advanced searches, including searches that
      specify the language of the Tweet. (SOCIALTW-41)
