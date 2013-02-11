@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.twitter.api.impl.SearchParameters;
 
 
 /**
@@ -64,7 +65,17 @@ public interface SearchOperations {
 	 * @see Tweet
 	 */
 	SearchResults search(String query, int pageSize, long sinceId, long maxId);
-	
+
+	/**
+	 * Searches Twitter, returning a set of results
+	 * @param searchParameters The search parameters
+	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @see SearchResults
+	 * @see Tweet
+	 */
+	SearchResults search(SearchParameters searchParameters);
 	/**
 	 * Retrieves the authenticating user's saved searches.
 	 * @return a list of SavedSearch items

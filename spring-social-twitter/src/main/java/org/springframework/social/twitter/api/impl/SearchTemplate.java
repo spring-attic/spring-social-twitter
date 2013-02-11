@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,14 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Trends;
+import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -39,24 +41,27 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(String query) {
-		return search(query, DEFAULT_RESULTS_PER_PAGE, 0, 0);
+		return this.search(new SearchParameters(query));
 	}
 
 	public SearchResults search(String query, int resultsPerPage) {
-		return search(query, resultsPerPage, 0, 0);
+		SearchParameters p = new SearchParameters(query);
+		p.setCount(resultsPerPage);
+		return this.search(p);
 	}
 
 	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
+		SearchParameters p = new SearchParameters(query);
+		p.setCount(resultsPerPage);
+		p.setSinceId(sinceId);
+		p.setMaxId(maxId);
+		return this.search(p);
+	}
+
+	public SearchResults search(SearchParameters searchParameters) {
 		requireAuthorization();
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("q", query);
-		parameters.set("count", String.valueOf(resultsPerPage));
-		if (sinceId > 0) {
-			parameters.set("since_id", String.valueOf(sinceId));
-		}
-		if (maxId > 0) {
-			parameters.set("max_id", String.valueOf(maxId));
-		}
+		Assert.notNull(searchParameters);
+		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
 		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
 
@@ -95,6 +100,39 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 			parameters.set("exclude", "hashtags");
 		}
 		return restTemplate.getForObject(buildUri("trends/place.json", parameters), LocalTrendsHolder.class).getTrends();
+	}
+
+	// private helpers
+
+	private MultiValueMap<String, String> buildQueryParametersFromSearchParameters(SearchParameters searchParameters) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("q", searchParameters.getQuery());
+		if (searchParameters.getGeoCode() != null) {
+			parameters.set("geocode", searchParameters.getGeoCode().toString());
+		}
+		if (searchParameters.getLang() != null) {
+			parameters.set("lang", searchParameters.getLang());
+		}
+		if (searchParameters.getLocale() != null) {
+			parameters.set("locale", searchParameters.getLocale());
+		}
+		if (searchParameters.getResultType() != null) {
+			parameters.set("result_type", searchParameters.getResultType().toString());
+		}
+		parameters.set("count", searchParameters.getCount() != null ? String.valueOf(searchParameters.getCount()) : String.valueOf(DEFAULT_RESULTS_PER_PAGE));
+		if (searchParameters.getUntil() != null) {
+			parameters.set("until", new SimpleDateFormat("yyyy-MM-dd").format(searchParameters.getUntil()));
+		}
+		if (searchParameters.getSinceId() != null) {
+			parameters.set("since_id", String.valueOf(searchParameters.getSinceId()));
+		}
+		if (searchParameters.getMaxId() != null) {
+			parameters.set("max_id", String.valueOf(searchParameters.getMaxId()));
+		}
+		if (!searchParameters.isIncludeEntities()) {
+			parameters.set("include_entities", "false");
+		}
+		return parameters;
 	}
 
 	static final int DEFAULT_RESULTS_PER_PAGE = 50;

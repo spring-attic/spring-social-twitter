@@ -412,7 +412,7 @@ SearchResults results = twitter.searchOperations().search("#spring");]]>
 		</programlisting>
 		
 		<para>
-			The <methodname>search()</methodname> method will return a <classname>SearchResults</classname> object that includes a list of 50 most recent matching tweets as well as some metadata concerning the result set. 
+			The <methodname>search()</methodname> method will return a <classname>SearchResults</classname> object that includes a list of 50 most recent matching tweets as well as some metadata concerning the result set.
 			The metadata includes the maximum tweet ID in the search results list as well as the ID of a tweet that precedes the resulting tweets. 
 			The <code>sinceId</code> and <code>maxId</code> properties effectively define the boundaries of the result set. 
 			Additionally, there's a boolean <code>lastPage</code> property that, if <code>true</code>, indicates that this result set is the page of results.
@@ -443,7 +443,41 @@ SearchResults results = twitter.searchOperations().search("#spring", 2, 10, 1459
 		</para>
 	</section>
 
-	<section id="twitter-directMessages">
+    <section id="twitter-advanced-search">
+        <title>Advanced search</title>
+
+        <para>
+            For more enhanced search you can also use <classname>SearchParameters</classname> object and pass it to <methodname>search()</methodname> method. It allows you to specify more search keys.
+        </para>
+
+        <para>
+            For example, searching tweets containing "#spring" keyword in Dutch language:
+        </para>
+
+        <programlisting language="java"><![CDATA[
+SearchParameters params = new SearchParameters("#spring");
+params.setLang("nl");
+
+SearchResults results = twitter.searchOperations().search(params);]]>
+        </programlisting>
+
+        <para>
+            There are some more search parameters available:
+        </para>
+
+        <programlisting language="java"><![CDATA[
+SearchParameters params = new SearchParameters("#spring");
+params.setGeoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE));
+params.setLang("nl");
+params.setResultType(SearchParameters.ResultType.RECENT);
+params.setCount(25);
+params.setIncludeEntities(false);
+
+SearchResults results = twitter.searchOperations().search(params);]]>
+        </programlisting>
+    </section>
+
+    <section id="twitter-directMessages">
 		<title>Sending and receiving direct messages</title>
 		
 		<para>
