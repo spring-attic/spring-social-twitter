@@ -1,3 +1,13 @@
+Spring Social 1.1.0 Milestone 2 (February 12, 2012)
+===================================================
+Miscellaneous
+   * Changes to support Spring Social/Spring Security integration.
+     (SOCIAL-232)
+
+Improvements
+   * Added ability to perform advanced searches, including searches that
+     specify the language of the Tweet. (SOCIALTW-41)
+
 Spring Social 1.1.0 Milestone 1 (November 26, 2012)
 ==================================================
 Compatibility Notes:
