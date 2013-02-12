@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,13 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.social.twitter.api.ImageSize;
 import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserOperations;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
@@ -57,34 +55,23 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public TwitterProfile getUserProfile(String screenName) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("users/show.json", "screen_name", screenName), TwitterProfile.class);
 	}
 	
 	public TwitterProfile getUserProfile(long userId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("users/show.json", "user_id", String.valueOf(userId)), TwitterProfile.class);
-	}
-	
-	public byte[] getUserProfileImage(String screenName) {
-		return getUserProfileImage(screenName, ImageSize.NORMAL);
-	}
-	
-	public byte[] getUserProfileImage(String screenName, ImageSize size) {
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("size", size.toString().toLowerCase());
-		ResponseEntity<byte[]> response = restTemplate.getForEntity(buildUri("users/profile_image/"+screenName, parameters), byte[].class);
-		if(response.getStatusCode() == HttpStatus.FOUND) {
-			throw new UnsupportedOperationException("Attempt to fetch image resulted in a redirect which could not be followed. Add Apache HttpComponents HttpClient to the classpath " +
-					"to be able to follow redirects.");
-		}
-		return response.getBody();
 	}
 
 	public List<TwitterProfile> getUsers(long... userIds) {
+		requireAuthorization();
 		String joinedIds = ArrayUtils.join(userIds);
 		return restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class);
 	}
 
 	public List<TwitterProfile> getUsers(String... screenNames) {
+		requireAuthorization();
 		String joinedScreenNames = ArrayUtils.join(screenNames);
 		return restTemplate.getForObject(buildUri("users/lookup.json", "screen_name", joinedScreenNames), TwitterProfileList.class);
 	}
@@ -101,14 +88,18 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public List<SuggestionCategory> getSuggestionCategories() {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("users/suggestions.json"), SuggestionCategoryList.class);
 	}
 
 	public List<TwitterProfile> getSuggestions(String slug) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("users/suggestions/" + slug + ".json"), TwitterProfileUsersList.class).getList();
 	}
 
-	public RateLimitStatus getRateLimitStatus() {
-		return restTemplate.getForObject(buildUri("account/rate_limit_status.json"), RateLimitStatus.class);
+	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources) {
+		requireAuthorization();
+		String joinedResources = ArrayUtils.join(resources);
+		return restTemplate.getForObject(buildUri("account/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();
 	}
 }

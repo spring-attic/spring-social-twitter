@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,14 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/**
- * Mixin class for adding Jackson annotations to RateLimitStatus.
- * @author Craig Walls
- */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class RateLimitStatusMixin {
-	
+class MentionEntityMixin {
+
 	@JsonCreator
-	RateLimitStatusMixin(
-			@JsonProperty("hourly_limit") int hourlyLimit,
-			@JsonProperty("remaining_hits") int remainingHits,
-			@JsonProperty("reset_time_in_seconds") long resetTimeInSeconds
-			) {}
+	public MentionEntityMixin(
+			@JsonProperty("id") long id, 
+			@JsonProperty("screen_name") String screenName, 
+			@JsonProperty("name") String name, 
+			@JsonProperty("indices") int[] indices) {}
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@ package org.springframework.social.twitter.api.impl;
 
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
-import static org.springframework.social.test.client.RequestMatchers.*;
-import static org.springframework.social.test.client.ResponseCreators.*;
+import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.MediaType.*;
+import static org.springframework.test.web.client.match.RequestMatchers.*;
+import static org.springframework.test.web.client.response.ResponseCreators.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -38,51 +40,51 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = NotAuthorizedException.class)
 	@Ignore("Come back to this one")
 	public void badOrMissingAccessToken() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 			.andExpect(method(POST))
-			.andExpect(body("status=Some+message"))
-			.andRespond(withResponse("", responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andExpect(content().string("status=Some+message"))
+			.andRespond(withStatus(UNAUTHORIZED).body("").contentType(APPLICATION_JSON));
 		twitter.timelineOperations().updateStatus("Some message");		
 	}
 
 	@Test(expected = MissingAuthorizationException.class)
 	public void missingAccessToken() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("error-no-token"), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andRespond(withStatus(UNAUTHORIZED).body(jsonResource("error-no-token")).contentType(APPLICATION_JSON));
 		unauthorizedTwitter.userOperations().getUserProfile();
 	}
 	
 	@Test(expected = InvalidAuthorizationException.class)
 	public void badAccessToken() { // token is fabricated or fails signature validation
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("error-invalid-token"), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andRespond(withStatus(UNAUTHORIZED).body(jsonResource("error-invalid-token")).contentType(APPLICATION_JSON));
 		twitter.userOperations().getUserProfile();
 	}
 	
 	@Test(expected = RevokedAuthorizationException.class)
 	public void revokedToken() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("error-revoked-token"), responseHeaders, HttpStatus.UNAUTHORIZED, ""));
+			.andRespond(withStatus(UNAUTHORIZED).body(jsonResource("error-revoked-token")).contentType(APPLICATION_JSON));
 		twitter.userOperations().getUserProfile();		
 	}
 
 	@Test(expected = RateLimitExceededException.class)
 	public void enhanceYourCalm() {
-		mockServer.expect(requestTo("https://search.twitter.com/search.json?q=%23spring&rpp=50&page=1"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("{\"error\":\"You have been rate limited. Enhance your calm.\"}", responseHeaders, HttpStatus.valueOf(420), ""));		
+			.andRespond(withStatus(HttpStatus.valueOf(420)).body("{\"error\":\"You have been rate limited. Enhance your calm.\"}").contentType(APPLICATION_JSON));
 		twitter.searchOperations().search("#spring");
 	}
 
 	@Test(expected = InternalServerErrorException.class)
 	public void twitterIsBroken() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/home_timeline.json?count=20&include_entities=true"))
 				.andExpect(method(GET))
-				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR, ""));
+				.andRespond(withServerError().body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
 		} catch (InternalServerErrorException e) {
 			assertEquals("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.", e.getMessage());
@@ -93,9 +95,9 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ServerDownException.class)
 	public void twitterIsDownOrBeingUpgraded() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/home_timeline.json?count=20&include_entities=true"))
 				.andExpect(method(GET))
-				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.BAD_GATEWAY, ""));
+				.andRespond(withStatus(BAD_GATEWAY).body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
 		} catch (ServerDownException e) {
 			assertEquals("Twitter is down or is being upgraded.", e.getMessage());
@@ -106,9 +108,9 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ServerOverloadedException.class)
 	public void twitterIsOverloaded() {
 		try {
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/home_timeline.json?count=20&include_entities=true"))
 				.andExpect(method(GET))
-				.andRespond(withResponse("Non-JSON body", responseHeaders, HttpStatus.SERVICE_UNAVAILABLE, ""));
+				.andRespond(withStatus(SERVICE_UNAVAILABLE).body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
 		} catch (ServerDownException e) {
 			assertEquals("Twitter is overloaded with requests. Try again later.", e.getMessage());
@@ -119,9 +121,9 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ApiException.class)
 	public void nonJSONErrorResponse() {
 		try { 
-			mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json?page=1&count=20"))
+			mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/home_timeline.json?count=20&include_entities=true"))
 				.andExpect(method(GET))
-				.andRespond(withResponse("<h1>HTML response</h1>", responseHeaders, HttpStatus.BAD_REQUEST, ""));
+				.andRespond(withBadRequest().body("<h1>HTML response</h1>").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
 		} catch (ApiException e) {
 			assertEquals("Error consuming Twitter REST API", e.getMessage());
@@ -132,19 +134,26 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 	@Test(expected = ApiException.class)
 	@Ignore("TODO: Need to handle cases where there isn't an error, but the body is unparseable.")
 	public void unparseableSuccessResponse() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/home_timeline.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/home_timeline.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse("Unparseable {text}", responseHeaders, HttpStatus.OK, ""));
+			.andRespond(withSuccess("Unparseable {text}", APPLICATION_JSON));
 		twitter.timelineOperations().getHomeTimeline();		
 	}
 	
 	@Test(expected = RateLimitExceededException.class)
 	public void dailyStatusLimitExceeded() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/statuses/update.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 			.andExpect(method(POST))
-			.andExpect(body("status=Some+message"))
-			.andRespond(withResponse("{\"error\":\"User is over daily status update limit.\", \"request\":\"/1/statuses/update.json\"}", responseHeaders, HttpStatus.FORBIDDEN, ""));
+			.andExpect(content().string("status=Some+message"))
+			.andRespond(withStatus(FORBIDDEN).body("{\"error\":\"User is over daily status update limit.\", \"request\":\"/1/statuses/update.json\"}").contentType(APPLICATION_JSON));
 		twitter.timelineOperations().updateStatus("Some message");				
 	}
 
+	@Test(expected = RateLimitExceededException.class)
+	public void hourlyRateLimitExceeded() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
+			.andExpect(method(GET))
+			.andRespond(withBadRequest().body("{\"error\":\"Rate limit exceeded. Clients may not make more than 350 requests per hour.\"}").contentType(APPLICATION_JSON));
+		twitter.userOperations().getUserProfile();
+	}
 }

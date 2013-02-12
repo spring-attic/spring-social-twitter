@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.twitter.api.impl.SearchParameters;
 
 
 /**
@@ -32,6 +33,7 @@ public interface SearchOperations {
 	 * @param query The search query string
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -40,30 +42,40 @@ public interface SearchOperations {
 	/**
 	 * Searches Twitter, returning a specific page out of the complete set of results.
 	 * @param query The search query string
-	 * @param page The page to return
-	 * @param pageSize The number of {@link Tweet}s per page
+	 * @param pageSize The number of {@link Tweet}s per query
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
-	SearchResults search(String query, int page, int pageSize);
+	SearchResults search(String query, int pageSize);
 
 	/**
 	 * Searches Twitter, returning a specific page out of the complete set of
 	 * results. Results are filtered to those whose ID falls between sinceId and maxId.
 	 * @param query The search query string
-	 * @param page The page to return
-	 * @param pageSize The number of {@link Tweet}s per page
+	 * @param pageSize The number of {@link Tweet}s per query
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
-	SearchResults search(String query, int page, int pageSize, long sinceId, long maxId);
-	
+	SearchResults search(String query, int pageSize, long sinceId, long maxId);
+
+	/**
+	 * Searches Twitter, returning a set of results
+	 * @param searchParameters The search parameters
+	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @see SearchResults
+	 * @see Tweet
+	 */
+	SearchResults search(SearchParameters searchParameters);
 	/**
 	 * Retrieves the authenticating user's saved searches.
 	 * @return a list of SavedSearch items
@@ -99,62 +111,13 @@ public interface SearchOperations {
 	void deleteSavedSearch(long searchId);
 
 	/**
-	 * Retrieves the top 20 trending topics, hourly for the past 24 hours.
-	 * This list includes hashtagged topics.
-	 * @return a list of Trends objects, one for each hour in the past 24 hours, ordered with the most recent hour first.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	List<Trends> getDailyTrends();
-
-	/**
-	 * Retrieves the top 20 trending topics, hourly for the past 24 hours.
-	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
-	 * @return a list of Trends objects, one for each hour in the past 24 hours, ordered with the most recent hour first.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	List<Trends> getDailyTrends(boolean excludeHashtags);
-	
-	/**
-	 * Retrieves the top 20 trending topics, hourly for a 24-hour period starting at the specified date.
-	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
-	 * @param startDate the date to start retrieving trending data for, in MM-DD-YYYY format.
-	 * @return a list of Trends objects, one for each hour in the given 24 hours, ordered with the most recent hour first.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	List<Trends> getDailyTrends(boolean excludeHashtags, String startDate);
-
-	/**
-	 * Retrieves the top 30 trending topics for each day in the past week.
-	 * This list includes hashtagged topics.
-	 * @return a list of Trends objects, one for each day in the past week, ordered with the most recent day first.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	List<Trends> getWeeklyTrends();
-
-	/**
-	 * Retrieves the top 30 trending topics for each day in the past week.
-	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
-	 * @return a list of Trends objects, one for each day in the past week, ordered with the most recent day first.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	List<Trends> getWeeklyTrends(boolean excludeHashtags);
-	
-	/**
-	 * Retrieves the top 30 trending topics for each day in a given week.
-	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
-	 * @param startDate the date to start retrieving trending data for, in MM-DD-YYYY format.
-	 * @return a list of Trends objects, one for each day in the given week, ordered with the most recent day first.
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	List<Trends> getWeeklyTrends(boolean excludeHashtags, String startDate);
-
-	/**
 	 * Retrieves the top 10 trending topics for a given location, identified by its "Where on Earth" (WOE) ID.
 	 * This includes hashtagged topics.
 	 * See http://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @return A Trends object with the top 10 trending topics for the location.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Trends getLocalTrends(long whereOnEarthId);
 
@@ -165,6 +128,7 @@ public interface SearchOperations {
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return A Trends object with the top 10 trending topics for the given location.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags);
 

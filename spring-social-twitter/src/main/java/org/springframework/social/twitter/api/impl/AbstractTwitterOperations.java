@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ class AbstractTwitterOperations {
 		return URIBuilder.fromUri(API_URL_BASE + path).queryParams(parameters).build();
 	}
 	
-	private static final String API_URL_BASE = "https://api.twitter.com/1/";
+	private static final String API_URL_BASE = "https://api.twitter.com/1.1/";
 
 	private static final LinkedMultiValueMap<String, String> EMPTY_PARAMETERS = new LinkedMultiValueMap<String, String>();
 

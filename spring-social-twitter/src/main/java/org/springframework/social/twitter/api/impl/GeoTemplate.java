@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 	}
 
 	public Place getPlace(String placeId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("geo/id/" + placeId + ".json"), Place.class);
 	}
 	
@@ -44,6 +45,7 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 	}
 	
 	public List<Place> reverseGeoCode(double latitude, double longitude, PlaceType granularity, String accuracy) {
+		requireAuthorization();
 		MultiValueMap<String, String> parameters = buildGeoParameters(latitude, longitude, granularity, accuracy, null);
 		return restTemplate.getForObject(buildUri("geo/reverse_geocode.json", parameters), PlacesList.class).getList();
 	}
@@ -53,6 +55,7 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 	}
 	
 	public List<Place> search(double latitude, double longitude, PlaceType granularity, String accuracy, String query) {
+		requireAuthorization();
 		MultiValueMap<String, String> parameters = buildGeoParameters(latitude, longitude, granularity, accuracy, query);
 		return restTemplate.getForObject(buildUri("geo/search.json", parameters), PlacesList.class).getList();
 	}
@@ -62,18 +65,18 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 	}
 	
 	public SimilarPlaces findSimilarPlaces(double latitude, double longitude, String name, String streetAddress, String containedWithin) {
+		requireAuthorization();
 		MultiValueMap<String, String> parameters = buildPlaceParameters(latitude, longitude, name, streetAddress, containedWithin);
 		SimilarPlacesResponse response = restTemplate.getForObject(buildUri("geo/similar_places.json", parameters), SimilarPlacesResponse.class);
-		PlacePrototype placePrototype = new PlacePrototype(response.getToken(), latitude, longitude, name, streetAddress, containedWithin);
-		
+		PlacePrototype placePrototype = new PlacePrototype(response.getToken(), latitude, longitude, name, streetAddress, containedWithin);	
 		return new SimilarPlaces(response.getPlaces(), placePrototype);
 	}
 	
 	public Place createPlace(PlacePrototype placePrototype) {
-		MultiValueMap<String, String> request = buildPlaceParameters(
-				placePrototype.getLatitude(), placePrototype.getLongitude(), placePrototype.getName(), placePrototype.getStreetAddress(), placePrototype.getContainedWithin());
+		requireAuthorization();
+		MultiValueMap<String, String> request = buildPlaceParameters(placePrototype.getLatitude(), placePrototype.getLongitude(), placePrototype.getName(), placePrototype.getStreetAddress(), placePrototype.getContainedWithin());
 		request.set("token", placePrototype.getCreateToken());
-		return restTemplate.postForObject("https://api.twitter.com/1/geo/place.json", request, Place.class);		
+		return restTemplate.postForObject("https://api.twitter.com/1.1/geo/place.json", request, Place.class);		
 	}
 	
 	// private helpers
@@ -94,8 +97,7 @@ public class GeoTemplate extends AbstractTwitterOperations implements GeoOperati
 		return parameters;
 	}
 	
-	private MultiValueMap<String, String> buildPlaceParameters(double latitude,
-			double longitude, String name, String streetAddress, String containedWithin) {
+	private MultiValueMap<String, String> buildPlaceParameters(double latitude, double longitude, String name, String streetAddress, String containedWithin) {
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("lat", String.valueOf(latitude));
 		parameters.set("long", String.valueOf(longitude));

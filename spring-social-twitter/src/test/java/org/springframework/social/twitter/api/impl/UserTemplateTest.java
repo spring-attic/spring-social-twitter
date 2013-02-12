@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,19 +17,17 @@ package org.springframework.social.twitter.api.impl;
 
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
-import static org.springframework.social.test.client.RequestMatchers.*;
-import static org.springframework.social.test.client.ResponseCreators.*;
+import static org.springframework.http.MediaType.*;
+import static org.springframework.test.web.client.match.RequestMatchers.*;
+import static org.springframework.test.web.client.response.ResponseCreators.*;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.social.NotAuthorizedException;
-import org.springframework.social.twitter.api.ImageSize;
 import org.springframework.social.twitter.api.RateLimitStatus;
+import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -40,10 +38,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getProfileId() {
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		assertEquals(161064614, twitter.userOperations().getProfileId());
 	}
 
@@ -54,10 +51,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getScreenName() {
-		responseHeaders.setContentType(MediaType.APPLICATION_JSON);
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		assertEquals("artnames", twitter.userOperations().getScreenName());
 	}
 
@@ -68,9 +64,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserProfile() throws Exception {
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/verify_credentials.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile();
 		assertEquals(161064614, profile.getId());
@@ -113,9 +109,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void getUserProfile_userId() throws Exception {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/show.json?user_id=12345"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/show.json?user_id=12345"))
 				.andExpect(method(GET))
-				.andRespond(withResponse(jsonResource("twitter-profile"), responseHeaders));
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile(12345);
 		assertEquals(161064614, profile.getId());
@@ -126,66 +122,44 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("http://www.springsource.org", profile.getUrl());
 		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
-	
-	@Test
-	public void getUserProfileImage() throws Exception {
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/profile_image/tinyrod?size=normal"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("tinyrod.jpg", getClass()), responseHeaders));
-		
-		twitter.userOperations().getUserProfileImage("tinyrod");
-		// TODO: Fix ResponseCreators to handle binary data so that we can assert the contents/size of the image bytes. 
-	}
-
-	@Test
-	public void getUserProfileImage_mini() throws Exception {
-		getUserProfileImageBySize(ImageSize.MINI);
-	}
-
-	@Test
-	public void getUserProfileImage_normal() throws Exception {
-		getUserProfileImageBySize(ImageSize.NORMAL);
-	}
-
-	@Test
-	public void getUserProfileImage_original() throws Exception {
-		getUserProfileImageBySize(ImageSize.ORIGINAL);
-	}
-
-	@Test
-	public void getUserProfileImage_bigger() throws Exception {
-		getUserProfileImageBySize(ImageSize.BIGGER);
-	}
 
 	@Test
 	public void getUsers_byUserId() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/lookup.json?user_id=14846645%2C14718006"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/lookup.json?user_id=14846645%2C14718006"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().getUsers(14846645, 14718006);
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 	
+	@Test(expected = NotAuthorizedException.class)
+	public void getUsers_byUserId_unauthorized() {
+		unauthorizedTwitter.userOperations().getUsers(14846645, 14718006);
+	}
+	
 	@Test
 	public void getUsers_byScreenName() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/lookup.json?screen_name=royclarkson%2Ckdonald"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/lookup.json?screen_name=royclarkson%2Ckdonald"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().getUsers("royclarkson", "kdonald");
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 	
+	@Test(expected = NotAuthorizedException.class)
+	public void getUsers_byScreenName_unauthorized() {
+		unauthorizedTwitter.userOperations().getUsers("royclarkson", "kdonald");
+	}
+	
 	@Test
 	public void searchForUsers() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?page=1&per_page=20&q=some+query"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=1&per_page=20&q=some+query"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query");
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
@@ -194,9 +168,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void searchForUsers_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/search.json?page=3&per_page=35&q=some+query"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=3&per_page=35&q=some+query"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("list-of-profiles"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query", 3, 35);
 		assertEquals(2, users.size());
 		assertEquals("royclarkson", users.get(0).getScreenName());
@@ -210,9 +184,9 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getSuggestionCategories() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/suggestions.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/suggestions.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("suggestion-categories"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("suggestion-categories"), APPLICATION_JSON));
 		List<SuggestionCategory> categories = twitter.userOperations().getSuggestionCategories();
 		assertEquals(4, categories.size());
 		assertEquals("Art & Design", categories.get(0).getName());
@@ -229,11 +203,16 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(16, categories.get(3).getSize());
 	}
 	
+	@Test(expected = NotAuthorizedException.class)
+	public void getSuggestionCategories_unauthorized() {
+		unauthorizedTwitter.userOperations().getSuggestionCategories();
+	}
+	
 	@Test
 	public void getSuggestions() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/suggestions/springsource.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/suggestions/springsource.json"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("suggestions"), responseHeaders));
+			.andRespond(withSuccess(jsonResource("suggestions"), APPLICATION_JSON));
 
 		List<TwitterProfile> users = twitter.userOperations().getSuggestions("springsource");
 		assertEquals(2, users.size());
@@ -241,28 +220,33 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 	
-	@Test
-	public void getUnauthenticatedRateLimit() {
-		mockServer.expect(requestTo("https://api.twitter.com/1/account/rate_limit_status.json"))
-			.andExpect(method(GET))
-			.andRespond(withResponse(jsonResource("rate-limit-status-unauthenticated"), responseHeaders));
-		
-		RateLimitStatus status = twitter.userOperations().getRateLimitStatus();
-		assertEquals(150, status.getHourlyLimit());
-		assertEquals(1321296055, status.getResetTimeInSeconds());
-		assertEquals(149, status.getRemainingHits());
+	@Test(expected = NotAuthorizedException.class)
+	public void getSuggestions_unauthorized() {
+		unauthorizedTwitter.userOperations().getSuggestions("springsource");
 	}
 	
-	
-
-	private void getUserProfileImageBySize(ImageSize imageSize) throws IOException {
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.setContentType(MediaType.IMAGE_JPEG);
-		mockServer.expect(requestTo("https://api.twitter.com/1/users/profile_image/habuma?size=" + imageSize.name().toLowerCase()))
+	@Test
+	public void getRateLimit() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/rate_limit_status.json?resources=help%2Csearch"))
 			.andExpect(method(GET))
-			.andRespond(withResponse(new ClassPathResource("tinyrod.jpg", getClass()), responseHeaders));
-		twitter.userOperations().getUserProfileImage("habuma", imageSize);
-		// TODO: Fix ResponseCreators to handle binary data so that we can assert the contents/size of the image bytes. 
+			.andRespond(withSuccess(jsonResource("rate-limit-status"), APPLICATION_JSON));
+		
+		Map<ResourceFamily, List<RateLimitStatus>> statuses = twitter.userOperations().getRateLimitStatus(ResourceFamily.HELP,ResourceFamily.SEARCH);
+		assertTrue(statuses.containsKey(ResourceFamily.SEARCH));
+		assertTrue(statuses.containsKey(ResourceFamily.HELP));
+		assertEquals(1, statuses.get(ResourceFamily.SEARCH).size());
+		assertEquals(4, statuses.get(ResourceFamily.HELP).size());
+		assertEquals("/help/privacy", statuses.get(ResourceFamily.HELP).get(0).getEndpoint());
+		assertEquals(15, statuses.get(ResourceFamily.HELP).get(0).getQuarterOfHourLimit());
+		assertEquals("/help/languages", statuses.get(ResourceFamily.HELP).get(3).getEndpoint());
+		assertEquals(15, statuses.get(ResourceFamily.HELP).get(0).getQuarterOfHourLimit());
+		assertEquals("/search/tweets", statuses.get(ResourceFamily.SEARCH).get(0).getEndpoint());
+		assertEquals(180, statuses.get(ResourceFamily.SEARCH).get(0).getQuarterOfHourLimit());
+	}
+	
+	@Test(expected = NotAuthorizedException.class)
+	public void getRateLimit_unauthorized() {
+		unauthorizedTwitter.userOperations().getRateLimitStatus(ResourceFamily.HELP,ResourceFamily.SEARCH);
 	}
 
 }

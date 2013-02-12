@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	
 	public DirectMessage getDirectMessage(long id) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("direct_messages/show/" + id + ".json"), DirectMessage.class);
+		return restTemplate.getForObject(buildUri("direct_messages/show.json", "id", String.valueOf(id)), DirectMessage.class);
 	}
 
 	public DirectMessage sendDirectMessage(String toScreenName, String text) {
@@ -87,7 +87,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 
 	public void deleteDirectMessage(long messageId) {
 		requireAuthorization();
-		restTemplate.delete(buildUri("direct_messages/destroy/" + messageId + ".json"));
+		restTemplate.delete(buildUri("direct_messages/destroy.json","id",String.valueOf(messageId)));
 	}
 
 }

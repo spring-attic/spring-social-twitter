@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,6 +66,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	private GeoOperations geoOperations;
 
+
 	/**
 	 * Create a new instance of TwitterTemplate.
 	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
@@ -89,7 +90,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
 		initSubApis();
 	}
-	
+
 	public TimelineOperations timelineOperations() {
 		return timelineOperations;
 	}
@@ -144,7 +145,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	// private helper 
 
-	private void initSubApis() {
+    private void initSubApis() {
 		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
 		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized());

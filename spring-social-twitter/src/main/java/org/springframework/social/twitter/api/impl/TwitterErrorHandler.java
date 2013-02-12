@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,8 +87,12 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			}
 		}
 
-		if (statusCode == HttpStatus.UNAUTHORIZED) {
-			if(errorText == null) {
+		if (statusCode == HttpStatus.BAD_REQUEST) {
+			if (errorText.contains("Rate limit exceeded.")) {
+				throw new RateLimitExceededException();
+			}
+		} else if (statusCode == HttpStatus.UNAUTHORIZED) {
+			if (errorText == null) {
 				throw new NotAuthorizedException(response.getStatusText());
 			} else if (errorText.equals("Could not authenticate you.")) {
 				throw new MissingAuthorizationException();
