@@ -21,6 +21,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
@@ -29,6 +32,7 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.social.twitter.api.Entities;
+import org.springframework.social.twitter.api.TickerSymbolEntity;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -88,7 +92,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		JsonNode favoritedNode = tree.get("favorited");
 		boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.getBooleanValue() : false;
 		tweet.setFavorited(favorited);
-		Entities entities = toEntities(tree.get("entities"));
+		Entities entities = toEntities(tree.get("entities"), text);
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);
 		tweet.setUser(user);
@@ -113,13 +117,28 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		}
 	}
 
-	private Entities toEntities(final JsonNode node) throws IOException {
+	// passing in text to fetch ticker symbol pseudo-entities
+	private Entities toEntities(final JsonNode node, String text) throws IOException {
 		if (null == node || node.isNull() || node.isMissingNode()) {
 			return null;
 		}
 		final ObjectMapper mapper = this.createMapper();
-		return mapper.readValue(node, Entities.class);
+		Entities entities = mapper.readValue(node, Entities.class);
+		extractTickerSymbolEntitiesFromText(text, entities);
+		return entities;
 	}
+
+	private void extractTickerSymbolEntitiesFromText(String text, Entities entities) {
+		Pattern pattern = Pattern.compile("\\$[A-Za-z]+");
+		Matcher matcher = pattern.matcher(text);
+		while (matcher.find()) {
+			MatchResult matchResult = matcher.toMatchResult();
+			String tickerSymbol = matchResult.group().substring(1);
+			String url = "https://twitter.com/search?q=%24" + tickerSymbol + "&src=ctag";
+			entities.getTickerSymbols().add(new TickerSymbolEntity(tickerSymbol, url, new int[] {matchResult.start(), matchResult.end()}));
+		}
+	}
+
 
 	private TwitterProfile toProfile(final JsonNode node) throws IOException {
 		if (null == node || node.isNull() || node.isMissingNode()) {
