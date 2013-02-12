@@ -13,6 +13,7 @@
 		"in_reply_to_status_id" : 123123123123,
 		"created_at" : "Tue Jul 13 17:38:21 +0000 2010",
 		"retweeted" : true,
+		"favorited" : true,
 		"entities": {
 			"hashtags": [
 			{

@@ -1,3 +1,19 @@
+Spring Social 1.1.0 Milestone 2 (February 12, 2012)
+===================================================
+Miscellaneous
+  * Changes to support Spring Social/Spring Security integration.
+     (SOCIAL-232)
+
+Bug Fixes
+  * Set character set to UTF-8 for string parts of multipart messages to allow for
+    Korean and other characters to be posted in status updates. (SOCIALTW-37)
+
+Improvements
+   * Added ability to perform advanced searches, including searches that
+     specify the language of the Tweet. (SOCIALTW-41)
+   * Added favorited field to Tweet object. (SOCIALTW-43)
+   * Added ticker symbol pseudo-entity to Tweet's Entities object. (SOCIALTW-44)
+
 Spring Social 1.1.0 Milestone 1 (November 26, 2012)
 ==================================================
 Compatibility Notes:

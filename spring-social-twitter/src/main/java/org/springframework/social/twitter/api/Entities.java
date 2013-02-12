@@ -37,15 +37,21 @@ public class Entities implements Serializable {
 	private List<MentionEntity> mentions = new LinkedList<MentionEntity>();
 	
 	private List<MediaEntity> media = new LinkedList<MediaEntity>();
-	
+
+	private List<TickerSymbolEntity> tickerSymbols = new LinkedList<TickerSymbolEntity>();
+
 	public Entities(List<UrlEntity> urls, List<HashTagEntity> tags, List<MentionEntity> mentions, List<MediaEntity> media) {
 		this.urls = urls;
 		this.tags = tags;
 		this.mentions = mentions;
 		this.media = media;
 	}
-
 	
+	public Entities(List<UrlEntity> urls, List<HashTagEntity> tags, List<MentionEntity> mentions, List<MediaEntity> media, List<TickerSymbolEntity> tickerSymbols) {
+		this(urls, tags, mentions, media);
+		this.tickerSymbols = tickerSymbols;
+	}
+
 	public List<UrlEntity> getUrls() {
 		if (this.urls == null) {
 			return Collections.emptyList();
@@ -77,6 +83,12 @@ public class Entities implements Serializable {
 		return this.media;
 	}
 	
+	public List<TickerSymbolEntity> getTickerSymbols() {
+		if (this.tickerSymbols == null) {
+			return Collections.emptyList();
+		}
+		return this.tickerSymbols;
+	}
 	
 	public boolean hasUrls() {
 		return this.urls != null && !this.urls.isEmpty();
@@ -97,6 +109,9 @@ public class Entities implements Serializable {
 		return this.media != null && !this.media.isEmpty();
 	}
 	
+	public boolean hasTickerSymbols() {
+		return this.tickerSymbols != null && !this.tickerSymbols.isEmpty();
+	}
 	
 	@Override
 	public boolean equals(Object o) {
@@ -120,6 +135,9 @@ public class Entities implements Serializable {
 		if (urls != null ? !urls.equals(entities.urls) : entities.urls != null) {
 			return false;
 		}
+		if (tickerSymbols != null ? !tickerSymbols.equals(entities.tickerSymbols) : entities.tickerSymbols != null) {
+			return false;
+		}
 		
 		return true;
 	}
@@ -131,6 +149,7 @@ public class Entities implements Serializable {
 		result = 31 * result + (tags != null ? tags.hashCode() : 0);
 		result = 31 * result + (mentions != null ? mentions.hashCode() : 0);
 		result = 31 * result + (media != null ? media.hashCode() : 0);
+		result = 31 * result + (tickerSymbols != null ? tickerSymbols.hashCode() : 0);
 		return result;
 	}
 }
