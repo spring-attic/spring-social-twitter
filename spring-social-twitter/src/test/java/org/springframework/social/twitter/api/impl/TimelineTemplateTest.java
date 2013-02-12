@@ -15,6 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.MediaType.*;
@@ -29,8 +30,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.OperationNotPermittedException;
+import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.social.twitter.api.StatusDetails;
+import org.springframework.social.twitter.api.TickerSymbolEntity;
 import org.springframework.social.twitter.api.Tweet;
 
 
@@ -202,6 +205,30 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	@Test(expected = NotAuthorizedException.class)
 	public void getStatus_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getStatus(12345);
+	}
+		
+	@Test
+	public void getStatus_withTickerSymbolEntity() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("status_with_tickers"), APPLICATION_JSON));
+		
+		Tweet tweet = twitter.timelineOperations().getStatus(12345);
+		Entities entities = tweet.getEntities();
+		List<TickerSymbolEntity> tickerSymbols = entities.getTickerSymbols();
+		assertEquals(3, tickerSymbols.size());
+		assertEquals("VMW", tickerSymbols.get(0).getTickerSymbol());
+		assertEquals("https://twitter.com/search?q=%24VMW&src=ctag", tickerSymbols.get(0).getUrl());
+		assertEquals(17, tickerSymbols.get(0).getIndices()[0]);
+		assertEquals(21, tickerSymbols.get(0).getIndices()[1]);
+		assertEquals("FB", tickerSymbols.get(1).getTickerSymbol());
+		assertEquals("https://twitter.com/search?q=%24FB&src=ctag", tickerSymbols.get(1).getUrl());
+		assertEquals(23, tickerSymbols.get(1).getIndices()[0]);
+		assertEquals(26, tickerSymbols.get(1).getIndices()[1]);
+		assertEquals("AAPL", tickerSymbols.get(2).getTickerSymbol());
+		assertEquals("https://twitter.com/search?q=%24AAPL&src=ctag", tickerSymbols.get(2).getUrl());
+		assertEquals(28, tickerSymbols.get(2).getIndices()[0]);
+		assertEquals(33, tickerSymbols.get(2).getIndices()[1]);
 	}
 	
 	@Test
