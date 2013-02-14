@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
@@ -29,6 +32,7 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.social.twitter.api.Entities;
+import org.springframework.social.twitter.api.TickerSymbolEntity;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -58,20 +62,10 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 			return null;
 		}
 		JsonNode fromUserNode = tree.get("user");
-		String fromScreenName = null;
-		long fromId = 0;
-		String fromImageUrl = null;
 		String dateFormat = TIMELINE_DATE_FORMAT;
-		if (fromUserNode != null) {
-			fromScreenName = fromUserNode.get("screen_name").asText();
-			fromId = fromUserNode.get("id").asLong();
-			fromImageUrl = fromUserNode.get("profile_image_url").asText();
-		} else {
-			fromScreenName = tree.get("from_user").asText();
-			fromId = tree.get("from_user_id").asLong();
-			fromImageUrl = tree.get("profile_image_url").asText();
-			dateFormat = SEARCH_DATE_FORMAT;
-		}
+		String fromScreenName = fromUserNode.get("screen_name").asText();
+		long fromId = fromUserNode.get("id").asLong();
+		String fromImageUrl = fromUserNode.get("profile_image_url").asText(); 
 		Date createdAt = toDate(tree.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
 		String source = tree.get("source").asText();
 		JsonNode toUserIdNode = tree.get("in_reply_to_user_id");
@@ -95,7 +89,10 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		tweet.setRetweeted(retweeted);
 		Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedStatusNode) : null;
 		tweet.setRetweetedStatus(retweetedStatus);
-		Entities entities = toEntities(tree.get("entities"));
+		JsonNode favoritedNode = tree.get("favorited");
+		boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.getBooleanValue() : false;
+		tweet.setFavorited(favorited);
+		Entities entities = toEntities(tree.get("entities"), text);
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);
 		tweet.setUser(user);
@@ -120,13 +117,28 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		}
 	}
 
-	private Entities toEntities(final JsonNode node) throws IOException {
+	// passing in text to fetch ticker symbol pseudo-entities
+	private Entities toEntities(final JsonNode node, String text) throws IOException {
 		if (null == node || node.isNull() || node.isMissingNode()) {
 			return null;
 		}
 		final ObjectMapper mapper = this.createMapper();
-		return mapper.readValue(node, Entities.class);
+		Entities entities = mapper.readValue(node, Entities.class);
+		extractTickerSymbolEntitiesFromText(text, entities);
+		return entities;
 	}
+
+	private void extractTickerSymbolEntitiesFromText(String text, Entities entities) {
+		Pattern pattern = Pattern.compile("\\$[A-Za-z]+");
+		Matcher matcher = pattern.matcher(text);
+		while (matcher.find()) {
+			MatchResult matchResult = matcher.toMatchResult();
+			String tickerSymbol = matchResult.group().substring(1);
+			String url = "https://twitter.com/search?q=%24" + tickerSymbol + "&src=ctag";
+			entities.getTickerSymbols().add(new TickerSymbolEntity(tickerSymbol, url, new int[] {matchResult.start(), matchResult.end()}));
+		}
+	}
+
 
 	private TwitterProfile toProfile(final JsonNode node) throws IOException {
 		if (null == node || node.isNull() || node.isMissingNode()) {
@@ -138,7 +150,5 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 
 
 	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
-
-	private static final String SEARCH_DATE_FORMAT = "EEE, d MMM yyyy HH:mm:ss Z";
 
 }

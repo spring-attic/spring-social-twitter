@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,25 +18,32 @@ package org.springframework.social.twitter.config.annotation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.social.config.annotation.ProviderConfigRegistrarSupport;
+import org.springframework.social.UserIdSource;
+import org.springframework.social.config.annotation.AbstractProviderConfigRegistrarSupport;
 import org.springframework.social.config.xml.ApiHelper;
-import org.springframework.social.config.xml.UserIdSource;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
+import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
+import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
 /**
  * {@link ImportBeanDefinitionRegistrar} for configuring a {@link TwitterConnectionFactory} bean and a request-scoped {@link Twitter} bean.
  * @author Craig Walls
  */
-public class TwitterProviderConfigRegistrar extends ProviderConfigRegistrarSupport {
+public class TwitterProviderConfigRegistrar extends AbstractProviderConfigRegistrarSupport {
 
 	public TwitterProviderConfigRegistrar() {
 		super(EnableTwitter.class, TwitterConnectionFactory.class, TwitterApiHelper.class);
 	}
-	
+
+	@Override
+	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
+		return TwitterAuthenticationService.class;
+	}
+
 	static class TwitterApiHelper implements ApiHelper<Twitter> {
 		
 		private final UsersConnectionRepository usersConnectionRepository;

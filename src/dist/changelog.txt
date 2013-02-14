@@ -1,3 +1,41 @@
+Spring Social 1.1.0 Milestone 2 (February 12, 2012)
+===================================================
+Miscellaneous
+  * Changes to support Spring Social/Spring Security integration.
+     (SOCIAL-232)
+
+Bug Fixes
+  * Set character set to UTF-8 for string parts of multipart messages to allow for
+    Korean and other characters to be posted in status updates. (SOCIALTW-37)
+
+Improvements
+   * Added ability to perform advanced searches, including searches that
+     specify the language of the Tweet. (SOCIALTW-41)
+   * Added favorited field to Tweet object. (SOCIALTW-43)
+   * Added ticker symbol pseudo-entity to Tweet's Entities object. (SOCIALTW-44)
+
+Spring Social 1.1.0 Milestone 1 (November 26, 2012)
+==================================================
+Compatibility Notes:
+   * Due to changes in Twitter's API between v1.0 and v1.1, Spring Social
+     Twitter's API binding was required to change to match. Consequently,
+     some methods and data available in Spring Social Twitter 1.0.x's API 
+     binding may be different or completely missing in v1.1.0. In those
+     cases, deprecation did not make sense in this case, since Twitter's 
+     API will no longer offer equivalent operations for backward 
+     compatibility. The only choice was to rework the API bindings.
+
+Improvements
+   * Updated API binding to comply with version 1.1 of Twitter's API.
+     (SOCIALTW-39)
+   * Added XML configuration support for Twitter connection factory and API
+     binding beans. (SOCIAL-292)
+   * Added Java configuration support for Twitter connection factory and API
+     binding beans. (SOCIAL-293)     
+   * Added a retweeted property on Tweet to indicate whether the user has
+     retweeted a status or not. (SOCIALTW-29)
+   * Support for entity data in Tweet object. (SOCIALTW-33)
+
 Spring Social Twitter 1.0.2 (January 23, 2012)
 ===============================================
 Bug Fixes:

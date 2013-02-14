@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,14 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Trends;
+import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -41,33 +41,33 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(String query) {
-		return search(query, 1, DEFAULT_RESULTS_PER_PAGE, 0, 0);
+		return this.search(new SearchParameters(query));
 	}
 
-	public SearchResults search(String query, int page, int resultsPerPage) {
-		return search(query, page, resultsPerPage, 0, 0);
+	public SearchResults search(String query, int resultsPerPage) {
+		SearchParameters p = new SearchParameters(query);
+		p.setCount(resultsPerPage);
+		return this.search(p);
 	}
 
-	public SearchResults search(String query, int page, int resultsPerPage, long sinceId, long maxId) {
-		Map<String, String> parameters = new HashMap<String, String>();
-		parameters.put("query", query);
-		parameters.put("rpp", String.valueOf(resultsPerPage));
-		parameters.put("page", String.valueOf(page));
-		String searchUrl = SEARCH_URL;
-		if (sinceId > 0) {
-			searchUrl += "&since_id={since}";
-			parameters.put("since", String.valueOf(sinceId));
-		}
-		if (maxId > 0) {
-			searchUrl += "&max_id={max}";
-			parameters.put("max", String.valueOf(maxId));
-		}
-		return restTemplate.getForObject(searchUrl, SearchResults.class, parameters);
+	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
+		SearchParameters p = new SearchParameters(query);
+		p.setCount(resultsPerPage);
+		p.setSinceId(sinceId);
+		p.setMaxId(maxId);
+		return this.search(p);
+	}
+
+	public SearchResults search(SearchParameters searchParameters) {
+		requireAuthorization();
+		Assert.notNull(searchParameters);
+		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
+		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
 
 	public List<SavedSearch> getSavedSearches() {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("saved_searches.json"), SavedSearchList.class);
+		return restTemplate.getForObject(buildUri("saved_searches/list.json"), SavedSearchList.class);
 	}
 
 	public SavedSearch getSavedSearch(long searchId) {
@@ -89,54 +89,51 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	
 	// Trends
 
-	public List<Trends> getDailyTrends() {
-		return getDailyTrends(false, null);
-	}
-
-	public List<Trends> getDailyTrends(boolean excludeHashtags) {
-		return getDailyTrends(excludeHashtags, null);
-	}
-
-	public List<Trends> getDailyTrends(boolean excludeHashtags, String startDate) {
-		String path = makeTrendPath("trends/daily.json", excludeHashtags, startDate);
-		return restTemplate.getForObject(buildUri(path), DailyTrendsList.class).getList();
-	}
-	
-	public List<Trends> getWeeklyTrends() {
-		return getWeeklyTrends(false, null);
-	}
-	
-	public List<Trends> getWeeklyTrends(boolean excludeHashtags) {
-		return getWeeklyTrends(excludeHashtags, null);
-	}
-	
-	public List<Trends> getWeeklyTrends(boolean excludeHashtags, String startDate) {
-		String path = makeTrendPath("trends/weekly.json", excludeHashtags, startDate);
-		return restTemplate.getForObject(buildUri(path), WeeklyTrendsList.class).getList();
-	}
-
 	public Trends getLocalTrends(long whereOnEarthId) {
 		return getLocalTrends(whereOnEarthId, false);
 	}
 
 	public Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags) {
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("id",String.valueOf(whereOnEarthId));
 		if(excludeHashtags) {
 			parameters.set("exclude", "hashtags");
 		}
-		return restTemplate.getForObject(buildUri("trends/" + whereOnEarthId + ".json", parameters), LocalTrendsHolder.class).getTrends();
+		return restTemplate.getForObject(buildUri("trends/place.json", parameters), LocalTrendsHolder.class).getTrends();
 	}
 
-	private String makeTrendPath(String basePath, boolean excludeHashtags, String startDate) {
-		String url = basePath + (excludeHashtags || startDate != null ? "?" : "");
-		url += excludeHashtags ? "exclude=hashtags" : "";
-		url += excludeHashtags && startDate != null ? "&" : "";
-		url += startDate != null ? "date=" + startDate : "";
-		return url;
+	// private helpers
+
+	private MultiValueMap<String, String> buildQueryParametersFromSearchParameters(SearchParameters searchParameters) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("q", searchParameters.getQuery());
+		if (searchParameters.getGeoCode() != null) {
+			parameters.set("geocode", searchParameters.getGeoCode().toString());
+		}
+		if (searchParameters.getLang() != null) {
+			parameters.set("lang", searchParameters.getLang());
+		}
+		if (searchParameters.getLocale() != null) {
+			parameters.set("locale", searchParameters.getLocale());
+		}
+		if (searchParameters.getResultType() != null) {
+			parameters.set("result_type", searchParameters.getResultType().toString());
+		}
+		parameters.set("count", searchParameters.getCount() != null ? String.valueOf(searchParameters.getCount()) : String.valueOf(DEFAULT_RESULTS_PER_PAGE));
+		if (searchParameters.getUntil() != null) {
+			parameters.set("until", new SimpleDateFormat("yyyy-MM-dd").format(searchParameters.getUntil()));
+		}
+		if (searchParameters.getSinceId() != null) {
+			parameters.set("since_id", String.valueOf(searchParameters.getSinceId()));
+		}
+		if (searchParameters.getMaxId() != null) {
+			parameters.set("max_id", String.valueOf(searchParameters.getMaxId()));
+		}
+		if (!searchParameters.isIncludeEntities()) {
+			parameters.set("include_entities", "false");
+		}
+		return parameters;
 	}
 
 	static final int DEFAULT_RESULTS_PER_PAGE = 50;
-
-	private static final String SEARCH_API_URL_BASE = "https://search.twitter.com";
-	private static final String SEARCH_URL = SEARCH_API_URL_BASE + "/search.json?q={query}&rpp={rpp}&page={page}";
 }

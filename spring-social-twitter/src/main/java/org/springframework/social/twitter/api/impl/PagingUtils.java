@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,18 @@ class PagingUtils {
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("page", String.valueOf(page));
 		parameters.set("per_page", String.valueOf(pageSize));
+		if (sinceId > 0) {
+			parameters.set("since_id", String.valueOf(sinceId));
+		}
+		if (maxId > 0) {
+			parameters.set("max_id", String.valueOf(maxId));
+		}
+		return parameters;
+	}
+	
+	public static MultiValueMap<String, String> buildPagingParametersWithCount(int pageSize, long sinceId, long maxId) {
+		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("count", String.valueOf(pageSize));
 		if (sinceId > 0) {
 			parameters.set("since_id", String.valueOf(sinceId));
 		}

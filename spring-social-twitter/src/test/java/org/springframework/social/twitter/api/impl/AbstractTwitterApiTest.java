@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,8 @@ public abstract class AbstractTwitterApiTest {
 		} else {
 			assertNull(tweet.getRetweetCount());
 		}
+		
+		assertTrue(tweet.isFavorited());
 		Entities entities = tweet.getEntities();
 		List<HashTagEntity> hashtags = entities.getHashTags();
 		assertEquals(1,  hashtags.size());

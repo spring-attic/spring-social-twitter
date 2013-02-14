@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,9 @@ import java.util.Date;
  */
 public class RateLimitStatus {
 
-	private final int hourlyLimit;
+	private final String endpoint;
+
+	private final int quarterOfHourLimit;
 	
 	private final int remainingHits;
 	
@@ -30,15 +32,20 @@ public class RateLimitStatus {
 	
 	private final Date resetTime;
 	
-	public RateLimitStatus(int hourlyLimit, int remainingHits, long resetTimeInSeconds) {
-		this.hourlyLimit = hourlyLimit;
+	public RateLimitStatus(String endpoint, int quarterOfHourLimit, int remainingHits, long resetTimeInSeconds) {
+		this.endpoint = endpoint;
+		this.quarterOfHourLimit = quarterOfHourLimit;
 		this.remainingHits = remainingHits;
 		this.resetTimeInSeconds = resetTimeInSeconds;
 		this.resetTime = new Date(resetTimeInSeconds * 1000);
 	}
 	
-	public int getHourlyLimit() {
-		return hourlyLimit;
+	public String getEndpoint() {
+		return endpoint;
+	}
+	
+	public int getQuarterOfHourLimit() {
+		return quarterOfHourLimit;
 	}
 
 	public int getRemainingHits() {

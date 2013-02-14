@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,43 +41,24 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		super(isAuthorizedForUser);
 		this.restTemplate = restTemplate;
 	}
-
-	public CursoredList<UserList> getLists() {
-		return getListsInCursor(-1);
-	}
-
-	public CursoredList<UserList> getListsInCursor(long cursor) {
+	
+	public List<UserList> getLists(long userId) {
 		requireAuthorization();
-		return restTemplate.getForObject(buildUri("lists.json", "cursor", String.valueOf(cursor)), UserListList.class).getList();
-	}
-
-	public CursoredList<UserList> getLists(long userId) {
-		return getListsInCursor(userId, -1);
+		return restTemplate.getForObject(buildUri("lists/list.json", "user_id", String.valueOf(userId)), UserSubscriptionList.class);
 	}
 	
-	public CursoredList<UserList> getListsInCursor(long userId, long cursor) {
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("user_id", String.valueOf(userId));
-		parameters.set("cursor", String.valueOf(cursor));
-		return restTemplate.getForObject(buildUri("lists.json", parameters), UserListList.class).getList();
-	}
-
-	public CursoredList<UserList> getLists(String screenName) {
-		return getListsInCursor(screenName, -1);
-	}
-	
-	public CursoredList<UserList> getListsInCursor(String screenName, long cursor) {
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("screen_name", screenName);
-		parameters.set("cursor", String.valueOf(cursor));
-		return restTemplate.getForObject(buildUri("lists.json", parameters), UserListList.class).getList();
+	public List<UserList> getLists(String screenName) {
+		requireAuthorization();
+		return restTemplate.getForObject(buildUri("lists/list.json", "screen_name", String.valueOf(screenName)), UserSubscriptionList.class);
 	}
 
 	public UserList getList(long listId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/show.json", "list_id", String.valueOf(listId)), UserList.class);
 	}
 
 	public UserList getList(String screenName, String listSlug) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
@@ -85,30 +66,32 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<Tweet> getListStatuses(long listId) {
-		return getListStatuses(listId, 1, 20, 0, 0);
+		return getListStatuses(listId, 20, 0, 0);
 	}
 
-	public List<Tweet> getListStatuses(long listId, int page, int pageSize) {
-		return getListStatuses(listId, page, pageSize, 0, 0);
+	public List<Tweet> getListStatuses(long listId, int pageSize) {
+		return getListStatuses(listId, pageSize, 0, 0);
 	}
 
-	public List<Tweet> getListStatuses(long listId, int page, int pageSize, long sinceId, long maxId) {
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, sinceId, maxId);
+	public List<Tweet> getListStatuses(long listId, int pageSize, long sinceId, long maxId) {
+		requireAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, sinceId, maxId);
 		parameters.set("list_id", String.valueOf(listId));
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("lists/statuses.json", parameters), TweetList.class);
 	}
 
 	public List<Tweet> getListStatuses(String screenName, String listSlug) {
-		return getListStatuses(screenName, listSlug, 1, 20, 0, 0);
+		return getListStatuses(screenName, listSlug, 20, 0, 0);
 	}
 
-	public List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize) {
-		return getListStatuses(screenName, listSlug, page, pageSize, 0, 0);
+	public List<Tweet> getListStatuses(String screenName, String listSlug, int pageSize) {
+		return getListStatuses(screenName, listSlug, pageSize, 0, 0);
 	}
 
-	public List<Tweet> getListStatuses(String screenName, String listSlug, int page, int pageSize, long sinceId, long maxId) {
-		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, sinceId, maxId);
+	public List<Tweet> getListStatuses(String screenName, String listSlug, int pageSize, long sinceId, long maxId) {
+		requireAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, sinceId, maxId);
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
 		parameters.set("include_entities", "true");
@@ -134,10 +117,12 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<TwitterProfile> getListMembers(long listId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/members.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 	
 	public List<TwitterProfile> getListMembers(String screenName, String listSlug) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
@@ -177,16 +162,17 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<TwitterProfile> getListSubscribers(long listId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 
 	public List<TwitterProfile> getListSubscribers(String screenName, String listSlug) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", parameters), TwitterProfileUsersList.class).getList();
 	}
-
 	
 	public UserList subscribe(long listId) {
 		requireAuthorization();
@@ -219,18 +205,22 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public CursoredList<UserList> getMemberships(long userId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
 	public CursoredList<UserList> getMemberships(String screenName) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
 	public CursoredList<UserList> getSubscriptions(long userId) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 
 	public CursoredList<UserList> getSubscriptions(String screenName) {
+		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
@@ -252,6 +242,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public boolean isSubscriber(long listId, long subscriberId) {
+		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("list_id", String.valueOf(listId));
 		parameters.set("user_id", String.valueOf(subscriberId));
@@ -289,5 +280,8 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 
 	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet> {}
+	
+	@SuppressWarnings("serial")
+	private static class UserSubscriptionList extends ArrayList<UserList> {}
 
 }

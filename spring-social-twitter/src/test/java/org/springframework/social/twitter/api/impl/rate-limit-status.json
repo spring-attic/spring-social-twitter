@@ -1,0 +1,37 @@
+{
+	"rate_limit_context": {
+		"access_token": "119476949-oYGCs2M5duG5QalbOAK2YUZh8zG3ur7DPYo5qIFN"
+		},
+		"resources": {
+			"help": {
+				"/help/privacy": {
+					"remaining": 15,
+					"reset": 1346439527,
+					"limit": 15
+					},
+				"/help/configuration": {
+					"remaining": 15,
+					"reset": 1346439527,
+					"limit": 15
+					},
+				"/help/tos": {
+					"remaining": 15,
+					"reset": 1346439527,
+					"limit": 15
+					},
+				"/help/languages": {
+					"remaining": 15,
+					"reset": 1346439527,
+					"limit": 15
+					}
+				},
+			"search": {
+				"/search/tweets": {
+					"remaining": 180,
+					"reset": 1346439527,
+					"limit": 180
+					}
+			}
+		}
+}
+

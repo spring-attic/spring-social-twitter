@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2013 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,7 @@ public interface FriendOperations {
 	 * @param userId The user's Twitter ID
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFriends(long userId);
 
@@ -68,6 +69,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor used to fetch the friend IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFriendsInCursor(long userId, long cursor);
 
@@ -79,6 +81,7 @@ public interface FriendOperations {
 	 * @param screenName The user's Twitter screen name
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFriends(String screenName);
 
@@ -91,6 +94,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor used to fetch the friend IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFriendsInCursor(String screenName, long cursor);
 
@@ -117,6 +121,7 @@ public interface FriendOperations {
 	 * @param userId the user's Twitter ID
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFriendIds(long userId);
 
@@ -126,6 +131,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFriendIdsInCursor(long userId, long cursor);
 
@@ -134,6 +140,7 @@ public interface FriendOperations {
 	 * @param screenName the user's Twitter screen name
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFriendIds(String screenName);
 
@@ -143,6 +150,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFriendIdsInCursor(String screenName, long cursor);
 
@@ -177,6 +185,7 @@ public interface FriendOperations {
 	 * @param userId The user's Twitter ID
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFollowers(long userId);
 
@@ -189,6 +198,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor used to fetch the follower IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFollowersInCursor(long userId, long cursor);
 
@@ -200,6 +210,7 @@ public interface FriendOperations {
 	 * @param screenName The user's Twitter screen name
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFollowers(String screenName);
 
@@ -212,6 +223,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor used to fetch the follower IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<TwitterProfile> getFollowersInCursor(String screenName, long cursor);
 
@@ -237,6 +249,7 @@ public interface FriendOperations {
 	 * @param userId the user's Twitter ID
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFollowerIds(long userId);
 
@@ -246,6 +259,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFollowerIdsInCursor(long userId, long cursor);
 
@@ -254,6 +268,7 @@ public interface FriendOperations {
 	 * @param screenName the user's Twitter screen name
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFollowerIds(String screenName);
 
@@ -263,6 +278,7 @@ public interface FriendOperations {
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	CursoredList<Long> getFollowerIdsInCursor(String screenName, long cursor);
 
@@ -337,14 +353,6 @@ public interface FriendOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	TwitterProfile disableNotifications(String screenName);
-
-	/**
-	 * Checks for a friendship between two users. Returns true if userA follows userB.
-	 * @param userA the screen name of userA
-	 * @param userB the screen name of userB
-	 * @throws ApiException if there is an error while communicating with Twitter.
-	 */
-	boolean friendshipExists(String userA, String userB);
 
 	/**
 	 * Returns an array of numeric IDs for every user who has a pending request to follow the authenticating user.
