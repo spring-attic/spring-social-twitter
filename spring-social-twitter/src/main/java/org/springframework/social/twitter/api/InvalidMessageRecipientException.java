@@ -28,7 +28,7 @@ public class InvalidMessageRecipientException extends OperationNotPermittedExcep
 	private static final long serialVersionUID = 1L;
 
 	public InvalidMessageRecipientException(String message) {
-		super(message);
+		super("twitter", message);
 	}
 
 }
