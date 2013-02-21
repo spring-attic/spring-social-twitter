@@ -25,7 +25,7 @@ import org.springframework.social.OperationNotPermittedException;
 public class MessageTooLongException extends OperationNotPermittedException {
 
 	public MessageTooLongException(String message) {
-		super(message);
+		super("twitter", message);
 	}
 	
 }

@@ -62,7 +62,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		try {
 			super.handleError(response);
 		} catch(Exception e) {
-			throw new UncategorizedApiException("Error consuming Twitter REST API", e);
+			throw new UncategorizedApiException("twitter", "Error consuming Twitter REST API", e);
 		}
 	}
 	
@@ -89,47 +89,47 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 
 		if (statusCode == HttpStatus.BAD_REQUEST) {
 			if (errorText.contains("Rate limit exceeded.")) {
-				throw new RateLimitExceededException();
+				throw new RateLimitExceededException("twitter");
 			}
 		} else if (statusCode == HttpStatus.UNAUTHORIZED) {
 			if (errorText == null) {
-				throw new NotAuthorizedException(response.getStatusText());
+				throw new NotAuthorizedException("twitter", response.getStatusText());
 			} else if (errorText.equals("Could not authenticate you.")) {
-				throw new MissingAuthorizationException();
+				throw new MissingAuthorizationException("twitter");
 			} else if (errorText.equals("Could not authenticate with OAuth.")) { // revoked token
-				throw new RevokedAuthorizationException();
+				throw new RevokedAuthorizationException("twitter");
 			} else if (errorText.equals("Invalid / expired Token")) { // Note that Twitter doesn't actually expire tokens
-				throw new InvalidAuthorizationException(errorText);
+				throw new InvalidAuthorizationException("twitter", errorText);
 			} else {
-				throw new NotAuthorizedException(errorText);
+				throw new NotAuthorizedException("twitter", errorText);
 			}
 		} else if (statusCode == HttpStatus.FORBIDDEN) {
 			if (errorText.equals(DUPLICATE_STATUS_TEXT) || errorText.contains("You already said that")) {
-				throw new DuplicateStatusException(errorText);
+				throw new DuplicateStatusException("twitter", errorText);
 			} else if (errorText.equals(STATUS_TOO_LONG_TEXT) || errorText.contains(MESSAGE_TOO_LONG_TEXT)) {
 				throw new MessageTooLongException(errorText);
 			} else if (errorText.equals(INVALID_MESSAGE_RECIPIENT_TEXT)) {
 				throw new InvalidMessageRecipientException(errorText);
 			} else if (errorText.equals(DAILY_RATE_LIMIT_TEXT)) {
-				throw new RateLimitExceededException();
+				throw new RateLimitExceededException("twitter");
 			} else {
-				throw new OperationNotPermittedException(errorText);
+				throw new OperationNotPermittedException("twitter", errorText);
 			}
 		} else if (statusCode == HttpStatus.NOT_FOUND) {
-			throw new ResourceNotFoundException(errorText);
+			throw new ResourceNotFoundException("twitter", errorText);
 		} else if (statusCode == HttpStatus.valueOf(ENHANCE_YOUR_CALM)) {
-			throw new RateLimitExceededException();
+			throw new RateLimitExceededException("twitter");
 		}
 
 	}
 
 	private void handleServerErrors(HttpStatus statusCode) throws IOException {
 		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new InternalServerErrorException("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
+			throw new InternalServerErrorException("twitter", "Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
 		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
-			throw new ServerDownException("Twitter is down or is being upgraded.");
+			throw new ServerDownException("twitter", "Twitter is down or is being upgraded.");
 		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
-			throw new ServerOverloadedException("Twitter is overloaded with requests. Try again later.");
+			throw new ServerOverloadedException("twitter", "Twitter is overloaded with requests. Try again later.");
 		}
 	}
 
