@@ -24,12 +24,32 @@ import java.util.List;
 public interface StreamingOperations {
 	
 	/**
-	 * Monitor a filtered stream, given a set of listeners
+	 * Monitor the firehose stream, given a set of listeners.
+	 * Per the documentation at https://dev.twitter.com/docs/api/1.1/get/statuses/firehose, the firehose stream requires special permission.
+	 * @param listeners the listeners to monitor the stream
+	 */
+	void firehose(List<StreamListener> listeners);
+	
+	/**
+	 * Monitor the sample stream, given a set of listeners.
+	 * @param listeners the listeners to monitor the stream
+	 */
+	void sample(List<StreamListener> listeners);
+	
+	/**
+	 * Monitor a filtered stream, given a set of listeners.
 	 * @param trackKeywords the terms to track in the stream
 	 * @param listeners the listeners to monitor the stream
 	 */
 	void filter(String trackKeywords, List<StreamListener> listeners);
-	
+
+	/**
+	 * Monitor a filtered stream, given a set of listeners.
+	 * @param parameters the stream's filter parameters
+	 * @param listeners the listeners to monitor the stream
+	 */
+	void filter(FilterStreamParameters parameters, List<StreamListener> listeners);
+
 	/**
 	 * Shutdown the open stream
 	 */
