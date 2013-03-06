@@ -15,28 +15,10 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.springframework.social.twitter.api.StreamingException;
+interface StreamReader {
 
-public class MockStream implements StreamReader {
-	private boolean open = true;
-	private int messagesInStream;
-	
-	public MockStream(int messagesInStream) {
-		this.messagesInStream = messagesInStream;
-	}
-	
-	public void next() {
-		if(messagesInStream == 0) {
-			throw new StreamingException("Stream closed", null);
-		}
-		messagesInStream--;
-	}
+	void next();
 
-	public void close() {
-		open = false;
-	}
+	void close();
 
-	public boolean isOpen() {
-		return open;
-	}
 }

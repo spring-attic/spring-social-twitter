@@ -15,33 +15,34 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import org.springframework.social.twitter.api.Stream;
 import org.springframework.social.twitter.api.StreamingException;
 
-abstract class ThreadedStreamConsumer extends Thread {
+abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		
 	private volatile boolean open;
 
-	private Stream stream;
+	private StreamReader streamReader;
 
 	public ThreadedStreamConsumer() {
-		this.open = true;
+		this.open = true;		
 	}
 	
 	@Override
 	public void run() {
 		long timeToSleep = 250;
-		stream = null;
+		streamReader = null;
 		
 		while(open) {
 			try {
-				if(stream == null) {
-					stream = getStream();
+				if(streamReader == null) {
+					streamReader = getStreamReader();
 					timeToSleep = NO_WAIT;
 				}
-				stream.next();
+				streamReader.next();
 			} catch (StreamingException e) {
 				// if a valid connection drops, reconnect immediately
-				stream = null;
+				streamReader = null;
 			} catch (StreamCreationException e) {
 				if(e.getHttpStatus() != null) {
 					// Back off exponentially
@@ -70,13 +71,13 @@ abstract class ThreadedStreamConsumer extends Thread {
 
 	public void close() {
 		open = false;
-		if(stream != null) {
-			stream.close();
+		if(streamReader != null) {
+			streamReader.close();
 		}
 	}
 
 	// subclass hook
-	protected abstract Stream getStream() throws StreamCreationException;
+	protected abstract StreamReader getStreamReader() throws StreamCreationException;
 
 	protected void sleepBeforeRetry(long timeToSleep) {
 		try {

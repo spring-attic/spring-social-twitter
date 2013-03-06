@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.social.twitter.api.impl;
+package org.springframework.social.twitter.api;
 
-interface Stream {
+/**
+ * Represents a Twitter stream.
+ * @author Craig Walls
+ */
+public interface Stream {
 
-	void next();
-
-	void close();
-
+	void start();
+	
+	void stop();
+	
 }

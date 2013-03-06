@@ -32,7 +32,7 @@ public class StreamConsumerTest {
 		expectedTimeToSleep = 10000;
 		ThreadedStreamConsumer consumer = new ThreadedStreamConsumer() {
 			@Override
-			protected Stream getStream() throws StreamCreationException {
+			protected StreamReader getStreamReader() throws StreamCreationException {
 				return createStream(new StreamCreationException("Unable to create stream", HttpStatus.valueOf(420)));
 			}
 			
@@ -50,7 +50,7 @@ public class StreamConsumerTest {
 		expectedTimeToSleep = 250;
 		ThreadedStreamConsumer consumer = new ThreadedStreamConsumer() {
 			@Override
-			protected Stream getStream() throws StreamCreationException {
+			protected StreamReader getStreamReader() throws StreamCreationException {
 				return createStream(new StreamCreationException("Unable to create stream", new ConnectException()));
 			}
 			
@@ -76,7 +76,7 @@ public class StreamConsumerTest {
 		expectedTimeToSleep = Math.min(expectedTimeToSleep + 250, ThreadedStreamConsumer.NETWORK_ERROR_SLEEP_MAX);
 	}
 
-	private Stream createStream(StreamCreationException exceptionToThrow) throws StreamCreationException {
+	private StreamReader createStream(StreamCreationException exceptionToThrow) throws StreamCreationException {
 		if(streamsToCreateBeforeFailure == 0) {
 			throw exceptionToThrow;
 		}

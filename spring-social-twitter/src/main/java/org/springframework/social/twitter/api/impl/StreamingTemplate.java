@@ -30,6 +30,7 @@ import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.social.twitter.api.FilterStreamParameters;
+import org.springframework.social.twitter.api.Stream;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingOperations;
 import org.springframework.social.twitter.api.UserStreamParameters;
@@ -45,100 +46,92 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 	
 	private final RestTemplate restTemplate;
 					
-	private ThreadedStreamConsumer consumer;
-
 	public StreamingTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
 		super(isAuthorizedForUser);
 		this.restTemplate = restTemplate;
 	}
 
-	public void firehose(final List<StreamListener> listeners) {
+	public Stream firehose(final List<StreamListener> listeners) {
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
-		consumer = new ThreadedStreamConsumer() {
-			protected Stream getStream() throws StreamCreationException {
+		Stream stream = new ThreadedStreamConsumer() {
+			protected StreamReader getStreamReader() throws StreamCreationException {
 				return createStream(HttpMethod.GET, FIREHOSE_STREAM_URL, EMPTY_BODY, listeners);
 			}
 		};
-		startNewConsumer(consumer);
+		stream.start();
+		return stream;
 	}
 	
-	public void firehose(final int backfill, final List<StreamListener> listeners) {
+	public Stream firehose(final int backfill, final List<StreamListener> listeners) {
 		Assert.isTrue(Math.abs(backfill) >= -1 && Math.abs(backfill) <= 150000, "'backfill' must be a value between 1 to 150000 or -1 to -150000");
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
-		consumer = new ThreadedStreamConsumer() {
-			protected Stream getStream() throws StreamCreationException {				
+		Stream stream = new ThreadedStreamConsumer() {
+			protected StreamReader getStreamReader() throws StreamCreationException {				
 				MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>(1);
 				parameters.set("count", String.valueOf(backfill));
 				return createStream(HttpMethod.GET, FIREHOSE_STREAM_URL, parameters, listeners);
 			}
 		};
-		startNewConsumer(consumer);
+		stream.start();
+		return stream;
 	}
 	
-	public void sample(final List<StreamListener> listeners) {
+	public Stream sample(final List<StreamListener> listeners) {
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
-		consumer = new ThreadedStreamConsumer() {
-			protected Stream getStream() throws StreamCreationException {
+		Stream stream = new ThreadedStreamConsumer() {
+			protected StreamReader getStreamReader() throws StreamCreationException {
 				return createStream(HttpMethod.GET, SAMPLE_STREAM_URL, EMPTY_BODY, listeners);
 			}
 		};
-		startNewConsumer(consumer);
+		stream.start();
+		return stream;
 	}
 	
-	public void filter(String trackKeywords, List<StreamListener> listeners) {
-		filter((FilterStreamParameters) new FilterStreamParameters().track(trackKeywords), listeners);
+	public Stream filter(String trackKeywords, List<StreamListener> listeners) {
+		return filter((FilterStreamParameters) new FilterStreamParameters().track(trackKeywords), listeners);
 	}
 
-	public void filter(final FilterStreamParameters parameters, final List<StreamListener> listeners) {
+	public Stream filter(final FilterStreamParameters parameters, final List<StreamListener> listeners) {
 		Assert.notNull(parameters, "StreamFilter may not be null");
 		Assert.isTrue(parameters.isValid(), "At least one of follow, track, or location must be specified in StreamFilter");
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
-		consumer = new ThreadedStreamConsumer() {
-			protected Stream getStream() throws StreamCreationException {
+		Stream stream = new ThreadedStreamConsumer() {
+			protected StreamReader getStreamReader() throws StreamCreationException {
 				return createStream(HttpMethod.POST, FILTERED_STREAM_URL, parameters.toParameterMap(), listeners);
 			}
 		};
-		startNewConsumer(consumer);
+		stream.start();
+		return stream;
 	}
 	
-	public void user(List<StreamListener> listeners) {
-		user(new UserStreamParameters(), listeners);
+	public Stream user(List<StreamListener> listeners) {
+		return user(new UserStreamParameters(), listeners);
 	}
 	
-	public void user(final UserStreamParameters parameters, final List<StreamListener> listeners) {
+	public Stream user(final UserStreamParameters parameters, final List<StreamListener> listeners) {
 		Assert.notNull(parameters, "StreamFilter may not be null");
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
-		consumer = new ThreadedStreamConsumer() {
-			protected Stream getStream() throws StreamCreationException {
+		Stream stream = new ThreadedStreamConsumer() {
+			protected StreamReader getStreamReader() throws StreamCreationException {
 				return createStream(HttpMethod.POST, USER_STREAM_URL, parameters.toParameterMap(), listeners);
 			}
 		};
-		startNewConsumer(consumer);
+		stream.start();
+		return stream;
 	}
 	
-	private Stream createStream(HttpMethod method, String streamUrl, MultiValueMap<String, String> body, List<StreamListener> listeners) throws StreamCreationException {
+	private StreamReader createStream(HttpMethod method, String streamUrl, MultiValueMap<String, String> body, List<StreamListener> listeners) throws StreamCreationException {
 		try {
 			ClientHttpResponse response = executeRequest(method, streamUrl, body);
 			if (response.getStatusCode().value() > 200) {
 				throw new StreamCreationException("Unable to create stream", response.getStatusCode());
 			}
-			return new StreamImpl(response.getBody(), listeners);
+			return new StreamReaderImpl(response.getBody(), listeners);
 		} catch (IOException e) {
 			throw new StreamCreationException("Unable to create stream.", e);
 		}
 	}
 	
-	public void stopStreaming() {
-		if(consumer != null) {
-			consumer.close();
-			consumer = null;
-		}
-	}
-	
-	private void startNewConsumer(ThreadedStreamConsumer consumer) {
-		consumer.start();
-	}
-
 	private ClientHttpResponse executeRequest(HttpMethod method, String url, MultiValueMap<String, String> body) throws IOException {
 		ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
 		ClientHttpRequest request = requestFactory.createRequest(URI.create(url), method);

@@ -47,7 +47,7 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		
 		MockStreamListener listener = new MockStreamListener(7) {
 			protected void shutdown() {
-				twitter.streamingOperations().stopStreaming();
+//				twitter.streamingOperations().stopStreaming();
 			}
 		};
 		
@@ -70,7 +70,7 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		
 		MockStreamListener listener = new MockStreamListener(21) {
 			protected void shutdown() {
-				twitter.streamingOperations().stopStreaming();
+//				twitter.streamingOperations().stopStreaming();
 			}
 		};
 		

@@ -34,7 +34,7 @@ public class StreamImplTest {
 	public void next() throws Exception {
 		StreamListener mockListener = mock(StreamListener.class);		
 		InputStream inputStream = new ClassPathResource("filter-stream-track.json", getClass()).getInputStream();
-		StreamImpl stream = new StreamImpl(inputStream, asList(mockListener));
+		StreamReaderImpl stream = new StreamReaderImpl(inputStream, asList(mockListener));
 		try {
 			while(true) {
 				stream.next();

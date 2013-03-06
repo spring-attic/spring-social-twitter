@@ -26,7 +26,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingException;
 
-class StreamImpl implements Stream {
+class StreamReaderImpl implements StreamReader {
 	
 	private volatile boolean open;
 		
@@ -38,7 +38,7 @@ class StreamImpl implements Stream {
 
 	private final StreamDispatcher dispatcher;
 	
-	public StreamImpl(InputStream inputStream, List<StreamListener> listeners) {
+	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners) {
 		this.inputStream = inputStream;
 		this.reader = new BufferedReader(new InputStreamReader(inputStream));
 		queue = new ConcurrentLinkedQueue<String>();

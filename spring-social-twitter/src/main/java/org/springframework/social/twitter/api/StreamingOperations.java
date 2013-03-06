@@ -28,7 +28,7 @@ public interface StreamingOperations {
 	 * Per the documentation at https://dev.twitter.com/docs/api/1.1/get/statuses/firehose, the firehose stream requires special permission.
 	 * @param listeners the listeners to monitor the stream
 	 */
-	void firehose(List<StreamListener> listeners);
+	Stream firehose(List<StreamListener> listeners);
 	
 	/**
 	 * Monitor the firehose stream, given a set of listeners and a backfill value.
@@ -40,35 +40,30 @@ public interface StreamingOperations {
 	 * @param backfill the number of messages to backfill. Valid values 1 to 150000 or -1 to -150000.
 	 * @param listeners the listeners to monitor the stream
 	 */
-	void firehose(int backfill, List<StreamListener> listeners);
+	Stream firehose(int backfill, List<StreamListener> listeners);
 
 	/**
 	 * Monitor the sample stream, given a set of listeners.
 	 * @param listeners the listeners to monitor the stream
 	 */
-	void sample(List<StreamListener> listeners);
+	Stream sample(List<StreamListener> listeners);
 	
 	/**
 	 * Monitor a filtered stream, given a set of listeners.
 	 * @param trackKeywords the terms to track in the stream
 	 * @param listeners the listeners to monitor the stream
 	 */
-	void filter(String trackKeywords, List<StreamListener> listeners);
+	Stream filter(String trackKeywords, List<StreamListener> listeners);
 
 	/**
 	 * Monitor a filtered stream, given a set of listeners.
 	 * @param parameters the stream's filter parameters
 	 * @param listeners the listeners to monitor the stream
 	 */
-	void filter(FilterStreamParameters parameters, List<StreamListener> listeners);
+	Stream filter(FilterStreamParameters parameters, List<StreamListener> listeners);
 
-	void user(List<StreamListener> listeners);
+	Stream user(List<StreamListener> listeners);
 	
-	void user(UserStreamParameters parameters, List<StreamListener> listeners);
+	Stream user(UserStreamParameters parameters, List<StreamListener> listeners);
 
-	/**
-	 * Shutdown the open stream
-	 */
-	void stopStreaming();
-	
 }
