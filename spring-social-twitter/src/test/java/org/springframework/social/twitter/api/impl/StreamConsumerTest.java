@@ -30,7 +30,7 @@ public class StreamConsumerTest {
 	@Test
 	public void run_failWithHttpError() {		
 		expectedTimeToSleep = 10000;
-		StreamConsumer consumer = new StreamConsumer() {
+		ThreadedStreamConsumer consumer = new ThreadedStreamConsumer() {
 			@Override
 			protected Stream getStream() throws StreamCreationException {
 				return createStream(new StreamCreationException("Unable to create stream", HttpStatus.valueOf(420)));
@@ -48,7 +48,7 @@ public class StreamConsumerTest {
 	@Test
 	public void run_failWithNetworkError() {		
 		expectedTimeToSleep = 250;
-		StreamConsumer consumer = new StreamConsumer() {
+		ThreadedStreamConsumer consumer = new ThreadedStreamConsumer() {
 			@Override
 			protected Stream getStream() throws StreamCreationException {
 				return createStream(new StreamCreationException("Unable to create stream", new ConnectException()));
@@ -57,7 +57,7 @@ public class StreamConsumerTest {
 			@Override
 			protected void sleepBeforeRetry(long timeToSleep) {
 				assertSleepWithLinearBackOff(timeToSleep);
-				if(timeToSleep >= StreamConsumer.NETWORK_ERROR_SLEEP_MAX) {
+				if(timeToSleep >= ThreadedStreamConsumer.NETWORK_ERROR_SLEEP_MAX) {
 					close(); // to keep the test from running forever
 				}
 			}
@@ -73,7 +73,7 @@ public class StreamConsumerTest {
 
 	private void assertSleepWithLinearBackOff(long timeToSleep) {
 		assertEquals(expectedTimeToSleep, timeToSleep);
-		expectedTimeToSleep = Math.min(expectedTimeToSleep + 250, StreamConsumer.NETWORK_ERROR_SLEEP_MAX);
+		expectedTimeToSleep = Math.min(expectedTimeToSleep + 250, ThreadedStreamConsumer.NETWORK_ERROR_SLEEP_MAX);
 	}
 
 	private Stream createStream(StreamCreationException exceptionToThrow) throws StreamCreationException {

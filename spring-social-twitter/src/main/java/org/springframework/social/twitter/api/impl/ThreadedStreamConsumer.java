@@ -17,13 +17,13 @@ package org.springframework.social.twitter.api.impl;
 
 import org.springframework.social.twitter.api.StreamingException;
 
-abstract class StreamConsumer extends Thread {
+abstract class ThreadedStreamConsumer extends Thread {
 		
 	private volatile boolean open;
 
 	private Stream stream;
 
-	public StreamConsumer() {
+	public ThreadedStreamConsumer() {
 		this.open = true;
 	}
 	

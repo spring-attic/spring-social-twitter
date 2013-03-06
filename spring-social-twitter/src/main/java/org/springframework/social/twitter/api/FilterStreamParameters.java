@@ -15,40 +15,22 @@
  */
 package org.springframework.social.twitter.api;
 
+import org.springframework.util.MultiValueMap;
+
 /**
  * Defines the parameters of a filtered stream.
  * You must set at least one of track, follow, or locations.
  * @author Craig Walls
  */
-public class FilterStreamParameters {
-	
-	private StringBuffer track = new StringBuffer();
+public class FilterStreamParameters extends AbstractStreamParameters {
 
-	private StringBuffer follow = new StringBuffer();
-	
-	private StringBuffer locations = new StringBuffer();
+	protected StringBuffer follow = new StringBuffer();
 
-	public FilterStreamParameters() {}
-	
-	/**
-	 * Add tracking keywords to the filter.
-	 * Does not replace any existing tracking keywords in the filter.
-	 * @param track the keywords to track.
-	 * @return this StreamFilter for building up filter parameters.
-	 */
-	public FilterStreamParameters track(String track) {
-		if (this.track.length() > 0) {
-			this.track.append(',');
-		}
-		this.track.append(track);
-		return this;
-	}
-	
 	/**
 	 * Add a user to follow in the stream.
 	 * Does not replace any existing follows in the filter.
 	 * @param follow the Twitter user ID of a user to follow in the stream.
-	 * @return this StreamFilter for building up filter parameters.
+	 * @return this FilterStreamParameters for building up filter parameters.
 	 */
 	public FilterStreamParameters follow(long follow) {
 		if (this.follow.length() > 0) {
@@ -59,32 +41,6 @@ public class FilterStreamParameters {
 	}
 	
 	/**
-	 * Add a location to the filter
-	 * Does not replace any existing locations in the filter.
-	 * @param west the longitude of the western side of the location's bounding box.
-	 * @param south the latitude of the southern side of the location's bounding box.
-	 * @param east the longitude of the eastern side of the location's bounding box.
-	 * @param north the latitude of the northern side of the location's bounding box.
-	 * @return this StreamFilter for building up filter parameters.
-	 */
-	public FilterStreamParameters addLocation(float west, float south, float east, float north) {
-		if (locations.length() > 0) {
-			locations.append(',');
-		}
-		locations.append(west).append(',').append(south).append(',');
-		locations.append(east).append(',').append(north).append(',');
-		return this;
-	}
-	
-	/**
-	 * Whether or not at least one of track, follow, or locations has values.
-	 * @return true if the minimum requirements are met.
-	 */
-	public boolean isReady() {
-		return follow.length() > 0 || track.length() > 0 || locations.length() > 0;
-	}
-	
-	/**
 	 * @return the follow parameters as they'll be sent in the streaming request.
 	 */
 	public String getFollowParameterValue() {
@@ -92,17 +48,19 @@ public class FilterStreamParameters {
 	}
 	
 	/**
-	 * @return the track parameters as they'll be sent in the streaming request.
+	 * Whether or not at least one of track, follow, or locations has values.
+	 * @return true if the minimum requirements are met.
 	 */
-	public String getTrackParameterValue() {
-		return track.toString();
+	public boolean isValid() {
+		return follow.length() > 0 || track.length() > 0 || locations.length() > 0;
 	}
-	
-	/**
-	 * @return the locations parameters as they'll be sent in the streaming request.
-	 */
-	public String getLocationsParameterValue() {
-		return locations.toString();
+
+	@Override
+	public MultiValueMap<String, String> toParameterMap() {
+		MultiValueMap<String, String> parameterMap = super.toParameterMap();
+		if (follow != null && follow.length() > 0) {
+			parameterMap.set("follow", follow.toString());
+		}
+		return parameterMap;
 	}
-	
 }
