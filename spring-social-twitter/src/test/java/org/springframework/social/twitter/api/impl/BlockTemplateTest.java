@@ -100,10 +100,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	public void getBlockedUsers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/list.json?cursor=-1"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("blocked-user-ids"), APPLICATION_JSON));
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/lookup.json?user_id=14846645%2C14718006"))
-			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		CursoredList<TwitterProfile> blockedUsers = twitter.blockOperations().getBlockedUsers();
 		assertBlockedUsers(blockedUsers);
 	}
@@ -117,10 +114,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	public void getBlockedUsersInCursor() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/list.json?cursor=332211"))
 			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("blocked-user-ids"), APPLICATION_JSON));
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/lookup.json?user_id=14846645%2C14718006"))
-			.andExpect(method(GET))
-			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		CursoredList<TwitterProfile> blockedUsers = twitter.blockOperations().getBlockedUsersInCursor(332211);
 		assertBlockedUsers(blockedUsers);
 	}

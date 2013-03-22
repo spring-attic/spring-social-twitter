@@ -100,6 +100,6 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources) {
 		requireAuthorization();
 		String joinedResources = ArrayUtils.join(resources);
-		return restTemplate.getForObject(buildUri("account/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();
+		return restTemplate.getForObject(buildUri("application/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();
 	}
 }

@@ -151,7 +151,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	public void deleteSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/saved_searches/destroy/26897775.json"))
-			.andExpect(method(DELETE))
+			.andExpect(method(POST))
 			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.searchOperations().deleteSavedSearch(26897775);
 		mockServer.verify();
