@@ -114,6 +114,21 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("statuses/mentions_timeline.json", parameters), TweetList.class);
 	}
+	
+	public List<Tweet> getRetweetsOfMe() {
+		return getRetweetsOfMe(1, 20, 0, 0);
+	}
+
+	public List<Tweet> getRetweetsOfMe(int page, int pageSize) {
+		return getRetweetsOfMe(page, pageSize, 0, 0);
+	}
+
+	public List<Tweet> getRetweetsOfMe(int page, int pageSize, long sinceId, long maxId) {
+		requireAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
+		parameters.set("include_entities", "true");
+		return restTemplate.getForObject(buildUri("statuses/retweets_of_me.json", parameters), TweetList.class);
+	}
 
 	public Tweet getStatus(long tweetId) {
 		requireAuthorization();
@@ -198,4 +213,5 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet> {}
+	
 }

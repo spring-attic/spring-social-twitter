@@ -42,6 +42,11 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		this.restTemplate = restTemplate;
 	}
 	
+	public List<UserList> getLists() {
+		requireAuthorization();
+		return restTemplate.getForObject(buildUri("lists/list.json"), UserSubscriptionList.class);
+	}
+	
 	public List<UserList> getLists(long userId) {
 		requireAuthorization();
 		return restTemplate.getForObject(buildUri("lists/list.json", "user_id", String.valueOf(userId)), UserSubscriptionList.class);
