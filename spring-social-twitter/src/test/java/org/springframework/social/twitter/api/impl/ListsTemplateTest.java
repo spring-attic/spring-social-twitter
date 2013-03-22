@@ -34,6 +34,19 @@ import org.springframework.social.twitter.api.UserList;
  * @author Craig Walls
  */
 public class ListsTemplateTest extends AbstractTwitterApiTest {
+	
+	@Test
+	public void getLists_currentUser() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/list.json"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("multiple-list"), APPLICATION_JSON));
+		assertListOfLists(twitter.listOperations().getLists());
+	}
+	
+	@Test(expected = NotAuthorizedException.class)
+	public void getLists_currentUser_unauthorized() {
+		unauthorizedTwitter.listOperations().getLists();
+	}
 
 	@Test
 	public void getLists_byId() {

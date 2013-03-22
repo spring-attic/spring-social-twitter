@@ -150,6 +150,33 @@ public interface TimelineOperations {
 	List<Tweet> getUserTimeline(long userId, int pageSize, long sinceId, long maxId);
 
 	/**
+	 * Retrieve the 20 most recent tweets of the authenticated user that have been retweeted by others.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<Tweet> getRetweetsOfMe();
+	
+	/**
+	 * Retrieve tweets of the authenticated user that have been retweeted by others.  The most recent tweets are listed first.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 100. (Will return at most 100 entries, even if pageSize is greater than 100.) 
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<Tweet> getRetweetsOfMe(int page, int pageSize);
+	
+	/**
+	 * Retrieve tweets of the authenticated user that have been retweeted by others.  The most recent tweets are listed first.
+	 * @param page The page to return
+	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 100. (Will return at most 100 entries, even if pageSize is greater than 100.) 
+	 * @param sinceId The minimum {@link Tweet} ID to return in the results.
+	 * @param maxId The maximum {@link Tweet} ID to return in the results.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	List<Tweet> getRetweetsOfMe(int page, int pageSize, long sinceId, long maxId);
+	
+	/**
 	 * Retrieve the 20 most recent tweets that mention the authenticated user.
 	 * @return a collection of {@link Tweet} objects that mention the authenticated user.
 	 * @throws ApiException if there is an error while communicating with Twitter.

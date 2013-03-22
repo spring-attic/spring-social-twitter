@@ -193,6 +193,38 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	@Test
+	public void getRetweetsOfMe() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweets_of_me.json?page=1&count=20&include_entities=true"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe();
+		assertTimelineTweets(timeline);
+	}
+
+	@Test 
+	public void getRetweetsOfMe_paged() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweets_of_me.json?page=7&count=25&include_entities=true"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe(7, 25);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getRetweetsOfMe_paged_withSinceIdAndMaxId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweets_of_me.json?page=7&count=25&since_id=2345&max_id=3456&include_entities=true"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = twitter.timelineOperations().getRetweetsOfMe(7, 25, 2345, 3456);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test(expected = NotAuthorizedException.class)
+	public void getRetweetsOfMe_unauthorized() {
+		unauthorizedTwitter.timelineOperations().getRetweetsOfMe();
+	}
+	
+	@Test
 	public void getStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
 			.andExpect(method(GET))
