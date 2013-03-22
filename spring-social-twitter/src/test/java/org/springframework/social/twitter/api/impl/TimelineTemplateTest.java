@@ -399,7 +399,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	public void deleteStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/destroy/12345.json"))
-			.andExpect(method(DELETE))
+			.andExpect(method(POST))
 			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.timelineOperations().deleteStatus(12345L);
 		mockServer.verify();

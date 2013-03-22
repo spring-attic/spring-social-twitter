@@ -164,7 +164,8 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public void deleteStatus(long tweetId) {
 		requireAuthorization();
-		restTemplate.delete(buildUri("statuses/destroy/" + tweetId + ".json"));
+		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
+		restTemplate.postForObject(buildUri("statuses/destroy/" + tweetId + ".json"), data, String.class);
 	}
 
 	public void retweet(long tweetId) {

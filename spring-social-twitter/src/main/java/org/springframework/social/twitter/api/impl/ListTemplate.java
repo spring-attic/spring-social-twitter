@@ -118,7 +118,9 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 
 	public void deleteList(long listId) {
 		requireAuthorization();
-		restTemplate.delete(buildUri("lists/destroy.json", "list_id", String.valueOf(listId)));
+		MultiValueMap<String, Object> request = new LinkedMultiValueMap<String, Object>();
+		request.set("list_id", String.valueOf(listId));
+		restTemplate.postForObject(buildUri("lists/destroy.json"), request, UserList.class);
 	}
 
 	public List<TwitterProfile> getListMembers(long listId) {

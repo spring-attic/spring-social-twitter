@@ -84,7 +84,8 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 
 	public void deleteSavedSearch(long searchId) {
 		requireAuthorization();
-		restTemplate.delete(buildUri("saved_searches/destroy/" + searchId + ".json"));
+		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
+		restTemplate.postForObject(buildUri("saved_searches/destroy/" + searchId + ".json"), data, SavedSearch.class);
 	}
 	
 	// Trends

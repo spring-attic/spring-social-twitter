@@ -15,7 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.List;
 
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.CursoredList;
@@ -73,8 +72,7 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 		requireAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
-		CursoredList<Long> blockedUserIds = restTemplate.getForObject(buildUri("blocks/list.json", parameters), CursoredLongList.class).getList();
-		return getCursoredProfileList(blockedUserIds, blockedUserIds.getPreviousCursor(), blockedUserIds.getNextCursor());
+		return restTemplate.getForObject(buildUri("blocks/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
 
 	public CursoredList<Long> getBlockedUserIds() {
@@ -87,17 +85,5 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 		parameters.set("cursor", String.valueOf(cursor));
 		return restTemplate.getForObject(buildUri("blocks/ids.json", parameters), CursoredLongList.class).getList();
 	}
-	
-	private CursoredList<TwitterProfile> getCursoredProfileList(List<Long> userIds, long previousCursor, long nextCursor) {
-		// TODO: Would be good to figure out how to retrieve profiles in a tighter-than-cursor granularity.
-		List<List<Long>> chunks = CursorUtils.chunkList(userIds, 100);
-		CursoredList<TwitterProfile> users = new CursoredList<TwitterProfile>(userIds.size(), previousCursor, nextCursor);
-		for (List<Long> userIdChunk : chunks) {
-			String joinedIds = ArrayUtils.join(userIdChunk.toArray());
-			users.addAll(restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class));
-		}
-		return users;
-	}
-
 
 }

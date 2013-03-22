@@ -227,7 +227,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getRateLimit() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/rate_limit_status.json?resources=help%2Csearch"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/application/rate_limit_status.json?resources=help%2Csearch"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("rate-limit-status"), APPLICATION_JSON));
 		
