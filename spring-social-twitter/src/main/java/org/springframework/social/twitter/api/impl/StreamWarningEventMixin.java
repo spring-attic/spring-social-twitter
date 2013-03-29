@@ -24,18 +24,18 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.DeserializationContext;
 import org.codehaus.jackson.map.JsonDeserializer;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.springframework.social.twitter.api.StreamDeleteEvent;
-import org.springframework.social.twitter.api.impl.DeleteTweetEventMixin.DeleteTweetEventDeserializer;
+import org.springframework.social.twitter.api.StreamWarningEvent;
+import org.springframework.social.twitter.api.impl.StreamWarningEventMixin.StreamWarningEventDeserializer;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@JsonDeserialize(using = DeleteTweetEventDeserializer.class)
-class DeleteTweetEventMixin {
-	
-	static final class DeleteTweetEventDeserializer extends JsonDeserializer<StreamDeleteEvent> {
+@JsonDeserialize(using=StreamWarningEventDeserializer.class)
+class StreamWarningEventMixin {
+
+	static final class StreamWarningEventDeserializer extends JsonDeserializer<StreamWarningEvent> {
 		@Override
-		public StreamDeleteEvent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-			JsonNode deleteNode = jp.readValueAsTree().get("delete").get("status");
-			return new StreamDeleteEvent(deleteNode.get("id").getValueAsLong(), deleteNode.get("user_id").getValueAsLong());
+		public StreamWarningEvent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+			JsonNode warningNode = jp.readValueAsTree().get("warning");
+			return new StreamWarningEvent(warningNode.get("code").asText(), warningNode.get("message").asText(), warningNode.get("percent_full").asDouble());
 		}
 	}
 	

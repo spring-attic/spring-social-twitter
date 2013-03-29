@@ -37,7 +37,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 			try {
 				if(streamReader == null) {
 					streamReader = getStreamReader();
-					timeToSleep = NO_WAIT;
+					timeToSleep = MIN_WAIT;
 				}
 				streamReader.next();
 			} catch (StreamingException e) {
@@ -46,7 +46,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 			} catch (StreamCreationException e) {
 				if(e.getHttpStatus() != null) {
 					// Back off exponentially
-					if(timeToSleep == NO_WAIT) {
+					if(timeToSleep == MIN_WAIT) {
 						timeToSleep = 10000;
 					}
 					sleepBeforeRetry(timeToSleep);
@@ -58,7 +58,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 				} else {
 					if(open) {
 						// Back off linearly
-						if(timeToSleep == NO_WAIT) {
+						if(timeToSleep == MIN_WAIT) {
 							timeToSleep = 250;
 						}
 						sleepBeforeRetry(timeToSleep);
@@ -89,6 +89,6 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 
 	static final long NETWORK_ERROR_SLEEP_MAX = 16000;
 
-	private static final long NO_WAIT = 0;
+	private static final long MIN_WAIT = 250;
 
 }

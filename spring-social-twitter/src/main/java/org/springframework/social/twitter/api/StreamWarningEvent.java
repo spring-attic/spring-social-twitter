@@ -16,31 +16,33 @@
 package org.springframework.social.twitter.api;
 
 /**
- * Listener interface for clients consuming data from a Twitter stream.
+ * A stream event warning that the client is stalling and is in danger of being disconnected.
  * @author Craig Walls
  */
-public interface StreamListener {
-		
-	/**
-	 * Called when a new Tweet is available on the stream
-	 * @param tweet
-	 */
-	void onTweet(Tweet tweet);
-	
-	/**
-	 * Called when a delete message is available on the stream
-	 */
-	void onDelete(StreamDeleteEvent deleteEvent);
+public class StreamWarningEvent {
 
-	/**
-	 * Called when the stream is being track limited.
-	 * @param numberOfLimitedTweets
-	 */
-	void onLimit(int numberOfLimitedTweets);
+	private final String code;
 	
-	/**
-	 * Called on 
-	 */
-	void onWarning(StreamWarningEvent warningEvent);
+	private final String message;
+	
+	private final double percentFull;
+
+	public String getCode() {
+		return code;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public double getPercentFull() {
+		return percentFull;
+	}
+
+	public StreamWarningEvent(String code, String message, double percentFull) {
+		this.code = code;
+		this.message = message;
+		this.percentFull = percentFull;
+	}
 	
 }

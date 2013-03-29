@@ -22,6 +22,7 @@ import java.util.Queue;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamListener;
+import org.springframework.social.twitter.api.StreamWarningEvent;
 import org.springframework.social.twitter.api.Tweet;
 
 class StreamDispatcher implements Runnable {
@@ -39,7 +40,8 @@ class StreamDispatcher implements Runnable {
 		this.listeners = listeners;
 		objectMapper = new ObjectMapper();
 		objectMapper.getDeserializationConfig().addMixInAnnotations(Tweet.class, TweetMixin.class);
-		objectMapper.getDeserializationConfig().addMixInAnnotations(StreamDeleteEvent.class, DeleteTweetEventMixin.class);
+		objectMapper.getDeserializationConfig().addMixInAnnotations(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
+		objectMapper.getDeserializationConfig().addMixInAnnotations(StreamWarningEvent.class, StreamWarningEventMixin.class);
 		active = true;
 	}
 
@@ -47,13 +49,18 @@ class StreamDispatcher implements Runnable {
 		while(active || queue.peek() != null) {
 			String line = queue.poll();
 			if(line == null) continue;
+			
+			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
+			
 			try {
-				if (line.contains("in_reply_to_status_id_str")) {
+				if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
 					handleTweet(line);
 				} else if (line.startsWith("{\"limit")) {
-					handleLimit(line);				
+					handleLimit(line);
 				} else if (line.startsWith("{\"delete")) {
-					handleDelete(line);				
+					handleDelete(line);
+				} else if (line.startsWith("{\"warning")) {
+					handleWarning(line);
 				}
 			} catch (IOException e) {
 				// TODO: Should only happen if Jackson doesn't know how to map the line
@@ -97,4 +104,16 @@ class StreamDispatcher implements Runnable {
 			}).start();
 		}
 	}
+	
+	private void handleWarning(String line) throws IOException {
+		final StreamWarningEvent warningEvent = objectMapper.readValue(line, StreamWarningEvent.class);
+		for (final StreamListener listener : listeners) {
+			new Thread(new Runnable() {
+				public void run() {
+					listener.onWarning(warningEvent);
+				}
+			}).start();
+		}
+	}
+	
 }

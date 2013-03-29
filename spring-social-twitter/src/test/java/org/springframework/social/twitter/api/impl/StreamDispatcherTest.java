@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamListener;
+import org.springframework.social.twitter.api.StreamWarningEvent;
 import org.springframework.social.twitter.api.Tweet;
 
 public class StreamDispatcherTest {
@@ -39,7 +40,7 @@ public class StreamDispatcherTest {
 		StreamListener mockListener = mock(StreamListener.class);		
 		Queue<String> queue = createQueueWithItems();
 		StreamDispatcher dispatcher = new StreamDispatcher(queue, Arrays.asList(mockListener));
-		runAndAssert(mockListener, dispatcher, 4, 2, 1);
+		runAndAssert(mockListener, dispatcher, 4, 2, 1, 3);
 		dispatcher.stop();
 	}
 
@@ -48,7 +49,7 @@ public class StreamDispatcherTest {
 		StreamListener mockListener = mock(StreamListener.class);		
 		Queue<String> queue = new ConcurrentLinkedQueue<String>();
 		StreamDispatcher dispatcher = new StreamDispatcher(queue, Arrays.asList(mockListener));
-		runAndAssert(mockListener, dispatcher, 0, 0, 0);
+		runAndAssert(mockListener, dispatcher, 0, 0, 0, 0);
 		dispatcher.stop();
 	}
 	
@@ -58,7 +59,7 @@ public class StreamDispatcherTest {
 		Queue<String> queue = createQueueWithItems();
 		StreamDispatcher dispatcher = new StreamDispatcher(queue, Arrays.asList(mockListener));
 		dispatcher.stop();
-		runAndAssert(mockListener, dispatcher, 4, 2, 1);
+		runAndAssert(mockListener, dispatcher, 4, 2, 1, 3);
 	}
 	
 	@Test
@@ -67,7 +68,7 @@ public class StreamDispatcherTest {
 		Queue<String> queue = new ConcurrentLinkedQueue<String>();
 		StreamDispatcher dispatcher = new StreamDispatcher(queue, Arrays.asList(mockListener));
 		dispatcher.stop();
-		runAndAssert(mockListener, dispatcher, 0, 0, 0);
+		runAndAssert(mockListener, dispatcher, 0, 0, 0, 0);
 	}	
 	
 	@Test
@@ -77,16 +78,17 @@ public class StreamDispatcherTest {
 		queue.add("BOGUS LINE");
 		queue.add("{\"unrecognized\":\"event\"}");
 		StreamDispatcher dispatcher = new StreamDispatcher(queue, Arrays.asList(mockListener));
-		runAndAssert(mockListener, dispatcher, 0, 0, 0);		
+		runAndAssert(mockListener, dispatcher, 0, 0, 0, 0);		
 		dispatcher.stop();
 	}
 
-	private void runAndAssert(StreamListener mockListener, StreamDispatcher dispatcher, int tweetEvents, int deleteEvents, int limitEvents) throws Exception {
+	private void runAndAssert(StreamListener mockListener, StreamDispatcher dispatcher, int tweetEvents, int deleteEvents, int limitEvents, int warningEvents) throws Exception {
 		new Thread(dispatcher).start();
 		Thread.sleep(1000); // pause to give thread opportunity to do its job
 		verify(mockListener, times(tweetEvents)).onTweet(any(Tweet.class));
 		verify(mockListener, times(deleteEvents)).onDelete(any(StreamDeleteEvent.class));
 		verify(mockListener, times(limitEvents)).onLimit(369);
+		verify(mockListener, times(warningEvents)).onWarning(any(StreamWarningEvent.class));
 	}
 
 	private Queue<String> createQueueWithItems() {

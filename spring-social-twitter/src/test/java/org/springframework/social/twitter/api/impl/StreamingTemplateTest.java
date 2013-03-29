@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamListener;
+import org.springframework.social.twitter.api.StreamWarningEvent;
 import org.springframework.social.twitter.api.Tweet;
 
 /**
@@ -86,6 +87,7 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		List<Tweet> tweetsReceived = new ArrayList<Tweet>();
 		List<StreamDeleteEvent> deletesReceived = new ArrayList<StreamDeleteEvent>();
 		List<Integer> limitsReceived = new ArrayList<Integer>();
+		List<StreamWarningEvent> warningsReceived = new ArrayList<StreamWarningEvent>();
 		private int stopAfter = Integer.MAX_VALUE;
 		
 		public MockStreamListener(int stopAfter) {
@@ -104,6 +106,11 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 
 		public void onLimit(int numberOfLimitedTweets) {
 			limitsReceived.add(numberOfLimitedTweets);
+			messageReceived();
+		}
+		
+		public void onWarning(StreamWarningEvent warningEvent) {
+			warningsReceived.add(warningEvent);
 			messageReceived();
 		}
 

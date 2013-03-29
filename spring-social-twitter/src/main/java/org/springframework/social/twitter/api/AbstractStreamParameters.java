@@ -28,6 +28,8 @@ abstract class AbstractStreamParameters {
 	protected StringBuffer track = new StringBuffer();
 	
 	protected StringBuffer locations = new StringBuffer();
+	
+	protected boolean stallWarnings = false;
 
 	public AbstractStreamParameters() {}
 	
@@ -63,6 +65,11 @@ abstract class AbstractStreamParameters {
 		return this;
 	}
 	
+	public AbstractStreamParameters stallWarnings(boolean stallWarnings) {
+		this.stallWarnings = stallWarnings;
+		return this;
+	}
+	
 	/**
 	 * @return the track parameters as they'll be sent in the streaming request.
 	 */
@@ -84,6 +91,9 @@ abstract class AbstractStreamParameters {
 		}
 		if (locations != null && locations.length() > 0) {
 			parameterMap.set("locations", locations.toString());
+		}
+		if (stallWarnings) {
+			parameterMap.set("stall_warnings", "true");
 		}
 		return parameterMap;
 	}
