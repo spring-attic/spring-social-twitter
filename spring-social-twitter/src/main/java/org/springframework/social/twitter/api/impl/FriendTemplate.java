@@ -15,7 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.social.twitter.api.CursoredList;
@@ -43,8 +42,10 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public CursoredList<TwitterProfile> getFriendsInCursor(long cursor) {
-		CursoredList<Long> friendIds = getFriendIdsInCursor(cursor);
-		return getCursoredProfileList(friendIds, friendIds.getPreviousCursor(), friendIds.getNextCursor());
+		requireAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		return restTemplate.getForObject(buildUri("friends/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFriends(long userId) {
@@ -52,8 +53,11 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 
 	public CursoredList<TwitterProfile> getFriendsInCursor(long userId, long cursor) {
-		CursoredList<Long> friendIds = getFriendIdsInCursor(userId, cursor);
-		return getCursoredProfileList(friendIds, friendIds.getPreviousCursor(), friendIds.getNextCursor());
+		requireAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		parameters.set("user_id", String.valueOf(userId));
+		return restTemplate.getForObject(buildUri("friends/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFriends(String screenName) {
@@ -61,8 +65,11 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<TwitterProfile> getFriendsInCursor(String screenName, long cursor) {
-		CursoredList<Long> friendIds = getFriendIdsInCursor(screenName, cursor);
-		return getCursoredProfileList(friendIds, friendIds.getPreviousCursor(), friendIds.getNextCursor());
+		requireAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		parameters.set("screen_name", String.valueOf(screenName));
+		return restTemplate.getForObject(buildUri("friends/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
 	
 	public CursoredList<Long> getFriendIds() {
@@ -103,17 +110,22 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<TwitterProfile> getFollowersInCursor(long cursor) {
-		CursoredList<Long> followerIds = getFollowerIdsInCursor(cursor);
-		return getCursoredProfileList(followerIds, followerIds.getPreviousCursor(), followerIds.getNextCursor());
+		requireAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		return restTemplate.getForObject(buildUri("followers/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
-
+	
 	public CursoredList<TwitterProfile> getFollowers(long userId) {
 		return getFollowersInCursor(userId, -1);
 	}
 	
 	public CursoredList<TwitterProfile> getFollowersInCursor(long userId, long cursor) {
-		CursoredList<Long> followerIds = getFollowerIdsInCursor(userId, cursor);
-		return getCursoredProfileList(followerIds, followerIds.getPreviousCursor(), followerIds.getNextCursor());
+		requireAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		parameters.set("user_id", String.valueOf(userId));
+		return restTemplate.getForObject(buildUri("followers/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFollowers(String screenName) {
@@ -121,8 +133,11 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	}
 	
 	public CursoredList<TwitterProfile> getFollowersInCursor(String screenName, long cursor) {
-		CursoredList<Long> followerIds = getFollowerIdsInCursor(screenName, cursor);
-		return getCursoredProfileList(followerIds, followerIds.getPreviousCursor(), followerIds.getNextCursor());
+		requireAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("cursor", String.valueOf(cursor));
+		parameters.set("screen_name", String.valueOf(screenName));
+		return restTemplate.getForObject(buildUri("followers/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
 	}
 
 	public CursoredList<Long> getFollowerIds() {
@@ -226,17 +241,6 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	public CursoredList<Long> getOutgoingFriendships(long cursor) {
 		requireAuthorization();
 		return restTemplate.getForObject(buildUri("friendships/outgoing.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
-	}
-
-	private CursoredList<TwitterProfile> getCursoredProfileList(List<Long> userIds, long previousCursor, long nextCursor) {
-		// TODO: Would be good to figure out how to retrieve profiles in a tighter-than-cursor granularity.
-		List<List<Long>> chunks = CursorUtils.chunkList(userIds, 100);
-		CursoredList<TwitterProfile> users = new CursoredList<TwitterProfile>(userIds.size(), previousCursor, nextCursor);
-		for (List<Long> userIdChunk : chunks) {
-			String joinedIds = ArrayUtils.join(userIdChunk.toArray());
-			users.addAll(restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class));
-		}
-		return users;
 	}
 	
 	private static final MultiValueMap<String, Object> EMPTY_DATA = new LinkedMultiValueMap<String, Object>();
