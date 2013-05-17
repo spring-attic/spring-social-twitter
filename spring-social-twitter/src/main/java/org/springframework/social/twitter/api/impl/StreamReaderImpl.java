@@ -22,6 +22,9 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingException;
@@ -37,14 +40,17 @@ class StreamReaderImpl implements StreamReader {
 	private final Queue<String> queue;
 
 	private final StreamDispatcher dispatcher;
+
+	private final ScheduledFuture<?> future;
 	
 	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners) {
 		this.inputStream = inputStream;
 		this.reader = new BufferedReader(new InputStreamReader(inputStream));
 		queue = new ConcurrentLinkedQueue<String>();
 		dispatcher = new StreamDispatcher(queue, listeners);
-		new Thread(dispatcher).start();
-		open = true;		
+		ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
+		future = executor.scheduleAtFixedRate(dispatcher, 0, 10, TimeUnit.MILLISECONDS);
+		open = true;
 	}
 	
 	public void next() {
@@ -65,6 +71,7 @@ class StreamReaderImpl implements StreamReader {
 	public void close() {
 		try {
 			open = false;
+			future.cancel(true);
 			dispatcher.stop();
 			inputStream.close();
 		} catch(IOException ignore) {}

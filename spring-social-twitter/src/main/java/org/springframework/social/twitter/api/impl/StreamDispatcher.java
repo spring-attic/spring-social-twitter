@@ -46,9 +46,10 @@ class StreamDispatcher implements Runnable {
 	}
 
 	public void run() {
-		while(active || queue.peek() != null) {
+		while(active) {
 			String line = queue.poll();
-			if(line == null) continue;
+			System.out.println("00000000000 " + line);
+			if(line == null) return;
 			
 			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
 			
@@ -71,7 +72,7 @@ class StreamDispatcher implements Runnable {
 	public void stop() {
 		active = false;
 	}
-
+	
 	private void handleDelete(String line) throws IOException {
 		final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
 		for (final StreamListener listener : listeners) {

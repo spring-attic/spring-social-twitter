@@ -27,7 +27,6 @@ import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingException;
 import org.springframework.social.twitter.api.Tweet;
 
-
 public class StreamImplTest {
 
 	@Test
