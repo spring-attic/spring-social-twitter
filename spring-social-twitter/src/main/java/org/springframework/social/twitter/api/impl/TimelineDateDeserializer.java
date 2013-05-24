@@ -21,10 +21,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 
 /**
  * Deserializer to read date values from Twitter timeline entries.
@@ -35,11 +35,11 @@ class TimelineDateDeserializer extends JsonDeserializer<Date> {
 	@Override
 	public Date deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-        try {
-            return new SimpleDateFormat(TIMELINE_DATE_FORMAT, Locale.ENGLISH).parse(jp.getText());
-        } catch (ParseException e) {
-            return null;
-        }
+		try {
+			return new SimpleDateFormat(TIMELINE_DATE_FORMAT, Locale.ENGLISH).parse(jp.getText());
+		} catch (ParseException e) {
+			return null;
+		}
 	}
 
 	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";

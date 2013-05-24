@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api;
 import java.io.Serializable;
 import java.util.Arrays;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A user mention entity.

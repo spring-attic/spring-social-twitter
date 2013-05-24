@@ -15,7 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 class UrlEntityMixin {
 

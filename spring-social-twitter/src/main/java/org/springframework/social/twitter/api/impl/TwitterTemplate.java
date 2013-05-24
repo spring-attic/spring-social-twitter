@@ -15,8 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.twitter.api.BlockOperations;
@@ -30,6 +29,8 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.UserOperations;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * This is the central class for interacting with Twitter.
@@ -130,11 +131,9 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	// AbstractOAuth1ApiBinding hooks
 	
 	@Override
-	protected MappingJacksonHttpMessageConverter getJsonMessageConverter() {
-		MappingJacksonHttpMessageConverter converter = super.getJsonMessageConverter();
-		ObjectMapper objectMapper = new ObjectMapper();				
-		objectMapper.registerModule(new TwitterModule());
-		converter.setObjectMapper(objectMapper);		
+	protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
+		MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
+		converter.setObjectMapper(new ObjectMapper().registerModule(new TwitterModule()));		
 		return converter;
 	}
 	
@@ -145,7 +144,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	// private helper 
 
-    private void initSubApis() {
+	private void initSubApis() {
 		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
 		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized());
