@@ -41,8 +41,8 @@ class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 	@Override
 	public LocalTrendsHolder deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-		JsonNode tree = jp.readValueAsTree();
-		Iterator<JsonNode> dayIt = tree.iterator();
+		JsonNode node = jp.readValueAs(JsonNode.class);
+		Iterator<JsonNode> dayIt = node.iterator();
 		if(dayIt.hasNext()) {
 			JsonNode day = dayIt.next();
 			Date createdAt = toDate(day.get("created_at").asText());

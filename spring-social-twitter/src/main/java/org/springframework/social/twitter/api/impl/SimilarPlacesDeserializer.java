@@ -34,8 +34,8 @@ class SimilarPlacesDeserializer extends JsonDeserializer<SimilarPlacesResponse> 
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new TwitterModule());
 		jp.setCodec(mapper);				
-		JsonNode tree = jp.readValueAsTree();
-		JsonNode resultNode = tree.get("result");
+		JsonNode node = jp.readValueAs(JsonNode.class);
+		JsonNode resultNode = node.get("result");
 		String token = resultNode.get("token").textValue();
 		JsonNode placesNode = resultNode.get("places");
 		@SuppressWarnings("unchecked")

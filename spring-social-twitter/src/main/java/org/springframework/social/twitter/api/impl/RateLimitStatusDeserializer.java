@@ -40,11 +40,11 @@ public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatu
 
 	@Override
 	public RateLimitStatusHolder deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		JsonNode tree = jp.readValueAsTree();
-		if (null == tree || tree.isMissingNode() || tree.isNull()) {
+		JsonNode node = jp.readValueAs(JsonNode.class);
+		if (null == node || node.isMissingNode() || node.isNull()) {
 			return null;
 		}
-		JsonNode resources = tree.get("resources");
+		JsonNode resources = node.get("resources");
 		Map<ResourceFamily, List<RateLimitStatus>> rateLimits = new EnumMap<ResourceFamily, List<RateLimitStatus>>(ResourceFamily.class);
 		for (Iterator<Entry<String,JsonNode>> resourceFamilyIt = resources.fields(); resourceFamilyIt.hasNext();) {
 			Entry<String,JsonNode> resourceFamilyNode = resourceFamilyIt.next();

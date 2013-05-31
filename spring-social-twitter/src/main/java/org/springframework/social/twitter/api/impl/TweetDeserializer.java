@@ -46,55 +46,55 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 
 	@Override
 	public Tweet deserialize(final JsonParser jp, final DeserializationContext ctx) throws IOException {
-		final JsonNode tree = jp.readValueAsTree();
-		if (null == tree || tree.isMissingNode() || tree.isNull()) {
+		final JsonNode node = jp.readValueAs(JsonNode.class);
+		if (null == node || node.isMissingNode() || node.isNull()) {
 			return null;
 		}
-		final Tweet tweet = this.deserialize(tree);
+		final Tweet tweet = this.deserialize(node);
 		jp.skipChildren();
 		return tweet;
 	}
 
 
-	public Tweet deserialize(JsonNode tree) throws IOException, JsonProcessingException {
-		final long id = tree.path("id").asLong();
-		final String text = tree.path("text").asText();
+	public Tweet deserialize(JsonNode node) throws IOException, JsonProcessingException {
+		final long id = node.path("id").asLong();
+		final String text = node.path("text").asText();
 		if (id <= 0 || text == null || text.isEmpty()) {
 			return null;
 		}
-		JsonNode fromUserNode = tree.get("user");
+		JsonNode fromUserNode = node.get("user");
 		String dateFormat = TIMELINE_DATE_FORMAT;
 		String fromScreenName = fromUserNode.get("screen_name").asText();
 		long fromId = fromUserNode.get("id").asLong();
 		String fromImageUrl = fromUserNode.get("profile_image_url").asText(); 
-		Date createdAt = toDate(tree.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
-		String source = tree.get("source").asText();
-		JsonNode toUserIdNode = tree.get("in_reply_to_user_id");
+		Date createdAt = toDate(node.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
+		String source = node.get("source").asText();
+		JsonNode toUserIdNode = node.get("in_reply_to_user_id");
 		Long toUserId = toUserIdNode != null ? toUserIdNode.asLong() : null;
-		JsonNode metadataNode = tree.get("metadata");
-		JsonNode languageCodeNode = metadataNode != null ? metadataNode.get("iso_language_code") : tree.get("iso_language_code");
+		JsonNode metadataNode = node.get("metadata");
+		JsonNode languageCodeNode = metadataNode != null ? metadataNode.get("iso_language_code") : node.get("iso_language_code");
 		String languageCode = languageCodeNode != null ? languageCodeNode.asText() : null;
 		Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
-		JsonNode inReplyToStatusIdNode = tree.get("in_reply_to_status_id");
+		JsonNode inReplyToStatusIdNode = node.get("in_reply_to_status_id");
 		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.asLong() : null;
 		tweet.setInReplyToStatusId(inReplyToStatusId);
-		JsonNode inReplyToUserIdNode = tree.get("in_reply_to_user_id");
+		JsonNode inReplyToUserIdNode = node.get("in_reply_to_user_id");
 		Long inReplyUsersId = inReplyToUserIdNode != null && !inReplyToUserIdNode.isNull() ? inReplyToUserIdNode.asLong() : null;
 		tweet.setInReplyToUserId(inReplyUsersId);
-		tweet.setInReplyToScreenName(tree.path("in_reply_to_screen_name").asText());
-		JsonNode retweetCountNode = tree.get("retweet_count");
+		tweet.setInReplyToScreenName(node.path("in_reply_to_screen_name").asText());
+		JsonNode retweetCountNode = node.get("retweet_count");
 		Integer retweetCount = retweetCountNode != null && !retweetCountNode.isNull() ? retweetCountNode.asInt() : null;
 		tweet.setRetweetCount(retweetCount);
-		JsonNode retweetedNode = tree.get("retweeted");
-		JsonNode retweetedStatusNode = tree.get("retweeted_status");
+		JsonNode retweetedNode = node.get("retweeted");
+		JsonNode retweetedStatusNode = node.get("retweeted_status");
 		boolean retweeted = retweetedNode != null && !retweetedNode.isNull() ? retweetedNode.asBoolean() : false;
 		tweet.setRetweeted(retweeted);
 		Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedStatusNode) : null;
 		tweet.setRetweetedStatus(retweetedStatus);
-		JsonNode favoritedNode = tree.get("favorited");
+		JsonNode favoritedNode = node.get("favorited");
 		boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.asBoolean() : false;
 		tweet.setFavorited(favorited);
-		Entities entities = toEntities(tree.get("entities"), text);
+		Entities entities = toEntities(node.get("entities"), text);
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);
 		tweet.setUser(user);

@@ -19,9 +19,9 @@ class SearchMetadataDeserializer extends JsonDeserializer<SearchMetadata>{
 	@Override
 	public SearchMetadata deserialize(JsonParser jp, DeserializationContext ctxt) 
 			throws IOException, JsonProcessingException {
-		JsonNode tree = jp.readValueAsTree();
-		int max_id = tree.get("max_id").asInt();
-		long since_id = tree.get("since_id").asLong();
+		JsonNode node = jp.readValueAs(JsonNode.class);
+		int max_id = node.get("max_id").asInt();
+		long since_id = node.get("since_id").asLong();
 		return new SearchMetadata(max_id, since_id);
 	}
 }
