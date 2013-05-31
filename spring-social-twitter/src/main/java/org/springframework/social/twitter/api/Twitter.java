@@ -56,6 +56,11 @@ public interface Twitter extends ApiBinding {
 	 * Returns the portion of the Twitter API containing the search operations.
 	 */
 	SearchOperations searchOperations();
+
+	/**
+	 * Returns the portion of the Twitter API containing the streaming operations.
+	 */
+	StreamingOperations streamingOperations();
 	
 	/**
 	 * Returns the portion of the Twitter API containing the tweet and timeline operations.
