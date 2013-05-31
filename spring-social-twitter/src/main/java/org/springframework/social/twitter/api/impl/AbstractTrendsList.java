@@ -55,16 +55,16 @@ class AbstractTrendsList {
 		return list;
 	}
 	
-    protected Date toDate(String dateString, DateFormat dateFormat) {
-        if (dateString == null) {
-            return null;
-        }
-
-        try {
-            return dateFormat.parse(dateString);
-        } catch (ParseException e) {
-            return null;
-        }
-    }
+	protected Date toDate(String dateString, DateFormat dateFormat) {
+		if (dateString == null) {
+			return null;
+		}
+		
+		try {
+			return dateFormat.parse(dateString);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
 
 }

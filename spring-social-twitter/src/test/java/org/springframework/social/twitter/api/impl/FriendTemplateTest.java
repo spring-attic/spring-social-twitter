@@ -247,7 +247,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/followers/list.json?cursor=-1&screen_name=oizik"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
-	    
+
 		List<TwitterProfile> followers = twitter.friendOperations().getFollowers("oizik");
 		assertEquals(2, followers.size());
 		assertEquals("royclarkson", followers.get(0).getScreenName());
@@ -259,7 +259,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/followers/list.json?cursor=12357&screen_name=oizik"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
-	    
+
 		List<TwitterProfile> followers = twitter.friendOperations().getFollowersInCursor("oizik", 12357);
 		assertEquals(2, followers.size());
 		assertEquals("royclarkson", followers.get(0).getScreenName());
@@ -392,7 +392,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
 		String followedScreenName = twitter.friendOperations().follow("oizik2");
 		assertEquals("oizik2", followedScreenName);
-	    
+
 		mockServer.verify();
 	}
 	
@@ -409,7 +409,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		String unFollowedScreenName = twitter.friendOperations().unfollow(98765);
 		assertEquals("oizik2", unFollowedScreenName);
 		mockServer.verify();
-    }
+	}
 
 	@Test(expected = NotAuthorizedException.class)
 	public void unfollow_byUserId_unauthorized() {
@@ -421,11 +421,11 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/destroy.json?screen_name=oizik2"))
 			.andExpect(method(POST))
 			.andRespond(withSuccess(jsonResource("unfollow"), APPLICATION_JSON));
-        
+
 		String unFollowedScreenName = twitter.friendOperations().unfollow("oizik2");
 		assertEquals("oizik2", unFollowedScreenName);
 		mockServer.verify();
-    }
+	}
 	
 	@Test(expected = NotAuthorizedException.class)
 	public void unfollow_byScreenName_unauthorized() {
@@ -439,8 +439,8 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications(98765);
 		assertEquals("oizik2", unFollowedUser.getScreenName());
-        mockServer.verify();
-    }
+		mockServer.verify();
+	}
 
 	@Test(expected = NotAuthorizedException.class)
 	public void enableNotifications_byUserId_unauthorized() {
@@ -454,8 +454,8 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("follow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications("oizik2");
 		assertEquals("oizik2", unFollowedUser.getScreenName());
-        mockServer.verify();
-    }
+		mockServer.verify();
+	}
 
 	@Test(expected = NotAuthorizedException.class)
 	public void enableNotifications_byScreenName_unauthorized() {
@@ -469,8 +469,8 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("unfollow"), APPLICATION_JSON));
 		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications(98765);
 		assertEquals("oizik2", unFollowedUser.getScreenName());
-        mockServer.verify();
-    }
+		mockServer.verify();
+	}
 
 	@Test(expected = NotAuthorizedException.class)
 	public void disableNotifications_byUserId_unauthorized() {
@@ -485,7 +485,7 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications("oizik2");
 		assertEquals("oizik2", unFollowedUser.getScreenName());
 		mockServer.verify();
-    }
+	}
 	
 	@Test(expected = NotAuthorizedException.class)
 	public void disableNotifications_byScreenName_unauthorized() {

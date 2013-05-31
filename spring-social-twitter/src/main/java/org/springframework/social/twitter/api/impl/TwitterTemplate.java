@@ -15,10 +15,10 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.codehaus.jackson.map.ObjectMapper;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
+import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.DirectMessageOperations;
 import org.springframework.social.twitter.api.FriendOperations;
@@ -30,6 +30,8 @@ import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.UserOperations;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * This is the central class for interacting with Twitter.
@@ -65,7 +67,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	private BlockOperations blockOperations;
 	
 	private GeoOperations geoOperations;
-
+	
 
 	/**
 	 * Create a new instance of TwitterTemplate.
@@ -76,7 +78,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate() {
 		super();
-		initSubApis();
+		initSubApis(null);
 	}
 
 	/**
@@ -88,7 +90,19 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret) {
 		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-		initSubApis();
+		initSubApis(null);
+	}
+	
+	/**
+	 * Create a new instance of TwitterTemplate.
+	 * This instance of TwitterTemplate is limited to only performing operations requiring client authorization.
+	 * For instance, you can use it to search Twitter, but you cannot use it to post a status update.
+	 * The access token you use here must be obtained via OAuth 2 Client Credentials Grant. See {@link OAuth2Operations#authenticateClient()}.
+	 * @param clientToken an access token obtained through OAuth 2 client credentials grant with Twitter.
+	 */
+	public TwitterTemplate(String clientToken) {
+		super();
+		initSubApis(clientToken);
 	}
 
 	public TimelineOperations timelineOperations() {
@@ -130,11 +144,9 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	// AbstractOAuth1ApiBinding hooks
 	
 	@Override
-	protected MappingJacksonHttpMessageConverter getJsonMessageConverter() {
-		MappingJacksonHttpMessageConverter converter = super.getJsonMessageConverter();
-		ObjectMapper objectMapper = new ObjectMapper();				
-		objectMapper.registerModule(new TwitterModule());
-		converter.setObjectMapper(objectMapper);		
+	protected MappingJackson2HttpMessageConverter getJsonMessageConverter() {
+		MappingJackson2HttpMessageConverter converter = super.getJsonMessageConverter();
+		converter.setObjectMapper(new ObjectMapper().registerModule(new TwitterModule()));		
 		return converter;
 	}
 	
@@ -145,13 +157,13 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	// private helper 
 
-    private void initSubApis() {
+	private void initSubApis(String clientToken) {
 		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
 		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
 		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized());
 		this.listOperations = new ListTemplate(getRestTemplate(), isAuthorized());
 		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorized());
-		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorized());
+		this.searchOperations = new SearchTemplate(getRestTemplate(), clientToken, isAuthorized());
 		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorized());
 		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorized());
 	}

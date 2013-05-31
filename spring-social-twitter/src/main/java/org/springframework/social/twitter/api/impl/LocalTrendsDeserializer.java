@@ -23,13 +23,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
 import org.springframework.social.twitter.api.Trend;
 import org.springframework.social.twitter.api.Trends;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Deserializer to read local trends data into a LocalTrendsHolder object.
@@ -40,8 +41,8 @@ class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 	@Override
 	public LocalTrendsHolder deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
-		JsonNode tree = jp.readValueAsTree();
-		Iterator<JsonNode> dayIt = tree.iterator();
+		JsonNode node = jp.readValueAs(JsonNode.class);
+		Iterator<JsonNode> dayIt = node.iterator();
 		if(dayIt.hasNext()) {
 			JsonNode day = dayIt.next();
 			Date createdAt = toDate(day.get("created_at").asText());
@@ -49,7 +50,7 @@ class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 			List<Trend> trends = new ArrayList<Trend>();
 			for(Iterator<JsonNode> trendsIt = trendNodes.iterator(); trendsIt.hasNext(); ) {
 				JsonNode trendNode = trendsIt.next();
-				trends.add(new Trend(trendNode.get("name").asText(), trendNode.get("query").getTextValue()));
+				trends.add(new Trend(trendNode.get("name").asText(), trendNode.get("query").asText()));
 			}
 			jp.skipChildren();
 			return new LocalTrendsHolder(new Trends(createdAt, trends));
