@@ -46,8 +46,8 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 	
 	private final RestTemplate restTemplate;
 					
-	public StreamingTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
-		super(isAuthorizedForUser);
+	public StreamingTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
 	}
 

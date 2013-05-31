@@ -19,7 +19,6 @@ import static org.springframework.social.twitter.api.impl.SearchParametersUtil.*
 
 import java.util.List;
 
-import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchOperations;
 import org.springframework.social.twitter.api.SearchResults;
@@ -37,14 +36,9 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 
 	private final RestTemplate restTemplate;
 
-	private ClientSearchTemplate clientSearchTemplate;
-
-	public SearchTemplate(RestTemplate restTemplate, String clientToken, boolean isAuthorizedForUser) {
-		super(isAuthorizedForUser);
+	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
-		if (clientToken != null) {
-			this.clientSearchTemplate = new ClientSearchTemplate(clientToken);
-		}
 	}
 
 	public SearchResults search(String query) {
@@ -66,38 +60,31 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(SearchParameters searchParameters) {
-		try {
-			requireAuthorization();
-			Assert.notNull(searchParameters);
-			MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
-			return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
-		} catch (MissingAuthorizationException e) {
-			if (clientSearchTemplate != null) {
-				return clientSearchTemplate.search(searchParameters);
-			}
-			throw e;
-		}
+		requireEitherUserOrAppAuthorization();
+		Assert.notNull(searchParameters);
+		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
+		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
 
 	public List<SavedSearch> getSavedSearches() {
-		requireAuthorization();
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("saved_searches/list.json"), SavedSearchList.class);
 	}
 
 	public SavedSearch getSavedSearch(long searchId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("saved_searches/show/" + searchId + ".json"), SavedSearch.class);
 	}
 
 	public SavedSearch createSavedSearch(String query) {		
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.set("query", query);
 		return restTemplate.postForObject(buildUri("saved_searches/create.json"), data, SavedSearch.class);
 	}
 
 	public void deleteSavedSearch(long searchId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		restTemplate.postForObject(buildUri("saved_searches/destroy/" + searchId + ".json"), data, SavedSearch.class);
 	}
@@ -109,6 +96,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags) {
+		requireEitherUserOrAppAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("id",String.valueOf(whereOnEarthId));
 		if(excludeHashtags) {
