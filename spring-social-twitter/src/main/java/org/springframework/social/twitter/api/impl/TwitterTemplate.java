@@ -15,10 +15,21 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.springframework.http.HttpRequest;
+import org.springframework.http.client.ClientHttpRequestExecution;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Version;
+import org.springframework.social.support.ClientHttpRequestFactorySelector;
+import org.springframework.social.support.HttpRequestDecorator;
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.DirectMessageOperations;
 import org.springframework.social.twitter.api.FriendOperations;
@@ -70,17 +81,18 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	private GeoOperations geoOperations;
 
 	private StreamingOperations streamOperations;
-
+	
+	private RestTemplate clientRestTemplate = null;
+	
 	/**
 	 * Create a new instance of TwitterTemplate.
 	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
-	 * Some operations, such as search, do not require OAuth authentication.
 	 * A TwitterTemplate created with this constructor will support those operations.
 	 * Any operations requiring authentication will throw {@link NotAuthorizedException} .
 	 */
 	public TwitterTemplate() {
 		super();
-		initSubApis(null);
+		initSubApis();
 	}
 
 	/**
@@ -92,7 +104,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate(String consumerKey, String consumerSecret, String accessToken, String accessTokenSecret) {
 		super(consumerKey, consumerSecret, accessToken, accessTokenSecret);
-		initSubApis(null);
+		initSubApis();
 	}
 	
 	/**
@@ -104,7 +116,8 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate(String clientToken) {
 		super();
-		initSubApis(clientToken);
+		this.clientRestTemplate = createClientRestTemplate(clientToken);
+		initSubApis();
 	}
 
 	public TimelineOperations timelineOperations() {
@@ -146,6 +159,15 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	public RestOperations restOperations() {
 		return getRestTemplate();
 	}
+	
+	// Override getRestTemplate() to return an app-authorized RestTemplate if a client token is available.
+	@Override
+	public RestTemplate getRestTemplate() {
+		if (clientRestTemplate != null) {
+			return clientRestTemplate;
+		}
+		return super.getRestTemplate();
+	}
 
 	// AbstractOAuth1ApiBinding hooks
 	
@@ -162,17 +184,50 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	}
 	
 	// private helper 
-
-	private void initSubApis(String clientToken) {
-		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized());
-		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized());
-		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized());
-		this.listOperations = new ListTemplate(getRestTemplate(), isAuthorized());
-		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorized());
-		this.searchOperations = new SearchTemplate(getRestTemplate(), clientToken, isAuthorized());
-		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorized());
-		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorized());
-		this.streamOperations = new StreamingTemplate(getRestTemplate(), isAuthorized());
+	private RestTemplate createClientRestTemplate(String clientToken) {
+		RestTemplate restTemplate = new RestTemplate(ClientHttpRequestFactorySelector.getRequestFactory());
+		OAuth2RequestInterceptor interceptor = new OAuth2RequestInterceptor(clientToken, OAuth2Version.BEARER);
+		List<ClientHttpRequestInterceptor> interceptors = new LinkedList<ClientHttpRequestInterceptor>();
+		interceptors.add(interceptor);
+		restTemplate.setInterceptors(interceptors);
+		restTemplate.setMessageConverters(getMessageConverters());
+		configureRestTemplate(restTemplate);
+		return restTemplate;
+	}
+		
+	private void initSubApis() {
+		this.userOperations = new UserTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.directMessageOperations = new DirectMessageTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.friendOperations = new FriendTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.listOperations = new ListTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.timelineOperations = new TimelineTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.searchOperations = new SearchTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.blockOperations = new BlockTemplate(getRestTemplate(), isAuthorized(),isAuthorizedForApp());
+		this.geoOperations = new GeoTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+		this.streamOperations = new StreamingTemplate(getRestTemplate(), isAuthorized(), isAuthorizedForApp());
+	}
+	
+	private boolean isAuthorizedForApp() {
+		return clientRestTemplate != null;
 	}
 
+	// TODO: This duplicates the class of the same name in Spring Social Core. Consider making the core implementation public.
+	private static final class OAuth2RequestInterceptor implements ClientHttpRequestInterceptor {
+
+		private final String accessToken;
+		
+		private final OAuth2Version oauth2Version;
+
+		public OAuth2RequestInterceptor(String accessToken, OAuth2Version oauth2Version) {
+			this.accessToken = accessToken;
+			this.oauth2Version = oauth2Version;
+		}
+		
+		public ClientHttpResponse intercept(final HttpRequest request, final byte[] body, ClientHttpRequestExecution execution) throws IOException {
+			HttpRequest protectedResourceRequest = new HttpRequestDecorator(request);
+			protectedResourceRequest.getHeaders().set("Authorization", oauth2Version.getAuthorizationHeaderValue(accessToken));
+			return execution.execute(protectedResourceRequest, body);
+		}
+
+	}
 }

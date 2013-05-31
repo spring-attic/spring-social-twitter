@@ -3,6 +3,10 @@ Spring Social Twitter 1.1.0 Milestone 3 (? ?, 2013)
 Miscellaneous
   * Upgraded to Jackson 2
 
+Improvements
+  * Support for Twitter's Streaming API (SOCIALTW-2)
+  * Support for Application-Only authorization (SOCIALTW-48)
+
 Spring Social Twitter 1.1.0 Milestone 2 (February 12, 2013)
 ===================================================
 Miscellaneous
