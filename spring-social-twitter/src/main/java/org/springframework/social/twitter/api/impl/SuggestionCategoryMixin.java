@@ -15,8 +15,8 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Mixin class for adding Jackson annotations to SuggestionCategory.

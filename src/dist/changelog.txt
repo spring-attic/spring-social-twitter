@@ -1,4 +1,9 @@
-Spring Social 1.1.0 Milestone 2 (February 12, 2012)
+Spring Social Twitter 1.1.0 Milestone 3 (? ?, 2013)
+===================================================
+Miscellaneous
+  * Upgraded to Jackson 2
+
+Spring Social Twitter 1.1.0 Milestone 2 (February 12, 2013)
 ===================================================
 Miscellaneous
   * Changes to support Spring Social/Spring Security integration.
@@ -14,7 +19,7 @@ Improvements
    * Added favorited field to Tweet object. (SOCIALTW-43)
    * Added ticker symbol pseudo-entity to Tweet's Entities object. (SOCIALTW-44)
 
-Spring Social 1.1.0 Milestone 1 (November 26, 2012)
+Spring Social Twitter 1.1.0 Milestone 1 (November 26, 2012)
 ==================================================
 Compatibility Notes:
    * Due to changes in Twitter's API between v1.0 and v1.1, Spring Social

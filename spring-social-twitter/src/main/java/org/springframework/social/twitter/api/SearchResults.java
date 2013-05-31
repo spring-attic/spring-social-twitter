@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class SearchResults {
 	private List<Tweet> tweets;
-    private SearchMetadata metadata;
+	private SearchMetadata metadata;
 	private boolean lastPage;
 
 	public SearchResults(List<Tweet> tweets, SearchMetadata metaData) {
@@ -34,7 +34,7 @@ public class SearchResults {
 	
 	public SearchResults(List<Tweet> tweets, SearchMetadata metaData, boolean lastPage) {
 		this.tweets = tweets;
-        this.metadata = metaData;
+		this.metadata = metaData;
 		this.lastPage = lastPage;
 	}
 

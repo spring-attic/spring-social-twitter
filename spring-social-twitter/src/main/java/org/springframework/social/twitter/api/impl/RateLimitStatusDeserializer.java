@@ -23,13 +23,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
+
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  * Deserializer to read rate limit status information into MultiValueMap
@@ -39,16 +40,16 @@ public class RateLimitStatusDeserializer extends JsonDeserializer<RateLimitStatu
 
 	@Override
 	public RateLimitStatusHolder deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-		JsonNode tree = jp.readValueAsTree();
-		if (null == tree || tree.isMissingNode() || tree.isNull()) {
+		JsonNode node = jp.readValueAs(JsonNode.class);
+		if (null == node || node.isMissingNode() || node.isNull()) {
 			return null;
 		}
-		JsonNode resources = tree.get("resources");
+		JsonNode resources = node.get("resources");
 		Map<ResourceFamily, List<RateLimitStatus>> rateLimits = new EnumMap<ResourceFamily, List<RateLimitStatus>>(ResourceFamily.class);
-		for (Iterator<Entry<String,JsonNode>> resourceFamilyIt = resources.getFields(); resourceFamilyIt.hasNext();) {
+		for (Iterator<Entry<String,JsonNode>> resourceFamilyIt = resources.fields(); resourceFamilyIt.hasNext();) {
 			Entry<String,JsonNode> resourceFamilyNode = resourceFamilyIt.next();
 			List<RateLimitStatus> rateLimitsList = new LinkedList<RateLimitStatus>();
-			for (Iterator<Entry<String,JsonNode>> resourceEndpointIt = resourceFamilyNode.getValue().getFields(); resourceEndpointIt.hasNext();) {
+			for (Iterator<Entry<String,JsonNode>> resourceEndpointIt = resourceFamilyNode.getValue().fields(); resourceEndpointIt.hasNext();) {
 				Entry<String,JsonNode> endpointNode = resourceEndpointIt.next();
 				RateLimitStatus endpointLimit = new RateLimitStatus(endpointNode.getKey(), endpointNode.getValue().get("limit").asInt(), endpointNode.getValue().get("remaining").asInt(), endpointNode.getValue().get("reset").asInt());
 				rateLimitsList.add(endpointLimit);

@@ -15,8 +15,6 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.module.SimpleModule;
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.HashTagEntity;
@@ -33,13 +31,16 @@ import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UrlEntity;
 import org.springframework.social.twitter.api.UserList;
 
+import com.fasterxml.jackson.databind.module.SimpleModule;
+
 /**
  * Jackson module for registering mixin annotations against Twitter model classes.
  */
+@SuppressWarnings("serial")
 class TwitterModule extends SimpleModule {
 
 	public TwitterModule() {
-		super("TwitterModule", new Version(1, 0, 0, null));
+		super("TwitterModule");
 	}
 	
 	@Override

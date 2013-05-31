@@ -16,17 +16,19 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
+import java.util.Map;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.springframework.social.twitter.api.PlaceType;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class PlaceMixin {
@@ -44,8 +46,8 @@ class PlaceMixin {
 	private static class StreetAddressDeserializer extends JsonDeserializer<String> {
 		@Override
 		public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-			JsonNode tree = jp.readValueAsTree();
-			return tree.has("street_address") ? tree.get("street_address").asText() : null;
+			Map<String, String> attributesMap = jp.readValueAs(new TypeReference<Map<String, String>>(){});
+			return attributesMap.containsKey("street_address") ? attributesMap.get("street_address") : null;
 		}
 	}
 }
