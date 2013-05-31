@@ -34,44 +34,44 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	
 	private final RestTemplate restTemplate;
 
-	public UserTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
-		super(isAuthorizedForUser);
+	public UserTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
 	}
 
 	public long getProfileId() {
-		requireAuthorization();
+		requireUserAuthorization();
 		return getUserProfile().getId();
 	}
 
 	public String getScreenName() {
-		requireAuthorization();
+		requireUserAuthorization();
 		return getUserProfile().getScreenName();
 	}
 
 	public TwitterProfile getUserProfile() {
-		requireAuthorization();
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("account/verify_credentials.json"), TwitterProfile.class);
 	}
 
 	public TwitterProfile getUserProfile(String screenName) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("users/show.json", "screen_name", screenName), TwitterProfile.class);
 	}
 	
 	public TwitterProfile getUserProfile(long userId) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("users/show.json", "user_id", String.valueOf(userId)), TwitterProfile.class);
 	}
 
 	public List<TwitterProfile> getUsers(long... userIds) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		String joinedIds = ArrayUtils.join(userIds);
 		return restTemplate.getForObject(buildUri("users/lookup.json", "user_id", joinedIds), TwitterProfileList.class);
 	}
 
 	public List<TwitterProfile> getUsers(String... screenNames) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		String joinedScreenNames = ArrayUtils.join(screenNames);
 		return restTemplate.getForObject(buildUri("users/lookup.json", "screen_name", joinedScreenNames), TwitterProfileList.class);
 	}
@@ -81,24 +81,24 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	}
 
 	public List<TwitterProfile> searchForUsers(String query, int page, int pageSize) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithPerPage(page, pageSize, 0, 0);
 		parameters.set("q", query);
 		return restTemplate.getForObject(buildUri("users/search.json", parameters), TwitterProfileList.class);
 	}
 
 	public List<SuggestionCategory> getSuggestionCategories() {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("users/suggestions.json"), SuggestionCategoryList.class);
 	}
 
 	public List<TwitterProfile> getSuggestions(String slug) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("users/suggestions/" + slug + ".json"), TwitterProfileUsersList.class).getList();
 	}
 
 	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		String joinedResources = ArrayUtils.join(resources);
 		return restTemplate.getForObject(buildUri("application/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();
 	}
