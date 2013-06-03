@@ -32,34 +32,34 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 	
 	private final RestTemplate restTemplate;
 					
-	public BlockTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
-		super(isAuthorizedForUser);
+	public BlockTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
 	}
 
 	public TwitterProfile block(long userId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("user_id", String.valueOf(userId));
 		return restTemplate.postForObject(buildUri("blocks/create.json"), request, TwitterProfile.class);
 	}
 	
 	public TwitterProfile block(String screenName) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("screen_name", screenName);
 		return restTemplate.postForObject(buildUri("blocks/create.json"), request, TwitterProfile.class);
 	}
 	
 	public TwitterProfile unblock(long userId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("user_id", String.valueOf(userId));
 		return restTemplate.postForObject(buildUri("blocks/destroy.json"), request, TwitterProfile.class);
 	}
 	
 	public TwitterProfile unblock(String screenName) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("screen_name", screenName);
 		return restTemplate.postForObject(buildUri("blocks/destroy.json"), request, TwitterProfile.class);
@@ -70,7 +70,7 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 	}
 	
 	public CursoredList<TwitterProfile> getBlockedUsersInCursor(long cursor) {
-		requireAuthorization();
+		requireUserAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
 		CursoredList<Long> blockedUserIds = restTemplate.getForObject(buildUri("blocks/list.json", parameters), CursoredLongList.class).getList();
@@ -82,7 +82,7 @@ class BlockTemplate extends AbstractTwitterOperations implements BlockOperations
 	}
 	
 	public CursoredList<Long> getBlockedUserIdsInCursor(long cursor) {
-		requireAuthorization();
+		requireUserAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("cursor", String.valueOf(cursor));
 		return restTemplate.getForObject(buildUri("blocks/ids.json", parameters), CursoredLongList.class).getList();

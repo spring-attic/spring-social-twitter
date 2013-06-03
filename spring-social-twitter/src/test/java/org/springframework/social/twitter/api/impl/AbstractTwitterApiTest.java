@@ -33,14 +33,21 @@ public abstract class AbstractTwitterApiTest {
 
 	protected TwitterTemplate twitter;
 	
+	protected TwitterTemplate appAuthTwitter;
+
 	protected TwitterTemplate unauthorizedTwitter;
 
 	protected MockRestServiceServer mockServer;
+	
+	protected MockRestServiceServer appAuthMockServer;
+
 
 	@Before
 	public void setup() {
 		twitter = new TwitterTemplate("API_KEY", "API_SECRET", "ACCESS_TOKEN", "ACCESS_TOKEN_SECRET");
 		mockServer = MockRestServiceServer.createServer(twitter.getRestTemplate());
+		appAuthTwitter = new TwitterTemplate("APP_ACCESS_TOKEN");
+		appAuthMockServer = MockRestServiceServer.createServer(appAuthTwitter.getRestTemplate());
 		unauthorizedTwitter = new TwitterTemplate();
 		 // create a mock server just to avoid hitting real twitter if something gets past the authorization check
 		MockRestServiceServer.createServer(unauthorizedTwitter.getRestTemplate());

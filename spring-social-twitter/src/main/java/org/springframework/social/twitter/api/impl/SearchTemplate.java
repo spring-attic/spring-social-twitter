@@ -15,7 +15,8 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.text.SimpleDateFormat;
+import static org.springframework.social.twitter.api.impl.SearchParametersUtil.*;
+
 import java.util.List;
 
 import org.springframework.social.twitter.api.SavedSearch;
@@ -35,8 +36,8 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 
 	private final RestTemplate restTemplate;
 
-	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
-		super(isAuthorizedForUser);
+	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
 	}
 
@@ -59,32 +60,33 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(SearchParameters searchParameters) {
-		requireAuthorization();
+		requireEitherUserOrAppAuthorization();
 		Assert.notNull(searchParameters);
 		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
 		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
 
 	public List<SavedSearch> getSavedSearches() {
-		requireAuthorization();
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("saved_searches/list.json"), SavedSearchList.class);
 	}
 
 	public SavedSearch getSavedSearch(long searchId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("saved_searches/show/" + searchId + ".json"), SavedSearch.class);
 	}
 
 	public SavedSearch createSavedSearch(String query) {		
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.set("query", query);
 		return restTemplate.postForObject(buildUri("saved_searches/create.json"), data, SavedSearch.class);
 	}
 
 	public void deleteSavedSearch(long searchId) {
-		requireAuthorization();
-		restTemplate.delete(buildUri("saved_searches/destroy/" + searchId + ".json"));
+		requireUserAuthorization();
+		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
+		restTemplate.postForObject(buildUri("saved_searches/destroy/" + searchId + ".json"), data, SavedSearch.class);
 	}
 	
 	// Trends
@@ -94,6 +96,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags) {
+		requireEitherUserOrAppAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("id",String.valueOf(whereOnEarthId));
 		if(excludeHashtags) {
@@ -102,38 +105,4 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		return restTemplate.getForObject(buildUri("trends/place.json", parameters), LocalTrendsHolder.class).getTrends();
 	}
 
-	// private helpers
-
-	private MultiValueMap<String, String> buildQueryParametersFromSearchParameters(SearchParameters searchParameters) {
-		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("q", searchParameters.getQuery());
-		if (searchParameters.getGeoCode() != null) {
-			parameters.set("geocode", searchParameters.getGeoCode().toString());
-		}
-		if (searchParameters.getLang() != null) {
-			parameters.set("lang", searchParameters.getLang());
-		}
-		if (searchParameters.getLocale() != null) {
-			parameters.set("locale", searchParameters.getLocale());
-		}
-		if (searchParameters.getResultType() != null) {
-			parameters.set("result_type", searchParameters.getResultType().toString());
-		}
-		parameters.set("count", searchParameters.getCount() != null ? String.valueOf(searchParameters.getCount()) : String.valueOf(DEFAULT_RESULTS_PER_PAGE));
-		if (searchParameters.getUntil() != null) {
-			parameters.set("until", new SimpleDateFormat("yyyy-MM-dd").format(searchParameters.getUntil()));
-		}
-		if (searchParameters.getSinceId() != null) {
-			parameters.set("since_id", String.valueOf(searchParameters.getSinceId()));
-		}
-		if (searchParameters.getMaxId() != null) {
-			parameters.set("max_id", String.valueOf(searchParameters.getMaxId()));
-		}
-		if (!searchParameters.isIncludeEntities()) {
-			parameters.set("include_entities", "false");
-		}
-		return parameters;
-	}
-
-	static final int DEFAULT_RESULTS_PER_PAGE = 50;
 }

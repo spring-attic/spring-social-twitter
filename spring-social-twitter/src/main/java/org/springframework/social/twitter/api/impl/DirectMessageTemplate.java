@@ -31,8 +31,8 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	
 	private final RestTemplate restTemplate;
 
-	public DirectMessageTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser) {
-		super(isAuthorizedForUser);
+	public DirectMessageTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
 	}
 
@@ -45,7 +45,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public List<DirectMessage> getDirectMessagesReceived(int page, int pageSize, long sinceId, long maxId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("direct_messages.json", parameters), DirectMessageList.class);
 	}
@@ -59,18 +59,18 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public List<DirectMessage> getDirectMessagesSent(int page, int pageSize, long sinceId, long maxId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(page, pageSize, sinceId, maxId);
 		return restTemplate.getForObject(buildUri("direct_messages/sent.json", parameters), DirectMessageList.class);
 	}
 	
 	public DirectMessage getDirectMessage(long id) {
-		requireAuthorization();
+		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("direct_messages/show.json", "id", String.valueOf(id)), DirectMessage.class);
 	}
 
 	public DirectMessage sendDirectMessage(String toScreenName, String text) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.add("screen_name", String.valueOf(toScreenName));
 		data.add("text", text);
@@ -78,7 +78,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public DirectMessage sendDirectMessage(long toUserId, String text) {
-		requireAuthorization();
+		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.add("user_id", String.valueOf(toUserId));
 		data.add("text", text);
@@ -86,7 +86,7 @@ class DirectMessageTemplate extends AbstractTwitterOperations implements DirectM
 	}
 
 	public void deleteDirectMessage(long messageId) {
-		requireAuthorization();
+		requireUserAuthorization();
 		restTemplate.delete(buildUri("direct_messages/destroy.json","id",String.valueOf(messageId)));
 	}
 
