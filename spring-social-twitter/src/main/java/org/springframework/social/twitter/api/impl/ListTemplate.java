@@ -212,7 +212,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public CursoredList<UserList> getMemberships(long userId) {
-		requireUserAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
 	}
 

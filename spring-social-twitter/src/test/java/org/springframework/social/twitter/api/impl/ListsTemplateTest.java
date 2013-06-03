@@ -55,7 +55,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("multiple-list"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getLists(161064614));
 	}
-	
+
+	@Test
+	public void getLists_byId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/list.json?user_id=161064614"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("multiple-list"), APPLICATION_JSON));
+		assertListOfLists(appAuthTwitter.listOperations().getLists(161064614));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getLists_byId_unauthorized() {
 		unauthorizedTwitter.listOperations().getLists(161064614);
@@ -68,7 +77,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("multiple-list"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getLists("habuma"));
 	}
-	
+
+	@Test
+	public void getLists_byScreenName_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/list.json?screen_name=habuma"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("multiple-list"), APPLICATION_JSON));
+		assertListOfLists(appAuthTwitter.listOperations().getLists("habuma"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getLists_byScreenName_unauthorized() {
 		unauthorizedTwitter.listOperations().getLists("habuma");
@@ -86,6 +104,24 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	public void getList_byListId_unauthorized() {
 		unauthorizedTwitter.listOperations().getList(40841803);
 	}
+	
+	@Test
+	public void getList_byScreenNameAndSlug() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/show.json?owner_screen_name=habuma&slug=sluggo"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
+		assertSingleList(twitter.listOperations().getList("habuma", "sluggo"));
+	}
+
+	@Test
+	public void getList_byScreenNameAndSlug_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/show.json?owner_screen_name=habuma&slug=sluggo"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
+		assertSingleList(appAuthTwitter.listOperations().getList("habuma", "sluggo"));
+	}
+
 	
 	@Test
 	public void createList_publicListForUserId() {
@@ -149,7 +185,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getListMembers_byUserIdAndListId() {
+	public void getListMembers_byListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?list_id=40841803"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
@@ -157,7 +193,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
-	public void getListMembers_byUserIdAndListId_unauthorized() {
+	public void getListMembers_byListId_unauthorized() {
 		unauthorizedTwitter.listOperations().getListMembers(40841803);
 	}
 
@@ -168,7 +204,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListMembers("habuma", "forfun"));
 	}
-	
+
+	@Test
+	public void getListMembers_byScreenNameAndListSlug_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?owner_screen_name=habuma&slug=forfun"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
+		assertListMembers(appAuthTwitter.listOperations().getListMembers("habuma", "forfun"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getListMembers_byScreenNameAndListSlug_unauthorized() {
 		unauthorizedTwitter.listOperations().getListMembers("habuma", "forfun");
@@ -245,7 +290,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getListSubscribers_byUserIdAndListId() {
+	public void getListSubscribers_byListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers.json?list_id=40841803"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
@@ -253,7 +298,7 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	@Test(expected = NotAuthorizedException.class)
-	public void getListSubscribers_byUserIdAndListId_unauthorized() {
+	public void getListSubscribers_byListId_unauthorized() {
 		unauthorizedTwitter.listOperations().getListSubscribers(40841803);
 	}
 
@@ -264,7 +309,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListSubscribers("habuma", "forfun"));
 	}
-	
+
+	@Test
+	public void getListSubscribers_byScreenNameAndListSlug_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers.json?owner_screen_name=habuma&slug=forfun"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
+		assertListMembers(appAuthTwitter.listOperations().getListSubscribers("habuma", "forfun"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getListSubscribers_byScreenNameAndListSlug_unauthorized() {
 		unauthorizedTwitter.listOperations().getListSubscribers("habuma", "forfun");
@@ -277,7 +331,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getMemberships(161064614));
 	}
-	
+
+	@Test
+	public void getMemberships_forUserId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/memberships.json?user_id=161064614"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		assertListOfLists(appAuthTwitter.listOperations().getMemberships(161064614));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getMemberships_forUserId_unauthorized() {
 		unauthorizedTwitter.listOperations().getMemberships(161064614);
@@ -290,7 +353,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getMemberships("habuma"));
 	}
-	
+
+	@Test
+	public void getMemberships_forScreenName_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/memberships.json?screen_name=habuma"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		assertListOfLists(appAuthTwitter.listOperations().getMemberships("habuma"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getMemberships_forScreenName_unauthorized() {
 		unauthorizedTwitter.listOperations().getMemberships("habuma");
@@ -303,7 +375,16 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getSubscriptions(161064614));
 	}
-	
+
+	@Test
+	public void getSubscriptions_forUserId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?user_id=161064614"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		assertListOfLists(appAuthTwitter.listOperations().getSubscriptions(161064614));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getSubscriptions_forUserId_unauthorized() {
 		unauthorizedTwitter.listOperations().getSubscriptions(161064614);
@@ -317,6 +398,15 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListOfLists(twitter.listOperations().getSubscriptions("habuma"));
 	}
 	
+	@Test
+	public void getSubscriptions_forScreenName_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?screen_name=habuma"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		assertListOfLists(appAuthTwitter.listOperations().getSubscriptions("habuma"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getSubscriptions_forScreenName_unauthorized() {
 		unauthorizedTwitter.listOperations().getSubscriptions("habuma");
@@ -333,7 +423,21 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertTrue(twitter.listOperations().isMember(40841803, 123456));
 		assertFalse(twitter.listOperations().isMember(40841803, 987654));
 	}
-	
+
+	@Test
+	public void isMember_byUserId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/show.json?list_id=40841803&user_id=123456"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/show.json?list_id=40841803&user_id=987654"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
+		assertTrue(appAuthTwitter.listOperations().isMember(40841803, 123456));
+		assertFalse(appAuthTwitter.listOperations().isMember(40841803, 987654));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void isMember_byUserId_unauthorized() {
 		unauthorizedTwitter.listOperations().isMember(40841803, 123456);
@@ -350,7 +454,21 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertTrue(twitter.listOperations().isMember("habuma", "forfun", "royclarkson"));
 		assertFalse(twitter.listOperations().isMember("habuma", "forfun", "kdonald"));
 	}
-	
+
+	@Test
+	public void isMember_byScreenName_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/show.json?owner_screen_name=habuma&slug=forfun&screen_name=royclarkson"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/show.json?owner_screen_name=habuma&slug=forfun&screen_name=kdonald"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
+		assertTrue(appAuthTwitter.listOperations().isMember("habuma", "forfun", "royclarkson"));
+		assertFalse(appAuthTwitter.listOperations().isMember("habuma", "forfun", "kdonald"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void isMember_byScreenName_unauthorized() {
 		unauthorizedTwitter.listOperations().isMember("habuma", "forfun", "royclarkson");
@@ -367,7 +485,21 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertTrue(twitter.listOperations().isSubscriber(40841803, 123456));
 		assertFalse(twitter.listOperations().isSubscriber(40841803, 987654));
 	}
-	
+
+	@Test
+	public void isSubscriber_byUserId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/show.json?list_id=40841803&user_id=123456"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/show.json?list_id=40841803&user_id=987654"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
+		assertTrue(appAuthTwitter.listOperations().isSubscriber(40841803, 123456));
+		assertFalse(appAuthTwitter.listOperations().isSubscriber(40841803, 987654));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void isSubscriber_byUserId_unauthorized() {
 		unauthorizedTwitter.listOperations().isSubscriber(40841803, 123456);
@@ -384,7 +516,21 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertTrue(twitter.listOperations().isSubscriber("habuma", "forfun", "royclarkson"));
 		assertFalse(twitter.listOperations().isSubscriber("habuma", "forfun", "kdonald"));
 	}
-	
+
+	@Test
+	public void isSubscriber_byScreenName_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/show.json?owner_screen_name=habuma&slug=forfun&screen_name=royclarkson"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/show.json?owner_screen_name=habuma&slug=forfun&screen_name=kdonald"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
+		assertTrue(appAuthTwitter.listOperations().isSubscriber("habuma", "forfun", "royclarkson"));
+		assertFalse(appAuthTwitter.listOperations().isSubscriber("habuma", "forfun", "kdonald"));
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void isSubscriber_byScreenName_unauthorized() {
 		unauthorizedTwitter.listOperations().isSubscriber("habuma", "forfun", "royclarkson");
@@ -485,11 +631,31 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void getListStatuses_slug_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/statuses.json?count=20&owner_screen_name=habuma&slug=mylist&include_entities=true"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.listOperations().getListStatuses("habuma", "mylist");
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
 	public void getListStatuses_slug_paged() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/statuses.json?count=30&owner_screen_name=habuma&slug=mylist&include_entities=true"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist", 30);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getListStatuses_slug_paged_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/statuses.json?count=30&owner_screen_name=habuma&slug=mylist&include_entities=true"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.listOperations().getListStatuses("habuma", "mylist", 30);
 		assertTimelineTweets(timeline);
 	}
 
@@ -501,7 +667,17 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		List<Tweet> timeline = twitter.listOperations().getListStatuses("habuma", "mylist", 30, 12345, 54321);
 		assertTimelineTweets(timeline);
 	}
-	
+
+	@Test
+	public void getListStatuses_slug_withSinceIdAndMaxId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/statuses.json?count=30&since_id=12345&max_id=54321&owner_screen_name=habuma&slug=mylist&include_entities=true"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.listOperations().getListStatuses("habuma", "mylist", 30, 12345, 54321);
+		assertTimelineTweets(timeline);
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getListStatuses_slug_withSinceIdAndMaxId_unauthorized() {
 		unauthorizedTwitter.listOperations().getListStatuses(1234, 30, 12345, 54321);

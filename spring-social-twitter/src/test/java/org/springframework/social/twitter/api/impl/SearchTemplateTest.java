@@ -87,6 +87,45 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 	public void search_sinceAndMaxId_unauthorized() {
 		unauthorizedTwitter.searchOperations().search("#spring", 10, 123, 54321);
 	}
+
+	@Test
+	public void search_queryOnly_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
+		SearchResults searchResults = appAuthTwitter.searchOperations().search("#spring");
+		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
+		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		List<Tweet> tweets = searchResults.getTweets();
+		assertSearchTweets(tweets);
+	}
+	
+	@Test
+	public void search_pageAndResultsPerPage_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=10"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
+		SearchResults searchResults = appAuthTwitter.searchOperations().search("#spring", 10);
+		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
+		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		List<Tweet> tweets = searchResults.getTweets();
+		assertSearchTweets(tweets);
+	}
+	
+	@Test
+	public void search_sinceAndMaxId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=10&since_id=123&max_id=54321"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
+		SearchResults searchResults = appAuthTwitter.searchOperations().search("#spring", 10, 123, 54321);
+		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
+		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		List<Tweet> tweets = searchResults.getTweets();
+		assertSearchTweets(tweets);
+	}
 	
 	@Test
 	public void getSavedSearches() {
@@ -187,7 +226,35 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		List<Trend> trends = localTrends.getTrends();
 		assertEquals(2, trends.size());
 	}	
+
+	@Test
+	public void getLocalTrends_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/trends/place.json?id=2442047"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("local-trends"), APPLICATION_JSON));
+		Trends localTrends = appAuthTwitter.searchOperations().getLocalTrends(2442047);
+		List<Trend> trends = localTrends.getTrends();
+		assertEquals(2, trends.size());
+		Trend trend1 = trends.get(0);
+		assertEquals("Cool Stuff", trend1.getName());
+		assertEquals("Cool+Stuff", trend1.getQuery());
+		Trend trend2 = trends.get(1);
+		assertEquals("#springsocial", trend2.getName());
+		assertEquals("%23springsocial", trend2.getQuery());
+	}
 	
+	@Test
+	public void getLocalTrends_excludeHashtags_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/trends/place.json?id=2442047&exclude=hashtags"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("local-trends"), APPLICATION_JSON));
+		Trends localTrends = appAuthTwitter.searchOperations().getLocalTrends(2442047, true);
+		List<Trend> trends = localTrends.getTrends();
+		assertEquals(2, trends.size());
+	}	
+
 	// test helpers
 
 	private void assertSearchTweets(List<Tweet> tweets) {

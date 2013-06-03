@@ -134,6 +134,36 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void getUserTimeline_forScreenName_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=20&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getUserTimeline("habuma");
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getUserTimeline_forScreenName_paged_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=24&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getUserTimeline("habuma", 24);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getUserTimeline_forScreenName_paged_withSinceIdAndMaxId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=24&since_id=112233&max_id=332211&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getUserTimeline("habuma", 24, 112233, 332211);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
 	public void getUserTimeline_forUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=20&user_id=12345&include_entities=true"))
 				.andExpect(method(GET))
@@ -157,6 +187,36 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getUserTimeline(12345L, 24, 112233, 332211);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getUserTimeline_forUserId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=20&user_id=12345&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getUserTimeline(12345L);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getUserTimeline_forUserId_paged_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=24&user_id=12345&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getUserTimeline(12345L, 24);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getUserTimeline_forUserId_paged_withSinceIdAndMaxId_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=24&since_id=112233&max_id=332211&user_id=12345&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getUserTimeline(12345L, 24, 112233, 332211);
 		assertTimelineTweets(timeline);
 	}
 
@@ -233,7 +293,18 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		Tweet tweet = twitter.timelineOperations().getStatus(12345);
 		assertSingleTweet(tweet);
 	}
-	
+
+	@Test
+	public void getStatus_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
+		
+		Tweet tweet = appAuthTwitter.timelineOperations().getStatus(12345);
+		assertSingleTweet(tweet);
+	}
+
 	@Test(expected = NotAuthorizedException.class)
 	public void getStatus_unauthorized() {
 		unauthorizedTwitter.timelineOperations().getStatus(12345);
@@ -470,7 +541,27 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		List<Tweet> timeline = twitter.timelineOperations().getRetweets(42L, 12);
 		assertTimelineTweets(timeline);						
 	}
-	
+
+	@Test
+	public void getRetweets_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweets/42.json?count=100&include_entities=true"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getRetweets(42L);
+		assertTimelineTweets(timeline);						
+	}
+
+	@Test
+	public void getRetweets_withCount_appAuthorization() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweets/42.json?count=12&include_entities=true"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getRetweets(42L, 12);
+		assertTimelineTweets(timeline);						
+	}
+
 	@Test
 	public void getFavorites() {
 		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
@@ -488,6 +579,28 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.timelineOperations().getFavorites(50);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_appAuthorization() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites();
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_paged_appAuthorization() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&include_entities=true"))
+				.andExpect(method(GET))
+				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites(50);
 		assertTimelineTweets(timeline);
 	}
 
