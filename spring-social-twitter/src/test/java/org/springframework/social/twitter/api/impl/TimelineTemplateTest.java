@@ -582,27 +582,27 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test
-	public void getFavorites_appAuthorization() {
-		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
-		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&include_entities=true"))
-				.andExpect(method(GET))
-				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
-				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
-		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites();
-		assertTimelineTweets(timeline);
-	}
+	// @Test
+	// public void getFavorites_appAuthorization() {
+	// 	// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+	// 	appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&include_entities=true"))
+	// 			.andExpect(method(GET))
+	// 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+	// 			.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+	// 	List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites();
+	// 	assertTimelineTweets(timeline);
+	// }
 
-	@Test
-	public void getFavorites_paged_appAuthorization() {
-		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
-		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&include_entities=true"))
-				.andExpect(method(GET))
-				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
-				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
-		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites(50);
-		assertTimelineTweets(timeline);
-	}
+	// @Test
+	// public void getFavorites_paged_appAuthorization() {
+	// 	// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+	// 	appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&include_entities=true"))
+	// 			.andExpect(method(GET))
+	// 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+	// 			.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+	// 	List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites(50);
+	// 	assertTimelineTweets(timeline);
+	// }
 
 	@Test(expected = NotAuthorizedException.class)
 	public void getFavorites_unauthorized() {

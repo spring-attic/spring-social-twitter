@@ -95,57 +95,69 @@ public interface TimelineOperations {
 
 	/**
 	 * Retrieves the 20 most recent tweets posted by the given user.
+	 * Supports either user or application authorization.
 	 * @param screenName The screen name of the user whose timeline is being requested.
 	 * @return a collection of {@link Tweet}s from the specified user's timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getUserTimeline(String screenName);
 
 	/**
 	 * Retrieves tweets posted by the given user. The most recent tweets are listed first.
+	 * Supports either user or application authorization.
 	 * @param screenName The screen name of the user whose timeline is being requested.
 	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
 	 * @return a collection of {@link Tweet}s from the specified user's timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getUserTimeline(String screenName, int pageSize);
 
 	/**
 	 * Retrieves tweets posted by the given user. The most recent tweets are listed first.
+	 * Supports either user or application authorization.
 	 * @param screenName The screen name of the user whose timeline is being requested.
 	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a collection of {@link Tweet}s from the specified user's timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getUserTimeline(String screenName, int pageSize, long sinceId, long maxId);
 
 	/**
 	 * Retrieves the 20 most recent tweets posted by the given user.
+	 * Supports either user or application authorization.
 	 * @param userId The user ID of the user whose timeline is being requested.
 	 * @return a collection of {@link Tweet}s from the specified user's timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getUserTimeline(long userId);
 
 	/**
 	 * Retrieves tweets posted by the given user. The most recent tweets are listed first.
+	 * Supports either user or application authorization.
 	 * @param userId The user ID of the user whose timeline is being requested.
 	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
 	 * @return a collection of {@link Tweet}s from the specified user's timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getUserTimeline(long userId, int pageSize);
 
 	/**
 	 * Retrieves tweets posted by the given user. The most recent tweets are listed first.
+	 * Supports either user or application authorization.
 	 * @param userId The user ID of the user whose timeline is being requested.
 	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 200. (Will return at most 200 entries, even if pageSize is greater than 200.)
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a collection of {@link Tweet}s from the specified user's timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getUserTimeline(long userId, int pageSize, long sinceId, long maxId);
 
@@ -206,8 +218,10 @@ public interface TimelineOperations {
 
 	/**
 	 * Returns a single tweet.
+	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	Tweet getStatus(long tweetId);
 
@@ -275,16 +289,20 @@ public interface TimelineOperations {
 
 	/**
 	 * Retrieves up to 100 retweets of a specific tweet.
+	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getRetweets(long tweetId);
 
 	/**
 	 * Retrieves retweets of a specific tweet.
+	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
 	 * @param count The maximum number of retweets to return. Should be less than or equal to 100. (Will return at most 100 entries, even if pageSize is greater than 100.)
 	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getRetweets(long tweetId, int count);
 

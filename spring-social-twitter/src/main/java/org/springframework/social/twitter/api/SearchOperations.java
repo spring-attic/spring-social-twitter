@@ -30,10 +30,11 @@ public interface SearchOperations {
 	
 	/**
 	 * Searches Twitter, returning the first 50 matching {@link Tweet}s
+	 * Supports either user or application authorization.
 	 * @param query The search query string
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -41,11 +42,12 @@ public interface SearchOperations {
 
 	/**
 	 * Searches Twitter, returning a specific page out of the complete set of results.
+	 * Supports either user or application authorization.
 	 * @param query The search query string
 	 * @param pageSize The number of {@link Tweet}s per query
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -54,13 +56,14 @@ public interface SearchOperations {
 	/**
 	 * Searches Twitter, returning a specific page out of the complete set of
 	 * results. Results are filtered to those whose ID falls between sinceId and maxId.
+	 * Supports either user or application authorization.
 	 * @param query The search query string
 	 * @param pageSize The number of {@link Tweet}s per query
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -68,10 +71,11 @@ public interface SearchOperations {
 
 	/**
 	 * Searches Twitter, returning a set of results
+	 * Supports either user or application authorization.
 	 * @param searchParameters The search parameters
 	 * @return a {@link SearchResults} containing the search results metadata and a list of matching {@link Tweet}s
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @see SearchResults
 	 * @see Tweet
 	 */
@@ -114,21 +118,23 @@ public interface SearchOperations {
 	 * Retrieves the top 10 trending topics for a given location, identified by its "Where on Earth" (WOE) ID.
 	 * This includes hashtagged topics.
 	 * See http://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
+	 * Supports either user or application authorization.
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @return A Trends object with the top 10 trending topics for the location.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	Trends getLocalTrends(long whereOnEarthId);
 
 	/**
 	 * Retrieves the top 10 trending topics for a given location, identified by its "Where on Earth" (WOE) ID.
 	 * See http://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
+	 * Supports either user or application authorization.
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
 	 * @return A Trends object with the top 10 trending topics for the given location.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags);
 
