@@ -54,8 +54,9 @@ public class SearchParameters  {
 	 * @param geoCode GeoCode object stuffed with coordinates and radius
 	 * @see GeoCode
 	 */
-	public void setGeoCode(GeoCode geoCode) {
+	public SearchParameters geoCode(GeoCode geoCode) {
 		this.geoCode = geoCode;
+		return this;
 	}
 
 	/**
@@ -63,8 +64,9 @@ public class SearchParameters  {
 	 *
 	 * @param lang an ISO 639-1 language code
 	 */
-	public void setLang(String lang) {
+	public SearchParameters lang(String lang) {
 		this.lang = lang;
+		return this;
 	}
 
 	/**
@@ -73,8 +75,9 @@ public class SearchParameters  {
 	 *
 	 * @param locale locale
 	 */
-	public void setLocale(String locale) {
+	public SearchParameters locale(String locale) {
 		this.locale = locale;
+		return this;
 	}
 
 	/**
@@ -83,8 +86,9 @@ public class SearchParameters  {
 	 * @param resultType type of preferred result type
 	 * @see ResultType
 	 */
-	public void setResultType(ResultType resultType) {
+	public SearchParameters resultType(ResultType resultType) {
 		this.resultType = resultType;
+		return this;
 	}
 
 	/**
@@ -93,8 +97,9 @@ public class SearchParameters  {
 	 *
 	 * @param count number of tweets to return
 	 */
-	public void setCount(int count) {
+	public SearchParameters count(int count) {
 		this.count = count;
+		return this;
 	}
 
 	/**
@@ -102,8 +107,9 @@ public class SearchParameters  {
 	 *
 	 * @param untilDate date to search until
 	 */
-	public void setUntil(Date untilDate) {
+	public SearchParameters until(Date untilDate) {
 		this.untilDate = untilDate;
+		return this;
 	}
 
 	/**
@@ -111,8 +117,9 @@ public class SearchParameters  {
 	 *
 	 * @param sinceId The minimum {@link org.springframework.social.twitter.api.Tweet} ID to return in the results
 	 */
-	public void setSinceId(long sinceId) {
+	public SearchParameters sinceId(long sinceId) {
 		this.sinceId = sinceId;
+		return this;
 	}
 
 	/**
@@ -120,8 +127,9 @@ public class SearchParameters  {
 	 *
 	 * @param maxId The maximum {@link org.springframework.social.twitter.api.Tweet} ID to return in the results
 	 */
-	public void setMaxId(long maxId) {
+	public SearchParameters maxId(long maxId) {
 		this.maxId = maxId;
+		return this;
 	}
 
 	/**
@@ -129,8 +137,9 @@ public class SearchParameters  {
 	 *
 	 * @param includeEntities Include entities node
 	 */
-	public void setIncludeEntities(boolean includeEntities) {
+	public SearchParameters includeEntities(boolean includeEntities) {
 		this.includeEntities = includeEntities;
+		return this;
 	}
 
 	/**

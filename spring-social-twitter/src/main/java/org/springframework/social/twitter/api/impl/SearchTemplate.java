@@ -45,18 +45,15 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		return this.search(new SearchParameters(query));
 	}
 
-	public SearchResults search(String query, int resultsPerPage) {
-		SearchParameters p = new SearchParameters(query);
-		p.setCount(resultsPerPage);
+	public SearchResults search(String query, int count) {
+		SearchParameters p = new SearchParameters(query).count(count);
 		return this.search(p);
 	}
 
-	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
-		SearchParameters p = new SearchParameters(query);
-		p.setCount(resultsPerPage);
-		p.setSinceId(sinceId);
+	public SearchResults search(String query, int count, long sinceId, long maxId) {
+		SearchParameters p = new SearchParameters(query).count(count).sinceId(sinceId);
 		if (maxId > 0) {
-			p.setMaxId(maxId);
+			p.maxId(maxId);
 		}
 		return this.search(p);
 	}
