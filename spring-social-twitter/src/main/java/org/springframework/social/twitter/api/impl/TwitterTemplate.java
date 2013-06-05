@@ -83,10 +83,13 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	/**
 	 * Create a new instance of TwitterTemplate.
 	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
-	 * Some operations, such as search, do not require OAuth authentication.
-	 * A TwitterTemplate created with this constructor will support those operations.
 	 * Any operations requiring authentication will throw {@link NotAuthorizedException} .
+	 * As of v1.1 of Twitter's API, all resources require authorization. Therefore, any instance of TwitterTemplate
+	 * created with this constructor will be effectively useless.
+	 * 
+	 * @deprecated Because all resources now require authorization, this constructor isn't very useful. It will be removed in Spring Social Twitter 1.1.0.
 	 */
+	@Deprecated
 	public TwitterTemplate() {
 		super();
 		initSubApis();
