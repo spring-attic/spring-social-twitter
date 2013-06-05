@@ -26,7 +26,7 @@ class AbstractTwitterOperations {
 	
 	private final boolean isUserAuthorized;
 
-	private boolean isAppAuthorized;
+	private final boolean isAppAuthorized;
 
 	public AbstractTwitterOperations(boolean isUserAuthorized, boolean isAppAuthorized) {
 		this.isUserAuthorized = isUserAuthorized;
