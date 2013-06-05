@@ -324,6 +324,48 @@ public interface TimelineOperations {
 	List<Tweet> getFavorites(int pageSize);
 
 	/**
+	 * Retrieves the 20 most recent tweets favorited by the specified user.
+	 * Supports either user or application authorization.
+	 * @param userId The user ID of the user whose favorites are being requested.
+	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	List<Tweet> getFavorites(long userId);
+
+	/**
+	 * Retrieves tweets favorited by the specified user.
+	 * Supports either user or application authorization.
+	 * @param userId The user ID of the user whose favorites are being requested.
+	 * @param pageSize The number of entries per page.
+	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	List<Tweet> getFavorites(long userId, int pageSize);
+
+	/**
+	 * Retrieves the 20 most recent tweets favorited by the specified user.
+	 * Supports either user or application authorization.
+	 * @param screenName The screen name of the user whose favorites are being requested.
+	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	List<Tweet> getFavorites(String screenName);
+
+	/**
+	 * Retrieves tweets favorited by the specified user.
+	 * Supports either user or application authorization.
+	 * @param screenName The screen name of the user whose favorites are being requested.
+	 * @param pageSize The number of entries per page.
+	 * @return a collection of {@link Tweet}s from the specified user's favorite timeline.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	List<Tweet> getFavorites(String screenName, int pageSize);
+
+	/**
 	 * Adds a tweet to the user's collection of favorite tweets.
 	 * @param id the tweet's ID
 	 * @throws ApiException if there is an error while communicating with Twitter.

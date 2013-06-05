@@ -193,12 +193,35 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public List<Tweet> getFavorites(int pageSize) {
 		requireUserAuthorization();
-		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, 0, 0);
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("favorites/list.json", parameters), TweetList.class);
 	}
 
+	public List<Tweet> getFavorites(long userId) {
+		return getFavorites(userId, 20);
+	}
+
+	public List<Tweet> getFavorites(long userId, int pageSize) {
+		requireEitherUserOrAppAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, 0, 0);
+		parameters.set("user_id", String.valueOf(userId));
+		parameters.set("include_entities", "true");
+		return restTemplate.getForObject(buildUri("favorites/list.json", parameters), TweetList.class);
+	}
+	
+	public List<Tweet> getFavorites(String screenName) {
+		return getFavorites(screenName, 20);
+	}
+
+	public List<Tweet> getFavorites(String screenName, int pageSize) {
+		requireEitherUserOrAppAuthorization();
+		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, 0, 0);
+		parameters.set("screen_name", screenName);
+		parameters.set("include_entities", "true");
+		return restTemplate.getForObject(buildUri("favorites/list.json", parameters), TweetList.class);
+	}
+	
 	public void addToFavorites(long tweetId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
