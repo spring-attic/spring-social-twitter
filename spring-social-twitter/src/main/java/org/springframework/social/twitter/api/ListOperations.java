@@ -77,32 +77,35 @@ public interface ListOperations {
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
+	 * Supports either user or application authorization.
 	 * @param listId the ID of the list to retrieve.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getListStatuses(long listId);
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
+	 * Supports either user or application authorization.
 	 * @param listId the ID of the list to retrieve.
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getListStatuses(long listId, int pageSize);
 
 	/**
 	 * Retrieves the timeline tweets for the given user list.
+	 * Supports either user or application authorization.
 	 * @param listId the ID of the list to retrieve.
 	 * @param pageSize The number of {@link Tweet}s per page.
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results
 	 * @param maxId The maximum {@link Tweet} ID to return in the results
 	 * @return a list of {@link Tweet} objects for the items in the user list timeline.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<Tweet> getListStatuses(long listId, int pageSize, long sinceId, long maxId);
 
@@ -176,9 +179,10 @@ public interface ListOperations {
 	
 	/**
 	 * Retrieves a list of Twitter profiles whose users are members of the list.
+	 * Supports either user or application authorization.
 	 * @param listId the ID of the list.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @return a list of {@link TwitterProfile}
 	 */
 	List<TwitterProfile> getListMembers(long listId);
@@ -272,10 +276,11 @@ public interface ListOperations {
 
 	/**
 	 * Retrieves the subscribers to a list.
+	 * Supports either user or application authorization.
 	 * @param listId the ID of the list.
 	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<TwitterProfile> getListSubscribers(long listId);
 
