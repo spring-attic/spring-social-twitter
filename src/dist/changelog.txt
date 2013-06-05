@@ -11,14 +11,14 @@ available (such as search).
 
 Improvements:
    * Support application-only authorization (e.g., OAuth 2's
-     client credentials grant) in TwitterTemplate.
+     client credentials grant) in TwitterTemplate. (SOCIALTW-48)
    * Sync-up Twitter API binding to what's current in
      Spring Social Twitter 1.1.0.BUILD-SNAPSHOT.
 
 Spring Social Twitter 1.0.3 (February 12, 2013)
 ===============================================     
 Improvements:
-   * Update API bindings to use Twitter's 1.1 API.
+   * Update API bindings to use Twitter's 1.1 API. (SOCIALTW-39)
 
 Spring Social Twitter 1.0.2 (January 23, 2012)
 ===============================================
