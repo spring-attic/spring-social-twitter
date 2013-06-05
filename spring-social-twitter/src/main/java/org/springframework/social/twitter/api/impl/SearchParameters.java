@@ -249,4 +249,43 @@ public class SearchParameters  {
 			return this.resultType;
 		}
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		SearchParameters other = (SearchParameters) o;
+		return other.query.equals(this.query)
+			&& other.count == this.count
+			&& bothNullOrEquals(other.geoCode, this.geoCode)
+			&& other.includeEntities == this.includeEntities
+			&& bothNullOrEquals(other.lang, this.lang)
+			&& bothNullOrEquals(other.locale, this.locale)
+			&& bothNullOrEquals(other.maxId, this.maxId)
+			&& bothNullOrEquals(other.resultType, this.resultType)
+			&& bothNullOrEquals(other.sinceId, this.sinceId)
+			&& bothNullOrEquals(other.untilDate, this.untilDate);
+	}
+	
+	private boolean bothNullOrEquals(Object o1, Object o2) {
+		return (o1 == null && o2 == null) || (o1 != null && o2 != null && o1.equals(o2));
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((query == null) ? 0 : query.hashCode());
+		result = prime * result + ((count == null) ? 0 : count.hashCode());
+		result = prime * result + ((sinceId == null) ? 0 : sinceId.hashCode());
+		result = prime * result + ((maxId == null) ? 0 : maxId.hashCode());
+		result = prime * result + ((lang == null) ? 0 : lang.hashCode());
+		result = prime * result + ((geoCode == null) ? 0 : geoCode.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((resultType == null) ? 0 : resultType.hashCode());
+		result = prime * result + ((untilDate == null) ? 0 : untilDate.hashCode());
+		result = prime * result + (includeEntities ? 0 : 1);
+		return result;
+	}
 }
