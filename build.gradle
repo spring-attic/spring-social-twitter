@@ -37,6 +37,7 @@ configure(allprojects) {
 
     repositories {
         maven { url "http://repo.springsource.org/libs-snapshot" }
+        maven { url "http://repo.springsource.org/libs-release" }
     }
 
     dependencies {
