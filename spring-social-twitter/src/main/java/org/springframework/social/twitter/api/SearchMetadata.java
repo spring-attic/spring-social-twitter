@@ -7,18 +7,26 @@ package org.springframework.social.twitter.api;
  */
 public class SearchMetadata {
 	
-	private final int max_id;
+	private final long max_id;
 	private final long since_id;
 	
-	public SearchMetadata(int max_id, long since_id) {
+	public SearchMetadata(long max_id, long since_id) {
 		this.max_id = max_id;
 		this.since_id = since_id;
 	}
 
-	public int getMax_id() {
+	/**
+	 * The maximum ID of any tweet in the search results.
+	 * Typically the ID of the most recent tweet in the search results.
+	 */
+	public long getMax_id() {
 		return max_id;
 	}
 
+	/**
+	 * The value of the sinceId parameter specified in the search.
+	 * If not specified, it will be zero (not the minimum ID of the tweets in the search results). 
+	 */
 	public long getSince_id() {
 		return since_id;
 	}

@@ -89,13 +89,13 @@
 	],
 	 "search_metadata" : {
 	      "since_id":10,
-	      "max_id":999,
+	      "max_id":342666964596039680,
 	      "refresh_url":"?since_id=10&q=%23spring",
 	      "results_per_page":15,
           "completed_in": 0.035,
-	      "next_results":"?max_id=999&q=%23spring",
+	      "next_results":"?max_id=342666964596039680&q=%23spring",
 	      "query":"%23spring",
-	      "max_id_str":"999",
+	      "max_id_str":"342666964596039680",
 	      "since_id_str":"10"
 	}
 }

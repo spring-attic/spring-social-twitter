@@ -44,7 +44,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 		SearchResults searchResults = twitter.searchOperations().search("#spring");
 		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
-		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		assertEquals(342666964596039680L, searchResults.getSearchMetadata().getMax_id());
 		List<Tweet> tweets = searchResults.getTweets();
 		assertSearchTweets(tweets);
 	}
@@ -61,7 +61,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 		SearchResults searchResults = twitter.searchOperations().search("#spring", 10);
 		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
-		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		assertEquals(342666964596039680L, searchResults.getSearchMetadata().getMax_id());
 		List<Tweet> tweets = searchResults.getTweets();
 		assertSearchTweets(tweets);
 	}
@@ -78,7 +78,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 		SearchResults searchResults = twitter.searchOperations().search("#spring", 10, 123, 54321);
 		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
-		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		assertEquals(342666964596039680L, searchResults.getSearchMetadata().getMax_id());
 		List<Tweet> tweets = searchResults.getTweets();
 		assertSearchTweets(tweets);
 	}
@@ -96,7 +96,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 		SearchResults searchResults = appAuthTwitter.searchOperations().search("#spring");
 		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
-		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		assertEquals(342666964596039680L, searchResults.getSearchMetadata().getMax_id());
 		List<Tweet> tweets = searchResults.getTweets();
 		assertSearchTweets(tweets);
 	}
@@ -109,7 +109,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 		SearchResults searchResults = appAuthTwitter.searchOperations().search("#spring", 10);
 		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
-		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		assertEquals(342666964596039680L, searchResults.getSearchMetadata().getMax_id());
 		List<Tweet> tweets = searchResults.getTweets();
 		assertSearchTweets(tweets);
 	}
@@ -122,7 +122,7 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("search"), APPLICATION_JSON));
 		SearchResults searchResults = appAuthTwitter.searchOperations().search("#spring", 10, 123, 54321);
 		assertEquals(10, searchResults.getSearchMetadata().getSince_id());
-		assertEquals(999, searchResults.getSearchMetadata().getMax_id());
+		assertEquals(342666964596039680L, searchResults.getSearchMetadata().getMax_id());
 		List<Tweet> tweets = searchResults.getTweets();
 		assertSearchTweets(tweets);
 	}
