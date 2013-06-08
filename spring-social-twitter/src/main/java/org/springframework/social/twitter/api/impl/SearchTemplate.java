@@ -21,6 +21,7 @@ import java.util.List;
 
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchOperations;
+import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Trends;
 import org.springframework.util.Assert;
@@ -46,17 +47,14 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 	}
 
 	public SearchResults search(String query, int resultsPerPage) {
-		SearchParameters p = new SearchParameters(query);
-		p.setCount(resultsPerPage);
+		SearchParameters p = new SearchParameters(query).count(resultsPerPage);
 		return this.search(p);
 	}
 
 	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
-		SearchParameters p = new SearchParameters(query);
-		p.setCount(resultsPerPage);
-		p.setSinceId(sinceId);
+		SearchParameters p = new SearchParameters(query).count(resultsPerPage).sinceId(sinceId);
 		if (maxId > 0) {
-			p.setMaxId(maxId);
+			p.maxId(maxId);
 		}
 		return this.search(p);
 	}

@@ -19,7 +19,6 @@ import java.util.List;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
-import org.springframework.social.twitter.api.impl.SearchParameters;
 
 
 /**
