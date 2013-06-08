@@ -17,6 +17,7 @@ package org.springframework.social.twitter.api.impl;
 
 import java.text.SimpleDateFormat;
 
+import org.springframework.social.twitter.api.SearchParameters;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
