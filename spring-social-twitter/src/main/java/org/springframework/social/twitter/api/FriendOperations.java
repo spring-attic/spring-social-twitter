@@ -53,10 +53,11 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
 	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
 	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param userId The user's Twitter ID
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFriends(long userId);
 
@@ -65,11 +66,12 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
 	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
 	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param userId The user's Twitter ID
 	 * @param cursor the cursor used to fetch the friend IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFriendsInCursor(long userId, long cursor);
 
@@ -81,7 +83,7 @@ public interface FriendOperations {
 	 * @param screenName The user's Twitter screen name
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFriends(String screenName);
 
@@ -90,6 +92,7 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the friend IDs and one call for every 100 friends).
 	 * If all you need is the friend IDs, consider calling getFriendIds() instead.
 	 * Or if you need only a subset of the user's friends, call UserOperations.getUsers() passing in the list of friend IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param screenName The user's Twitter screen name
 	 * @param cursor the cursor used to fetch the friend IDs 
 	 * @return a list of TwitterProfiles
@@ -118,39 +121,43 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
+	 * Supports either application or user authorization.
 	 * @param userId the user's Twitter ID
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFriendIds(long userId);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
+	 * Supports either application or user authorization.
 	 * @param userId the user's Twitter ID
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFriendIdsInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
+	 * Supports either application or user authorization.
 	 * @param screenName the user's Twitter screen name
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFriendIds(String screenName);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that the given user follows.
+	 * Supports either application or user authorization.
 	 * @param screenName the user's Twitter screen name
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFriendIdsInCursor(String screenName, long cursor);
 
@@ -182,10 +189,11 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param userId The user's Twitter ID
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFollowers(long userId);
 
@@ -194,11 +202,12 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param userId The user's Twitter ID
 	 * @param cursor the cursor used to fetch the follower IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFollowersInCursor(long userId, long cursor);
 
@@ -207,10 +216,11 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param screenName The user's Twitter screen name
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFollowers(String screenName);
 
@@ -219,11 +229,12 @@ public interface FriendOperations {
 	 * Note that this method make multiple calls to Twitter's REST API (one call to get a list of the follower IDs and one call for every 100 followers).
 	 * If all you need is the follower IDs, consider calling getFollowerIds() instead.
 	 * Or if you need only a subset of the user's followers, call UserOperations.getUsers() passing in the list of follower IDs you need. 
+	 * Supports either application or user authorization.
 	 * @param screenName The user's Twitter screen name
 	 * @param cursor the cursor used to fetch the follower IDs 
 	 * @return a list of TwitterProfiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<TwitterProfile> getFollowersInCursor(String screenName, long cursor);
 
@@ -246,39 +257,43 @@ public interface FriendOperations {
 
 	/**
 	 * Retrieves a list of up to 5000IDs for the Twitter users that follow the given user.
+	 * Supports either application or user authorization.
 	 * @param userId the user's Twitter ID
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFollowerIds(long userId);
 
 	/**
 	 * Retrieves a list of up to 5000IDs for the Twitter users that follow the given user.
+	 * Supports either application or user authorization.
 	 * @param userId the user's Twitter ID
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFollowerIdsInCursor(long userId, long cursor);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the given user.
+	 * Supports either application or user authorization.
 	 * @param screenName the user's Twitter screen name
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFollowerIds(String screenName);
 
 	/**
 	 * Retrieves a list of up to 5000 IDs for the Twitter users that follow the given user.
+	 * Supports either application or user authorization.
 	 * @param screenName the user's Twitter screen name
 	 * @param cursor the cursor value to fetch a specific page of entries. Use -1 for the first page of entries.
 	 * @return a list of user IDs
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<Long> getFollowerIdsInCursor(String screenName, long cursor);
 
