@@ -54,35 +54,37 @@ public interface UserOperations {
 
 	/**
 	 * Retrieves a specific user's Twitter profile details.
-	 * Note that this method does not require authentication.
+	 * Supports either user or application authorization.
 	 * @param screenName the screen name for the user whose details are to be retrieved.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	TwitterProfile getUserProfile(String screenName);
 
 	/**
 	 * Retrieves a specific user's Twitter profile details.
-	 * Note that this method does not require authentication.
+	 * Supports either user or application authorization.
 	 * @param userId the user ID for the user whose details are to be retrieved.
 	 * @return a {@link TwitterProfile} object representing the user's profile.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	TwitterProfile getUserProfile(long userId);
 	
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of user IDs.
+	 * Supports either user or application authorization.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<TwitterProfile> getUsers(long... userIds);
 
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of screen names.
+	 * Supports either user or application authorization.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<TwitterProfile> getUsers(String... screenNames);
 	
@@ -104,24 +106,27 @@ public interface UserOperations {
 
 	/**
 	 * Retrieves a list of categories from which suggested users to follow may be found.
+	 * Supports either user or application authorization.
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<SuggestionCategory> getSuggestionCategories();
 
 	/**
 	 * Retrieves a list of suggestions of users to follow for a given category.
+	 * Supports either user or application authorization.
 	 * @param slug the category's slug
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<TwitterProfile> getSuggestions(String slug);
 
 	/**
 	 * Retrieves the rate limit statuses for each of the resource families passed as arguments
+	 * Supports either user or application authorization.
 	 * @param resources the list of resource families to inquire about
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials. 
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources);
 }

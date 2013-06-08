@@ -583,13 +583,86 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void getFavorites_appAuthorization() {
+	public void getFavorites_userId() {
 		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
-		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&include_entities=true"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&user_id=12345&include_entities=true"))
 				.andExpect(method(GET))
-				.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
 				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
-		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites();
+		List<Tweet> timeline = twitter.timelineOperations().getFavorites(12345L);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_paged_userId() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&user_id=12345&include_entities=true"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = twitter.timelineOperations().getFavorites(12345L, 50);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_userId_appAuthorization() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&user_id=12345&include_entities=true"))
+				.andExpect(method(GET))
+	 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites(12345L);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_paged_userId_appAuthorization() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&user_id=12345&include_entities=true"))
+				.andExpect(method(GET))
+	 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites(12345L, 50);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_screenName() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = twitter.timelineOperations().getFavorites("habuma");
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_paged_screenName() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = twitter.timelineOperations().getFavorites("habuma", 50);
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_screenName_appAuthorization() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=20&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+	 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites("habuma");
+		assertTimelineTweets(timeline);
+	}
+
+	@Test
+	public void getFavorites_paged_screenName_appAuthorization() {
+		// Note: The documentation for /favorites.json doesn't list the count parameter, but it works anyway.
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/list.json?count=50&screen_name=habuma&include_entities=true"))
+				.andExpect(method(GET))
+	 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+				.andRespond(withSuccess(jsonResource("favorite"), APPLICATION_JSON));
+		List<Tweet> timeline = appAuthTwitter.timelineOperations().getFavorites("habuma", 50);
 		assertTimelineTweets(timeline);
 	}
 

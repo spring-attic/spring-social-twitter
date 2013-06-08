@@ -20,12 +20,12 @@ configure(allprojects) {
     ext {
       springSocialVersion = '1.1.0.BUILD-SNAPSHOT'
       hamcrestVersion = '1.3'
-      jacksonVersion = '2.2.1'
+      jacksonVersion = '2.2.2'
       junitVersion = '4.11'
       mockitoVersion = '1.9.5'
       servletApiVersion = '2.5'
-      springVersion = '3.2.1.RELEASE'
-      springSecurityCryptoVersion = '3.1.3.RELEASE'
+      springVersion = '3.2.3.RELEASE'
+      springSecurityCryptoVersion = '3.1.4.RELEASE'
     }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
