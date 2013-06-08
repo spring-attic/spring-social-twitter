@@ -79,7 +79,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<Tweet> getListStatuses(long listId, int pageSize, long sinceId, long maxId) {
-		requireUserAuthorization();
+		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, sinceId, maxId);
 		parameters.set("list_id", String.valueOf(listId));
 		parameters.set("include_entities", "true");
@@ -124,7 +124,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<TwitterProfile> getListMembers(long listId) {
-		requireUserAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("lists/members.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 	
@@ -169,7 +169,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	}
 
 	public List<TwitterProfile> getListSubscribers(long listId) {
-		requireUserAuthorization();
+		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 
