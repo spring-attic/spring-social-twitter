@@ -1,3 +1,9 @@
+Spring Social Twitter 1.0.5 (June 10, 2013)
+===========================================
+Bug Fixes:
+   * Addressed Spring 3.0.x compatibility issue when using 
+     application tokens.
+
 Spring Social Twitter 1.0.4 (June 6, 2013)
 ==========================================
 This release was pushed as an emergency release to enable creation
