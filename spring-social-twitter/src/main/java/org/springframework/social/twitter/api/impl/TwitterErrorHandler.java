@@ -16,6 +16,7 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -67,13 +68,10 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 	}
 	
 	private void handleClientErrors(ClientHttpResponse response) throws IOException {
-		HttpStatus statusCode = response.getStatusCode();		
+		HttpStatus statusCode = response.getStatusCode();
 		Map<String, Object> errorMap = extractErrorDetailsFromResponse(response);
-		if (errorMap == null) {
-			return; // unexpected error body, can't be handled here
-		}
 
-		String errorText = null;
+		String errorText = "";
 		if (errorMap.containsKey("error")) {
 			errorText = (String) errorMap.get("error");
 		} else if(errorMap.containsKey("errors")) {
@@ -138,7 +136,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 		try {
 			return mapper.<Map<String, Object>>readValue(response.getBody(), new TypeReference<Map<String, Object>>() {});
 		} catch (JsonParseException e) {
-			return null;
+			return Collections.emptyMap();
 		}
 	}
 
