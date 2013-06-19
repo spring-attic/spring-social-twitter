@@ -24,6 +24,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.social.ApiException;
 import org.springframework.social.InternalServerErrorException;
@@ -155,5 +156,13 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withBadRequest().body("{\"error\":\"Rate limit exceeded. Clients may not make more than 350 requests per hour.\"}").contentType(APPLICATION_JSON));
 		twitter.userOperations().getUserProfile();
+	}
+	
+	@Test(expected = NotAuthorizedException.class)
+	public void streamingUnauthorizedWithEmptyBody() {
+		mockServer.expect(requestTo("https://stream.twitter.com/1.1/statuses/sample.json"))
+			.andExpect(method(GET))
+			.andRespond(withUnauthorizedRequest().body(new ClassPathResource("401.html", getClass())));
+		twitter.restOperations().getForObject("https://stream.twitter.com/1.1/statuses/sample.json", String.class);
 	}
 }
