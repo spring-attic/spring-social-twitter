@@ -116,7 +116,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 			}
 		} else if (statusCode == HttpStatus.NOT_FOUND) {
 			throw new ResourceNotFoundException("twitter", errorText);
-		} else if (statusCode == HttpStatus.valueOf(ENHANCE_YOUR_CALM)) {
+		} else if (statusCode == HttpStatus.valueOf(ENHANCE_YOUR_CALM) || statusCode == HttpStatus.valueOf(TOO_MANY_REQUESTS)) {
 			throw new RateLimitExceededException("twitter");
 		}
 
@@ -149,4 +149,5 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 
 	
 	private static final int ENHANCE_YOUR_CALM = 420;
+	private static final int TOO_MANY_REQUESTS = 429;
 }
