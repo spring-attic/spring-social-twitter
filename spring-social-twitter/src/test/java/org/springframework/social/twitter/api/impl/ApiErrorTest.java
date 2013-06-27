@@ -80,6 +80,14 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.searchOperations().search("#spring");
 	}
 
+	@Test(expected = RateLimitExceededException.class)
+	public void tooManyRequests() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50"))
+			.andExpect(method(GET))
+			.andRespond(withStatus(HttpStatus.valueOf(429)).body("{\"errors\":[ {\"code\":88, \"message\":\"Rate limit exceeded\"} ] }").contentType(APPLICATION_JSON));
+		twitter.searchOperations().search("#spring");
+	}
+
 	@Test(expected = InternalServerErrorException.class)
 	public void twitterIsBroken() {
 		try {
