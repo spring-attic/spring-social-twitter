@@ -28,7 +28,6 @@ import org.junit.Test;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.DuplicateStatusException;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.OperationNotPermittedException;
 import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.MessageTooLongException;
@@ -69,11 +68,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getHomeTimeline_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getHomeTimeline();
-	}
-
 	@Test
 	public void getUserTimeline() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=20&include_entities=true"))
@@ -101,11 +95,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getUserTimeline_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getUserTimeline();
-	}
-	
 	@Test
 	public void getUserTimeline_forScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/user_timeline.json?count=20&screen_name=habuma&include_entities=true"))
@@ -247,11 +236,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(mentions);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getMentions_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getMentions();
-	}
-	
 	@Test
 	public void getRetweetsOfMe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweets_of_me.json?page=1&count=20&include_entities=true"))
@@ -279,11 +263,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getRetweetsOfMe_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getRetweetsOfMe();
-	}
-	
 	@Test
 	public void getStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
@@ -305,11 +284,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertSingleTweet(tweet);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getStatus_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getStatus(12345);
-	}
-		
 	@Test
 	public void getStatus_withTickerSymbolEntity() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
@@ -343,11 +317,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message");
 		assertSingleTweet(tweet);
 		mockServer.verify();
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void updateStatus_unauthorized() {
-		unauthorizedTwitter.timelineOperations().updateStatus("Shouldn't work");
 	}
 
 	@Test
@@ -433,13 +402,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void updateStatus_withLocation_unauthorized() {
-		StatusDetails details = new StatusDetails();
-		details.setLocation(123.1f, -111.2f);
-		unauthorizedTwitter.timelineOperations().updateStatus("Test Message", details);
-	}
-
 	@Test(expected = DuplicateStatusException.class)
 	public void updateStatus_duplicateTweet() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
@@ -476,11 +438,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void deleteStatus_unauthorized() {
-		unauthorizedTwitter.timelineOperations().deleteStatus(12345L);
-	}
-	
 	@Test
 	public void retweet() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweet/12345.json"))
@@ -492,11 +449,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void retweet_unauthorized() {
-		unauthorizedTwitter.timelineOperations().retweet(12345L);
-	}
-
 	@Test(expected=DuplicateStatusException.class)
 	public void retweet_duplicateTweet() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweet/12345.json"))
@@ -677,11 +629,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getFavorites_unauthorized() {
-		unauthorizedTwitter.timelineOperations().getFavorites();
-	}
-
 	@Test
 	public void addToFavorites() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/create.json"))
@@ -691,11 +638,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void addToFavorites_unauthorized() {
-		unauthorizedTwitter.timelineOperations().addToFavorites(12345L);
-	}
-
 	@Test
 	public void removeFromFavorites() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/favorites/destroy.json"))
@@ -703,11 +645,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.timelineOperations().removeFromFavorites(71L);
 		mockServer.verify();
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void removeFromFavorites_unauthorized() {
-		unauthorizedTwitter.timelineOperations().removeFromFavorites(12345L);
 	}
 	
 	// private helper

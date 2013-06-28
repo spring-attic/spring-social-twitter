@@ -27,10 +27,9 @@ public class TwitterTemplateTest {
 		assertTrue(twitter.isAuthorized());
 	}
 
-	@Test
-	public void isAuthorizedForUser_notAuthorized() {
-		TwitterTemplate twitter = new TwitterTemplate();
-		assertFalse(twitter.isAuthorized());
+	@Test(expected=IllegalArgumentException.class)
+	public void nullApplicationToken() {
+		new TwitterTemplate(null);
 	}
-
+	
 }

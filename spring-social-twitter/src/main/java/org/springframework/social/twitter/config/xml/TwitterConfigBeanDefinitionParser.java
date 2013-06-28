@@ -24,7 +24,6 @@ import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.twitter.api.Twitter;
-import org.springframework.social.twitter.api.impl.TwitterTemplate;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
@@ -63,7 +62,7 @@ class TwitterConfigBeanDefinitionParser extends AbstractProviderConfigBeanDefini
 			if (logger.isDebugEnabled() && connection == null) {
 				logger.debug("No current connection; Returning default TwitterTemplate instance.");
 			}
-			return connection != null ? connection.getApi() : new TwitterTemplate();
+			return connection != null ? connection.getApi() : null;
 		}
 		
 		private final static Log logger = LogFactory.getLog(TwitterApiHelper.class);

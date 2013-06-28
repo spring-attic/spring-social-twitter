@@ -22,7 +22,6 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -43,11 +42,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void block_userId_unauthorized() {
-		unauthorizedTwitter.blockOperations().block(12345);
-	}
-
 	@Test
 	public void block_screenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/create.json"))
@@ -58,11 +52,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		assertTwitterProfile(blockedUser);
 		mockServer.verify();
 	}	
-
-	@Test(expected = NotAuthorizedException.class)
-	public void block_screenName_unauthorized() {
-		unauthorizedTwitter.blockOperations().block("habuma");
-	}
 
 	@Test
 	public void unblock_userId() {
@@ -75,11 +64,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void unblock_userId_unauthorized() {
-		unauthorizedTwitter.blockOperations().unblock(12345);
-	}
-
 	@Test
 	public void unblock_screenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/destroy.json"))
@@ -91,11 +75,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}	
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void unblock_screenName_unauthorized() {
-		unauthorizedTwitter.blockOperations().unblock("habuma");
-	}
-
 	@Test
 	public void getBlockedUsers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/list.json?cursor=-1"))
@@ -105,11 +84,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		assertBlockedUsers(blockedUsers);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getBlockedUsers_unauthorized() {
-		unauthorizedTwitter.blockOperations().getBlockedUsers();
-	}
-
 	@Test
 	public void getBlockedUsersInCursor() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/list.json?cursor=332211"))
@@ -117,11 +91,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		CursoredList<TwitterProfile> blockedUsers = twitter.blockOperations().getBlockedUsersInCursor(332211);
 		assertBlockedUsers(blockedUsers);
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getBlockedUsersInCursor_unauthorized() {
-		unauthorizedTwitter.blockOperations().getBlockedUsersInCursor(332211);
 	}
 
 	@Test
@@ -134,11 +103,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getBlockedUserIds_unauthorized() {
-		unauthorizedTwitter.blockOperations().getBlockedUserIds();
-	}
-	
 	@Test
 	public void getBlockedUserIdsInCursor() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/blocks/ids.json?cursor=332211"))
@@ -149,11 +113,6 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getBlockedUserIdsInCursor_unauthorized() {
-		unauthorizedTwitter.blockOperations().getBlockedUsersInCursor(332211);
-	}
-
 	// private helpers
 	
 	private void assertTwitterProfile(TwitterProfile blockedUser) {
