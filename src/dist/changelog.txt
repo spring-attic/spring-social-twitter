@@ -4,6 +4,10 @@ Compatibility Notes:
   * SearchMetadata's getSince_id() and getMax_id() methods were renamed
     to remove the underscores. They are now getSinceId() and getMaxId().
     (SOCIALTW-54)
+  * The default constructor has been removed from TwitterTemplate. Now
+    that Twitter API 1.1 no longer support unauthorized requests for
+    resources, the default constructor offered no value and using it
+    would certainly lead to a NotAuthorizedException. (SOCIALTW-50)
 
 Bug Fixes
   * Properly deserialize languageCode from JSON. SOCIALTW-49
