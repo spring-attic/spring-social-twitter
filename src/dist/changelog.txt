@@ -1,9 +1,25 @@
-Spring Social Twitter 1.1.0 Milestone 3 (? ?, 2013)
-===================================================
-Miscellaneous
-  * Upgraded to Jackson 2
+Spring Social Twitter 1.1.0 Milestone 3 (July 8, 2013)
+======================================================
+Compatibility Notes:
+  * SearchMetadata's getSince_id() and getMax_id() methods were renamed
+    to remove the underscores. They are now getSinceId() and getMaxId().
+    (SOCIALTW-54)
+
+Bug Fixes
+  * Properly deserialize languageCode from JSON. SOCIALTW-49
+  * Fix for missing authorization header in some Twitter API 1.1
+    calls. (SOCIALTW-51)
+  * Handle Twitter API 1.1's rate limit from an HTTP 429 status.
+    (SOCIALTW-53)
+  * SearchMetadata's since_id and max_id properties changed from int to
+    long. (SOCIALTW-55)
+  * Fix TwitterErrorHandler to better handle errors when the response
+    body isn't JSON. (SOCIALTW-57)
+  * UserTemplate.getRateLimitStatus() fixed to reference correct API
+    resource. (SOCIALTW-46)
 
 Improvements
+  * Upgraded to Jackson 2
   * Support for Twitter's Streaming API (SOCIALTW-2)
   * Support for Application-Only authorization (SOCIALTW-48)
 
