@@ -47,7 +47,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 				if(e.getHttpStatus() != null) {
 					// Back off exponentially
 					if(timeToSleep == MIN_WAIT) {
-						timeToSleep = 10000;
+						timeToSleep = 5000;
 					}
 					sleepBeforeRetry(timeToSleep);
 					timeToSleep = timeToSleep * 2;				
@@ -85,7 +85,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		} catch (InterruptedException e1) {}
 	}
 
-	static final long HTTP_ERROR_SLEEP_MAX = 250000;
+	static final long HTTP_ERROR_SLEEP_MAX = 320000;
 
 	static final long NETWORK_ERROR_SLEEP_MAX = 16000;
 
