@@ -25,7 +25,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.MessageTooLongException;
 
@@ -64,11 +63,6 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getDirectMessagesReceived_unauthorized() {
-		unauthorizedTwitter.directMessageOperations().getDirectMessagesReceived();
-	}
-
 	@Test
 	public void getDirectMessagesSent() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/sent.json?page=1&count=20"))
@@ -99,11 +93,6 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertDirectMessageListContents(messages);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getDirectMessagesSent_unauthorized() {
-		unauthorizedTwitter.directMessageOperations().getDirectMessagesSent();
-	}
-
 	@Test
 	public void getDirectMessage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/show.json?id=23456"))
@@ -132,11 +121,6 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void sendDirectMessaage_toScreenName_unauthorized() {
-		unauthorizedTwitter.directMessageOperations().sendDirectMessage("habuma", "Hello there!");
-	}
-
 	@Test
 	public void sendDirectMessage_toUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/new.json")).andExpect(method(POST))
@@ -156,11 +140,6 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("rclarkson", message.getRecipient().getScreenName());
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void sendDirectMessaage_toUserId_unauthorized() {
-		unauthorizedTwitter.directMessageOperations().sendDirectMessage(112233, "Hello there!");
-	}
-	
 	@Test
 	public void deleteDirectMessage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/destroy.json"))
@@ -171,11 +150,6 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void deleteDirectMessage_unauthorized() {
-		unauthorizedTwitter.directMessageOperations().deleteDirectMessage(42L);
-	}
-	
 	private void assertDirectMessageListContents(List<DirectMessage> messages) {
 		assertEquals(2, messages.size());
 		assertEquals(12345, messages.get(0).getId());

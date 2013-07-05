@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
@@ -44,22 +43,12 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(161064614, twitter.userOperations().getProfileId());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getProfileId_unauthorized() {
-		unauthorizedTwitter.userOperations().getProfileId();
-	}
-
 	@Test
 	public void getScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		assertEquals("artnames", twitter.userOperations().getScreenName());
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getScreenName_unauthorized() {
-		unauthorizedTwitter.userOperations().getScreenName();
 	}
 
 	@Test
@@ -102,11 +91,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("0084B4", profile.getLinkColor());
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getUserProfile_unauthorized() {
-		unauthorizedTwitter.userOperations().getUserProfile();
-	}
-
 	@Test
 	public void getUserProfile_userId() throws Exception {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/show.json?user_id=12345"))
@@ -195,11 +179,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("royclarkson", users.get(0).getScreenName());
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getUsers_byUserId_unauthorized() {
-		unauthorizedTwitter.userOperations().getUsers(14846645, 14718006);
-	}
 	
 	@Test
 	public void getUsers_byScreenName() {
@@ -224,11 +203,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getUsers_byScreenName_unauthorized() {
-		unauthorizedTwitter.userOperations().getUsers("royclarkson", "kdonald");
-	}
-	
 	@Test
 	public void searchForUsers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=1&per_page=20&q=some+query"))
@@ -251,11 +225,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void searchForUsers_unauthorized() {
-		unauthorizedTwitter.userOperations().searchForUsers("some query");
-	}
-	
 	@Test
 	public void getSuggestionCategories() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/suggestions.json"))
@@ -299,11 +268,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(16, categories.get(3).getSize());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getSuggestionCategories_unauthorized() {
-		unauthorizedTwitter.userOperations().getSuggestionCategories();
-	}
-	
 	@Test
 	public void getSuggestions() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/suggestions/springsource.json"))
@@ -329,11 +293,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", users.get(1).getScreenName());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getSuggestions_unauthorized() {
-		unauthorizedTwitter.userOperations().getSuggestions("springsource");
-	}
-	
 	@Test
 	public void getRateLimit() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/application/rate_limit_status.json?resources=help%2Csearch"))
@@ -371,11 +330,6 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(15, statuses.get(ResourceFamily.HELP).get(0).getQuarterOfHourLimit());
 		assertEquals("/search/tweets", statuses.get(ResourceFamily.SEARCH).get(0).getEndpoint());
 		assertEquals(180, statuses.get(ResourceFamily.SEARCH).get(0).getQuarterOfHourLimit());
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getRateLimit_unauthorized() {
-		unauthorizedTwitter.userOperations().getRateLimitStatus(ResourceFamily.HELP,ResourceFamily.SEARCH);
 	}
 
 }

@@ -29,6 +29,7 @@ import org.springframework.social.twitter.api.StreamingOperations;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Twitter;
 import org.springframework.social.twitter.api.UserOperations;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -75,17 +76,6 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	
 	/**
 	 * Create a new instance of TwitterTemplate.
-	 * This constructor creates a new TwitterTemplate able to perform unauthenticated operations against Twitter's API.
-	 * A TwitterTemplate created with this constructor will support those operations.
-	 * Any operations requiring authentication will throw {@link NotAuthorizedException} .
-	 */
-	public TwitterTemplate() {
-		super();
-		initSubApis();
-	}
-
-	/**
-	 * Create a new instance of TwitterTemplate.
 	 * @param consumerKey the application's API key
 	 * @param consumerSecret the application's API secret
 	 * @param accessToken an access token acquired through OAuth authentication with Twitter
@@ -105,6 +95,7 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	 */
 	public TwitterTemplate(String clientToken) {
 		super();
+		Assert.notNull(clientToken, "Constructor argument 'clientToken' cannot be null.");
 		this.clientRestTemplate = createClientRestTemplate(clientToken);
 		initSubApis();
 	}
