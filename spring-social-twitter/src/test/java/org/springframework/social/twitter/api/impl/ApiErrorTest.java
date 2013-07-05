@@ -29,7 +29,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.social.ApiException;
 import org.springframework.social.InternalServerErrorException;
 import org.springframework.social.InvalidAuthorizationException;
-import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.RateLimitExceededException;
 import org.springframework.social.RevokedAuthorizationException;
@@ -48,14 +47,6 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 		twitter.timelineOperations().updateStatus("Some message");		
 	}
 
-	@Test(expected = MissingAuthorizationException.class)
-	public void missingAccessToken() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
-			.andExpect(method(GET))
-			.andRespond(withStatus(UNAUTHORIZED).body(jsonResource("error-no-token")).contentType(APPLICATION_JSON));
-		unauthorizedTwitter.userOperations().getUserProfile();
-	}
-	
 	@Test(expected = InvalidAuthorizationException.class)
 	public void badAccessToken() { // token is fabricated or fails signature validation
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))

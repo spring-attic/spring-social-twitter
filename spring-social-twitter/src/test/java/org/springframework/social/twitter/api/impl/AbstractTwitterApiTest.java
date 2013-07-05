@@ -35,8 +35,6 @@ public abstract class AbstractTwitterApiTest {
 	
 	protected TwitterTemplate appAuthTwitter;
 	
-	protected TwitterTemplate unauthorizedTwitter;
-
 	protected MockRestServiceServer mockServer;
 	
 	protected MockRestServiceServer appAuthMockServer;
@@ -47,9 +45,6 @@ public abstract class AbstractTwitterApiTest {
 		mockServer = MockRestServiceServer.createServer(twitter.getRestTemplate());
 		appAuthTwitter = new TwitterTemplate("APP_ACCESS_TOKEN");
 		appAuthMockServer = MockRestServiceServer.createServer(appAuthTwitter.getRestTemplate());
-		unauthorizedTwitter = new TwitterTemplate();
-		 // create a mock server just to avoid hitting real twitter if something gets past the authorization check
-		MockRestServiceServer.createServer(unauthorizedTwitter.getRestTemplate());
 	}
 	
 	protected Resource jsonResource(String filename) {

@@ -25,7 +25,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserList;
@@ -43,11 +42,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListOfLists(twitter.listOperations().getLists());
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getLists_currentUser_unauthorized() {
-		unauthorizedTwitter.listOperations().getLists();
-	}
-
 	@Test
 	public void getLists_byId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/list.json?user_id=161064614"))
@@ -63,11 +57,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
 			.andRespond(withSuccess(jsonResource("multiple-list"), APPLICATION_JSON));
 		assertListOfLists(appAuthTwitter.listOperations().getLists(161064614));
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getLists_byId_unauthorized() {
-		unauthorizedTwitter.listOperations().getLists(161064614);
 	}
 
 	@Test
@@ -87,22 +76,12 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListOfLists(appAuthTwitter.listOperations().getLists("habuma"));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getLists_byScreenName_unauthorized() {
-		unauthorizedTwitter.listOperations().getLists("habuma");
-	}
-
 	@Test
 	public void getList_byListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/show.json?list_id=40841803"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 		assertSingleList(twitter.listOperations().getList(40841803));
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void getList_byListId_unauthorized() {
-		unauthorizedTwitter.listOperations().getList(40841803);
 	}
 	
 	@Test
@@ -141,11 +120,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(twitter.listOperations().createList("forfun2", "Just for Fun, too", false));
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void createList_unauthorized() {
-		unauthorizedTwitter.listOperations().createList("forfun2", "Just for Fun, too", false);
-	}
-	
 	@Test
 	public void updateList_publicListForUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/update.json"))
@@ -164,11 +138,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(twitter.listOperations().updateList(40841803, "forfun2", "Just for Fun, too", false));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void updateList_unauthorized() {
-		unauthorizedTwitter.listOperations().updateList(40841803, "forfun2", "Just for Fun, too", false);
-	}
-
 	@Test
 	public void deleteList_forUserIdByListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/destroy.json"))
@@ -179,11 +148,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void deleteList_unauthorized() {
-		unauthorizedTwitter.listOperations().deleteList(40841803);
-	}
-
 	@Test
 	public void getListMembers_byListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?list_id=40841803"))
@@ -192,11 +156,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListMembers(twitter.listOperations().getListMembers(40841803));
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getListMembers_byListId_unauthorized() {
-		unauthorizedTwitter.listOperations().getListMembers(40841803);
-	}
-
 	@Test
 	public void getListMembers_byScreenNameAndListSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?owner_screen_name=habuma&slug=forfun"))
@@ -214,11 +173,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListMembers(appAuthTwitter.listOperations().getListMembers("habuma", "forfun"));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getListMembers_byScreenNameAndListSlug_unauthorized() {
-		unauthorizedTwitter.listOperations().getListMembers("habuma", "forfun");
-	}
-	
 	@Test
 	public void addToList_forUserIdListIdSingle() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/create_all.json"))
@@ -239,11 +193,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(twitter.listOperations().addToList(40841803, 123456, 234567, 345678));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void addToList_forUserIdListId_unauthorized() {
-		unauthorizedTwitter.listOperations().addToList(40841803, 123456);
-	}
-
 	@Test
 	public void addToList_forScreenNameMultiple() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/create_all.json"))
@@ -252,11 +201,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("single-list"), APPLICATION_JSON));
 
 		assertSingleList(twitter.listOperations().addToList(40841803, "habuma", "royclarkson"));
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void addToList_forScreenName_unauthorized() {
-		unauthorizedTwitter.listOperations().addToList(40841803, "habuma", "royclarkson");
 	}
 
 	@Test
@@ -269,11 +213,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void removeFromList_ownerIdListIdMemberId_unauthorized() {
-		unauthorizedTwitter.listOperations().removeFromList(40841803, 12345);
-	}
-
 	@Test
 	public void removeFromList_screenName() {		
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/destroy.json"))
@@ -284,11 +223,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void removeFromList_screenName_unauthorized() {
-		unauthorizedTwitter.listOperations().removeFromList(40841803, "habuma");
-	}
-
 	@Test
 	public void getListSubscribers_byListId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers.json?list_id=40841803"))
@@ -297,11 +231,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListMembers(twitter.listOperations().getListSubscribers(40841803));
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getListSubscribers_byListId_unauthorized() {
-		unauthorizedTwitter.listOperations().getListSubscribers(40841803);
-	}
-
 	@Test
 	public void getListSubscribers_byScreenNameAndListSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers.json?owner_screen_name=habuma&slug=forfun"))
@@ -317,11 +246,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(appAuthTwitter.listOperations().getListSubscribers("habuma", "forfun"));
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getListSubscribers_byScreenNameAndListSlug_unauthorized() {
-		unauthorizedTwitter.listOperations().getListSubscribers("habuma", "forfun");
 	}
 
 	@Test
@@ -341,11 +265,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListOfLists(appAuthTwitter.listOperations().getMemberships(161064614));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getMemberships_forUserId_unauthorized() {
-		unauthorizedTwitter.listOperations().getMemberships(161064614);
-	}
-
 	@Test
 	public void getMemberships_forScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/memberships.json?screen_name=habuma"))
@@ -361,11 +280,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
 			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(appAuthTwitter.listOperations().getMemberships("habuma"));
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getMemberships_forScreenName_unauthorized() {
-		unauthorizedTwitter.listOperations().getMemberships("habuma");
 	}
 
 	@Test
@@ -385,11 +299,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListOfLists(appAuthTwitter.listOperations().getSubscriptions(161064614));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getSubscriptions_forUserId_unauthorized() {
-		unauthorizedTwitter.listOperations().getSubscriptions(161064614);
-	}
-
 	@Test
 	public void getSubscriptions_forScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?screen_name=habuma"))
@@ -407,11 +316,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertListOfLists(appAuthTwitter.listOperations().getSubscriptions("habuma"));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getSubscriptions_forScreenName_unauthorized() {
-		unauthorizedTwitter.listOperations().getSubscriptions("habuma");
-	}
-	
 	@Test
 	public void isMember_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members/show.json?list_id=40841803&user_id=123456"))
@@ -436,11 +340,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
 		assertTrue(appAuthTwitter.listOperations().isMember(40841803, 123456));
 		assertFalse(appAuthTwitter.listOperations().isMember(40841803, 987654));
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void isMember_byUserId_unauthorized() {
-		unauthorizedTwitter.listOperations().isMember(40841803, 123456);
 	}
 
 	@Test
@@ -469,11 +368,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertFalse(appAuthTwitter.listOperations().isMember("habuma", "forfun", "kdonald"));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void isMember_byScreenName_unauthorized() {
-		unauthorizedTwitter.listOperations().isMember("habuma", "forfun", "royclarkson");
-	}
-	
 	@Test
 	public void isSubscriber_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/show.json?list_id=40841803&user_id=123456"))
@@ -498,11 +392,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withStatus(NOT_FOUND).body("{}").contentType(APPLICATION_JSON));
 		assertTrue(appAuthTwitter.listOperations().isSubscriber(40841803, 123456));
 		assertFalse(appAuthTwitter.listOperations().isSubscriber(40841803, 987654));
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void isSubscriber_byUserId_unauthorized() {
-		unauthorizedTwitter.listOperations().isSubscriber(40841803, 123456);
 	}
 
 	@Test
@@ -531,11 +420,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertFalse(appAuthTwitter.listOperations().isSubscriber("habuma", "forfun", "kdonald"));
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void isSubscriber_byScreenName_unauthorized() {
-		unauthorizedTwitter.listOperations().isSubscriber("habuma", "forfun", "royclarkson");
-	}
-	
 	@Test
 	public void subscribe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/create.json"))
@@ -546,11 +430,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(list);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void subscribe_unauthorized() {
-		unauthorizedTwitter.listOperations().subscribe(54321);
-	}
-
 	@Test
 	public void subscribe_usernameAndSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/create.json"))
@@ -561,11 +440,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertSingleList(list);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void subscribe_usernameAndSlug_unauthorized() {
-		unauthorizedTwitter.listOperations().subscribe("habuma", "somelist");
-	}
-
 	@Test
 	public void unsubscribe() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscribers/destroy.json"))
@@ -575,11 +449,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		UserList list = twitter.listOperations().unsubscribe(54321);
 		assertSingleList(list);
 		mockServer.verify();
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void unsubscribe_unauthorized() {
-		unauthorizedTwitter.listOperations().unsubscribe(54321);
 	}
 	
 	@Test
@@ -592,11 +461,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void unsubscribe_usernameAndSlug_unauthorized() {
-		unauthorizedTwitter.listOperations().unsubscribe("habuma", "somelist");
-	}
-	
 	@Test
 	public void getListStatuses_listId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/statuses.json?count=20&list_id=1234&include_entities=true"))
@@ -613,12 +477,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("timeline"), APPLICATION_JSON));
 		List<Tweet> timeline = twitter.listOperations().getListStatuses(1234, 30, 12345, 54321);
 		assertTimelineTweets(timeline);
-	}
-
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void getListStatuses_listId_withSinceIdAndMaxId_unauthorized() {
-		unauthorizedTwitter.listOperations().getListStatuses(1234, 30, 12345, 54321);
 	}
 
 	@Test
@@ -678,10 +536,6 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 		assertTimelineTweets(timeline);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getListStatuses_slug_withSinceIdAndMaxId_unauthorized() {
-		unauthorizedTwitter.listOperations().getListStatuses(1234, 30, 12345, 54321);
-	}
 	// private helpers
 	
 	private void assertSingleList(UserList list) {

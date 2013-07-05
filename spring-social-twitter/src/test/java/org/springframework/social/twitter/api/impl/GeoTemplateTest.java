@@ -24,7 +24,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.PlacePrototype;
 import org.springframework.social.twitter.api.PlaceType;
@@ -41,11 +40,6 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertPlace(place);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getPlace_unauthorized() {
-		unauthorizedTwitter.geoOperations().getPlace("0bba15b36bd9e8cc");
-	}
-
 	@Test
 	public void reverseGeoCode_pointOnly() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833"))
@@ -53,11 +47,6 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("places-list"), APPLICATION_JSON));
 		List<Place> places = twitter.geoOperations().reverseGeoCode(33.050278, -96.745833);
 		assertPlaces(places);
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void reverseGeoCode_pointOnly_unauthorized() {
-		unauthorizedTwitter.geoOperations().reverseGeoCode(33.050278, -96.745833);
 	}
 	
 	@Test
@@ -103,11 +92,6 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("places-list"), APPLICATION_JSON));
 		List<Place> places = twitter.geoOperations().search(33.050278, -96.745833);
 		assertPlaces(places);
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void search_pointOnly_unauthorized() {
-		unauthorizedTwitter.geoOperations().search(33.050278, -96.745833);
 	}
 	
 	@Test
@@ -183,11 +167,6 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(PlaceType.POINT_OF_INTEREST, similarPlaces.get(1).getPlaceType());
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void findSimilarPlaces_unauthorized() {
-		unauthorizedTwitter.geoOperations().findSimilarPlaces(37.7821120598956, -122.400612831116, "Twitter HQ", "795 Folsom St", "2e056b6d9c0ff3cd");
-	}
-	
 	@Test
 	public void createPlace() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/place.json"))
@@ -200,12 +179,6 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void createPlace_unauthorized() {
-		PlacePrototype placePrototype = new PlacePrototype("0b699bfda6514e84c7b69cf993c0c23e", 33.153661, -94.973045, "Restaurant Mexico", "301 W Ferguson Rd", "2e056b6d9c0ff3cd");
-		unauthorizedTwitter.geoOperations().createPlace(placePrototype);
-	}
-
 	private void assertPlace(Place place) {
 		assertEquals("0bba15b36bd9e8cc", place.getId());
 		assertEquals("Restaurant Mexico", place.getName());

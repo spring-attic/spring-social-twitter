@@ -24,7 +24,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
 import org.springframework.social.twitter.api.Trend;
@@ -49,11 +48,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertSearchTweets(tweets);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void search_unauthorized() {
-		unauthorizedTwitter.searchOperations().search("#spring");
-	}
-
 	@Test
 	public void search_pageAndResultsPerPage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=10"))
@@ -66,11 +60,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertSearchTweets(tweets);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void search_pageAndResultsPerPage_unauthorized() {
-		unauthorizedTwitter.searchOperations().search("#spring", 10);
-	}
-
 	@Test
 	public void search_sinceAndMaxId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=10&since_id=123&max_id=54321"))
@@ -83,11 +72,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertSearchTweets(tweets);
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void search_sinceAndMaxId_unauthorized() {
-		unauthorizedTwitter.searchOperations().search("#spring", 10, 123, 54321);
-	}
-
 	@Test
 	public void search_queryOnly_appAuthorization() {
 		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/search/tweets.json?q=%23spring&count=50"))
@@ -146,11 +130,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(1, search2.getPosition());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getSavedSearches_unauthorized() {
-		unauthorizedTwitter.searchOperations().getSavedSearches();
-	}
-
 	@Test
 	public void getSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/saved_searches/show/26897775.json"))
@@ -163,11 +142,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(0, savedSearch.getPosition());
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void getSavedSearch_unauthorized() {
-		unauthorizedTwitter.searchOperations().getSavedSearch(26897775);
-	}
-
 	@Test
 	public void createSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/saved_searches/create.json"))
@@ -182,11 +156,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void createSavedSearch_unauthorized() {
-		unauthorizedTwitter.searchOperations().createSavedSearch("#twitter");
-	}
-
 	@Test
 	public void deleteSavedSearch() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/saved_searches/destroy/26897775.json"))
@@ -194,11 +163,6 @@ public class SearchTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess("{}", APPLICATION_JSON));
 		twitter.searchOperations().deleteSavedSearch(26897775);
 		mockServer.verify();
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void deleteSavedSearch_unauthorized() {
-		unauthorizedTwitter.searchOperations().deleteSavedSearch(26897775);
 	}
 	
 	@Test

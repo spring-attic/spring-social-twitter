@@ -24,7 +24,6 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.TwitterProfile;
 
@@ -54,11 +53,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertFriendsFollowers(friends);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getFriends_currentUser_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFriends();
-	}
-	
 	@Test
 	public void getFriends_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friends/list.json?cursor=-1&user_id=98765"))
@@ -171,11 +165,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		
 		CursoredList<Long> friendIds = twitter.friendOperations().getFriendIds();
 		assertFriendFollowerIdsList(friendIds);
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getFriendIds_currentUser_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFriendIds();
 	}
 
 	@Test
@@ -296,11 +285,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", followers.get(1).getScreenName());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getFollowers_currentUser_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFollowers();
-	}
-
 	@Test 
 	public void getFollowers_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/followers/list.json?cursor=-1&user_id=98765"))
@@ -349,11 +333,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(2, followers.size());
 		assertEquals("royclarkson", followers.get(0).getScreenName());
 		assertEquals("kdonald", followers.get(1).getScreenName());
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getFollowersInCursor_byUserId_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFollowersInCursor(98765L,13579);
 	}
 
 	@Test 
@@ -406,11 +385,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("kdonald", followers.get(1).getScreenName());
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getFollowersInCursor_byScreenName_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFollowersInCursor("oizik",12357);
-	}
-
 	@Test
 	public void getFriends_currentUser_noFollowers() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/followers/list.json?cursor=-1"))
@@ -451,11 +425,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		
 		CursoredList<Long> followerIds = twitter.friendOperations().getFollowerIdsInCursor(24680);
 		assertFriendFollowerIdsList(followerIds);
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void getFollowerIds_currentUser_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFollowerIds();
 	}
 
 	@Test
@@ -500,11 +469,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertFriendFollowerIdsList(followerIds);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getFollowerIdsInCursor_byUserId_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFollowerIdsInCursor(98765L, 24680);
-	}
-
 	@Test
 	public void getFollowerIds_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/followers/ids.json?cursor=-1&screen_name=habuma"))
@@ -547,11 +511,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertFriendFollowerIdsList(followerIds);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getFollowerIdsInCursor_byScreenName_unauthorized() {
-		unauthorizedTwitter.friendOperations().getFollowerIdsInCursor("habuma",24680);
-	}
-
 	@Test
 	public void follow_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/create.json?user_id=98765"))
@@ -562,11 +521,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("oizik2", followedScreenName);
 		
 		mockServer.verify();
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void follow_byUserId_unauthorized() {
-		unauthorizedTwitter.friendOperations().follow(98765);
 	}
 	
 	@Test
@@ -580,11 +534,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void follow_byScreenName_unauthorized() {
-		unauthorizedTwitter.friendOperations().follow("aizik2");
-	}
-	
 	@Test
 	public void unfollow_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/destroy.json?user_id=98765"))
@@ -593,11 +542,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		String unFollowedScreenName = twitter.friendOperations().unfollow(98765);
 		assertEquals("oizik2", unFollowedScreenName);
 		mockServer.verify();
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void unfollow_byUserId_unauthorized() {
-		unauthorizedTwitter.friendOperations().unfollow(98765);
 	}
 
 	@Test
@@ -611,11 +555,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 	
-	@Test(expected = NotAuthorizedException.class)
-	public void unfollow_byScreenName_unauthorized() {
-		unauthorizedTwitter.friendOperations().follow("aizik2");
-	}
-
 	@Test
 	public void enableNotifications_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?user_id=98765&device=true"))
@@ -624,11 +563,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		TwitterProfile unFollowedUser = twitter.friendOperations().enableNotifications(98765);
 		assertEquals("oizik2", unFollowedUser.getScreenName());
 		mockServer.verify();
-	}
-
-	@Test(expected = NotAuthorizedException.class)
-	public void enableNotifications_byUserId_unauthorized() {
-		unauthorizedTwitter.friendOperations().enableNotifications(98765);
 	}
 	
 	@Test
@@ -641,11 +575,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void enableNotifications_byScreenName_unauthorized() {
-		unauthorizedTwitter.friendOperations().enableNotifications("oizik2");
-	}
-
 	@Test
 	public void disableNotifications_byUserId() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?user_id=98765&device=false"))
@@ -656,11 +585,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void disableNotifications_byUserId_unauthorized() {
-		unauthorizedTwitter.friendOperations().disableNotifications(98765);
-	}
-	
 	@Test
 	public void disableNotifications_byScreenName() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/update.json?screen_name=oizik2&device=false"))
@@ -669,11 +593,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		TwitterProfile unFollowedUser = twitter.friendOperations().disableNotifications("oizik2");
 		assertEquals("oizik2", unFollowedUser.getScreenName());
 		mockServer.verify();
-	}
-	
-	@Test(expected = NotAuthorizedException.class)
-	public void disableNotifications_byScreenName_unauthorized() {
-		unauthorizedTwitter.friendOperations().disableNotifications("oizik2");
 	}
 	
 	@Test
@@ -696,11 +615,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertIncomingOutgoingFriendships(friendships);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getIncomingFriendships_unauthorized() {
-		unauthorizedTwitter.friendOperations().getIncomingFriendships();
-	}
-	
 	@Test
 	public void getOutgoingFriendships() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/friendships/outgoing.json?cursor=-1"))
@@ -721,11 +635,6 @@ public class FriendTemplateTest extends AbstractTwitterApiTest {
 		assertIncomingOutgoingFriendships(friendships);
 	}
 
-	@Test(expected = NotAuthorizedException.class)
-	public void getOutgoingFriendships_unauthorized() {
-		unauthorizedTwitter.friendOperations().getOutgoingFriendships();
-	}
-	
 	private void assertFriendFollowerIdsList(CursoredList<Long> friendIds) {
 		assertEquals(2, friendIds.size());
 		assertEquals(14846645L, (long) friendIds.get(0));
