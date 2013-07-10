@@ -43,6 +43,8 @@ public class Tweet implements Serializable {
 	private boolean favorited;
 	private Entities entities;
 	private TwitterProfile user;
+	private StatusDetails statusDetails;
+	
 
 	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
@@ -54,6 +56,14 @@ public class Tweet implements Serializable {
 		this.fromUserId = fromUserId;
 		this.languageCode = languageCode;
 		this.source = source;		
+	}
+	
+	public StatusDetails getStatusDetails(){
+		return statusDetails;
+	}
+	
+	public void setStatusDetails(StatusDetails statusDetails){
+		this.statusDetails=statusDetails;		
 	}
 
 	public String getText() {
