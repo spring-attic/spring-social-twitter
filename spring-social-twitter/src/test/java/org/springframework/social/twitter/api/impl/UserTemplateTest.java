@@ -331,5 +331,15 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("/search/tweets", statuses.get(ResourceFamily.SEARCH).get(0).getEndpoint());
 		assertEquals(180, statuses.get(ResourceFamily.SEARCH).get(0).getQuarterOfHourLimit());
 	}
+	
+	@Test
+	public void getAccountSettings() {
+		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/account/settings.json"))
+			.andExpect(method(GET))
+			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
+			.andRespond(withSuccess(jsonResource("account-settings"), APPLICATION_JSON));
+
+		twitter.userOperations().getAccountSettings();
+	}
 
 }

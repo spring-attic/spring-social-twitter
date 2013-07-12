@@ -129,4 +129,13 @@ public interface UserOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	Map<ResourceFamily, List<RateLimitStatus>> getRateLimitStatus(ResourceFamily... resources);
+
+	/**
+	 * Retrives the authenticating user's account settings.
+	 * @return the authetnicating user's account settings.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	AccountSettings getAccountSettings();
+
 }

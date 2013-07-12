@@ -41,6 +41,7 @@ public class Tweet implements Serializable {
 	private boolean retweeted;
 	private Tweet retweetedStatus;
 	private boolean favorited;
+	private Integer favoriteCount;
 	private Entities entities;
 	private TwitterProfile user;
 
@@ -163,6 +164,14 @@ public class Tweet implements Serializable {
 
 	public boolean isFavorited() {
 		return favorited;
+	}
+	
+	public void setFavoriteCount(Integer favoriteCount) {
+		this.favoriteCount = favoriteCount;
+	}
+	
+	public Integer getFavoriteCount() {
+		return favoriteCount;
 	}
 
 	public Entities getEntities() {

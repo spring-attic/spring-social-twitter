@@ -94,6 +94,9 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		JsonNode favoritedNode = node.get("favorited");
 		boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.asBoolean() : false;
 		tweet.setFavorited(favorited);
+		JsonNode favoriteCountNode = node.get("favorite_count");
+		Integer favoriteCount = favoriteCountNode != null && !favoriteCountNode.isNull() ? favoriteCountNode.asInt() : null;
+		tweet.setFavoriteCount(favoriteCount);
 		Entities entities = toEntities(node.get("entities"), text);
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);

@@ -71,6 +71,8 @@ public abstract class AbstractTwitterApiTest {
 			assertNull(tweet.getRetweetCount());
 		}
 		
+		assertEquals(1001, (int) tweet.getFavoriteCount());
+		
 		assertTrue(tweet.isFavorited());
 		Entities entities = tweet.getEntities();
 		List<HashTagEntity> hashtags = entities.getHashTags();
