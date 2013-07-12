@@ -364,7 +364,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 				.andExpect(method(POST))
 				.andExpect(content().string("status=Test+Message&lat=123.1&long=-111.2"))
 				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").atLocation(123.1f, -111.2f));
+		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").atLocation(-111.2f, 123.1f));
 		assertSingleTweet(tweet);
 		mockServer.verify();
 	}
@@ -401,7 +401,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 				.andExpect(method(POST))
 				.andExpect(content().string("status=Test+Message&lat=123.1&long=-111.2&display_coordinates=true"))
 				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").atLocation(123.1f, -111.2f).displayCoordinates(true));
+		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").atLocation(-111.2f, 123.1f).displayCoordinates(true));
 		assertSingleTweet(tweet);
 		mockServer.verify();
 	}

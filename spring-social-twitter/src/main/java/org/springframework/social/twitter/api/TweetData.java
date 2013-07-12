@@ -44,7 +44,7 @@ public class TweetData {
 		return this;
 	}
 	
-	public TweetData atLocation(float latitude, float longitude) {
+	public TweetData atLocation(float longitude, float latitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		return this;
