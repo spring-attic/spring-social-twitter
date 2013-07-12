@@ -22,6 +22,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.TweetData;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
@@ -139,11 +140,11 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	}
 
 	public Tweet updateStatus(String message) {
-		return updateStatus(message, new StatusDetails());
+		return updateStatus(new TweetData(message));
 	}
 
 	public Tweet updateStatus(String message, Resource media) {
-		return updateStatus(message, media, new StatusDetails());
+		return updateStatus(new TweetData(message).withMedia(media));
 	}
 
 	public Tweet updateStatus(String message, StatusDetails details) {
@@ -163,6 +164,12 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		return restTemplate.postForObject(buildUri("statuses/update_with_media.json"), tweetParams, Tweet.class);
 	}
 
+	public Tweet updateStatus(TweetData tweetData) {
+		requireUserAuthorization();
+		String uriPath = tweetData.hasMedia() ? "statuses/update_with_media.json" : "statuses/update.json";
+		return restTemplate.postForObject(buildUri(uriPath), tweetData.toRequestParameters(), Tweet.class);
+	}
+	
 	public void deleteStatus(long tweetId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();

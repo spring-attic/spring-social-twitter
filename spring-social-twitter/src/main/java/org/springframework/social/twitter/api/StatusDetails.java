@@ -22,8 +22,10 @@ import org.springframework.util.MultiValueMap;
 
 /**
  * Carries optional metadata pertaining to a Twitter status update.
+ * @deprecated Use {@link TimelineOperations#updateStatus(TweetData)} instead.
  * @author Craig Walls
  */
+@Deprecated
 public class StatusDetails {
 	
 	private Long inReplyToStatusId;

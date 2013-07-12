@@ -244,7 +244,9 @@ public interface TimelineOperations {
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @deprecated Use {@link TimelineOperations#updateStatus(TweetData)} instead.
 	 */
+	@Deprecated
 	Tweet updateStatus(String status, Resource photo);
 
 	/**
@@ -255,7 +257,9 @@ public interface TimelineOperations {
 	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @deprecated Use {@link TimelineOperations#updateStatus(TweetData)} instead.
 	 */
+	@Deprecated
 	Tweet updateStatus(String status, StatusDetails details);
 
 	/**
@@ -268,9 +272,22 @@ public interface TimelineOperations {
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 * @deprecated Use {@link TimelineOperations#updateStatus(TweetData)} instead.
 	 */
+	@Deprecated
 	Tweet updateStatus(String status, Resource photo, StatusDetails details);
 
+	/**
+	 * Updates the user's status, including any additional metadata about the status carried in TweetData
+	 * @param tweetData The data defining the status.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
+	 */
+	Tweet updateStatus(TweetData tweetData);
+	
 	/**
 	 * Removes a status entry.
 	 * @param tweetId the tweet's ID

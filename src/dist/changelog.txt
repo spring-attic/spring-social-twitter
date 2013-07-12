@@ -1,3 +1,13 @@
+Spring Social Twitter 1.1.0 Milestone 4 (August 5, 2013)
+========================================================
+Compatibility Notes:
+  * StatusDetails and most of TimelineOperations.updateStatus() methods have
+    been deprecated in favor of the updateStatus() method that takes TweetData
+    as a parameter.
+
+Improvements
+  * Add a builder-style API for creating Tweets. (SOCIALTW-63)
+
 Spring Social Twitter 1.1.0 Milestone 3 (July 8, 2013)
 ======================================================
 Compatibility Notes:
