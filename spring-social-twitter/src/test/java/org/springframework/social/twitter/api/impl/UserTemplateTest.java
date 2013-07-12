@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+import org.springframework.social.twitter.api.AccountSettings;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
@@ -334,12 +335,22 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void getAccountSettings() {
-		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/account/settings.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/settings.json"))
 			.andExpect(method(GET))
-			.andExpect(header("Authorization", "Bearer APP_ACCESS_TOKEN"))
 			.andRespond(withSuccess(jsonResource("account-settings"), APPLICATION_JSON));
 
-		twitter.userOperations().getAccountSettings();
+		AccountSettings settings = twitter.userOperations().getAccountSettings();
+		assertTrue(settings.isAlwaysUseHttps());
+		assertTrue(settings.isDiscoverableByEmail());
+		assertTrue(settings.isGeoEnabled());
+		assertEquals("en", settings.getLanguage());
+		assertFalse(settings.isProtected());
+		assertEquals("theSeanCook", settings.getScreenName());
+		assertFalse(settings.isShowAllInlineMedia());
+		assertTrue(settings.isUseCookiePersonalization());
+		assertEquals("Pacific Time (US & Canada)", settings.getTimeZone().getName());
+		assertEquals("America/Los_Angeles", settings.getTimeZone().getTZInfoName());
+		assertEquals(-28800, settings.getTimeZone().getUTCOffset());
 	}
 
 }

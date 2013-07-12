@@ -18,6 +18,7 @@ package org.springframework.social.twitter.api.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.social.twitter.api.AccountSettings;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
@@ -101,5 +102,11 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		requireEitherUserOrAppAuthorization();
 		String joinedResources = ArrayUtils.join(resources);
 		return restTemplate.getForObject(buildUri("application/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();
+	}
+	
+	@Override
+	public AccountSettings getAccountSettings() {
+		requireUserAuthorization();
+		return restTemplate.getForObject(buildUri("account/settings.json"), AccountSettings.class);
 	}
 }
