@@ -15,16 +15,11 @@
  */
 package org.springframework.social.twitter.config.annotation;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.social.UserIdSource;
 import org.springframework.social.config.annotation.AbstractProviderConfigRegistrarSupport;
-import org.springframework.social.config.xml.ApiHelper;
-import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.security.provider.SocialAuthenticationService;
 import org.springframework.social.twitter.api.Twitter;
+import org.springframework.social.twitter.config.support.TwitterApiHelper;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 import org.springframework.social.twitter.security.TwitterAuthenticationService;
 
@@ -41,33 +36,6 @@ public class TwitterProviderConfigRegistrar extends AbstractProviderConfigRegist
 	@Override
 	protected Class<? extends SocialAuthenticationService<?>> getAuthenticationServiceClass() {
 		return TwitterAuthenticationService.class;
-	}
-
-	static class TwitterApiHelper implements ApiHelper<Twitter> {
-		
-		private final UsersConnectionRepository usersConnectionRepository;
-
-		private final UserIdSource userIdSource;
-
-		private TwitterApiHelper(UsersConnectionRepository usersConnectionRepository, UserIdSource userIdSource) {
-			this.usersConnectionRepository = usersConnectionRepository;
-			this.userIdSource = userIdSource;		
-		}
-
-		public Twitter getApi() {
-			if (logger.isDebugEnabled()) {
-				logger.debug("Getting API binding instance for Twitter provider");
-			}
-					
-			Connection<Twitter> connection = usersConnectionRepository.createConnectionRepository(userIdSource.getUserId()).findPrimaryConnection(Twitter.class);
-			if (logger.isDebugEnabled() && connection == null) {
-				logger.debug("No current connection; Returning default TwitterTemplate instance.");
-			}
-			return connection != null ? connection.getApi() : null;
-		}
-		
-		private final static Log logger = LogFactory.getLog(TwitterApiHelper.class);
-
 	}
 
 }
