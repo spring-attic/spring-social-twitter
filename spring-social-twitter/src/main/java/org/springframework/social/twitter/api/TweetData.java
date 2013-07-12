@@ -32,6 +32,8 @@ public class TweetData {
 	private boolean displayCoordinates;
 	
 	private Resource mediaResource;
+
+	private String placeId;
 		
 	public TweetData(String message) {
 		this.message = message;
@@ -45,6 +47,11 @@ public class TweetData {
 	public TweetData atLocation(float latitude, float longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
+		return this;
+	}
+	
+	public TweetData atPlace(String placeId) {
+		this.placeId = placeId;
 		return this;
 	}
 	
@@ -77,6 +84,9 @@ public class TweetData {
 		}
 		if (mediaResource != null) {
 			params.set("media", mediaResource);
+		}
+		if (placeId != null) {
+			params.set("place_id", placeId);
 		}
 		return params;
 	}

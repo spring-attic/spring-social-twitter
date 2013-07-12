@@ -7,6 +7,7 @@ Compatibility Notes:
 
 Improvements
   * Add a builder-style API for creating Tweets. (SOCIALTW-63)
+  * Add ability to specify a place ID when updating status. (SOCIALTW-35)
 
 Spring Social Twitter 1.1.0 Milestone 3 (July 8, 2013)
 ======================================================

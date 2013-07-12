@@ -370,6 +370,17 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void updateStatus_withPlace() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
+				.andExpect(method(POST))
+				.andExpect(content().string("status=Test+Message&place_id=df51dec6f4ee2b2c"))
+				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
+		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").atPlace("df51dec6f4ee2b2c"));
+		assertSingleTweet(tweet);
+		mockServer.verify();
+	}
+
+	@Test
 	public void updateStatus_withLocationAndDisplayCoordinates_DEPRECATED() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 				.andExpect(method(POST))
