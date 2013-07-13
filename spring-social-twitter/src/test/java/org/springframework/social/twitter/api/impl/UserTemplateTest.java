@@ -362,5 +362,38 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("http://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
 		assertEquals(2357024, settings.getTrendLocation().get(0).getWhereOnEarthID());
 	}
+	
+	@Test
+	public void updateAccountSettings_allSettings() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/settings.json"))
+				.andExpect(method(POST))
+				.andExpect(content().string("trend_location_woeid=12345&sleep_time_enabled=true&start_sleep_time=2&end_sleep_time=8&time_zone=America%2FLos_Angeles&lang=EN"))
+				.andRespond(withSuccess(jsonResource("account-settings"), APPLICATION_JSON));
+		AccountSettings settings = twitter.userOperations().updateAccountSettings(
+				new AccountSettingsData().language("EN").timeZone("America/Los_Angeles").withSleepTimeEnabled(2, 8).trendLocationWOEID(12345));
+		assertTrue(settings.isAlwaysUseHttps());
+		assertTrue(settings.isDiscoverableByEmail());
+		assertTrue(settings.isDiscoverableByMobilePhone());
+		assertTrue(settings.isDisplaySensitiveMedia());
+		assertTrue(settings.isGeoEnabled());
+		assertEquals("en", settings.getLanguage());
+		assertFalse(settings.isProtected());
+		assertEquals("theSeanCook", settings.getScreenName());
+		assertTrue(settings.isUseCookiePersonalization());
+		assertTrue(settings.getSleepTime().isEnabled());
+		assertEquals(1, settings.getSleepTime().getStartTime().intValue());
+		assertEquals(6, settings.getSleepTime().getEndTime().intValue());
+		assertEquals("Pacific Time (US & Canada)", settings.getTimeZone().getName());
+		assertEquals("America/Los_Angeles", settings.getTimeZone().getTZInfoName());
+		assertEquals(-28800, settings.getTimeZone().getUTCOffset());
+		assertEquals("United States", settings.getTrendLocation().get(0).getCountry());
+		assertEquals("US", settings.getTrendLocation().get(0).getCountryCode());
+		assertEquals("Atlanta", settings.getTrendLocation().get(0).getName());
+		assertEquals(23424977, settings.getTrendLocation().get(0).getParentId());
+		assertEquals("http://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
+		assertEquals(2357024, settings.getTrendLocation().get(0).getWhereOnEarthID());
+		mockServer.verify();
+	}
+
 
 }

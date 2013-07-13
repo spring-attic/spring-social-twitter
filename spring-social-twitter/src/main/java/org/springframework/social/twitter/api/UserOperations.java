@@ -20,6 +20,7 @@ import java.util.Map;
 
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
+import org.springframework.social.twitter.api.impl.AccountSettingsData;
 
 
 /**
@@ -132,10 +133,16 @@ public interface UserOperations {
 
 	/**
 	 * Retrives the authenticating user's account settings.
-	 * @return the authetnicating user's account settings.
+	 * @return the authenticating user's account settings.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	AccountSettings getAccountSettings();
 
+	/**
+	 * Updates the authenticating user's account settings.
+	 * @param accountSettingsData An AccountSettingsData with the settings to be changed.
+	 * @return The updated account settings.
+	 */
+	AccountSettings updateAccountSettings(AccountSettingsData accountSettingsData);
 }

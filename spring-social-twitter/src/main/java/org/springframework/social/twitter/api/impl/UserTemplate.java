@@ -104,9 +104,14 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		return restTemplate.getForObject(buildUri("application/rate_limit_status.json", "resources", joinedResources), RateLimitStatusHolder.class).getRateLimits();
 	}
 	
-	@Override
 	public AccountSettings getAccountSettings() {
 		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("account/settings.json"), AccountSettings.class);
 	}
+	
+	public AccountSettings updateAccountSettings(AccountSettingsData accountSettingsData) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/settings.json"), accountSettingsData.toRequestParameters(), AccountSettings.class);
+	}
+
 }
