@@ -1,15 +1,17 @@
 {
     "always_use_https": true, 
     "discoverable_by_email": true, 
+    "discoverable_by_mobile_phone": true,
+    "display_sensitive_media": true,
     "geo_enabled": true, 
     "language": "en", 
     "protected": false, 
     "screen_name": "theSeanCook", 
     "show_all_inline_media": false, 
     "sleep_time": {
-        "enabled": false, 
-        "end_time": null, 
-        "start_time": null
+        "enabled": true, 
+        "end_time": 6, 
+        "start_time": 1
     }, 
     "time_zone": {
         "name": "Pacific Time (US & Canada)", 

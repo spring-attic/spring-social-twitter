@@ -342,15 +342,25 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		AccountSettings settings = twitter.userOperations().getAccountSettings();
 		assertTrue(settings.isAlwaysUseHttps());
 		assertTrue(settings.isDiscoverableByEmail());
+		assertTrue(settings.isDiscoverableByMobilePhone());
+		assertTrue(settings.isDisplaySensitiveMedia());
 		assertTrue(settings.isGeoEnabled());
 		assertEquals("en", settings.getLanguage());
 		assertFalse(settings.isProtected());
 		assertEquals("theSeanCook", settings.getScreenName());
-		assertFalse(settings.isShowAllInlineMedia());
 		assertTrue(settings.isUseCookiePersonalization());
+		assertTrue(settings.getSleepTime().isEnabled());
+		assertEquals(1, settings.getSleepTime().getStartTime().intValue());
+		assertEquals(6, settings.getSleepTime().getEndTime().intValue());
 		assertEquals("Pacific Time (US & Canada)", settings.getTimeZone().getName());
 		assertEquals("America/Los_Angeles", settings.getTimeZone().getTZInfoName());
 		assertEquals(-28800, settings.getTimeZone().getUTCOffset());
+		assertEquals("United States", settings.getTrendLocation().get(0).getCountry());
+		assertEquals("US", settings.getTrendLocation().get(0).getCountryCode());
+		assertEquals("Atlanta", settings.getTrendLocation().get(0).getName());
+		assertEquals(23424977, settings.getTrendLocation().get(0).getParentId());
+		assertEquals("http://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
+		assertEquals(2357024, settings.getTrendLocation().get(0).getWhereOnEarthID());
 	}
 
 }
