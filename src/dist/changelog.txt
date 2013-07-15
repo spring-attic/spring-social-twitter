@@ -11,6 +11,10 @@ Improvements
   * Add favorite_count to Tweet class. (SOCIALTW-60)
   * Add support for fetching Account Settings. (SOCIALTW-47)
 
+Bug Fixes
+  * Escape star (*) per Twitter's non-standard URL encoding scheme.
+    (SOCIALTW-58)
+
 Spring Social Twitter 1.1.0 Milestone 3 (July 8, 2013)
 ======================================================
 Compatibility Notes:
