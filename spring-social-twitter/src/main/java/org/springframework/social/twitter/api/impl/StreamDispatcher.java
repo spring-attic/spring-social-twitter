@@ -21,6 +21,7 @@ import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamListener;
@@ -35,7 +36,7 @@ class StreamDispatcher implements Runnable {
 
 	private ObjectMapper objectMapper;
 	
-	private volatile boolean active;
+	private AtomicBoolean active;
 
 	private final Queue<String> queue;
 	
@@ -49,11 +50,11 @@ class StreamDispatcher implements Runnable {
 		objectMapper.addMixInAnnotations(Tweet.class, TweetMixin.class);
 		objectMapper.addMixInAnnotations(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
 		objectMapper.addMixInAnnotations(StreamWarningEvent.class, StreamWarningEventMixin.class);
-		active = true;
+		active = new AtomicBoolean(true);
 	}
 
 	public void run() {
-		while(active) {
+		while(active.get()) {
 			String line = queue.poll();
 			if(line == null || line.length() == 0) return;
 			
@@ -76,7 +77,7 @@ class StreamDispatcher implements Runnable {
 	}
 	
 	public void stop() {
-		active = false;
+		active.compareAndSet(true, false);
 		pool.shutdown();
 	}
 	
