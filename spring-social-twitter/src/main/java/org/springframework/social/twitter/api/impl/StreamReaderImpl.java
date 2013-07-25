@@ -25,13 +25,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingException;
 
 class StreamReaderImpl implements StreamReader {
 	
-	private volatile boolean open;
+	private AtomicBoolean open;
 		
 	private final InputStream inputStream;
 
@@ -50,7 +51,7 @@ class StreamReaderImpl implements StreamReader {
 		dispatcher = new StreamDispatcher(queue, listeners);
 		ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
 		future = executor.scheduleAtFixedRate(dispatcher, 0, 10, TimeUnit.MILLISECONDS);
-		open = true;
+		open = new AtomicBoolean(true);
 	}
 	
 	public void next() {
@@ -61,7 +62,7 @@ class StreamReaderImpl implements StreamReader {
 			}			
 			queue.add(line);
 		} catch (IOException e) {
-			if(open) {
+			if(open.get()) {
 				close();
 				throw new StreamingException("The Stream is closed", e);
 			}
@@ -70,7 +71,7 @@ class StreamReaderImpl implements StreamReader {
 
 	public void close() {
 		try {
-			open = false;
+			open.set(false);
 			future.cancel(true);
 			dispatcher.stop();
 			inputStream.close();

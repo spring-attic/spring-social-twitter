@@ -77,7 +77,7 @@ class StreamDispatcher implements Runnable {
 	}
 	
 	public void stop() {
-		active.compareAndSet(true, false);
+		active.set(false);
 		pool.shutdown();
 	}
 	
