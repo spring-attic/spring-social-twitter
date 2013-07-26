@@ -21,6 +21,7 @@ import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.MediaEntity;
 import org.springframework.social.twitter.api.MentionEntity;
+import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.SavedSearch;
 import org.springframework.social.twitter.api.SearchResults;
@@ -66,6 +67,7 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(AccountSettings.TimeZone.class, AccountSettingsMixin.TimeZoneMixin.class);
 		context.setMixInAnnotations(AccountSettings.SleepTime.class, AccountSettingsMixin.SleepTimeMixin.class);
 		context.setMixInAnnotations(AccountSettings.TrendLocation.class, AccountSettingsMixin.TrendLocationMixin.class);
+		context.setMixInAnnotations(OEmbedTweet.class, OEmbedTweetMixin.class);
 	}
 
 }

@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
+import org.springframework.social.twitter.api.OEmbedOptions;
+import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Tweet;
@@ -138,7 +140,19 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("statuses/show/" + tweetId + ".json", parameters), Tweet.class);
 	}
+	
+	public OEmbedTweet getStatusOEmbed(long tweetId) {
+		return getStatusOEmbed(tweetId, new OEmbedOptions());
+	}
+	
+	public OEmbedTweet getStatusOEmbed(long tweetId, OEmbedOptions options) {
+		requireEitherUserOrAppAuthorization();
+		MultiValueMap<String, String> parameters = options.toRequestParameters();
+		parameters.set("id", String.valueOf(tweetId));
+		return restTemplate.getForObject(buildUri("statuses/oembed.json", parameters), OEmbedTweet.class);
+	}
 
+	
 	public Tweet updateStatus(String message) {
 		return updateStatus(new TweetData(message));
 	}

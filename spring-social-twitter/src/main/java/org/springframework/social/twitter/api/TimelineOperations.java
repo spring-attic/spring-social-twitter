@@ -226,6 +226,25 @@ public interface TimelineOperations {
 	Tweet getStatus(long tweetId);
 
 	/**
+	 * Returns a single tweet as an oEmbed representation.
+	 * Supports either user or application authorization.
+	 * @param tweetId the tweet's ID
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	OEmbedTweet getStatusOEmbed(long tweetId);
+
+	/**
+	 * Returns a single tweet as an oEmbed representation.
+	 * Supports either user or application authorization.
+	 * @param tweetId the tweet's ID
+	 * @param options options for the embedded tweet
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	OEmbedTweet getStatusOEmbed(long tweetId, OEmbedOptions options);
+
+	/**
 	 * Updates the user's status.
 	 * @param status The status message
 	 * @throws ApiException if there is an error while communicating with Twitter.

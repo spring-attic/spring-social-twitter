@@ -31,6 +31,8 @@ import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.OperationNotPermittedException;
 import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.MessageTooLongException;
+import org.springframework.social.twitter.api.OEmbedOptions;
+import org.springframework.social.twitter.api.OEmbedTweet;
 import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.TickerSymbolEntity;
 import org.springframework.social.twitter.api.Tweet;
@@ -309,6 +311,33 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(33, tickerSymbols.get(2).getIndices()[1]);
 	}
 	
+	@Test
+	public void getStatusOEmbed() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/oembed.json?id=357251561744916480"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("oembed"), APPLICATION_JSON));
+
+		OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(357251561744916480L);
+		assertOEmbedTweet(oembed);
+	}
+
+	@Test
+	public void getStatusOEmbed_withAllOptions() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/oembed.json?maxwidth=300&hide_media=true&hide_thread=true&omit_script=true&align=center&related=springsocial&lang=es&id=357251561744916480"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("oembed"), APPLICATION_JSON));
+
+		OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(357251561744916480L, 
+				new OEmbedOptions().maxWidth(300)
+								   .hideMedia()
+								   .hideThread()
+								   .omitScript()
+								   .align("center")
+								   .related("springsocial")
+								   .language("es"));
+		assertOEmbedTweet(oembed);
+	}
+
 	@Test
 	public void updateStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
@@ -739,4 +768,20 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		return resource;
 	}
 	
+	private void assertOEmbedTweet(OEmbedTweet oembed) {
+		assertEquals("Craig Walls", oembed.getAuthorName());
+		assertEquals("https://twitter.com/habuma", oembed.getAuthorUrl());
+		assertEquals(3153600000L, oembed.getCacheAge());
+		assertNull(oembed.getHeight());
+		assertEquals("<blockquote class=\"twitter-tweet\"><p>This does not bode well for those traveling out of DFW today. "
+				+ "<a href=\"http://t.co/r1dJT15q3w\">pic.twitter.com/r1dJT15q3w</a></p>&mdash; Craig Walls (@habuma) "
+				+ "<a href=\"https://twitter.com/habuma/statuses/357251561744916480\">July 16, 2013</a></blockquote>\n"
+				+ "<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>", oembed.getHtml());
+		assertEquals("Twitter", oembed.getProviderName());
+		assertEquals("https://twitter.com", oembed.getProviderUrl());
+		assertEquals("rich", oembed.getType());
+		assertEquals("https://twitter.com/habuma/statuses/357251561744916480", oembed.getUrl());
+		assertEquals("1.0", oembed.getVersion());
+		assertEquals(550, (int) oembed.getWidth());
+	}
 }
