@@ -185,7 +185,18 @@ public interface ListOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @return a list of {@link TwitterProfile}
 	 */
-	List<TwitterProfile> getListMembers(long listId);
+	CursoredList<TwitterProfile> getListMembers(long listId);
+
+	/**
+	 * Retrieves a list of Twitter profiles whose users are members of the list.
+	 * Supports either user or application authorization.
+	 * @param listId the ID of the list.
+	 * @param cursor the cursor to use when fetching the list members.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 * @return a list of {@link TwitterProfile}
+	 */
+	CursoredList<TwitterProfile> getListMembersInCursor(long listId, long cursor);
 
 	/**
 	 * Retrieves a list of Twitter profiles whose users are members of the list.
@@ -196,7 +207,19 @@ public interface ListOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @return a list of {@link TwitterProfile}
 	 */
-	List<TwitterProfile> getListMembers(String screenName, String listSlug);
+	CursoredList<TwitterProfile> getListMembers(String screenName, String listSlug);
+
+	/**
+	 * Retrieves a list of Twitter profiles whose users are members of the list.
+	 * Supports either user or application authorization.
+	 * @param screenName the screen name of the list owner.
+	 * @param listSlug the slug of the list.
+	 * @param cursor the cursor to use when fetching the list members.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 * @return a list of {@link TwitterProfile}
+	 */
+	CursoredList<TwitterProfile> getListMembersInCursor(String screenName, String listSlug, long cursor);
 
 	/**
 	 * Adds one or more new members to a user list.
@@ -316,6 +339,28 @@ public interface ListOperations {
 	CursoredList<UserList> getMemberships(String screenName);
 
 	/**
+	 * Retrieves the lists that a given user is a member of.
+	 * Supports either user or application authorization.
+	 * @param userId the user ID
+	 * @param cursor the cursor to use when fetching the list memberships.
+	 * @return a list of {@link UserList}s that the user is a member of.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getMembershipsInCursor(long userId, long cursor);
+
+	/**
+	 * Retrieves the lists that a given user is a member of.
+	 * Supports either user or application authorization.
+	 * @param screenName the user's screen name
+	 * @param cursor the cursor to use when fetching the list memberships.
+	 * @return a list of {@link UserList}s that the user is a member of.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getMembershipsInCursor(String screenName, long cursor);
+
+	/**
 	 * Retrieves the lists that a given user is subscribed to.
 	 * Supports either user or application authorization.
 	 * @param userId the user ID
@@ -334,6 +379,28 @@ public interface ListOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	CursoredList<UserList> getSubscriptions(String screenName);
+
+	/**
+	 * Retrieves the lists that a given user is subscribed to.
+	 * Supports either user or application authorization.
+	 * @param userId the user ID
+	 * @param cursor the cursor to use when fetching the list subscriptions.
+	 * @return a list of {@link UserList}s that the user is subscribed to.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getSubscriptionsInCursor(long userId, long cursor);
+
+	/**
+	 * Retrieves the lists that a given user is subscribed to.
+	 * Supports either user or application authorization.
+	 * @param screenName the user's screen name
+	 * @param cursor the cursor to use when fetching the list subscriptions.
+	 * @return a list of {@link UserList}s that the user is subscribed to.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getSubscriptionsInCursor(String screenName, long cursor);
 
 	/**
 	 * Checks to see if a given user is a member of a given list.

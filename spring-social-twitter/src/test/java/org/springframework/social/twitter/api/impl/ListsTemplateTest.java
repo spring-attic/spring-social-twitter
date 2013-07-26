@@ -25,6 +25,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserList;
@@ -155,13 +156,36 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListMembers(40841803));
 	}
-	
+
+	@Test
+	public void getListMembersInCursor_byListId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?list_id=40841803&cursor=12345"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
+		CursoredList<TwitterProfile> listMembers = twitter.listOperations().getListMembersInCursor(40841803, 12345);
+		assertListMembers(listMembers);
+		assertEquals(332211, listMembers.getNextCursor());
+		assertEquals(112233, listMembers.getPreviousCursor());
+		
+	}
+
 	@Test
 	public void getListMembers_byScreenNameAndListSlug() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?owner_screen_name=habuma&slug=forfun"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
 		assertListMembers(twitter.listOperations().getListMembers("habuma", "forfun"));
+	}
+
+	@Test
+	public void getListMembersInCursor_byScreenNameAndListSlug() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/members.json?owner_screen_name=habuma&slug=forfun&cursor=12345"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("list-members"), APPLICATION_JSON));
+		CursoredList<TwitterProfile> listMembers = twitter.listOperations().getListMembersInCursor("habuma", "forfun", 12345);
+		assertListMembers(listMembers);
+		assertEquals(332211, listMembers.getNextCursor());
+		assertEquals(112233, listMembers.getPreviousCursor());
 	}
 
 	@Test
@@ -257,6 +281,17 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void getMembershipsInCursor_forUserId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/memberships.json?user_id=161064614&cursor=12345"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		CursoredList<UserList> memberships = twitter.listOperations().getMembershipsInCursor(161064614, 12345);
+		assertListOfLists(memberships);
+		assertEquals(234567, memberships.getNextCursor());
+		assertEquals(123456, memberships.getPreviousCursor());
+	}
+
+	@Test
 	public void getMemberships_forUserId_appAuthorization() {
 		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/memberships.json?user_id=161064614"))
 			.andExpect(method(GET))
@@ -271,6 +306,17 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getMemberships("habuma"));
+	}
+
+	@Test
+	public void getMembershipsInCursor_forScreenName() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/memberships.json?screen_name=habuma&cursor=12345"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		CursoredList<UserList> memberships = twitter.listOperations().getMembershipsInCursor("habuma", 12345);
+		assertListOfLists(memberships);
+		assertEquals(234567, memberships.getNextCursor());
+		assertEquals(123456, memberships.getPreviousCursor());
 	}
 
 	@Test
@@ -291,6 +337,17 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void getSubscriptionsInCursor_forUserId() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?user_id=161064614&cursor=12345"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		CursoredList<UserList> subscriptions = twitter.listOperations().getSubscriptionsInCursor(161064614, 12345);
+		assertListOfLists(subscriptions);
+		assertEquals(234567, subscriptions.getNextCursor());
+		assertEquals(123456, subscriptions.getPreviousCursor());
+	}
+
+	@Test
 	public void getSubscriptions_forUserId_appAuthorization() {
 		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?user_id=161064614"))
 			.andExpect(method(GET))
@@ -306,7 +363,18 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
 		assertListOfLists(twitter.listOperations().getSubscriptions("habuma"));
 	}
-	
+
+	@Test
+	public void getSubscriptionsInCursor_forScreenName() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?screen_name=habuma&cursor=12345"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("list-of-lists"), APPLICATION_JSON));
+		CursoredList<UserList> subscriptions = twitter.listOperations().getSubscriptionsInCursor("habuma", 12345);
+		assertListOfLists(subscriptions);
+		assertEquals(234567, subscriptions.getNextCursor());
+		assertEquals(123456, subscriptions.getPreviousCursor());
+	}
+
 	@Test
 	public void getSubscriptions_forScreenName_appAuthorization() {
 		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/lists/subscriptions.json?screen_name=habuma"))

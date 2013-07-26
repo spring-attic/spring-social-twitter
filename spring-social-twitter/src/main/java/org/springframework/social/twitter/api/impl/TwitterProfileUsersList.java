@@ -17,6 +17,7 @@ package org.springframework.social.twitter.api.impl;
 
 import java.util.List;
 
+import org.springframework.social.twitter.api.CursoredList;
 import org.springframework.social.twitter.api.TwitterProfile;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,14 +31,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class TwitterProfileUsersList {
 
-	private final List<TwitterProfile> list;
+	private final CursoredList<TwitterProfile> list;
 
 	@JsonCreator
-	public TwitterProfileUsersList(@JsonProperty("users") List<TwitterProfile> list) {
-		this.list = list;		
+	public TwitterProfileUsersList(@JsonProperty("users") List<TwitterProfile> list,
+			@JsonProperty("previous_cursor") long previousCursor,
+			@JsonProperty("next_cursor") long nextCursor) {
+		this.list = new CursoredList<TwitterProfile>(list, previousCursor, nextCursor);		
 	}
 
-	public List<TwitterProfile> getList() {
+	public CursoredList<TwitterProfile> getList() {
 		return list;
 	}
 }
