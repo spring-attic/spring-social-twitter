@@ -190,10 +190,10 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		restTemplate.postForObject(buildUri("statuses/destroy/" + tweetId + ".json"), data, String.class);
 	}
 
-	public void retweet(long tweetId) {
+	public Tweet retweet(long tweetId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
-		restTemplate.postForObject(buildUri("statuses/retweet/" + tweetId + ".json"), data, String.class);
+		return restTemplate.postForObject(buildUri("statuses/retweet/" + tweetId + ".json"), data, Tweet.class);
 	}
 
 	public List<Tweet> getRetweets(long tweetId) {

@@ -321,7 +321,7 @@ public interface TimelineOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
-	void retweet(long tweetId);
+	Tweet retweet(long tweetId);
 
 	/**
 	 * Retrieves up to 100 retweets of a specific tweet.

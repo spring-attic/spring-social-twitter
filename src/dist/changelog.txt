@@ -11,6 +11,7 @@ Improvements
   * Add favorite_count to Tweet class. (SOCIALTW-60)
   * Add support for fetching Account Settings. (SOCIALTW-47)
   * Add support for fetching Tweet as an oEmbed object. (SOCIALTW-61)
+  * Return retweet data when retweeting. (SOCIALTW-67)
 
 Bug Fixes
   * Escape star (*) per Twitter's non-standard URL encoding scheme.

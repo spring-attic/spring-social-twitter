@@ -1,0 +1,250 @@
+{
+    "contributors": null, 
+    "coordinates": null, 
+    "created_at": "Thu Aug 01 22:04:57 +0000 2013", 
+    "entities": {
+        "hashtags": [
+            {
+                "indices": [
+                    89, 
+                    105
+                ], 
+                "text": "springframework"
+            }, 
+            {
+                "indices": [
+                    106, 
+                    113
+                ], 
+                "text": "groovy"
+            }, 
+            {
+                "indices": [
+                    114, 
+                    121
+                ], 
+                "text": "grails"
+            }
+        ], 
+        "symbols": [], 
+        "urls": [], 
+        "user_mentions": [
+            {
+                "id": 48158548, 
+                "id_str": "48158548", 
+                "indices": [
+                    3, 
+                    16
+                ], 
+                "name": "SpringOne 2GX 2013", 
+                "screen_name": "springone2gx"
+            }
+        ]
+    }, 
+    "favorite_count": 0, 
+    "favorited": false, 
+    "geo": null, 
+    "id": 363057792615071744, 
+    "id_str": "363057792615071744", 
+    "in_reply_to_screen_name": null, 
+    "in_reply_to_status_id": null, 
+    "in_reply_to_status_id_str": null, 
+    "in_reply_to_user_id": null, 
+    "in_reply_to_user_id_str": null, 
+    "lang": "en", 
+    "place": null, 
+    "retweet_count": 4, 
+    "retweeted": true, 
+    "retweeted_status": {
+        "contributors": null, 
+        "coordinates": null, 
+        "created_at": "Thu Aug 01 21:26:15 +0000 2013", 
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        71, 
+                        87
+                    ], 
+                    "text": "springframework"
+                }, 
+                {
+                    "indices": [
+                        88, 
+                        95
+                    ], 
+                    "text": "groovy"
+                }, 
+                {
+                    "indices": [
+                        96, 
+                        103
+                    ], 
+                    "text": "grails"
+                }, 
+                {
+                    "indices": [
+                        133, 
+                        138
+                    ], 
+                    "text": "s2gx"
+                }, 
+                {
+                    "indices": [
+                        139, 
+                        144
+                    ], 
+                    "text": "java"
+                }
+            ], 
+            "symbols": [], 
+            "urls": [
+                {
+                    "display_url": "bit.ly/s2gx13_reg", 
+                    "expanded_url": "http://bit.ly/s2gx13_reg", 
+                    "indices": [
+                        110, 
+                        132
+                    ], 
+                    "url": "http://t.co/zNxUFLs5Dt"
+                }
+            ], 
+            "user_mentions": []
+        }, 
+        "favorite_count": 0, 
+        "favorited": false, 
+        "geo": null, 
+        "id": 363048052157726721, 
+        "id_str": "363048052157726721", 
+        "in_reply_to_screen_name": null, 
+        "in_reply_to_status_id": null, 
+        "in_reply_to_status_id_str": null, 
+        "in_reply_to_user_id": null, 
+        "in_reply_to_user_id_str": null, 
+        "lang": "en", 
+        "place": null, 
+        "possibly_sensitive": false, 
+        "retweet_count": 4, 
+        "retweeted": true, 
+        "source": "web", 
+        "text": "Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNxUFLs5Dt #s2gx #java", 
+        "truncated": false, 
+        "user": {
+            "contributors_enabled": false, 
+            "created_at": "Wed Jun 17 23:19:57 +0000 2009", 
+            "default_profile": true, 
+            "default_profile_image": false, 
+            "description": "September 9-12, 2013 in Santa Clara, CA / The Premier Spring & Groovy/Grails Event - Register Today!", 
+            "entities": {
+                "description": {
+                    "urls": []
+                }, 
+                "url": {
+                    "urls": [
+                        {
+                            "display_url": "springone2gx.com", 
+                            "expanded_url": "http://www.springone2gx.com", 
+                            "indices": [
+                                0, 
+                                22
+                            ], 
+                            "url": "http://t.co/Hr9wfCTiRh"
+                        }
+                    ]
+                }
+            }, 
+            "favourites_count": 0, 
+            "follow_request_sent": false, 
+            "followers_count": 209, 
+            "following": false, 
+            "friends_count": 1, 
+            "geo_enabled": false, 
+            "id": 48158548, 
+            "id_str": "48158548", 
+            "is_translator": false, 
+            "lang": "en", 
+            "listed_count": 12, 
+            "location": "Santa Clara, CA", 
+            "name": "SpringOne 2GX 2013", 
+            "notifications": false, 
+            "profile_background_color": "C0DEED", 
+            "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png", 
+            "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png", 
+            "profile_background_tile": false, 
+            "profile_image_url": "http://a0.twimg.com/profile_images/3313206628/28864e56d47735b6c83216462f4ffdda_normal.png", 
+            "profile_image_url_https": "https://si0.twimg.com/profile_images/3313206628/28864e56d47735b6c83216462f4ffdda_normal.png", 
+            "profile_link_color": "0084B4", 
+            "profile_sidebar_border_color": "C0DEED", 
+            "profile_sidebar_fill_color": "DDEEF6", 
+            "profile_text_color": "333333", 
+            "profile_use_background_image": true, 
+            "protected": false, 
+            "screen_name": "springone2gx", 
+            "statuses_count": 26, 
+            "time_zone": "Mountain Time (US & Canada)", 
+            "url": "http://t.co/Hr9wfCTiRh", 
+            "utc_offset": -21600, 
+            "verified": false
+        }
+    }, 
+    "source": "<a href=\"http://www.springframework.org/spring-social\" rel=\"nofollow\">Spring Social Showcase</a>", 
+    "text": "RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNx\u2026", 
+    "truncated": false, 
+    "user": {
+        "contributors_enabled": false, 
+        "created_at": "Mon Jun 25 23:50:04 +0000 2007", 
+        "default_profile": false, 
+        "default_profile_image": false, 
+        "description": "", 
+        "entities": {
+            "description": {
+                "urls": []
+            }, 
+            "url": {
+                "urls": [
+                    {
+                        "display_url": "springinaction.com", 
+                        "expanded_url": "http://www.springinaction.com", 
+                        "indices": [
+                            0, 
+                            22
+                        ], 
+                        "url": "http://t.co/LRXkeMjg6N"
+                    }
+                ]
+            }
+        }, 
+        "favourites_count": 14, 
+        "follow_request_sent": false, 
+        "followers_count": 1755, 
+        "following": false, 
+        "friends_count": 137, 
+        "geo_enabled": true, 
+        "id": 7078572, 
+        "id_str": "7078572", 
+        "is_translator": false, 
+        "lang": "en", 
+        "listed_count": 125, 
+        "location": "Denton, TX", 
+        "name": "Craig Walls", 
+        "notifications": false, 
+        "profile_background_color": "9AE4E8", 
+        "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png", 
+        "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png", 
+        "profile_background_tile": false, 
+        "profile_image_url": "http://a0.twimg.com/profile_images/1205746571/me2_300_normal.jpg", 
+        "profile_image_url_https": "https://si0.twimg.com/profile_images/1205746571/me2_300_normal.jpg", 
+        "profile_link_color": "0000FF", 
+        "profile_sidebar_border_color": "87BC44", 
+        "profile_sidebar_fill_color": "E0FF92", 
+        "profile_text_color": "000000", 
+        "profile_use_background_image": true, 
+        "protected": false, 
+        "screen_name": "habuma", 
+        "statuses_count": 3989, 
+        "time_zone": "Central Time (US & Canada)", 
+        "url": "http://t.co/LRXkeMjg6N", 
+        "utc_offset": -18000, 
+        "verified": false
+    }
+}

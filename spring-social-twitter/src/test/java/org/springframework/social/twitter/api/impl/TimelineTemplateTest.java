@@ -551,12 +551,12 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
 	public void retweet() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweet/12345.json"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/retweet/363048052157726721.json"))
 				.andExpect(method(POST))
-			.andRespond(withSuccess("{}", APPLICATION_JSON));
-
-		twitter.timelineOperations().retweet(12345);
-
+			.andRespond(withSuccess(jsonResource("retweet-response"), APPLICATION_JSON));
+		Tweet retweet = twitter.timelineOperations().retweet(363048052157726721L);
+		assertEquals(363057792615071744L, retweet.getId());
+		assertEquals("RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNx\u2026", retweet.getText());
 		mockServer.verify();
 	}
 	
