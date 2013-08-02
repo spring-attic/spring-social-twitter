@@ -22,6 +22,8 @@ import java.util.Map;
 
 import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.Place.GeoPoint;
+import org.springframework.social.twitter.api.Place.Geometry;
+import org.springframework.social.twitter.api.Place.GeometryType;
 import org.springframework.social.twitter.api.PlaceType;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -54,6 +56,10 @@ class PlaceMixin {
 	@JsonProperty("bounding_box")
 	@JsonDeserialize(using=BoundingBoxDeserializer.class)
 	List<GeoPoint> boundingBox;
+	
+	@JsonProperty("geometry")
+	@JsonDeserialize(using=GeometryDeserializer.class)
+	Geometry geometry;
 
 	private static class StreetAddressDeserializer extends JsonDeserializer<String> {
 		@Override
@@ -87,6 +93,64 @@ class PlaceMixin {
 				}
 			}
 			return points;
+		}
+	}
+	
+	private static class GeometryDeserializer extends JsonDeserializer<Geometry> {
+		@Override
+		public Geometry deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+			List<List<GeoPoint>> geoPoints = new ArrayList<List<GeoPoint>>();
+			
+			List<?> coordinatesList = null;
+			String type = null;
+			while (jp.nextToken() != JsonToken.END_OBJECT) {
+				String fieldname = jp.getCurrentName();
+				if ("coordinates".equals(fieldname)) {
+					jp.nextToken(); // to get to the value token;
+					coordinatesList = jp.readValueAs(new TypeReference<List<?>>() {});
+				} else if ("type".equals(fieldname)) {
+					jp.nextToken();
+					type = jp.getText();
+				}
+			}
+
+			if ("Point".equals(type)) {
+				setPoint(geoPoints, coordinatesList);
+			} else if ("Polygon".equals(type)) {
+				setPolygon(geoPoints, coordinatesList);
+			} else if ("MultiPolygon".equals(type)) {
+				setMultiPolygon(geoPoints, coordinatesList);
+			}
+			
+			return new Geometry(GeometryType.valueOf(type.toUpperCase()), geoPoints);
+		}
+
+		private void setMultiPolygon(List<List<GeoPoint>> geoPoints,
+				List<?> coordinatesList) {
+			for (Object o : coordinatesList) {
+				List<?> mCoordinatesList = (List<?>) o;
+				setPolygon(geoPoints, mCoordinatesList);
+			}
+		}
+
+		private void setPolygon(List<List<GeoPoint>> geoPoints, List<?> coordinatesList) {
+			@SuppressWarnings("unchecked")
+			List<List<Double>> polyCoords = (List<List<Double>>) coordinatesList.get(0);
+			List<GeoPoint> polyPoints = new ArrayList<Place.GeoPoint>();
+			for (List<Double> polyCoord : polyCoords) {
+				double latitude = polyCoord.get(1);
+				double longitude = polyCoord.get(0);
+				polyPoints.add(new GeoPoint(latitude, longitude));
+			}
+			geoPoints.add(polyPoints);
+		}
+
+		private void setPoint(List<List<GeoPoint>> geoPoints, List<?> coordinatesList) {
+			List<GeoPoint> points = new ArrayList<GeoPoint>();
+			double latitude = Double.valueOf(String.valueOf(coordinatesList.get(1)));
+			double longitude = Double.valueOf(String.valueOf(coordinatesList.get(0)));
+			points.add(new GeoPoint(latitude, longitude));
+			geoPoints.add(points);
 		}
 	}
 }

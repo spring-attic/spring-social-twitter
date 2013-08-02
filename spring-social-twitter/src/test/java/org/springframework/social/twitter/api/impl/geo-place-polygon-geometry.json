@@ -1,0 +1,90 @@
+{
+    "attributes": {}, 
+    "bounding_box": {
+        "coordinates": [
+            [
+                [
+                    -122.400612831116, 
+                    37.7821120598956
+                ], 
+                [
+                    -122.400612831116, 
+                    37.7821120598956
+                ], 
+                [
+                    -122.400612831116, 
+                    37.7821120598956
+                ], 
+                [
+                    -122.400612831116, 
+                    37.7821120598956
+                ]
+            ]
+        ], 
+        "type": "Polygon"
+    }, 
+    "contained_within": [
+        {
+            "attributes": {
+                "street_address": "795 Folsom St"
+            }, 
+            "bounding_box": {
+                "coordinates": [
+                    [
+                        [
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ], 
+                        [
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ], 
+                        [
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ], 
+                        [
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ]
+                    ]
+                ], 
+                "type": "Polygon"
+            }, 
+            "country": "United States", 
+            "country_code": "US", 
+            "full_name": "Twitter HQ, San Francisco", 
+            "id": "247f43d441defc03", 
+            "name": "Twitter HQ", 
+            "place_type": "poi", 
+            "url": "https://api.twitter.com/1.1/geo/id/247f43d441defc03.json"
+        }
+    ], 
+    "country": "United States", 
+    "country_code": "US", 
+    "full_name": "Twitter 3rd Floor Lunch Room, Twitter HQ", 
+	"geometry": {
+	    "coordinates": [
+	        [
+	            [
+	                -81.657396, 
+	                28.537687
+	            ], 
+	            [
+	                -81.65739, 
+	                28.553122
+	            ], 
+	            [
+	                -81.63666, 
+	                28.548427
+	            ]
+	        ]
+	    ], 
+	    "type": "Polygon"
+	},
+    "id": "6b9811c8d9de10b9", 
+    "name": "Twitter 3rd Floor Lunch Room", 
+    "place_type": "poi", 
+    "polylines": [], 
+    "url": "https://api.twitter.com/1.1/geo/id/6b9811c8d9de10b9.json"
+}

@@ -26,6 +26,8 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.social.twitter.api.Place;
 import org.springframework.social.twitter.api.Place.GeoPoint;
+import org.springframework.social.twitter.api.Place.Geometry;
+import org.springframework.social.twitter.api.Place.GeometryType;
 import org.springframework.social.twitter.api.PlacePrototype;
 import org.springframework.social.twitter.api.PlaceType;
 import org.springframework.social.twitter.api.SimilarPlaces;
@@ -33,14 +35,78 @@ import org.springframework.social.twitter.api.SimilarPlaces;
 public class GeoTemplateTest extends AbstractTwitterApiTest {
 	
 	@Test
-	public void getPlace() {
+	public void getPlace_pointGeometry() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/id/0bba15b36bd9e8cc.json"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("geo-place"), APPLICATION_JSON));
 		Place place = twitter.geoOperations().getPlace("0bba15b36bd9e8cc");
 		assertPlace(place);
 	}
-	
+
+	@Test
+	public void getPlace_polygonGeometry() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/id/0bba15b36bd9e8cc.json"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("geo-place-polygon-geometry"), APPLICATION_JSON));
+		Place place = twitter.geoOperations().getPlace("0bba15b36bd9e8cc");
+		Geometry geometry = place.getGeometry();
+		assertEquals(GeometryType.POLYGON, geometry.getType());
+		List<List<GeoPoint>> coordinates = geometry.getCoordinates();
+		assertEquals(1, coordinates.size());
+		List<GeoPoint> polyPoints = coordinates.get(0);
+		assertEquals(28.537687, polyPoints.get(0).getLatitude(), 0.000001);
+		assertEquals(-81.657396, polyPoints.get(0).getLongitude(), 0.000001);
+		assertEquals(28.553122, polyPoints.get(1).getLatitude(), 0.000001);
+		assertEquals(-81.65739, polyPoints.get(1).getLongitude(), 0.000001);
+		assertEquals(28.548427, polyPoints.get(2).getLatitude(), 0.000001);
+		assertEquals(-81.63666, polyPoints.get(2).getLongitude(), 0.000001);
+	}
+
+	@Test
+	public void getPlace_multipolygonGeometry() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/id/0bba15b36bd9e8cc.json"))
+			.andExpect(method(GET))
+			.andRespond(withSuccess(jsonResource("geo-place-multipolygon-geometry"), APPLICATION_JSON));
+		Place place = twitter.geoOperations().getPlace("0bba15b36bd9e8cc");
+		Geometry geometry = place.getGeometry();
+		assertEquals(GeometryType.MULTIPOLYGON, geometry.getType());
+		List<List<GeoPoint>> coordinates = geometry.getCoordinates();
+		assertEquals(3, coordinates.size());
+		List<GeoPoint> poly1 = coordinates.get(0);
+		assertEquals(28.421849, poly1.get(0).getLatitude(), 0.000001);
+		assertEquals(-81.359005, poly1.get(0).getLongitude(), 0.000001);
+		assertEquals(28.422499, poly1.get(1).getLatitude(), 0.000001);
+		assertEquals(-81.357395, poly1.get(1).getLongitude(), 0.000001);
+		assertEquals(28.422622, poly1.get(2).getLatitude(), 0.000001);
+		assertEquals(-81.357098, poly1.get(2).getLongitude(), 0.000001);
+		assertEquals(28.421602, poly1.get(3).getLatitude(), 0.000001);
+		assertEquals(-81.357104, poly1.get(3).getLongitude(), 0.000001);
+		assertEquals(28.421849, poly1.get(4).getLatitude(), 0.000001);
+		assertEquals(-81.359005, poly1.get(4).getLongitude(), 0.000001);
+		List<GeoPoint> poly2 = coordinates.get(1);
+		assertEquals(28.507288, poly2.get(0).getLatitude(), 0.000001);
+		assertEquals(-81.285984, poly2.get(0).getLongitude(), 0.000001);
+		assertEquals(28.507449, poly2.get(1).getLatitude(), 0.000001);
+		assertEquals(-81.285821, poly2.get(1).getLongitude(), 0.000001);
+		assertEquals(28.50598, poly2.get(2).getLatitude(), 0.000001);
+		assertEquals(-81.285357, poly2.get(2).getLongitude(), 0.000001);
+		assertEquals(28.50598, poly2.get(3).getLatitude(), 0.000001);
+		assertEquals(-81.285469, poly2.get(3).getLongitude(), 0.000001);
+		assertEquals(28.507288, poly2.get(4).getLatitude(), 0.000001);
+		assertEquals(-81.285984, poly2.get(4).getLongitude(), 0.000001);
+		List<GeoPoint> poly3 = coordinates.get(2);
+		assertEquals(28.587731, poly3.get(0).getLatitude(), 0.000001);
+		assertEquals(-81.382777, poly3.get(0).getLongitude(), 0.000001);
+		assertEquals(28.587534, poly3.get(1).getLatitude(), 0.000001);
+		assertEquals(-81.38229, poly3.get(1).getLongitude(), 0.000001);
+		assertEquals(28.587358, poly3.get(2).getLatitude(), 0.000001);
+		assertEquals(-81.382407, poly3.get(2).getLongitude(), 0.000001);
+		assertEquals(28.587597, poly3.get(3).getLatitude(), 0.000001);
+		assertEquals(-81.382816, poly3.get(3).getLongitude(), 0.000001);
+		assertEquals(28.587731, poly3.get(4).getLatitude(), 0.000001);
+		assertEquals(-81.382777, poly3.get(4).getLongitude(), 0.000001);
+	}
+
 	@Test
 	public void reverseGeoCode_pointOnly() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/reverse_geocode.json?lat=33.050278&long=-96.745833"))
@@ -206,6 +272,14 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(37.78211205989559, boundingBox.get(2).getLatitude(), 0.000001);
 		assertEquals(-122.40061283111572, boundingBox.get(3).getLongitude(), 0.000001);
 		assertEquals(37.78211205989559, boundingBox.get(3).getLatitude(), 0.000001);
+		Geometry geometry = place.getGeometry();
+		assertEquals(GeometryType.POINT, geometry.getType());
+		List<List<GeoPoint>> coordinates = geometry.getCoordinates();
+		assertEquals(1, coordinates.size());
+		assertEquals(1, coordinates.get(0).size());
+		GeoPoint point = coordinates.get(0).get(0);
+		assertEquals(37.7821120598957, point.getLatitude(), 0.000001);
+		assertEquals(-122.400612831117, point.getLongitude(), 0.000001);
 	}
 	
 	private void assertPlaces(List<Place> places) {
