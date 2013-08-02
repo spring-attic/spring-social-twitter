@@ -15,6 +15,8 @@
  */
 package org.springframework.social.twitter.api;
 
+import java.util.List;
+
 /**
  * Represents a place that a Twitter user may send a tweet from.
  * @author Craig Walls
@@ -34,6 +36,10 @@ public class Place {
 	private final String countryCode;
 	
 	private final PlaceType placeType;
+	
+	private List<Place> containedWithin;
+	
+	private List<GeoPoint> boundingBox;
 
 	public Place(String id, String name, String fullName, String streetAddress, String country, String countryCode, PlaceType placeType) {
 		this.id = id;
@@ -73,4 +79,29 @@ public class Place {
 		return placeType;
 	}
 
+	public List<Place> getContainedWithin() {
+		return containedWithin;
+	}
+	
+	public List<GeoPoint> getBoundingBox() {
+		return boundingBox;
+	}
+
+	public static class GeoPoint {
+		private final double latitude;
+		private final double longitude;
+		
+		public GeoPoint(double latitude, double longitude) {
+			this.latitude = latitude;
+			this.longitude = longitude;
+		}
+		
+		public double getLatitude() {
+			return latitude;
+		}
+		
+		public double getLongitude() {
+			return longitude;
+		}
+	}
 }

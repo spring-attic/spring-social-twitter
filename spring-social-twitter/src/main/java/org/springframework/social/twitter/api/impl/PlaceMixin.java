@@ -16,8 +16,12 @@
 package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.social.twitter.api.Place;
+import org.springframework.social.twitter.api.Place.GeoPoint;
 import org.springframework.social.twitter.api.PlaceType;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -25,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
@@ -43,11 +48,45 @@ class PlaceMixin {
 			@JsonProperty("country_code") String countryCode, 
 			@JsonProperty("place_type") @JsonDeserialize(using = PlaceTypeDeserializer.class) PlaceType placeType) {}
 	
+	@JsonProperty("contained_within")
+	List<Place> containedWithin;
+	
+	@JsonProperty("bounding_box")
+	@JsonDeserialize(using=BoundingBoxDeserializer.class)
+	List<GeoPoint> boundingBox;
+
 	private static class StreetAddressDeserializer extends JsonDeserializer<String> {
 		@Override
 		public String deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			Map<String, String> attributesMap = jp.readValueAs(new TypeReference<Map<String, String>>(){});
 			return attributesMap.containsKey("street_address") ? attributesMap.get("street_address") : null;
+		}
+	}
+	
+	private static class BoundingBoxDeserializer extends JsonDeserializer<List<GeoPoint>> {
+		@Override
+		public List<GeoPoint> deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+			List<GeoPoint> points = new ArrayList<Place.GeoPoint>();
+			while (jp.nextToken() != JsonToken.END_OBJECT) {
+				String fieldname = jp.getCurrentName();
+				if ("type".equals(fieldname)) {
+					jp.nextToken();
+				}
+				if ("coordinates".equals(fieldname)) {
+					jp.nextToken();
+					jp.nextToken();
+					while (jp.nextToken() != JsonToken.END_ARRAY) {
+						jp.nextToken();
+						double longitude = jp.getDoubleValue();
+						jp.nextToken();
+						double latitude = jp.getDoubleValue();
+						points.add(new Place.GeoPoint(latitude, longitude));
+						jp.nextToken();
+					}
+					jp.nextToken();
+				}
+			}
+			return points;
 		}
 	}
 }

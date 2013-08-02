@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.springframework.social.twitter.api.Place;
+import org.springframework.social.twitter.api.Place.GeoPoint;
 import org.springframework.social.twitter.api.PlacePrototype;
 import org.springframework.social.twitter.api.PlaceType;
 import org.springframework.social.twitter.api.SimilarPlaces;
@@ -180,13 +181,31 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	private void assertPlace(Place place) {
-		assertEquals("0bba15b36bd9e8cc", place.getId());
-		assertEquals("Restaurant Mexico", place.getName());
-		assertEquals("Restaurant Mexico, Mount Pleasant", place.getFullName());
-		assertEquals("301 W Ferguson Rd", place.getStreetAddress());
+		assertEquals("6b9811c8d9de10b9", place.getId());
+		assertEquals("Twitter 3rd Floor Lunch Room", place.getName());
+		assertEquals("Twitter 3rd Floor Lunch Room, Twitter HQ", place.getFullName());
+		assertNull(place.getStreetAddress());
 		assertEquals("United States", place.getCountry());
 		assertEquals("US", place.getCountryCode());
 		assertEquals(PlaceType.POINT_OF_INTEREST, place.getPlaceType());
+		assertEquals(1, place.getContainedWithin().size());
+		Place containedWithin = place.getContainedWithin().get(0);
+		assertEquals("247f43d441defc03", containedWithin.getId());
+		assertEquals("Twitter HQ", containedWithin.getName());
+		assertEquals("Twitter HQ, San Francisco", containedWithin.getFullName());
+		assertEquals("795 Folsom St", containedWithin.getStreetAddress());
+		assertEquals("United States", containedWithin.getCountry());
+		assertEquals("US", containedWithin.getCountryCode());
+		assertEquals(PlaceType.POINT_OF_INTEREST, containedWithin.getPlaceType());
+		List<GeoPoint> boundingBox = place.getBoundingBox();
+		assertEquals(-122.40061283111572, boundingBox.get(0).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.get(0).getLatitude(), 0.000001);
+		assertEquals(-122.40061283111572, boundingBox.get(1).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.get(1).getLatitude(), 0.000001);
+		assertEquals(-122.40061283111572, boundingBox.get(2).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.get(2).getLatitude(), 0.000001);
+		assertEquals(-122.40061283111572, boundingBox.get(3).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.get(3).getLatitude(), 0.000001);
 	}
 	
 	private void assertPlaces(List<Place> places) {

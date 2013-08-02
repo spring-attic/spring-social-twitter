@@ -1,97 +1,78 @@
 {
-    "country":"United States",
-    "url":"http:\/\/api.twitter.com\/1\/geo\/id\/0bba15b36bd9e8cc.json",
-    "country_code":"US",
-    "bounding_box":
-    {
-        "type":"Polygon",
-        "coordinates":
-        [
+    "attributes": {}, 
+    "bounding_box": {
+        "coordinates": [
             [
                 [
-                    -94.973045,
-                    33.153661
-                ],
+                    -122.400612831116, 
+                    37.7821120598956
+                ], 
                 [
-                    -94.973045,
-                    33.153661
-                ],
+                    -122.400612831116, 
+                    37.7821120598956
+                ], 
                 [
-                    -94.973045,
-                    33.153661
-                ],
+                    -122.400612831116, 
+                    37.7821120598956
+                ], 
                 [
-                    -94.973045,
-                    33.153661
+                    -122.400612831116, 
+                    37.7821120598956
                 ]
             ]
-        ]
-    },
-    "attributes":
-    {
-        "190530:url":"http:\/\/national.citysearch.com\/profile\/45768645\/mt_pleasant_tx\/restaurant_mexico.html",
-        "postal_code":"75455",
-        "190530:id":"45768645",
-        "street_address":"301 W Ferguson Rd",
-        "162830:id":"143723731",
-        "174368:id":"840481000163269",
-        "phone":"(903) 577-9421",
-        "189390:id":"restaurant-mexico-mount-pleasant-tx-75455"
-    },
-    "name":"Restaurant Mexico",
-    "full_name":"Restaurant Mexico, Mount Pleasant",
-    "place_type":"poi",
-    "contained_within":
-    [
+        ], 
+        "type": "Polygon"
+    }, 
+    "contained_within": [
         {
-            "country":"United States",
-            "url":"http:\/\/api.twitter.com\/1\/geo\/id\/2e056b6d9c0ff3cd.json",
-            "country_code":"US",
-            "bounding_box":
-            {
-                "type":"Polygon",
-                "coordinates":
-                [
+            "attributes": {
+                "street_address": "795 Folsom St"
+            }, 
+            "bounding_box": {
+                "coordinates": [
                     [
                         [
-                            -95.00708,
-                            33.111693
-                        ],
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ], 
                         [
-                            -94.93626,
-                            33.111693
-                        ],
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ], 
                         [
-                            -94.93626,
-                            33.201431
-                        ],
+                            -122.40061283111572, 
+                            37.78211205989559
+                        ], 
                         [
-                            -95.00708,
-                            33.201431
+                            -122.40061283111572, 
+                            37.78211205989559
                         ]
                     ]
-                ]
-            },
-            "attributes":
-            {
-            },
-            "name":"Mount Pleasant",
-            "full_name":"Mount Pleasant, TX",
-            "place_type":"city",
-            "id":"2e056b6d9c0ff3cd"
+                ], 
+                "type": "Polygon"
+            }, 
+            "country": "United States", 
+            "country_code": "US", 
+            "full_name": "Twitter HQ, San Francisco", 
+            "id": "247f43d441defc03", 
+            "name": "Twitter HQ", 
+            "place_type": "poi", 
+            "url": "https://api.twitter.com/1.1/geo/id/247f43d441defc03.json"
         }
-    ],
-    "geometry":
-    {
-        "type":"Point",
-        "coordinates":
-        [
-            -94.973045,
-            33.153661
-        ]
-    },
-    "id":"0bba15b36bd9e8cc",
-    "polylines":
-    [
-    ]
+    ], 
+    "country": "United States", 
+    "country_code": "US", 
+    "full_name": "Twitter 3rd Floor Lunch Room, Twitter HQ", 
+    "geometry": {
+        "coordinates": [
+            -122.400612831117, 
+            37.7821120598957
+        ], 
+        "type": "Point"
+    }, 
+    "id": "6b9811c8d9de10b9", 
+    "name": "Twitter 3rd Floor Lunch Room", 
+    "place_type": "poi", 
+    "polylines": [], 
+    "url": "https://api.twitter.com/1.1/geo/id/6b9811c8d9de10b9.json"
 }
