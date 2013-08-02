@@ -17,6 +17,8 @@ Improvements
 Bug Fixes
   * Escape star (*) per Twitter's non-standard URL encoding scheme.
     (SOCIALTW-58)
+  * Use count parameter instead of old per_page parameter in user search.
+    (SOCIALTW-64) 
 
 Spring Social Twitter 1.1.0 Milestone 3 (July 8, 2013)
 ======================================================

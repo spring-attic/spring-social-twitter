@@ -206,7 +206,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void searchForUsers() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=1&per_page=20&q=some+query"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=1&count=20&q=some+query"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query");
@@ -217,7 +217,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void searchForUsers_paged() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=3&per_page=35&q=some+query"))
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/users/search.json?page=3&count=35&q=some+query"))
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("list-of-profiles"), APPLICATION_JSON));
 		List<TwitterProfile> users = twitter.userOperations().searchForUsers("some query", 3, 35);
