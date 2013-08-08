@@ -70,6 +70,10 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 			}
 		}		
 	}
+	
+	public void open() {
+		this.start();
+	}
 
 	public void close() {
 		open.set(false);

@@ -58,7 +58,7 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 				return createStream(HttpMethod.GET, FIREHOSE_STREAM_URL, EMPTY_BODY, listeners);
 			}
 		};
-		stream.start();
+		stream.open();
 		return stream;
 	}
 	
@@ -72,7 +72,7 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 				return createStream(HttpMethod.GET, FIREHOSE_STREAM_URL, parameters, listeners);
 			}
 		};
-		stream.start();
+		stream.open();
 		return stream;
 	}
 	
@@ -83,7 +83,7 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 				return createStream(HttpMethod.GET, SAMPLE_STREAM_URL, EMPTY_BODY, listeners);
 			}
 		};
-		stream.start();
+		stream.open();
 		return stream;
 	}
 	
@@ -100,7 +100,7 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 				return createStream(HttpMethod.POST, FILTERED_STREAM_URL, parameters.toParameterMap(), listeners);
 			}
 		};
-		stream.start();
+		stream.open();
 		return stream;
 	}
 	
@@ -116,7 +116,7 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 				return createStream(HttpMethod.POST, USER_STREAM_URL, parameters.toParameterMap(), listeners);
 			}
 		};
-		stream.start();
+		stream.open();
 		return stream;
 	}
 	

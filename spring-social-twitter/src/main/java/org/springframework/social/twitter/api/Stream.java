@@ -21,8 +21,8 @@ package org.springframework.social.twitter.api;
  */
 public interface Stream {
 
-	void start();
+	void open();
 	
-	void stop();
+	void close();
 	
 }
