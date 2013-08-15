@@ -1,4 +1,4 @@
-Spring Social Twitter 1.1.0 Milestone 4 (August 5, 2013)
+Spring Social Twitter 1.1.0 Milestone 4 (August 19, 2013)
 ========================================================
 Compatibility Notes:
   * StatusDetails and most of TimelineOperations.updateStatus() methods have
@@ -13,6 +13,8 @@ Improvements
   * Add support for fetching Tweet as an oEmbed object. (SOCIALTW-61)
   * Return retweet data when retweeting. (SOCIALTW-67)
   * Include bounding box and geometry data in Place object. (SOCIALTW-36)
+  * Add convenient getUnmodifiedText() method to Tweet object to fetch
+    the unmodified text of a retweet. (SOCIALTW-69)
 
 Bug Fixes
   * Escape star (*) per Twitter's non-standard URL encoding scheme.
