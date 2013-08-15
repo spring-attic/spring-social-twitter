@@ -557,6 +557,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		Tweet retweet = twitter.timelineOperations().retweet(363048052157726721L);
 		assertEquals(363057792615071744L, retweet.getId());
 		assertEquals("RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNx\u2026", retweet.getText());
+		assertEquals("Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNxUFLs5Dt #s2gx #java", retweet.getUnmodifiedText());
 		mockServer.verify();
 	}
 	

@@ -57,8 +57,23 @@ public class Tweet implements Serializable {
 		this.source = source;		
 	}
 
+	/**
+	 * The text of the tweet. If this tweet is a retweet of another tweet, the text may be preceeded with "RT \@someuser" and may be truncated at the end.
+	 * To get the raw, unmodified text of the original tweet, use {@link #getOriginalText()}. 
+	 * @return The text of the tweet.
+	 */
 	public String getText() {
 		return text;
+	}
+	
+	/**
+	 * Returns the unmodified text of the tweet.
+	 * If this tweet is a retweet, it returns the text of the original tweet.
+	 * If it is not a retweet, then this method will return the same value as {@link #getText()}.
+	 * @return The unmodified text of the tweet.
+	 */
+	public String getUnmodifiedText() {
+		return isRetweet() ? retweetedStatus.getText() : getText();
 	}
 
 	public Date getCreatedAt() {
