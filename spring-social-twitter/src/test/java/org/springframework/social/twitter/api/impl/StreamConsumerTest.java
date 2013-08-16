@@ -29,7 +29,7 @@ public class StreamConsumerTest {
 	
 	@Test
 	public void run_failWithHttpError() {		
-		expectedTimeToSleep = 10000;
+		expectedTimeToSleep = 5000;
 		ThreadedStreamConsumer consumer = new ThreadedStreamConsumer() {
 			@Override
 			protected StreamReader getStreamReader() throws StreamCreationException {

@@ -15,17 +15,19 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import org.springframework.social.twitter.api.Stream;
 import org.springframework.social.twitter.api.StreamingException;
 
 abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		
-	private volatile boolean open;
+	private AtomicBoolean open;
 
 	private StreamReader streamReader;
 
 	public ThreadedStreamConsumer() {
-		this.open = true;		
+		this.open = new AtomicBoolean(true);		
 	}
 	
 	@Override
@@ -33,7 +35,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		long timeToSleep = 250;
 		streamReader = null;
 		
-		while(open) {
+		while(open.get()) {
 			try {
 				if(streamReader == null) {
 					streamReader = getStreamReader();
@@ -47,7 +49,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 				if(e.getHttpStatus() != null) {
 					// Back off exponentially
 					if(timeToSleep == MIN_WAIT) {
-						timeToSleep = 10000;
+						timeToSleep = 5000;
 					}
 					sleepBeforeRetry(timeToSleep);
 					timeToSleep = timeToSleep * 2;				
@@ -56,7 +58,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 						close();
 					}
 				} else {
-					if(open) {
+					if(open.get()) {
 						// Back off linearly
 						if(timeToSleep == MIN_WAIT) {
 							timeToSleep = 250;
@@ -68,9 +70,13 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 			}
 		}		
 	}
+	
+	public void open() {
+		this.start();
+	}
 
 	public void close() {
-		open = false;
+		open.set(false);
 		if(streamReader != null) {
 			streamReader.close();
 		}
@@ -85,7 +91,7 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		} catch (InterruptedException e1) {}
 	}
 
-	static final long HTTP_ERROR_SLEEP_MAX = 250000;
+	static final long HTTP_ERROR_SLEEP_MAX = 320000;
 
 	static final long NETWORK_ERROR_SLEEP_MAX = 16000;
 
