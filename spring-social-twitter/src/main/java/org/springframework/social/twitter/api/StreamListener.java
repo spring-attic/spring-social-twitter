@@ -39,7 +39,7 @@ public interface StreamListener {
 	void onLimit(int numberOfLimitedTweets);
 	
 	/**
-	 * Called on 
+	 * Called when a client is stalling and the stream is in danger of being disconnected.
 	 */
 	void onWarning(StreamWarningEvent warningEvent);
 	
