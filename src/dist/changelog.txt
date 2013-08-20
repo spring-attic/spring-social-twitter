@@ -1,3 +1,10 @@
+Spring Social Twitter 1.1.0.RC1 (September 2, 2013)
+===================================================
+Improvments
+  * Added a catch-all getExtraData() method to all Twitter model
+    types to capture any data returned from Twitter that is otherwise
+    unmapped to known properties. (SOCIALTW-68)
+
 Spring Social Twitter 1.1.0 Milestone 4 (August 19, 2013)
 ========================================================
 Compatibility Notes:
