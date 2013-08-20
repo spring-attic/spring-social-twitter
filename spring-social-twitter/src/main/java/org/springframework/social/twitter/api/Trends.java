@@ -23,7 +23,7 @@ import java.util.List;
  * Represents a list of trending topics at a specific point in time.
  * @author Craig Walls
  */
-public class Trends {
+public class Trends extends TwitterObject {
 	private final Date time;
 	private final List<Trend> trends;
 

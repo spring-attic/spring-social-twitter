@@ -24,7 +24,7 @@ import java.util.Arrays;
  * User: bowen
  * Date: 12/26/11
  */
-public class MediaEntity implements Serializable {
+public class MediaEntity extends TwitterObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

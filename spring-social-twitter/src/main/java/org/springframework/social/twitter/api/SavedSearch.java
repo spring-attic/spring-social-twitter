@@ -21,7 +21,7 @@ import java.util.Date;
  * Represents a saved search.
  * @author Craig Walls
  */
-public class SavedSearch {
+public class SavedSearch extends TwitterObject {
 	private final long id;
 
 	private final String name;

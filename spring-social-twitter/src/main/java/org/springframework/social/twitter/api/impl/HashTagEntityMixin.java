@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-class HashTagEntityMixin {
+abstract class HashTagEntityMixin extends TwitterObjectMixin {
 
 	@JsonCreator
 	public HashTagEntityMixin(

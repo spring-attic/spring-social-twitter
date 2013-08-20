@@ -23,7 +23,7 @@ import java.util.Date;
  * 
  * @author Craig Walls
  */
-public class TwitterProfile implements Serializable {
+public class TwitterProfile extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final long id;

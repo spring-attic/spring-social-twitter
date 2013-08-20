@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class SearchResultsMixin {
+abstract class SearchResultsMixin extends TwitterObjectMixin {
 
 	@JsonCreator
 	SearchResultsMixin(

@@ -24,7 +24,7 @@ import java.util.Arrays;
  * User: bowen
  * Date: 12/26/11
  */
-public class UrlEntity implements Serializable {
+public class UrlEntity extends TwitterObject implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

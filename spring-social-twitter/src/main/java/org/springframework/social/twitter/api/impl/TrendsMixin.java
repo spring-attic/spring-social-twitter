@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class TrendsMixin {
+abstract class TrendsMixin extends TwitterObjectMixin {
 	@JsonCreator
 	TrendsMixin(
 			@JsonProperty("created_at") @JsonDeserialize(using=TimelineDateDeserializer.class) Date time, 

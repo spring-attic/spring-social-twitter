@@ -19,7 +19,7 @@ package org.springframework.social.twitter.api;
  * Represents a single trending topic.
  * @author Craig Walls
  */
-public class Trend {
+public class Trend extends TwitterObject {
 	private final String name;
 
 	private final String query;

@@ -21,7 +21,7 @@ import java.util.List;
  * Represents a place that a Twitter user may send a tweet from.
  * @author Craig Walls
  */
-public class Place {
+public class Place extends TwitterObject {
 
 	private final String id;
 	

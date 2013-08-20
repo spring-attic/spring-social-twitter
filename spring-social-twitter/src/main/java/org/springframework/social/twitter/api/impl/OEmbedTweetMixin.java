@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class OEmbedTweetMixin {
+abstract class OEmbedTweetMixin extends TwitterObjectMixin {
 
 	@JsonProperty("type")
 	private String type;

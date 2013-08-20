@@ -21,7 +21,7 @@ package org.springframework.social.twitter.api;
  * See the oEmbed specification at http://oembed.com/ and Twitter's https://dev.twitter.com/docs/api/1.1/get/statuses/oembed resource for more details.
  * @author Craig Walls
  */
-public class OEmbedTweet {
+public class OEmbedTweet extends TwitterObject {
 
 	private String type;
 	private String version;

@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class PlaceMixin {
+abstract class PlaceMixin extends TwitterObjectMixin {
 	
 	@JsonCreator
 	public PlaceMixin(

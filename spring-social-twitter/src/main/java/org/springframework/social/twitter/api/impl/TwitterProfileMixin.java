@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class TwitterProfileMixin {
+abstract class TwitterProfileMixin extends TwitterObjectMixin {
 	@JsonCreator
 	TwitterProfileMixin(
 			@JsonProperty("id") long id, 

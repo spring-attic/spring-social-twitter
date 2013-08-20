@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-class AccountSettingsMixin {
+abstract class AccountSettingsMixin extends TwitterObjectMixin {
 
 	@JsonProperty("always_use_https")
 	private boolean alwaysUseHttps;

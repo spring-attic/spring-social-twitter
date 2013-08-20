@@ -21,7 +21,7 @@ import java.util.Date;
  * Represents a direct message.
  * @author Craig Walls
  */
-public class DirectMessage {
+public class DirectMessage extends TwitterObject {
 	private final long id;
 	private final String text;
 	private final TwitterProfile sender;

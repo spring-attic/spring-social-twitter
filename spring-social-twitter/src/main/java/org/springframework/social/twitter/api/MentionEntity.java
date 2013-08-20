@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * User: bowen
  * Date: 12/26/11
  */
-public class MentionEntity implements Serializable {
+public class MentionEntity extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("id")

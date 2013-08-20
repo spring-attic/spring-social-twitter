@@ -21,7 +21,7 @@ import java.util.List;
  * Model class representing Twitter account settings.
  * @author Craig Walls
  */
-public class AccountSettings {
+public class AccountSettings extends TwitterObject {
 
 	private boolean alwaysUseHttps;
 	private boolean discoverableByEmail;

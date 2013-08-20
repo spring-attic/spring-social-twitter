@@ -15,37 +15,22 @@
  */
 package org.springframework.social.twitter.api;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 
 /**
- * Represents the results of a similar places search. 
- * Includes places that match the search criteria and a {@link PlacePrototype} that can be used to create a new place.
+ * Base class for all Twitter types.
+ * Offers an extraData property for carrying any data in response from Twitter that won't be otherwise mapped to any properties of the subclass.
  * @author Craig Walls
  */
-@SuppressWarnings("serial")
-public class SimilarPlaces extends ArrayList<Place> {
-	
-	private final PlacePrototype placePrototype;
+public class TwitterObject {
 
 	private Map<String, Object> extraData;
 
-	public SimilarPlaces(List<Place> places, PlacePrototype placePrototype) {
-		super(places);
-		this.placePrototype = placePrototype;
+	public TwitterObject() {
 		this.extraData = new HashMap<String, Object>();
-	}
-
-	/**
-	 * A prototype place that matches the criteria for the call to {@link GeoOperations#findSimilarPlaces(double, double, String)}, 
-	 * including a create token that can be used to create the place.
-	 */
-	public PlacePrototype getPlacePrototype() {
-		return placePrototype;
 	}
 	
 	/**
@@ -63,5 +48,5 @@ public class SimilarPlaces extends ArrayList<Place> {
 	protected void add(String key, Object value) {
 		extraData.put(key, value);
 	}
-	
+
 }

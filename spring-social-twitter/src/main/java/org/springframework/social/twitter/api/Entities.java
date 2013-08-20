@@ -26,7 +26,7 @@ import java.util.List;
  * User: bowen
  * Date: 12/26/11
  */
-public class Entities implements Serializable {
+public class Entities extends TwitterObject implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

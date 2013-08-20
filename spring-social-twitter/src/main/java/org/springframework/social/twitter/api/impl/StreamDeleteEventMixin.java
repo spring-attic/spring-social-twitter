@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = DeleteTweetEventDeserializer.class)
-class StreamDeleteEventMixin {
+abstract class StreamDeleteEventMixin extends TwitterObjectMixin {
 	
 	static final class DeleteTweetEventDeserializer extends JsonDeserializer<StreamDeleteEvent> {
 		@Override

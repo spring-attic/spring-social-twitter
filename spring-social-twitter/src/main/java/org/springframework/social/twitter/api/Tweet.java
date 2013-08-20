@@ -22,7 +22,7 @@ import java.util.Date;
  * Represents a Twitter status update (e.g., a "tweet").
  * @author Craig Walls
  */
-public class Tweet implements Serializable {
+public class Tweet extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final long id;

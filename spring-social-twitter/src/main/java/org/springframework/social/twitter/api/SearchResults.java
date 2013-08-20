@@ -23,7 +23,7 @@ import java.util.List;
  * 
  * @author Craig Walls
  */
-public class SearchResults {
+public class SearchResults extends TwitterObject {
 	private List<Tweet> tweets;
 	private SearchMetadata metadata;
 	private boolean lastPage;

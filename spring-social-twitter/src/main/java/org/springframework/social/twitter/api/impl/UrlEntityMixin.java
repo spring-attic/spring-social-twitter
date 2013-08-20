@@ -17,7 +17,7 @@ package org.springframework.social.twitter.api.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class UrlEntityMixin {
+abstract class UrlEntityMixin extends TwitterObjectMixin {
 
 	public UrlEntityMixin(
 			@JsonProperty("display_url") String display, 

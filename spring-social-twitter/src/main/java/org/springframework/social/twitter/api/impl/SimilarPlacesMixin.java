@@ -20,6 +20,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = SimilarPlacesDeserializer.class)
-class SimilarPlacesMixin {
+abstract class SimilarPlacesMixin extends TwitterObjectMixin {
 
 }
