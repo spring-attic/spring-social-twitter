@@ -59,7 +59,7 @@ public class Tweet extends TwitterObject implements Serializable {
 
 	/**
 	 * The text of the tweet. If this tweet is a retweet of another tweet, the text may be preceeded with "RT \@someuser" and may be truncated at the end.
-	 * To get the raw, unmodified text of the original tweet, use {@link #getOriginalText()}. 
+	 * To get the raw, unmodified text of the original tweet, use {@link #getUnmodifiedText()}. 
 	 * @return The text of the tweet.
 	 */
 	public String getText() {
