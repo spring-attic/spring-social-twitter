@@ -1,0 +1,77 @@
+---
+title: Spring Social Twitter
+
+badges:
+  twitter: SpringSocial
+
+  custom:
+    - name: Source (GitHub)
+      url:  https://github.com/spring-projects/spring-social-twitter
+      icon: github
+
+    - name: Issues (JIRA)
+      url:  https://jira.springsource.org/browse/SOCIALTW
+      icon: tracking
+
+    - name: CI (Bamboo)
+      url:  https://build.springsource.org/browse/SOCIAL
+      icon: ci
+
+    - name: Forum
+      url:  http://forum.stage.springsource.org/forum/spring-projects/web/social
+      icon: forum
+
+    - name: StackOverflow
+      image_url: http://myrrix.com/wp-content/uploads/2012/06/stackoverflow.png
+      url:  http://stackoverflow.com/questions/tagged/spring-social
+      icon: stackoverflow
+
+---
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<!-- Specify the parent of this project (or delete if none) to influence the rendering of the breadcrumb -->
+{% capture parent_link %}
+[Spring Social]({{ site.projects_site_url }}/spring-social)
+{% endcapture %}
+
+{% capture billboard_description %}
+
+Connect your Spring application with Twitter's REST API.
+
+{% endcapture %}
+
+{% capture main_content %}
+
+Spring Social Twitter is an extension of Spring Social that enables you to connection your application with Twitter's REST API.
+
+## Features
+
+* A service provider and connection factory for use with Spring Social's connection framework.
+* An API binding for Twitter's REST API.
+* Much more...
+
+<span id="quick-start"></span>
+## Quick Start
+
+{% include download_widget.md %}
+
+{% endcapture %}
+
+{% capture related_resources %}
+
+### Spring Sample Projects
+
+* [Spring Social Showcase](https://github.com/SpringSource/spring-social-samples/tree/master/spring-social-showcase)
+* [Spring Social Quickstart](https://github.com/SpringSource/spring-social-samples/tree/master/spring-social-quickstart)
+
+### Getting Started Guides
+
+* [Accessing Twitter Data]({{site.main_site_url}}/guides/gs/accessing-twitter/)
+* [Registering an Application with Twitter]({{site.main_site_url}}/guides/gs/register-twitter-app/)
+
+{% endcapture %}
+
+
+{% include project_page.html %}
+</html>
