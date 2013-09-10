@@ -11,6 +11,7 @@
 		"in_reply_to_user_id" : "332211",
 		"retweet_count" : 12,
 		"in_reply_to_status_id" : 123123123123,
+		"lang": "en",
 		"created_at" : "Tue Jul 13 17:38:21 +0000 2010",
 		"retweeted" : true,
 		"favorited" : true,
@@ -70,6 +71,7 @@
 		},
 		"source" : "Twitter",
 		"in_reply_to_user_id" : "112233",
+		"lang": "en",
 		"retweet_count" : 0,
 		"created_at" : "Tue Jul 20 19:38:21 +0000 2010",
 		"entities": {
