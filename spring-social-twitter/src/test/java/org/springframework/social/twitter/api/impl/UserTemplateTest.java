@@ -395,5 +395,16 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		mockServer.verify();
 	}
 
+	@Test
+	public void updateProfileBackgroundImage() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_background_image.json"))
+				.andExpect(method(POST))
+				.andExpect(content().string("tile=false&include_entities=false&skip_status=false&use=true&image=BASE54DATA"))
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		TwitterProfile twitterProfile = twitter.userOperations().updateProfileBackgroundImage(
+				new ProfileBackgroundImage().image("BASE54DATA").tile(Boolean.FALSE).includeEntities(Boolean.FALSE).skipStatus(Boolean.FALSE).use(Boolean.TRUE));
+		assertEquals("http://a3.twimg.com/a/1301419075/images/themes/theme1/bg.png", twitterProfile.getBackgroundImageUrl());
+		mockServer.verify();
+	}	
 
 }

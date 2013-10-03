@@ -114,4 +114,9 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		return restTemplate.postForObject(buildUri("account/settings.json"), accountSettingsData.toRequestParameters(), AccountSettings.class);
 	}
 
+	public TwitterProfile updateProfileBackgroundImage(ProfileBackgroundImage profileBackgroundImage) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/update_profile_background_image.json"), profileBackgroundImage.toRequestParameters(), TwitterProfile.class);
+	}
+
 }

@@ -21,6 +21,7 @@ import java.util.Map;
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.twitter.api.impl.AccountSettingsData;
+import org.springframework.social.twitter.api.impl.ProfileBackgroundImage;
 
 
 /**
@@ -145,4 +146,12 @@ public interface UserOperations {
 	 * @return The updated account settings.
 	 */
 	AccountSettings updateAccountSettings(AccountSettingsData accountSettingsData);
+
+	/**
+	 * Updates the authenticating user's account delivery device settings.
+	 * @param profileBackgroundImage A ProfileBackgroundImage with background settings to be changed.
+	 * @return The updated profile.
+	 */	
+	TwitterProfile updateProfileBackgroundImage(ProfileBackgroundImage profileBackgroundImage);
+
 }
