@@ -34,7 +34,7 @@ public class TwitterObject {
 	}
 	
 	/**
-	 * @return Any fields in response from Facebook that are otherwise not mapped to any properties.
+	 * @return Any fields in response from Twitter that are otherwise not mapped to any properties.
 	 */
 	public Map<String, Object> getExtraData() {
 		return extraData;
