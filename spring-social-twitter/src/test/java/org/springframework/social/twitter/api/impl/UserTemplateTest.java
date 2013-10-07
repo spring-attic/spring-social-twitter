@@ -405,6 +405,25 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				new ProfileBackgroundImage().image("BASE54DATA").tile(Boolean.FALSE).includeEntities(Boolean.FALSE).skipStatus(Boolean.FALSE).use(Boolean.TRUE));
 		assertEquals("http://a3.twimg.com/a/1301419075/images/themes/theme1/bg.png", twitterProfile.getBackgroundImageUrl());
 		mockServer.verify();
-	}	
+	}
+	
+	@Test
+	public void updateProfileBackgroundColors() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_colors.json"))
+				.andExpect(method(POST))
+				.andExpect(content()
+						.string("profile_background_color=C0DEED&profile_link_color=0084B4&profile_sidebar_border_color=C0DEED&profile_sidebar_fill_color=DDEEF6&profile_text_color=333333&include_entities=false&skip_status=true"))
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		TwitterProfile twitterProfile = twitter.userOperations().updateProfileColors(
+				new ProfileBackgroundColors().backgroundColor("C0DEED").includeEntities(Boolean.FALSE).linkColor("0084B4").sidebarBorderColor("C0DEED").sidebarFillColor("DDEEF6")
+						.skipStatus(Boolean.TRUE).textColor("333333"));
+		assertEquals("C0DEED", twitterProfile.getBackgroundColor());
+		assertEquals("0084B4", twitterProfile.getLinkColor());
+		assertEquals("C0DEED", twitterProfile.getSidebarBorderColor());
+		assertEquals("DDEEF6", twitterProfile.getSidebarFillColor());
+		assertEquals("333333", twitterProfile.getTextColor());
+
+		mockServer.verify();
+	}
 
 }
