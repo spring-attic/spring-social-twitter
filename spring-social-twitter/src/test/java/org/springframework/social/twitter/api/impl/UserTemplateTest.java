@@ -425,5 +425,17 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 		mockServer.verify();
 	}
+	
+	@Test
+	public void updateProfileImage() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_image.json"))
+				.andExpect(method(POST))
+				.andExpect(content()
+						.string("image=BASE54DATA&include_entities=false&skip_status=true"))
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		TwitterProfile twitterProfile = twitter.userOperations().updateProfileImage(new ProfileImage().image("BASE54DATA").includeEntities(Boolean.FALSE).skipStatus(Boolean.TRUE));
+		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", twitterProfile.getProfileImageUrl());
+		mockServer.verify();
+	}
 
 }

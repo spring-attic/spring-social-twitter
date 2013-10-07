@@ -23,6 +23,7 @@ import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.twitter.api.impl.AccountSettingsData;
 import org.springframework.social.twitter.api.impl.ProfileBackgroundColors;
 import org.springframework.social.twitter.api.impl.ProfileBackgroundImage;
+import org.springframework.social.twitter.api.impl.ProfileImage;
 
 
 /**
@@ -161,4 +162,11 @@ public interface UserOperations {
 	 * @return The updated profile.
 	 */	
 	TwitterProfile updateProfileColors(ProfileBackgroundColors profileBackgroundColors);
+
+	/**
+	 * Updates the authenticating user's account profile image.
+	 * @param profileImage A ProfileImage with image data to be changed.
+	 * @return The updated profile.
+	 */	
+	TwitterProfile updateProfileImage(ProfileImage profileImage);
 }
