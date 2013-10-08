@@ -25,6 +25,7 @@ import org.springframework.social.twitter.api.impl.DeliveryDevice;
 import org.springframework.social.twitter.api.impl.ProfileBackgroundColors;
 import org.springframework.social.twitter.api.impl.ProfileBackgroundImage;
 import org.springframework.social.twitter.api.impl.ProfileBanner;
+import org.springframework.social.twitter.api.impl.ProfileData;
 import org.springframework.social.twitter.api.impl.ProfileImage;
 
 
@@ -154,10 +155,17 @@ public interface UserOperations {
 	/**
 	 * Updates the authenticating user's delivery device settings.
 	 * @param deliveryDevice A DeliveryDevice with settings to be changed.
-	 * @return true if update was successful. Note that twitter returns code 404 also in case where mobile phone is not set in user settings 
+	 * @return true if update was successful. Note that twitter returns code 404 also in case where mobile phone is not set in user settings.
 	 */	
 	Boolean updateDeliveryDevice(DeliveryDevice deliveryDevice);
 	
+	/**
+	 * Updates the authenticating user's profile.
+	 * @param profileData A ProfileData with settings to be updated.
+	 * @return updated profile. 
+	 */
+	TwitterProfile updateProfile(ProfileData profileData);
+
 	/**
 	 * Updates the authenticating user's account background image.
 	 * @param profileBackgroundImage A ProfileBackgroundImage with background image to be changed.

@@ -24,7 +24,6 @@ import org.springframework.social.twitter.api.AccountSettings;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
-import org.springframework.social.twitter.api.TwitterObject;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.UserOperations;
 import org.springframework.util.MultiValueMap;
@@ -121,6 +120,12 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		requireUserAuthorization();
 		ResponseEntity<String> response = restTemplate.postForEntity(buildUri("account/update_delivery_device.json"), deliveryDevice.toRequestParameters(), null);
 		return HttpStatus.OK == response.getStatusCode();
+	}
+	
+	public TwitterProfile updateProfile(ProfileData profileData) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/update_profile.json"), profileData.toRequestParameters(), TwitterProfile.class);
+
 	}
 	
 	public TwitterProfile updateProfileBackgroundImage(ProfileBackgroundImage profileBackgroundImage) {

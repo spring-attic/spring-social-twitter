@@ -406,6 +406,23 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	}
 	
 	@Test
+	public void updateProfile() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile.json"))
+				.andExpect(method(POST))
+				.andExpect(content()
+						.string("name=Art+Names&url=http%3A%2F%2Fwww.springsource.org&location=Denton%2C+TX&description=I%27m+just+a+normal+kinda+guy&include_entities=false&skip_status=true"))
+				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
+		TwitterProfile profile = twitter.userOperations().updateProfile(
+				new ProfileData().description("I'm just a normal kinda guy").includeEntities(Boolean.FALSE).location("Denton, TX").name("Art Names").skipStatus(Boolean.TRUE)
+						.url("http://www.springsource.org"));
+		assertEquals("http://www.springsource.org", profile.getUrl());
+		assertEquals("I'm just a normal kinda guy", profile.getDescription());
+		assertEquals("Art Names", profile.getName());
+		assertEquals("Denton, TX", profile.getLocation());
+		mockServer.verify();
+	}
+	
+	@Test
 	public void updateProfileBackgroundImage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_background_image.json"))
 				.andExpect(method(POST))
