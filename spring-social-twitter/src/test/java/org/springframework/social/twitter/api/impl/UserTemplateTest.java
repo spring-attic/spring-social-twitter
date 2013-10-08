@@ -30,6 +30,7 @@ import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
+import org.springframework.social.twitter.api.impl.DeliveryDevice.Device;
 
 /**
  * @author Craig Walls
@@ -396,13 +397,22 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
+	public void updateDeliveryDevice() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_delivery_device.json")).andExpect(method(POST))
+				.andExpect(content().string("device=sms&include_entities=false")).andRespond(withSuccess());
+		Boolean response = twitter.userOperations().updateDeliveryDevice(new DeliveryDevice().device(Device.sms).includeEntities(Boolean.FALSE));
+		assertTrue(response);
+		mockServer.verify();
+	}
+	
+	@Test
 	public void updateProfileBackgroundImage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_background_image.json"))
 				.andExpect(method(POST))
-				.andExpect(content().string("tile=false&include_entities=false&skip_status=false&use=true&image=BASE54DATA"))
+				.andExpect(content().string("tile=false&include_entities=false&skip_status=false&use=true&image=BASE64DATA"))
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 		TwitterProfile twitterProfile = twitter.userOperations().updateProfileBackgroundImage(
-				new ProfileBackgroundImage().image("BASE54DATA").tile(Boolean.FALSE).includeEntities(Boolean.FALSE).skipStatus(Boolean.FALSE).use(Boolean.TRUE));
+				new ProfileBackgroundImage().image("BASE64DATA").tile(Boolean.FALSE).includeEntities(Boolean.FALSE).skipStatus(Boolean.FALSE).use(Boolean.TRUE));
 		assertEquals("http://a3.twimg.com/a/1301419075/images/themes/theme1/bg.png", twitterProfile.getBackgroundImageUrl());
 		mockServer.verify();
 	}
@@ -431,10 +441,28 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_image.json"))
 				.andExpect(method(POST))
 				.andExpect(content()
-						.string("image=BASE54DATA&include_entities=false&skip_status=true"))
+						.string("image=BASE64DATA&include_entities=false&skip_status=true"))
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
-		TwitterProfile twitterProfile = twitter.userOperations().updateProfileImage(new ProfileImage().image("BASE54DATA").includeEntities(Boolean.FALSE).skipStatus(Boolean.TRUE));
+		TwitterProfile twitterProfile = twitter.userOperations().updateProfileImage(new ProfileImage().image("BASE64DATA").includeEntities(Boolean.FALSE).skipStatus(Boolean.TRUE));
 		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", twitterProfile.getProfileImageUrl());
+		mockServer.verify();
+	}
+	
+	@Test
+	public void removeProfileBanner() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/remove_profile_banner.json")).andExpect(method(POST))
+				.andExpect(content().string("")).andRespond(withSuccess());
+		Boolean response = twitter.userOperations().removeProfileBanner();
+		assertTrue(response);
+		mockServer.verify();
+	}
+
+	@Test
+	public void updateProfileBanner() {
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/update_profile_banner.json")).andExpect(method(POST))
+				.andExpect(content().string("banner=BASE64DATA&width=300&height=200&offset_left=10&offset_top=20")).andRespond(withSuccess());
+		Boolean response = twitter.userOperations().updateProfileBanner(new ProfileBanner().banner("BASE64DATA").height(200).width(300).offsetLeft(10).offsetTop(20));
+		assertTrue(response);
 		mockServer.verify();
 	}
 
