@@ -43,4 +43,14 @@ public interface StreamListener {
 	 */
 	void onWarning(StreamWarningEvent warningEvent);
 	
+	/**
+	 * Called when a event message is available on the stream
+	 */
+	void onEvent(StreamEvent event);
+	
+	/**
+	 * Called when a direct message is available on the stream
+	 */
+	void onDirectMessage(DirectMessage directMessage);
+	
 }
