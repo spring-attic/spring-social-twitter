@@ -23,6 +23,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamEvent;
@@ -34,6 +36,8 @@ import org.springframework.social.twitter.api.TwitterProfile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class StreamDispatcher implements Runnable {
+	private static final Log logger = LogFactory.getLog(StreamDispatcher.class);
+	
 	private final List<StreamListener> listeners;
 
 	private ObjectMapper objectMapper;
@@ -64,6 +68,8 @@ class StreamDispatcher implements Runnable {
 			if(line == null || line.length() == 0) return;
 			
 			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
+			
+			logger.debug(line);
 			
 			try {
 				if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
