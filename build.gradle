@@ -25,9 +25,9 @@ configure(allprojects) {
       jacksonVersion = '2.2.2'
       junitVersion = '4.11'
       mockitoVersion = '1.9.5'
-      servletApiVersion = '2.5'
-      springVersion = '3.2.3.RELEASE'
-      springSecurityCryptoVersion = '3.2.0.RC1'
+      servletApiVersion = '3.0.1'
+      springVersion = '4.0.1.RELEASE'
+      springSecurityCryptoVersion = '3.2.0.RELEASE'
     }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
@@ -103,7 +103,7 @@ project('spring-social-twitter') {
        compile ("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
        compile ("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
        compile ("org.springframework.security:spring-security-crypto:$springSecurityCryptoVersion")
-       compile ("javax.servlet:servlet-api:$servletApiVersion", provided)
+       compile ("javax.servlet:javax.servlet-api:$servletApiVersion", provided)
        testCompile ("org.springframework:spring-test:$springVersion")
     }
 }
