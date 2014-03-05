@@ -17,7 +17,6 @@ package org.springframework.social.twitter.api.impl;
 
 import org.springframework.http.converter.FormHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.oauth2.OAuth2Operations;
 import org.springframework.social.oauth2.OAuth2Template;
@@ -44,13 +43,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * such operations, {@link TwitterTemplate} must be constructed with the minimal
  * amount of information required to sign requests to Twitter's API with an
  * OAuth <code>Authorization</code> header.
- * </p>
- * <p>
- * There are some operations, such as searching, that do not require OAuth
- * authentication. In those cases, you may use a {@link TwitterTemplate} that is
- * created through the default constructor and without any OAuth details.
- * Attempts to perform secured operations through such an instance, however,
- * will result in {@link NotAuthorizedException} being thrown.
  * </p>
  * @author Craig Walls
  */
