@@ -20,6 +20,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.social.NotAuthorizedException;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.oauth2.OAuth2Operations;
+import org.springframework.social.oauth2.OAuth2Template;
 import org.springframework.social.twitter.api.BlockOperations;
 import org.springframework.social.twitter.api.DirectMessageOperations;
 import org.springframework.social.twitter.api.FriendOperations;
@@ -100,6 +101,18 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 		this.clientRestTemplate = createClientRestTemplate(clientToken);
 		initSubApis();
 	}
+	
+	/**
+	 * Create a new instance of TwitterTemplate.
+	 * This instance of TwitterTemplate is limited to only performing operations requiring client authorization.
+	 * For instance, you can use it to search Twitter, but you cannot use it to post a status update.
+	 * The client credentials given here are used to obtain a client access token via OAuth 2 Client Credentials Grant. See {@link OAuth2Operations#authenticateClient()}.
+	 * @param consumerKey the application's API key
+	 * @param consumerSecret the application's API secret
+	 */
+	public TwitterTemplate(String consumerKey, String consumerSecret) {
+		this(exchangeCredentialsForClientToken(consumerKey, consumerSecret));
+	}
 
 	public TimelineOperations timelineOperations() {
 		return timelineOperations;
@@ -170,6 +183,11 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	}
 	
 	// private helper 
+	private static String exchangeCredentialsForClientToken(String consumerKey, String consumerSecret) {
+		OAuth2Template oauth2 = new OAuth2Template(consumerKey, consumerSecret, "", "https://api.twitter.com/oauth2/token");
+		return oauth2.authenticateClient().getAccessToken();
+	}
+	
 	private RestTemplate createClientRestTemplate(String clientToken) {
 		RestTemplate restTemplate = new ClientAuthorizedTwitterTemplate(clientToken).getRestTemplate();
 		restTemplate.setMessageConverters(getMessageConverters());
