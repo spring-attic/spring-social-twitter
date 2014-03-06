@@ -1,0 +1,486 @@
+= Spring Social Twitter Reference
+Craig Walls; Keith Donald; Roy Clarkson
+
+The Spring Social Twitter project is an extension to
+http://www.springframework.org/spring-social[Spring Social] that enables
+integration with Twitter.
+
+== Introduction
+http://www.twitter.com[Twitter] is a popular micro-blogging and social networking service, enabling people to communicate with each other 140 characters at a time.
+
+Spring Social Twitter enables integration with Twitter with `TwitterConnectionFactory`, a connection factory that can be plugged into Spring Social's service provider connection framework, and with an API binding to Twitter's REST API.
+
+[[]]
+=== How to get
+
+The following Gradle dependency will add Spring Social Twitter to your
+project:
+
+.build.gradle
+[source,groovy,subs="attributes,verbatim"]
+----
+compile "org.springframework.social:spring-social-twitter:{spring-social-twitter-version}"
+----
+
+Or in Maven:
+
+.pom.xml
+[source,xml,subs="attributes,verbatim"]
+----
+<dependency>
+  <groupId>org.springframework.social</groupId>
+  <artifactId>spring-social-twitter</artifactId>
+  <version>{spring-social-twitter-version}</version>
+</dependency>
+----
+
+As an extension to Spring Social, Spring Social Twitter depends on
+Spring Social. Spring Social's core module will be transitively resolved
+from the Spring Social Twitter dependency. If you'll be using Spring
+Social's web module, you'll need to add that dependency yourself.
+In Gradle:
+
+.build.gradle
+[source,groovy,subs="attributes,verbatim"]
+----
+compile "org.springframework.social:spring-social-web:{spring-social-version}"
+----
+
+Or in Maven:
+
+.pom.xml
+[source,xml,subs="attributes,verbatim"]
+----
+<dependency>
+  <groupId>org.springframework.social</groupId>
+  <artifactId>spring-social-web</artifactId>
+  <version>{spring-social-version}</version>
+</dependency>
+----
+
+Note that Spring Social Twitter may release on a different schedule than Spring Social. 
+Consequently, Spring Social's version may differ from that of Spring Social Twitter.
+
+Consult
+http://docs.spring.io/spring-social/docs/1.0.x/reference/html/overview.html#overview-howtoget[Spring
+Social's reference documentation] for more information on Spring Social
+dependencies.
+
+
+[[]]
+== Configuring Twitter Connectivity
+Spring Social's `ConnectController` works with one or more provider-specific `ConnectionFactory` instances to exchange authorization details with the provider and to create connections. 
+Spring Social Twitter provides `TwitterConnectionFactory`, a `ConnectionFactory` for creating connections with Twitter.
+
+So that `ConnectController` can find `TwitterConnectionFactory`, it must be registered with a `ConnectionFactoryRegistry`. 
+The following configuration class uses Spring Social's Java configuration support to register a `ConnectionFactory` for Twitter:
+
+```java
+@Configuration
+public class SocialConfig implements SocialConfigurer {
+
+    @Override
+    public void addConnectionFactories(ConnectionFactoryConfigurer cfConfig, Environment env) {
+        cfConfig.addConnectionFactory(new TwitterConnectionFactory(
+            env.getProperty("twitter.consumerKey"), 
+            env.getProperty("twitter.consumerSecret")));
+    }
+
+    ...
+}
+```
+
+If we wanted to add support for connecting to other providers, we would simply register their connection factories here in the same way as `TwitterConnectionFactory`.
+
+Because client IDs and secrets may be different across environments (e.g., test, production, etc) it is recommended that these values be externalized. As shown here, Spring's `Environment` abstraction is provided as a parameter to `addConnectionFactories()` so that it can look up the application's client ID and secret.
+
+Optionally, you may also configure `TwitterConnectionFactory` in XML.
+Using Spring Social Twitter's XML configuration namespace:
+
+```xml
+<twitter:config app-id="${twitter.consumerKey}" 
+                 app-secret="${twitter.consumerSecret}" />
+```
+
+This is roughly equivalent to the Java-based configuration of `ConnectionFactoryRegistry` shown before. 
+As in the Java-based configuration, the application's client ID and secret are externalized (shown here as property placeholders).
+
+Refer to
+http://docs.spring.io/spring-social/site/docs/1.1.0.RC1/reference/htmlsingle/index.html#connecting[Spring Social's reference documentation] for complete details on configuring `ConnectController` and its dependencies.
+
+
+[[]]
+== Twitter API Binding
+Spring Social Twitter offers integration with Twitter's REST API through the `Twitter` interface and its implementation, `TwitterTemplate`.
+
+Creating an instance of `TwitterTemplate` involves invoking its constructor, passing in the application's OAuth credentials and an access token/secret pair authorizing the application to act on a user's behalf. 
+For example:
+
+```java
+String consumerKey = "..."; // The application's consumer key
+String consumerSecret = "..."; // The application's consumer secret
+String accessToken = "..."; // The access token granted after OAuth authorization
+String accessTokenSecret = "..."; // The access token secret granted after OAuth authorization
+Twitter twitter = new TwitterTemplate(consumerKey, consumerSecret, accessToken, accessTokenSecret);
+```
+
+In addition, `TwitterTemplate` has two more constructors that creates an instance for working with non-user-centric data.
+The first takes only an access token:
+
+```java
+String clientToken = "..."; // A client access token
+Twitter twitter = new TwitterTemplate(clientToken);
+```
+
+What's important to note here is that the access token given must be a client token, obtained via an OAuth 2 client credentials grant.
+Spring Social's `OAuth2Template` can help you obtain a client token via its `authenticateClient()` method.
+
+When you construct `TwitterTemplate` this way, it will be limited to performing operations that aren't on behalf of a specific user.
+For instance, you can do search operations, fetch a specific tweet, or even fetch the profile for a given user.
+You cannot, however, post a tweet or read a user's direct messages.
+
+Alternatively, you can construct a `TwitterTemplate` using only the client credentials:
+
+```java
+String consumerKey = "..."; // The application's consumer key
+String consumerSecret = "..."; // The application's consumer secret
+Twitter twitter = new TwitterTemplate(consumerKey, consumerSecret);
+```
+
+When constructed in this way, `TwitterTemplate` will use the client credentials to obtain a client access token on its own.
+The end result is the same as if you had constructed it with a client token.
+
+If you are using Spring Social's
+http://docs.spring.io/spring-social/site/docs/1.1.0.RC1/reference/htmlsingle/index.html#connectFramework[service provider framework], you can get an instance of Twitter from a
+`Connection`. For example, the following snippet calls getApi() on a
+connection to retrieve a Twitter:
+
+```java
+Connection<Twitter> connection = connectionRepository.findPrimaryConnection(Twitter.class);
+Twitter twitter = connection != null ? 
+                  connection.getApi() : 
+                  new TwitterTemplate(
+                     env.getProperty("twitter.consumerKey"), 
+                     env.getProperty("twitter.consumerSecret"));
+```
+
+Here, `ConnectionRepository` is being asked for the primary connection that the current user has with Twitter. 
+If connection to Twitter is found, a call to `getApi()` retrieves a `Twitter` instance that is configured with the connection details received when the connection was first established. 
+If there is no connection, a client instance of TwitterTemplate is created using the client credentials obtained via the `Environment` abstraction.
+
+Once you have a `Twitter` instance, you can perform a several operations against Twitter's API. 
+The `Twitter` interface is defined as follows:
+
+```java
+public interface Twitter {
+
+   BlockOperations blockOperations();
+   
+   DirectMessageOperations directMessageOperations();
+
+   FriendOperations friendOperations();
+
+   GeoOperations geoOperations();
+
+   ListOperations listOperations();
+
+   SearchOperations searchOperations();
+
+   StreamingOperations streamingOperations();
+
+   TimelineOperations timelineOperations();
+
+   UserOperations userOperations();
+
+   RestOperations restOperations();
+}
+```
+
+Each method returns sub-APIs, partitioning the Twitter service API into divisions targeting specific facets of Twitter functionality. 
+These sub-APIs are defined by interfaces described in <<table_subApis>>.
+
+[[table_subApis]]
+.Twitter's Sub-APIs
+[options="header",]
+|=======================================================================
+|Sub-API Interface |Description
+|BlockOperations | Block and unblock users
+|DirectMessageOperations |Reading and sending direct messages.
+|FriendOperations |Retrieving a user's list of friends and followers and following/unfollowing users.
+|GeoOperations |Working with locations.
+|ListOperations |Maintaining, subscribing to, and unsubscribing from user lists
+|SearchOperations |Searching tweets and viewing search trends
+|StreamingOperations |Receive tweets as they are created via Twitter's Streaming API.
+|TimelineOperations |Reading timelines and posting tweets.
+|UserOperations |Retrieving user profile data.
+|=======================================================================
+
+In addition to the Twitter-specific sub-APIs described in table <<table_subApis>>, `Twitter` also has a `restOperations()` method that returns a `RestOperations` (e.g., `RestTemplate`).
+The `RestOperations` returned is instrumented to add an OAuth `Authorization` header for all requests it sends to Twitter.
+
+What follows is a survey of common tasks you may perform with Twitter and its sub-APIs. 
+For complete details on the Spring Social's entire Twitter API binding, refer to the JavaDoc.
+
+[[]]
+=== Retrieving a user's Twitter profile data
+
+To get a user's Twitter profile, call `UserOperations`' `getUserProfile()`:
+
+```java
+TwitterProfile profile = twitter.userOperations().getUserProfile();
+```
+
+This returns a `TwitterProfile` object containing profile data for the authenticated user. 
+This profile information includes the user's Twitter screen name, their name, location, description, and the date that they created their Twitter account. 
+Also included is a URL to their profile image.
+
+If you want to retrieve the user profile for a specific user other than the authenticated user, you can so do by passing the user's screen name as a parameter to `getUserProfile()`:
+
+```java
+TwitterProfile profile = twitter.userOperations().getUserProfile("habuma");
+```
+
+If all you need is the screen name for the authenticating user, then call `UserOperations.getScreenName()`:
+
+```java
+String profileId = twitter.userOperations().getScreenName();
+```
+
+[[]]
+=== Tweeting
+To post a message to Twitter the simplest thing to do is to pass the message to the `updateStatus()` method provided by `TimelineOperations`:
+
+```java
+twitter.timelineOperations().updateStatus("Spring Social is awesome!")
+```
+
+Optionally, you may also include metadata about the tweet, such as the location (latitude and longitude) you are tweeting from. 
+For that, pass in a `StatusDetails` object, setting the location property:
+
+```java
+StatusDetails statusDetails = new StatusDetails().setLocation(51.502f, -0.126f);
+twitter.timelineOperations().updateStatus("I'm tweeting from London!", statusDetails)
+```
+
+To have Twitter display the location in a map (on the Twitter web site) then you should also set the `displayCoordinates` property to `true`:
+
+```java
+StatusDetails statusDetails = new StatusDetails().setLocation(51.502f, -0.126f).setDisplayCoordinates(true);
+twitter.timelineOperations().updateStatus("I'm tweeting from London!", statusDetails)
+```
+
+If you'd like to retweet another tweet (perhaps one found while searching or reading the Twitter timeline), call the retweet() method, passing in the ID of the tweet to be retweeted:
+
+```java
+long tweetId = tweet.getId();
+twitter.timelineOperations().retweet(tweetId);
+```
+
+Note that Twitter disallows repeated tweets. 
+Attempting to tweet or retweet the same message multiple times will result in a `DuplicateTweetException` being thrown.
+
+[[]]
+=== Reading Twitter timelines
+From a Twitter user's perspective, Twitter organizes tweets into four different timelines:
+
+* User - Includes tweets posted by the user.
+* Friends - Includes tweets from the user's timeline and the timeline of
+anyone that they follow, with the exception of any retweets.
+* Home - Includes tweets from the user's timeline and the timeline of
+anyone that they follow.
+* Public - Includes tweets from all Twitter users.
+
+To be clear, the only difference between the home timeline and the friends timeline is that the friends timeline excludes retweets.
+
+`TimelineOperations` also supports reading of tweets from one of the available Twitter timelines. 
+To retrieve the 20 most recent tweets from the public timeline, use the `getPublicTimeline()` method:
+
+```java
+List<Tweet> tweets = twitter.timelineOperations().getPublicTimeline();
+```
+
+`getHomeTimeline()` retrieves the 20 most recent tweets from the user's home timeline:
+
+```java
+List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
+```
+
+Similarly, `getFriendsTimeline()` retrieves the 20 most recent tweets from the user's friends timeline:
+
+```java
+List<Tweet> tweets = twitter.timelineOperations().getFriendsTimeline();
+```
+
+To get tweets from the authenticating user's own timeline, call the `getUserTimeline()` method:
+
+```java
+List<Tweet> tweets = twitter.timelineOperations().getUserTimeline();
+```
+
+If you'd like to retrieve the 20 most recent tweets from a specific user's timeline (not necessarily the authenticating user's timeline), pass the user's screen name in as a parameter to `getUserTimeline()`:
+
+```java
+List<Tweet> tweets = twitter.timelineOperations().getUserTimeline("rclarkson");
+```
+
+In addition to the four Twitter timelines, you may also want to get a list of tweets mentioning the user. 
+The `getMentions()` method returns the 20 most recent tweets that mention the authenticating user:
+
+```java
+List<Tweet> tweets = twitter.timelineOperations().getMentions();
+```
+
+[[]]
+=== Friends and Followers
+A key social concept in Twitter is the ability for one user to "follow" another user. 
+The followed user's tweets will appear in the following user's home and friends timelines. 
+To follow a user on behalf of the authenticating user, call the `FriendOperations`' `follow()` method:
+
+```java
+twitter.friendOperations().follow("habuma");
+```
+
+Similarly, you may stop following a user using the `unfollow()` method:
+
+```java
+twitter.friendOperations().unfollow("habuma");
+```
+
+If you want to see who a particular user is following, use the `getFriends()` method:
+
+```java
+List<TwitterProfile> friends = twitter.friendOperations().getFriends("habuma");
+```
+
+On the other hand, you may be interested in seeing who is following a given user. In that case the `getFollowers()` method may be useful:
+
+```java
+List<TwitterProfile> followers = twitter.friendOperations().getFollowers("habuma");
+```
+
+[[]]
+=== Twitter User Lists
+In addition to following other users, Twitter provides the ability for users to collect users in lists, regardless of whether or not they are being followed. 
+These lists may be private to the use who created them or may be public for others to read and subscribe to.
+
+To create a new list, use `ListOperations`' `createList()` method:
+
+```java
+UserList familyList = twitter.listOperations().createList(
+       "My Family", "Tweets from my immediate family members", false);
+```
+
+`createList()` takes three parameters and returns a `UserList` object representing the newly created list. 
+The first parameter is the name of the list. 
+The second parameter is a brief description of the list. 
+The final parameter is a boolean indicating whether or not the list is public. 
+Here, false indicates that the list should be private.
+
+Once the list is created, you may add members to the list by calling the `addToList()` method:
+
+```java
+twitter.listOperations().addToList(familyList.getSlug(), "artnames");
+```
+
+The first parameter given to `addToList()` is the list slug (which is readily available from the `UserList` object). 
+The second parameter is the screen name of a user to add to the list.
+
+To remove a member from a list, pass the same parameters to `removedFromList()`:
+
+```java
+twitter.listOperations().removeFromList(familyList.getSlug(), "artnames");
+```
+
+You can also subscribe to a list on behalf of the authenticating user. 
+Subscribing to a list has the effect of including tweets from the list's members in the user's home timeline. 
+The `subscribe()` method is used to subscribe to a list:
+
+```java
+twitter.listOperations().subscribe("habuma", "music");
+```
+
+Here, `subscribe()` is given the list owner's screen name ("habuma") and the list slug ("music").
+
+Similarly, you may unsubscribe from a list with the `unsubscribe()` method:
+
+```java
+twitter.listOperations().unsubscribe("habuma", "music");
+```
+
+[[]]
+=== Searching Twitter
+`SearchOperations` enables you to search the public timeline for tweets containing some text through its `search()` method.
+
+For example, to search for tweets containing "#spring":
+
+```java
+SearchResults results = twitter.searchOperations().search("#spring");
+```
+
+The `search()` method will return a `SearchResults` object that includes a list of 50 most recent matching tweets as well as some metadata concerning the result set. 
+The metadata includes the maximum tweet ID in the search results list as well as the ID of a tweet that precedes the
+resulting tweets. 
+The `sinceId` and `maxId` properties effectively define the boundaries of the result set. 
+Additionally, there's a boolean `lastPage` property that, if `true`, indicates that this result set is
+the page of results.
+
+To gain better control over the paging of results, you may choose to pass in the page and results per page to `search()`:
+
+```java
+SearchResults results = twitter.searchOperations().search("#spring", 2, 10);
+```
+
+Here, we're asking for the 2nd page of results where the pages have 10 tweets per page.
+
+Finally, if you'd like to confine the bounds of the search results to fit between two tweet IDs, you may pass in the since and maximum tweet ID values to `search()`:
+
+```java
+SearchResults results = twitter.searchOperations().search("#spring", 2, 10, 145962, 210112);
+```
+
+This ensures that the result set will not contain any tweets posted before the tweet whose ID is 146962 nor any tweets posted after the tweet whose ID is 210112.
+
+[[]]
+=== Advanced search
+For more enhanced search you can also use `SearchParameters` object and pass it to `search()` method. 
+It allows you to specify more search keys.
+
+For example, searching tweets containing "#spring" keyword in Dutch language:
+
+```java
+SearchParameters params = new SearchParameters("#spring");
+params.setLang("nl");
+
+SearchResults results = twitter.searchOperations().search(params);
+```
+
+There are some more search parameters available:
+
+```java
+SearchParameters params = new SearchParameters("#spring");
+params.setGeoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE));
+params.setLang("nl");
+params.setResultType(SearchParameters.ResultType.RECENT);
+params.setCount(25);
+params.setIncludeEntities(false);
+
+SearchResults results = twitter.searchOperations().search(params);
+```
+
+[[]]
+=== Sending and receiving direct messages
+In addition to posting tweets to the public timelines, Twitter also supports sending of private messages directly to a given user.
+`DirectMessageOperations`' `sendDirectMessage()` method can be used to send a direct message to another user:
+
+```java
+twitter.directMessageOperations().sendDirectMessage("kdonald", "You going to the Dolphins game?")
+```
+
+`DirectMessageOperations` can also be used to read direct messages received by the authenticating user through its `getDirectMessagesReceived()` method:
+
+```java
+List<DirectMessage> twitter.directMessageOperations().getDirectMessagesReceived();
+```
+
+`getDirectMessagesReceived()` will return the 20 most recently received direct messages.
+
