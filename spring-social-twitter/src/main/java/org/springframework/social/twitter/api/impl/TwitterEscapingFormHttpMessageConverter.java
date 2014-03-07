@@ -34,9 +34,14 @@ class TwitterEscapingFormHttpMessageConverter extends FormHttpMessageConverter {
 	@Override
 	public void write(MultiValueMap<String, ?> map, MediaType contentType, HttpOutputMessage outputMessage) 
 			throws IOException, HttpMessageNotWritableException {
-		super.write(map, contentType, new TwitterEscapingHttpOutputMessage(outputMessage));
+		// only do special escaping if this is a non-multipart request
+		if (!isMultipart(map, contentType)) {
+			super.write(map, contentType, new TwitterEscapingHttpOutputMessage(outputMessage));
+		} else {
+			super.write(map, contentType, outputMessage);
+		}
 	}
-
+	
 	private static class TwitterEscapingHttpOutputMessage implements HttpOutputMessage {
 		private HttpOutputMessage target;
 
@@ -72,6 +77,21 @@ class TwitterEscapingFormHttpMessageConverter extends FormHttpMessageConverter {
 				target.write(b);
 			}
 		}
+	}
+
+	// "borrowed" from FormHttpMessageConverter
+	private boolean isMultipart(MultiValueMap<String, ?> map, MediaType contentType) {
+		if (contentType != null) {
+			return MediaType.MULTIPART_FORM_DATA.equals(contentType);
+		}
+		for (String name : map.keySet()) {
+			for (Object value : map.get(name)) {
+				if (value != null && !(value instanceof String)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }
