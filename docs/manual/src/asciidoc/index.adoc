@@ -254,22 +254,26 @@ To post a message to Twitter the simplest thing to do is to pass the message to 
 twitter.timelineOperations().updateStatus("Spring Social is awesome!")
 ```
 
-Optionally, you may also include metadata about the tweet, such as the location (latitude and longitude) you are tweeting from. 
-For that, pass in a `StatusDetails` object, setting the location property:
+It's also possible to include additional metadata about a Tweet, such as the location (latitude and longitude) from which the Tweet was sent.
+To provide this additional metadata, you can construct and post a `TweetData` object.
+For example, to post the location of a Tweet:
 
 ```java
-StatusDetails statusDetails = new StatusDetails().setLocation(51.502f, -0.126f);
-twitter.timelineOperations().updateStatus("I'm tweeting from London!", statusDetails)
+twitter.timelineOperations().updateStatus(
+    new TweetData("I'm tweeting from London!")
+        .atLocation(-0.126f, 51.502f));
 ```
 
 To have Twitter display the location in a map (on the Twitter web site) then you should also set the `displayCoordinates` property to `true`:
 
 ```java
-StatusDetails statusDetails = new StatusDetails().setLocation(51.502f, -0.126f).setDisplayCoordinates(true);
-twitter.timelineOperations().updateStatus("I'm tweeting from London!", statusDetails)
+twitter.timelineOperations().updateStatus(
+    new TweetData("I'm tweeting from London!")
+        .atLocation(-0.126f, 51.502f)
+        .displayCoordinates(true));
 ```
 
-If you'd like to retweet another tweet (perhaps one found while searching or reading the Twitter timeline), call the retweet() method, passing in the ID of the tweet to be retweeted:
+If you'd like to retweet another tweet (perhaps one found while searching or reading the Twitter timeline), call the `retweet()` method, passing in the ID of the tweet to be retweeted:
 
 ```java
 long tweetId = tweet.getId();
@@ -281,34 +285,16 @@ Attempting to tweet or retweet the same message multiple times will result in a 
 
 [[]]
 === Reading Twitter timelines
-From a Twitter user's perspective, Twitter organizes tweets into four different timelines:
+From a Twitter user's perspective, Twitter organizes tweets into two different timelines:
 
 * User - Includes tweets posted by the user.
-* Friends - Includes tweets from the user's timeline and the timeline of
-anyone that they follow, with the exception of any retweets.
 * Home - Includes tweets from the user's timeline and the timeline of
 anyone that they follow.
-* Public - Includes tweets from all Twitter users.
-
-To be clear, the only difference between the home timeline and the friends timeline is that the friends timeline excludes retweets.
-
-`TimelineOperations` also supports reading of tweets from one of the available Twitter timelines. 
-To retrieve the 20 most recent tweets from the public timeline, use the `getPublicTimeline()` method:
-
-```java
-List<Tweet> tweets = twitter.timelineOperations().getPublicTimeline();
-```
 
 `getHomeTimeline()` retrieves the 20 most recent tweets from the user's home timeline:
 
 ```java
 List<Tweet> tweets = twitter.timelineOperations().getHomeTimeline();
-```
-
-Similarly, `getFriendsTimeline()` retrieves the 20 most recent tweets from the user's friends timeline:
-
-```java
-List<Tweet> tweets = twitter.timelineOperations().getFriendsTimeline();
 ```
 
 To get tweets from the authenticating user's own timeline, call the `getUserTimeline()` method:
@@ -385,7 +371,7 @@ twitter.listOperations().addToList(familyList.getSlug(), "artnames");
 The first parameter given to `addToList()` is the list slug (which is readily available from the `UserList` object). 
 The second parameter is the screen name of a user to add to the list.
 
-To remove a member from a list, pass the same parameters to `removedFromList()`:
+To remove a member from a list, pass the same parameters to `removeFromList()`:
 
 ```java
 twitter.listOperations().removeFromList(familyList.getSlug(), "artnames");
@@ -457,14 +443,13 @@ SearchResults results = twitter.searchOperations().search(params);
 There are some more search parameters available:
 
 ```java
-SearchParameters params = new SearchParameters("#spring");
-params.setGeoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE));
-params.setLang("nl");
-params.setResultType(SearchParameters.ResultType.RECENT);
-params.setCount(25);
-params.setIncludeEntities(false);
-
-SearchResults results = twitter.searchOperations().search(params);
+SearchResults results = twitter.searchOperations().search(
+    new SearchParameters("#spring")
+        .geoCode(new GeoCode(52.379241, 4.900846, 100, GeoCode.Unit.MILE))
+        .lang("nl")
+        .resultType(SearchParameters.ResultType.RECENT)
+        .count(25)
+        .includeEntities(false));
 ```
 
 [[]]
