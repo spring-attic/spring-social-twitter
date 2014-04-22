@@ -92,8 +92,37 @@ public class StatusDetails {
 	public StatusDetails setWrapLinks(boolean wrapLinks) {
 		this.wrapLinks = wrapLinks;
 		return this;
-	}
+	}	
 	
+	
+	public Long getInReplyToStatusId() {
+		return inReplyToStatusId;
+	}
+
+	public void setInReplyToStatusId(Long inReplyToStatusId) {
+		this.inReplyToStatusId = inReplyToStatusId;
+	}
+
+	public Float getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(Float latitude) {
+		this.latitude = latitude;
+	}
+
+	public Float getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(Float longitude) {
+		this.longitude = longitude;
+	}
+
+	public boolean isDisplayCoordinates() {
+		return displayCoordinates;
+	}
+
 	/**
 	 * Maps the {@link StatusDetails} values to a Map of Twitter parameters.
 	 * 
