@@ -33,7 +33,6 @@ import org.springframework.social.twitter.api.Entities;
 import org.springframework.social.twitter.api.MessageTooLongException;
 import org.springframework.social.twitter.api.OEmbedOptions;
 import org.springframework.social.twitter.api.OEmbedTweet;
-import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.TickerSymbolEntity;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TweetData;
@@ -361,18 +360,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void updateStatus_withImage_DEPRECATED() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update_with_media.json"))
-				.andExpect(method(POST))
-				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-		// TODO: Match body content to ensure fields and photo are included
-		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
-		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", photo);
-		assertSingleTweet(tweet);
-		mockServer.verify();
-	}
-
-	@Test
 	public void updateStatus_withImage() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update_with_media.json"))
 				.andExpect(method(POST))
@@ -380,20 +367,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		// TODO: Match body content to ensure fields and photo are included
 		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
 		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").withMedia(photo));
-		assertSingleTweet(tweet);
-		mockServer.verify();
-	}
-
-	@Test
-	public void updateStatus_withLocation_DEPRECATED() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
-				.andExpect(method(POST))
-				.andExpect(content().string("status=Test+Message&lat=123.1&long=-111.2"))
-				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-
-		StatusDetails details = new StatusDetails();
-		details.setLocation(123.1f, -111.2f);
-		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", details);
 		assertSingleTweet(tweet);
 		mockServer.verify();
 	}
@@ -421,21 +394,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void updateStatus_withLocationAndDisplayCoordinates_DEPRECATED() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
-				.andExpect(method(POST))
-				.andExpect(content().string("status=Test+Message&lat=123.1&long=-111.2&display_coordinates=true"))
-				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-
-		StatusDetails details = new StatusDetails();
-		details.setLocation(123.1f, -111.2f);
-		details.setDisplayCoordinates(true);
-		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", details);
-		assertSingleTweet(tweet);
-		mockServer.verify();
-	}
-
-	@Test
 	public void updateStatus_withLocationAndDisplayCoordinates() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 				.andExpect(method(POST))
@@ -447,21 +405,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	}
 
 	@Test
-	public void updateStatus_withInReplyToStatus_DEPRECATED() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
-				.andExpect(method(POST))
-				.andExpect(content().string("status=Test+Message+in+reply+to+%40someone&in_reply_to_status_id=123456"))
-				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-
-		StatusDetails details = new StatusDetails();
-		details.setInReplyToStatusId(123456);
-		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message in reply to @someone", details);
-		assertSingleTweet(tweet);
-		mockServer.verify();
-	}
-	
-
-	@Test
 	public void updateStatus_withInReplyToStatus() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 				.andExpect(method(POST))
@@ -469,34 +412,6 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
 
 		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message in reply to @someone").inReplyToStatus(123456));
-		assertSingleTweet(tweet);
-		mockServer.verify();
-	}
-
-	@Test
-	public void updateStatus_withWrapLinks_DEPRECATED() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
-				.andExpect(method(POST))
-				.andExpect(content().string("status=Test+Message&wrap_links=true"))
-				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-
-		StatusDetails details = new StatusDetails();
-		details.setWrapLinks(true);
-		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", details);
-		assertSingleTweet(tweet);
-		mockServer.verify();
-	}
-
-	@Test
-	public void updateStatus_withImageAndLocation_DEPRECATED() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update_with_media.json"))
-				.andExpect(method(POST))
-				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-		// TODO: Match body content to ensure fields and photo are included
-		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
-		StatusDetails details = new StatusDetails();
-		details.setLocation(123.1f, -111.2f);
-		Tweet tweet = twitter.timelineOperations().updateStatus("Test Message", photo, details);
 		assertSingleTweet(tweet);
 		mockServer.verify();
 	}
