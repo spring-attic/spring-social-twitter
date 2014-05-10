@@ -44,12 +44,14 @@ class StreamReaderImpl implements StreamReader {
 
 	private final ScheduledFuture<?> future;
 	
+	private final ScheduledThreadPoolExecutor executor;
+	
 	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners) {
 		this.inputStream = inputStream;
 		this.reader = new BufferedReader(new InputStreamReader(inputStream));
 		queue = new ConcurrentLinkedQueue<String>();
 		dispatcher = new StreamDispatcher(queue, listeners);
-		ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
+		executor = new ScheduledThreadPoolExecutor(10);
 		future = executor.scheduleAtFixedRate(dispatcher, 0, 10, TimeUnit.MILLISECONDS);
 		open = new AtomicBoolean(true);
 	}
@@ -74,6 +76,7 @@ class StreamReaderImpl implements StreamReader {
 			open.set(false);
 			future.cancel(true);
 			dispatcher.stop();
+			executor.shutdown();
 			inputStream.close();
 		} catch(IOException ignore) {}
 	}
