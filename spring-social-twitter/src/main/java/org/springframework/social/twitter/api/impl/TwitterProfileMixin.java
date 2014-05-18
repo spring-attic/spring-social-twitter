@@ -15,12 +15,12 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import java.util.Date;
 
 /**
  * Mixin class for adding Jackson annotations to TwitterProfile.
@@ -113,4 +113,7 @@ abstract class TwitterProfileMixin extends TwitterObjectMixin {
 
 	@JsonProperty("show_all_inline_media")
 	private boolean showAllInlineMedia;
+
+    @JsonProperty("profile_banner_url")
+    private String profileBannerUrl;
 }
