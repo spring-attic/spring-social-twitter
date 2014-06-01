@@ -141,11 +141,11 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		return restTemplate.getForObject(buildUri("statuses/show/" + tweetId + ".json", parameters), Tweet.class);
 	}
 	
-	public OEmbedTweet getStatusOEmbed(long tweetId) {
+	public OEmbedTweet getStatusOEmbed(String tweetId) {
 		return getStatusOEmbed(tweetId, new OEmbedOptions());
 	}
 	
-	public OEmbedTweet getStatusOEmbed(long tweetId, OEmbedOptions options) {
+	public OEmbedTweet getStatusOEmbed(String tweetId, OEmbedOptions options) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> parameters = options.toRequestParameters();
 		parameters.set("id", String.valueOf(tweetId));

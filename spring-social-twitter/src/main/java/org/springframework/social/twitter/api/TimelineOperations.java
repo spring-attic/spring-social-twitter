@@ -232,7 +232,7 @@ public interface TimelineOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	OEmbedTweet getStatusOEmbed(long tweetId);
+	OEmbedTweet getStatusOEmbed(String tweetId);
 
 	/**
 	 * Returns a single tweet as an oEmbed representation.
@@ -242,7 +242,7 @@ public interface TimelineOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	OEmbedTweet getStatusOEmbed(long tweetId, OEmbedOptions options);
+	OEmbedTweet getStatusOEmbed(String tweetId, OEmbedOptions options);
 
 	/**
 	 * Updates the user's status.
