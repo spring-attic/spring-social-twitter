@@ -21,6 +21,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.ApiException;
+import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.OperationNotPermittedException;
 
@@ -163,6 +164,7 @@ public interface TimelineOperations {
 
 	/**
 	 * Retrieve the 20 most recent tweets of the authenticated user that have been retweeted by others.
+	 * @return a list of Tweets
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
@@ -172,6 +174,7 @@ public interface TimelineOperations {
 	 * Retrieve tweets of the authenticated user that have been retweeted by others.  The most recent tweets are listed first.
 	 * @param page The page to return
 	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 100. (Will return at most 100 entries, even if pageSize is greater than 100.) 
+	 * @return a list of Tweets
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
@@ -183,6 +186,7 @@ public interface TimelineOperations {
 	 * @param pageSize The number of {@link Tweet}s per page. Should be less than or equal to 100. (Will return at most 100 entries, even if pageSize is greater than 100.) 
 	 * @param sinceId The minimum {@link Tweet} ID to return in the results.
 	 * @param maxId The maximum {@link Tweet} ID to return in the results.
+	 * @return a list of Tweets
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
@@ -220,6 +224,7 @@ public interface TimelineOperations {
 	 * Returns a single tweet.
 	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
@@ -229,6 +234,7 @@ public interface TimelineOperations {
 	 * Returns a single tweet as an oEmbed representation.
 	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
@@ -239,6 +245,7 @@ public interface TimelineOperations {
 	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
 	 * @param options options for the embedded tweet
+	 * @return an OEmbedTweet representing the tweet in oEmbed form
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
@@ -247,8 +254,9 @@ public interface TimelineOperations {
 	/**
 	 * Updates the user's status.
 	 * @param status The status message
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
@@ -258,8 +266,9 @@ public interface TimelineOperations {
 	 * Updates the user's status along with a picture.
 	 * @param status The status message
 	 * @param photo A {@link Resource} for the photo data. The given Resource must implement the getFilename() method (such as {@link FileSystemResource} or {@link ClassPathResource}) and must contain GIF, JPG, or PNG data.
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -272,8 +281,9 @@ public interface TimelineOperations {
 	 * Updates the user's status, including additional metadata concerning the status.
 	 * @param status The status message
 	 * @param details Metadata pertaining to the status
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 * @deprecated Use {@link TimelineOperations#updateStatus(TweetData)} instead.
@@ -286,8 +296,9 @@ public interface TimelineOperations {
 	 * @param status The status message
 	 * @param photo A {@link Resource} for the photo data. The given Resource must implement the getFilename() method (such as {@link FileSystemResource} or {@link ClassPathResource}) and must contain GIF, JPG, or PNG data.
 	 * @param details Metadata pertaining to the status
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -299,8 +310,9 @@ public interface TimelineOperations {
 	/**
 	 * Updates the user's status, including any additional metadata about the status carried in TweetData
 	 * @param tweetData The data defining the status.
+	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
-	 * @throws DuplicateTweetException if the status message duplicates a previously posted status.
+	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
 	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -318,6 +330,7 @@ public interface TimelineOperations {
 	/**
 	 * Posts a retweet of an existing tweet.
 	 * @param tweetId The ID of the tweet to be retweeted
+	 * @return the Tweet object representing the retweet
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
@@ -327,6 +340,7 @@ public interface TimelineOperations {
 	 * Retrieves up to 100 retweets of a specific tweet.
 	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
+	 * @return A list of Tweet objects representing the retweets
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
@@ -337,6 +351,7 @@ public interface TimelineOperations {
 	 * Supports either user or application authorization.
 	 * @param tweetId the tweet's ID
 	 * @param count The maximum number of retweets to return. Should be less than or equal to 100. (Will return at most 100 entries, even if pageSize is greater than 100.)
+	 * @return A list of Tweet objects representing the retweets
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */

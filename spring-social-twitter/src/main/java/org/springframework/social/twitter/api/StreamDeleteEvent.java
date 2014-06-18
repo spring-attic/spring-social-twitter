@@ -26,14 +26,14 @@ public class StreamDeleteEvent extends TwitterObject {
 	private final long userId;
 
 	/**
-	 * The ID of the tweet to delete
+	 * @return the ID of the tweet to delete
 	 */
 	public long getTweetId() {
 		return tweetId;
 	}
 
 	/**
-	 * The ID of the user who posted the tweet
+	 * @return the ID of the user who posted the tweet
 	 */
 	public long getUserId() {
 		return userId;

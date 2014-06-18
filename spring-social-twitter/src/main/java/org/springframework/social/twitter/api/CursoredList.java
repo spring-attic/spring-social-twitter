@@ -43,28 +43,28 @@ public class CursoredList<T> extends ArrayList<T> {
 	}
 
 	/**
-	 * The cursor to retrieve the previous page of results.
+	 * @return the cursor to retrieve the previous page of results.
 	 */
 	public long getPreviousCursor() {
 		return previousCursor;
 	}
 
 	/**
-	 * The cursor to retrieve the next page of results.
+	 * @return the cursor value to retrieve the next page of results.
 	 */
 	public long getNextCursor() {
 		return nextCursor;
 	}
 
 	/**
-	 * Returns true if there is a previous page of results.
+	 * @return true if there is a previous page of results.
 	 */
 	public boolean hasPrevious() {
 		return previousCursor > 0;
 	}
 
 	/**
-	 * Returns true if there is a next page of results.
+	 * @return true if there is a next page of results.
 	 */
 	public boolean hasNext() {
 		return nextCursor > 0;

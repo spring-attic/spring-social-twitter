@@ -31,6 +31,7 @@ public class OEmbedOptions {
 	/**
 	 * Specify the maximum width in pixels that the embedded tweet should be rendered at.
 	 * @param maxWidth the maximum width. Must be between 250 and 550.
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions maxWidth(int maxWidth) {
 		this.maxWidth = maxWidth;
@@ -40,6 +41,7 @@ public class OEmbedOptions {
 	/**
 	 * Specify that the embedded Tweet should not show images that were posted with the tweet.
 	 * By default, images will be shown.
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions hideMedia() {
 		this.hideMedia = true;
@@ -49,6 +51,7 @@ public class OEmbedOptions {
 	/**
 	 * Specify that the embedded Tweet should not show the original message if the tweet is a reply.
 	 * By default, the thread will be shown.
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions hideThread() {
 		this.hideThread = true;
@@ -59,6 +62,7 @@ public class OEmbedOptions {
 	 * Specify that the embedded Tweet should not include a &lt;script&gt; element pointing to widgets.js.
 	 * This avoids the script from being redundantly loaded in the case that 2 or more embedded tweets are rendered on a page.
 	 * By default, the script will be included.
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions omitScript() {
 		this.omitScript = true;
@@ -68,6 +72,7 @@ public class OEmbedOptions {
 	/**
 	 * Specifies how the embedded tweet should be aligned.
 	 * @param align The alignment value. Either left, right, center, or none. Defaults to none.
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions align(String align) {
 		this.align = align;
@@ -78,6 +83,7 @@ public class OEmbedOptions {
 	 * Suggested Twitter accounts that might be related to the embedded tweet. 
 	 * Used by Web Intents (https://dev.twitter.com/docs/intents) to render suggestions to the reader.
 	 * @param related A comma-separated list of Twitter screen names to recommend.
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions related(String related) {
 		this.related = related;
@@ -87,6 +93,7 @@ public class OEmbedOptions {
 	/**
 	 * Specifies the language code for the embedded tweet.
 	 * @param lang The language code. Example: "fr"
+	 * @return the same OEmbedOptions for additional configuration
 	 */
 	public OEmbedOptions language(String lang) {
 		this.lang = lang;

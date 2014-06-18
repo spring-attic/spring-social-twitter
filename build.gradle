@@ -24,16 +24,42 @@ configure(allprojects - docProjects) {
 
     group = 'org.springframework.social'
 
-    sourceCompatibility=1.5
-    targetCompatibility=1.5
-
-    [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
-
-    sourceSets.test.resources.srcDirs = ['src/test/resources', 'src/test/java']
-
-    tasks.withType(Test).all {
-        systemProperty("java.awt.headless", "true")
+    compileJava {
+        sourceCompatibility=1.5
+        targetCompatibility=1.5
     }
+    compileTestJava {
+        sourceCompatibility=1.7
+        targetCompatibility=1.7
+    }
+
+    [compileJava, compileTestJava]*.options*.compilerArgs = [
+        "-Xlint:serial",
+        "-Xlint:varargs",
+        "-Xlint:cast",
+        "-Xlint:classfile",
+        "-Xlint:dep-ann",
+        "-Xlint:divzero",
+        "-Xlint:empty",
+        "-Xlint:finally",
+        "-Xlint:overrides",
+        "-Xlint:path",
+        "-Xlint:processing",
+        "-Xlint:static",
+        "-Xlint:try",
+        "-Xlint:-options",     // intentionally disabled
+        "-Xlint:-fallthrough", // intentionally disabled
+        "-Xlint:rawtypes",
+        "-Xlint:deprecation",
+        "-Xlint:unchecked"
+    ]
+
+    sourceSets.test.resources.srcDirs = [
+        "src/test/resources", 
+        "src/test/java"
+    ]
+
+    test.systemProperty("java.awt.headless", "true")
 
     repositories {
         maven { url "http://repo.spring.io/libs-snapshot" }
@@ -47,6 +73,13 @@ configure(allprojects - docProjects) {
         testCompile ("org.springframework:spring-test:$springVersion")
     }
 
+    ext.javadocLinks = [
+        "http://docs.oracle.com/javase/7/docs/api/",
+        "http://docs.oracle.com/javaee/7/api/",
+        "http://docs.spring.io/spring/docs/${springVersion}/javadoc-api/",
+        "http://docs.jboss.org/jbossas/javadoc/4.0.5/connector/"
+    ] as String[]
+
     // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
     // exported to dependent projects in Eclipse to avoid false compilation errors due
     // to changing APIs across these versions
@@ -54,10 +87,6 @@ configure(allprojects - docProjects) {
         classpath.entries.findAll { entry -> entry.path.contains('servlet-api') }*.exported = false
     }
 }
-
-ext.javadocLinks = [
-    "http://docs.jboss.org/jbossas/javadoc/4.0.5/connector"
-] as String[]
 
 configure(subprojects - docProjects) { subproject ->
     apply from: "${rootProject.projectDir}/publish-maven.gradle"
@@ -87,9 +116,15 @@ configure(subprojects - docProjects) { subproject ->
     }
 
     javadoc {
+        description = "Generates project-level javadoc for use in -javadoc jar"
+
         options.memberLevel = org.gradle.external.javadoc.JavadocMemberLevel.PROTECTED
         options.author = true
         options.header = project.name
+        options.links(project.ext.javadocLinks)
+        if (JavaVersion.current().isJava8Compatible()) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
         //options.overview = "${projectDir}/src/main/java/overview.html"
     }
 
@@ -189,6 +224,9 @@ configure(rootProject) {
         options.header = rootProject.description
         options.overview = "src/api/overview.html"
         options.links(project.ext.javadocLinks)
+        if (JavaVersion.current().isJava8Compatible()) {
+            options.addStringOption('Xdoclint:none', '-quiet')
+        }
 
         source subprojects.collect { project ->
             project.sourceSets.main.allJava
@@ -233,7 +271,7 @@ configure(rootProject) {
     }    
 
     task wrapper(type: Wrapper) {
-        gradleVersion = '1.11'
+        gradleVersion = '1.12'
     }
 
 }

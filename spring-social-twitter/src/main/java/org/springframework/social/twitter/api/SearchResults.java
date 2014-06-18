@@ -39,26 +39,26 @@ public class SearchResults extends TwitterObject {
 	}
 
 	/**
-	 * Returns the list of matching {@link Tweet}s
+	 * @return the list of matching {@link Tweet}s
 	 */
 	public List<Tweet> getTweets() {
 		return tweets;
 	}
 	
 	/**
-	 * Returns the {@link SearchMetadata} associated with a
-	 * particular search
+	 * @return the {@link SearchMetadata} associated with a particular search
 	 */
 	public SearchMetadata getSearchMetadata() {
 		return metadata;
 	}
 
 	/**
-	 * Returns <code>true</code> if this is the last page of matching
+	 * @return <code>true</code> if this is the last page of matching
 	 * {@link Tweet}s; <code>false</code> if there are more pages that follow
 	 * this one.
 	 */
 	public boolean isLastPage() {
 		return lastPage;
 	}
+
 }

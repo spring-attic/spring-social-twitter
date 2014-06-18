@@ -63,6 +63,7 @@ public class RateLimitStatus {
 	/**
 	 * The approximate number of seconds until the rate limits are reset.
 	 * Note that this method recalculates the seconds until reset on each call.
+	 * @return the approximate number of seconds until the rate limits are reset.
 	 */
 	public int getSecondsUntilReset() {
 		return (int) (resetTimeInSeconds - System.currentTimeMillis() / 1000);

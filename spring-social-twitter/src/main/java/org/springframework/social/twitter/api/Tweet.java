@@ -148,6 +148,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	 * The number of times this tweet has been retweeted.
 	 * Only available in timeline results. 
 	 * getRetweetCount() will return null for Tweet objects returned in search results.
+	 * @return the number of times the tweet has been retweeted or null if that information is unavailable
 	 */
 	public Integer getRetweetCount() {
 		return retweetCount;

@@ -27,6 +27,7 @@ public interface StreamingOperations {
 	 * Monitor the firehose stream, given a set of listeners.
 	 * Per the documentation at https://dev.twitter.com/docs/api/1.1/get/statuses/firehose, the firehose stream requires special permission.
 	 * @param listeners the listeners to monitor the stream
+	 * @return the firehose stream
 	 */
 	Stream firehose(List<StreamListener> listeners);
 	
@@ -39,12 +40,14 @@ public interface StreamingOperations {
 	 * Per the documentation at https://dev.twitter.com/docs/api/1.1/get/statuses/firehose, the firehose stream requires special permission.
 	 * @param backfill the number of messages to backfill. Valid values 1 to 150000 or -1 to -150000.
 	 * @param listeners the listeners to monitor the stream
+	 * @return the firehose stream
 	 */
 	Stream firehose(int backfill, List<StreamListener> listeners);
 
 	/**
 	 * Monitor the sample stream, given a set of listeners.
 	 * @param listeners the listeners to monitor the stream
+	 * @return the sample stream
 	 */
 	Stream sample(List<StreamListener> listeners);
 	
@@ -52,6 +55,7 @@ public interface StreamingOperations {
 	 * Monitor a filtered stream, given a set of listeners.
 	 * @param trackKeywords the terms to track in the stream
 	 * @param listeners the listeners to monitor the stream
+	 * @return the filtered stream
 	 */
 	Stream filter(String trackKeywords, List<StreamListener> listeners);
 
@@ -59,6 +63,7 @@ public interface StreamingOperations {
 	 * Monitor a filtered stream, given a set of listeners.
 	 * @param parameters the stream's filter parameters
 	 * @param listeners the listeners to monitor the stream
+	 * @return the filtered stream
 	 */
 	Stream filter(FilterStreamParameters parameters, List<StreamListener> listeners);
 

@@ -19,10 +19,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * A representation of embedded media entity.
- * <p/>
- * User: bowen
- * Date: 12/26/11
+ * <p>A representation of embedded media entity.</p>
+ * @author bowen
  */
 public class MediaEntity extends TwitterObject implements Serializable {
 

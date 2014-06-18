@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 /**
- * Holds a Map<ResourceFamily, List<RateLimitStatus>> object deserialized from Twitter's rate limit status
+ * Holds a Map&lt;ResourceFamily, List&lt;RateLimitStatus&gt;&gt; object deserialized from Twitter's rate limit status
  * JSON structure.
  * @author Jeremy Appel
  */
@@ -41,7 +41,7 @@ public class RateLimitStatusHolder {
 	
 	/**
 	 * The map of rate limit statuses per resource family
-	 * @return Map<ResourceFamily, List<RateLimitStatus>>
+	 * @return Map&lt;ResourceFamily, List&lt;RateLimitStatus&gt;&gt;
 	 */
 	public Map<ResourceFamily, List<RateLimitStatus>> getRateLimits() {
 		return rateLimitsResultMap;

@@ -19,10 +19,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * A representation of a URL found within a tweet entity.
- * <p/>
- * User: bowen
- * Date: 12/26/11
+ * <p>A representation of a URL found within a tweet entity.</p>
+ * @author bowen
  */
 public class UrlEntity extends TwitterObject implements Serializable {
 

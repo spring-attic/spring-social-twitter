@@ -21,10 +21,8 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * A user mention entity.
- * <p/>
- * User: bowen
- * Date: 12/26/11
+ * <p>A user mention entity.</p>
+ * @author bowen
  */
 public class MentionEntity extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;

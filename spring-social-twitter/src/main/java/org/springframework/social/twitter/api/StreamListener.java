@@ -23,23 +23,25 @@ public interface StreamListener {
 		
 	/**
 	 * Called when a new Tweet is available on the stream
-	 * @param tweet
+	 * @param tweet a tweet available on the stream
 	 */
 	void onTweet(Tweet tweet);
 	
 	/**
 	 * Called when a delete message is available on the stream
+	 * @param deleteEvent a delete event
 	 */
 	void onDelete(StreamDeleteEvent deleteEvent);
 
 	/**
 	 * Called when the stream is being track limited.
-	 * @param numberOfLimitedTweets
+	 * @param numberOfLimitedTweets the number of tweets being limited on the stream
 	 */
 	void onLimit(int numberOfLimitedTweets);
 	
 	/**
 	 * Called when a client is stalling and the stream is in danger of being disconnected.
+	 * @param warningEvent a warning event
 	 */
 	void onWarning(StreamWarningEvent warningEvent);
 	

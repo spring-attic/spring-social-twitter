@@ -28,53 +28,54 @@ import org.springframework.web.client.RestOperations;
 public interface Twitter extends ApiBinding {
 	
 	/**
-	 * Returns the portion of the Twitter API containing the block operations.
+	 * @return the portion of the Twitter API containing the block operations.
 	 */
 	BlockOperations blockOperations();
 	
 	/**
-	 * Returns the portion of the Twitter API containing the direct message operations.
+	 * @return the portion of the Twitter API containing the direct message operations.
 	 */
 	DirectMessageOperations directMessageOperations();
 
 	/**
-	 * Returns the portion of the Twitter API containing the friends and followers operations.
+	 * @return the portion of the Twitter API containing the friends and followers operations.
 	 */
 	FriendOperations friendOperations();
 
 	/**
-	 * Returns the portion of the Twitter API containing the geo location operations.
+	 * @return the portion of the Twitter API containing the geo location operations.
 	 */
 	GeoOperations geoOperations();
 
 	/**
-	 * Returns the portion of the Twitter API containing the user list operations.
+	 * @return the portion of the Twitter API containing the user list operations.
 	 */
 	ListOperations listOperations();
 
 	/**
-	 * Returns the portion of the Twitter API containing the search operations.
+	 * @return the portion of the Twitter API containing the search operations.
 	 */
 	SearchOperations searchOperations();
 
 	/**
-	 * Returns the portion of the Twitter API containing the streaming operations.
+	 * @return the portion of the Twitter API containing the streaming operations.
 	 */
 	StreamingOperations streamingOperations();
 	
 	/**
-	 * Returns the portion of the Twitter API containing the tweet and timeline operations.
+	 * @return the portion of the Twitter API containing the tweet and timeline operations.
 	 */
 	TimelineOperations timelineOperations();
 
 	/**
-	 * Returns the portion of the Twitter API containing the user operations.
+	 * @return the portion of the Twitter API containing the user operations.
 	 */
 	UserOperations userOperations();
 
 	/**
 	 * Returns the underlying {@link RestOperations} object allowing for consumption of Twitter endpoints that may not be otherwise covered by the API binding.
 	 * The RestOperations object returned is configured to include an OAuth "Authorization" header on all requests.
+	 * @return a RestOperations object instrumented for including an OAuth Authorization header on requests.
 	 */
 	RestOperations restOperations();
 

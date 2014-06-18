@@ -162,6 +162,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not the user has mobile notifications enabled.
+	 * @return true if the user has mobile notifications enabled
 	 */
 	public boolean isNotificationsEnabled() {
 		return notificationsEnabled;
@@ -170,6 +171,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	/**
 	 * Whether or not the user is verified with Twitter.
 	 * See http://support.twitter.com/groups/31-twitter-basics/topics/111-features/articles/119135-about-verified-accounts.
+	 * @return true if the user is verified
 	 */
 	public boolean isVerified() {
 		return verified;
@@ -177,41 +179,42 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not the user has enabled their account with geo location.
+	 * @return true if geo-location is enabled
 	 */
 	public boolean isGeoEnabled() {
 		return geoEnabled;
 	}
 	
 	/**
-	 * The user's preferred language.
+	 * @return the user's preferred language.
 	 */
 	public String getLanguage() {
 		return language;
 	}
 	
 	/**
-	 * The number of tweets this user has posted.
+	 * @return the number of tweets this user has posted.
 	 */
 	public int getStatusesCount() {
 		return statusesCount;
 	}
 	
 	/**
-	 * The number of lists the user is listed on.
+	 * @return the number of lists the user is listed on.
 	 */
 	public int getListedCount() {
 		return listedCount;
 	}
 	
 	/**
-	 * The number of friends the user has (the number of users this user follows).
+	 * @return the number of friends the user has (the number of users this user follows).
 	 */
 	public int getFriendsCount() {
 		return friendsCount;
 	}
 
 	/**
-	 * The number of followers the user has.
+	 * @return the number of followers the user has.
 	 */
 	public int getFollowersCount() {
 		return followersCount;
@@ -219,6 +222,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not the authenticated user is following this user.
+	 * @return true if the authenticated user is following this user
 	 */
 	public boolean isFollowing() {
 		return following;
@@ -226,13 +230,14 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not a request has been sent by the authenticating user to follow this user.
+	 * @return true if a follow request has been sent to this user
 	 */
 	public boolean isFollowRequestSent() {
 		return followRequestSent;
 	}
 	
 	/**
-	 * The number of tweets that the user has marked as favorites.
+	 * @return the number of tweets that the user has marked as favorites.
 	 */
 	public int getFavoritesCount() {
 		return favoritesCount;
@@ -240,20 +245,21 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 
 	/**
 	 * Whether or not the user's tweets are protected.
+	 * @return true if the user's tweets are protected
 	 */
 	public boolean isProtected() {
 		return isProtected;
 	}
 	
 	/**
-	 * The user's time zone.
+	 * @return the user's time zone.
 	 */
 	public String getTimeZone() {
 		return timeZone;
 	}
 	
 	/**
-	 * The user's UTC offset in seconds.
+	 * @return the user's UTC offset in seconds.
 	 */
 	public int getUtcOffset() {
 		return utcOffset;
@@ -261,6 +267,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not this profile is enabled for contributors.
+	 * @return true if contributors are enabled
 	 */
 	public boolean isContributorsEnabled() {
 		return contributorsEnabled;
@@ -268,27 +275,28 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not this user is a translator.
+	 * @return true if the user is a translator
 	 */
 	public boolean isTranslator() {
 		return translator;
 	}
 	
 	/**
-	 * The color of the sidebar border on the user's Twitter profile page.
+	 * @return the color of the sidebar border on the user's Twitter profile page.
 	 */
 	public String getSidebarBorderColor() {
 		return sidebarBorderColor;
 	}
 
 	/**
-	 * The color of the sidebar fill on the user's Twitter profile page.
+	 * @return the color of the sidebar fill on the user's Twitter profile page.
 	 */
 	public String getSidebarFillColor() {
 		return sidebarFillColor;
 	}
 
 	/**
-	 * The color of the background of the user's Twitter profile page.
+	 * @return the color of the background of the user's Twitter profile page.
 	 */
 	public String getBackgroundColor() {
 		return backgroundColor;
@@ -296,13 +304,14 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 
 	/**
 	 * Whether or not the user's Twitter profile page uses a background image.
+	 * @return true if the user's profile page uses a background image
 	 */
 	public boolean useBackgroundImage() {
 		return useBackgroundImage;
 	}
 
 	/**
-	 * The URL to a background image shown on the user's Twitter profile page.
+	 * @return the URL to a background image shown on the user's Twitter profile page.
 	 */
 	public String getBackgroundImageUrl() {
 		return backgroundImageUrl;
@@ -310,20 +319,21 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 
 	/**
 	 * Whether or not the background image is tiled.
+	 * @return true if the background images is tiled
 	 */
 	public boolean isBackgroundImageTiled() {
 		return backgroundImageTiled;
 	}
 
 	/**
-	 * The text color on the user's Twitter profile page.
+	 * @return the text color on the user's Twitter profile page.
 	 */
 	public String getTextColor() {
 		return textColor;
 	}
 
 	/**
-	 * The link color on the user's Twitter profile page.
+	 * @return the link color on the user's Twitter profile page.
 	 */
 	public String getLinkColor() {
 		return linkColor;
@@ -332,6 +342,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	/**
 	 * Whether or not the user has selected to see all inline media from everyone.
 	 * If false, they will only see inline media from the users they follow.
+	 * @return true if the user wats to see all inline media
 	 */
 	public boolean showAllInlineMedia() {
 		return showAllInlineMedia;

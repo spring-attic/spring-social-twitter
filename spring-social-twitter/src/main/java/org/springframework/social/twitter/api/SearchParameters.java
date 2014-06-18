@@ -51,6 +51,7 @@ public class SearchParameters  {
 	 *
 	 * @param geoCode GeoCode object stuffed with coordinates and radius
 	 * @see GeoCode
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters geoCode(GeoCode geoCode) {
 		this.geoCode = geoCode;
@@ -61,6 +62,7 @@ public class SearchParameters  {
 	 * Sets optional <code>lang</code> parameter. Restricts tweets to the given language, given by an ISO 639-1 code.
 	 *
 	 * @param lang an ISO 639-1 language code
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters lang(String lang) {
 		this.lang = lang;
@@ -72,6 +74,7 @@ public class SearchParameters  {
 	 * (only ja is currently effective).
 	 *
 	 * @param locale locale
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters locale(String locale) {
 		this.locale = locale;
@@ -82,6 +85,7 @@ public class SearchParameters  {
 	 * Sets optional <code>result_type</code> parameter. Specifies what type of search results. Default is <code>mixed</code>.
 	 *
 	 * @param resultType type of preferred result type
+	 * @return The same SearchParameters for additional configuration.
 	 * @see ResultType
 	 */
 	public SearchParameters resultType(ResultType resultType) {
@@ -94,6 +98,7 @@ public class SearchParameters  {
 	 * Defaults to 15.
 	 *
 	 * @param count number of tweets to return
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters count(int count) {
 		this.count = count;
@@ -104,6 +109,7 @@ public class SearchParameters  {
 	 * Sets optional <code>until</code> parameter. Restricts search to tweets generated before the given date.
 	 *
 	 * @param untilDate date to search until
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters until(Date untilDate) {
 		this.untilDate = untilDate;
@@ -114,6 +120,7 @@ public class SearchParameters  {
 	 * Sets optional <code>since_id</code> parameter. Restricts search results with an ID greater than the specified one.
 	 *
 	 * @param sinceId The minimum {@link org.springframework.social.twitter.api.Tweet} ID to return in the results
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters sinceId(long sinceId) {
 		this.sinceId = sinceId;
@@ -124,6 +131,7 @@ public class SearchParameters  {
 	 * Sets optional <code>max_id</code> parameter. Restricts search results with an ID less or equel than the specified one.
 	 *
 	 * @param maxId The maximum {@link org.springframework.social.twitter.api.Tweet} ID to return in the results
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters maxId(long maxId) {
 		this.maxId = maxId;
@@ -134,6 +142,7 @@ public class SearchParameters  {
 	 * Sets optional <code>include_entities</code> parameter. The entities node will be excluded when set to false.
 	 *
 	 * @param includeEntities Include entities node
+	 * @return The same SearchParameters for additional configuration.
 	 */
 	public SearchParameters includeEntities(boolean includeEntities) {
 		this.includeEntities = includeEntities;

@@ -19,10 +19,8 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * A representation of tweet hashtags.
- * <p/>
- * User: bowen
- * Date: 12/26/11
+ * <p>A representation of tweet hashtags.</p>
+ * @author bowen
  */
 public class HashTagEntity extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;

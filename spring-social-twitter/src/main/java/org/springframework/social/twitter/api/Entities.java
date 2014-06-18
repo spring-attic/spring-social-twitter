@@ -21,10 +21,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * A json representation of entities found within twitter status objects.
- * <p/>
- * User: bowen
- * Date: 12/26/11
+ * <p>A json representation of entities found within twitter status objects.<p>
+ * @author bowen
  */
 public class Entities extends TwitterObject implements Serializable {
 	

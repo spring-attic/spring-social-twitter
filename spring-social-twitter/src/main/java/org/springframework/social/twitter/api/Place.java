@@ -54,70 +54,70 @@ public class Place extends TwitterObject {
 	}
 	
 	/**
-	 * The place's ID.
+	 * @return the place's ID.
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * A brief name for the place.
+	 * @return a brief name for the place.
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * The full name for the place.
+	 * @return the full name for the place.
 	 */
 	public String getFullName() {
 		return fullName;
 	}
 	
 	/**
-	 * The place's street address. May be null.
+	 * @return the place's street address. May be null.
 	 */
 	public String getStreetAddress() {
 		return streetAddress;
 	}
 
 	/**
-	 * The place's country.
+	 * @return the place's country.
 	 */
 	public String getCountry() {
 		return country;
 	}
 
 	/**
-	 * The place's country code.
+	 * @return the place's country code.
 	 */
 	public String getCountryCode() {
 		return countryCode;
 	}
 
 	/**
-	 * The place type.
+	 * @return the place type.
 	 */
 	public PlaceType getPlaceType() {
 		return placeType;
 	}
 
 	/**
-	 * A list of other places that this place is contained within.
+	 * @return a list of other places that this place is contained within.
 	 */
 	public List<Place> getContainedWithin() {
 		return containedWithin;
 	}
 	
 	/**
-	 * A list of points defining a box that fully contains the place's geometry.
+	 * @return a list of points defining a box that fully contains the place's geometry.
 	 */
 	public List<GeoPoint> getBoundingBox() {
 		return boundingBox;
 	}
 	
 	/**
-	 * The place's geometry.
+	 * @return the place's geometry.
 	 */
 	public Geometry getGeometry() {
 		return geometry;
@@ -157,7 +157,7 @@ public class Place extends TwitterObject {
 		}
 		
 		/**
-		 * The geometry's type, either POINT, POLYGON, or MULTIPOLYGON.
+		 * @return the geometry's type, either POINT, POLYGON, or MULTIPOLYGON.
 		 */
 		public GeometryType getType() {
 			return type;
@@ -167,7 +167,8 @@ public class Place extends TwitterObject {
 		 * The coordinates defining a place's geometry.
 		 * If type is POINT, then it is a List containing a single List containing a single point.
 		 * If type is POLYGON, then it is a List containing a List of points that define the polygon.
-		 * If type is MULTIPOLYGON, then it is a List of polygon-defining Lists. 
+		 * If type is MULTIPOLYGON, then it is a List of polygon-defining Lists.
+		 * @return the coordinates defining a place's geometry.
 		 */
 		public List<List<GeoPoint>> getCoordinates() {
 			return coordinates;

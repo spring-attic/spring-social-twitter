@@ -18,6 +18,7 @@ package org.springframework.social.twitter.api;
 import java.util.List;
 
 import org.springframework.social.ApiException;
+import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.MissingAuthorizationException;
 
 
@@ -107,7 +108,7 @@ public interface DirectMessageOperations {
 	 * @return the {@link DirectMessage}
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
-	 * @throws DuplicateTweetException if the message duplicates a previously sent message.
+	 * @throws DuplicateStatusException if the message duplicates a previously sent message.
 	 * @throws MessageTooLongException if the message length exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
@@ -123,7 +124,7 @@ public interface DirectMessageOperations {
 	 * @return the {@link DirectMessage}
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
-	 * @throws DuplicateTweetException if the message duplicates a previously sent message.
+	 * @throws DuplicateStatusException if the message duplicates a previously sent message.
 	 * @throws MessageTooLongException if the message length exceeds Twitter's 140 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */

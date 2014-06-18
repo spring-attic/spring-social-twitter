@@ -28,9 +28,9 @@ public class GeoCode {
 	/**
 	 * Creates GeoCode object with the default unit of measure is Unit.KILOMETER
 	 *
-	 * @param latitude
-	 * @param longitude
-	 * @param radius
+	 * @param latitude the location's latitude
+	 * @param longitude the location's longitude
+	 * @param radius the radius of the area to cover by this location
 	 */
 	public GeoCode(double latitude, double longitude, int radius) {
 		this(latitude, longitude, radius, Unit.KILOMETER);
