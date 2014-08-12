@@ -54,9 +54,10 @@ abstract class PlaceMixin extends TwitterObjectMixin {
 	List<Place> containedWithin;
 	
 	@JsonProperty("bounding_box")
-	@JsonDeserialize(using=BoundingBoxDeserializer.class)
-	List<GeoPoint> boundingBox;
-	
+	@JsonDeserialize(using=GeometryDeserializer.class)
+    Geometry boundingBox;
+
+
 	@JsonProperty("geometry")
 	@JsonDeserialize(using=GeometryDeserializer.class)
 	Geometry geometry;

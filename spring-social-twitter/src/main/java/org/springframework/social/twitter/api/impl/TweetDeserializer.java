@@ -96,19 +96,12 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);
 		tweet.setUser(user);
-
-
         JsonNode coordinatesNode = node.get("coordinates");
         Coordinates coordinates = toCoordinates(coordinatesNode);
         tweet.setCoordinates(coordinates);
-
-
-
-
-
-
-
-
+        JsonNode placeNode = node.get("place");
+        Place place = toPlace(placeNode);
+        tweet.setPlace(place);
         return tweet;
 	}
 
@@ -168,6 +161,14 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
         }
         final ObjectMapper mapper = this.createMapper();
         return mapper.reader(Coordinates.class).readValue(node);
+    }
+
+    private Place toPlace(final JsonNode node) throws IOException {
+        if (null == node || node.isNull() || node.isMissingNode()) {
+            return null;
+        }
+        final ObjectMapper mapper = this.createMapper();
+        return mapper.reader(Place.class).readValue(node);
     }
 
 	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
