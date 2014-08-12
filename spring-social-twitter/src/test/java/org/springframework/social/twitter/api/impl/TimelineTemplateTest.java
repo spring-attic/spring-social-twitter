@@ -15,6 +15,8 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpStatus.*;
@@ -275,7 +277,19 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertSingleTweet(tweet);
 	}
 
-	@Test
+    @Test
+    public void getStatusWithLocation() throws Exception {
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("status-with-location"), APPLICATION_JSON));
+
+        Tweet tweet = twitter.timelineOperations().getStatus(12345);
+        assertThat(tweet.getCoordinates().getLatitude(), is(equalTo(40.9920015)));
+        assertThat(tweet.getCoordinates().getLongitude(), is(equalTo(29.1203716)));
+        assertThat(tweet.getCoordinates().getType(), is(equalTo("Point")));
+    }
+
+    @Test
 	public void getStatus_appAuthorization() {
 		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
 			.andExpect(method(GET))
