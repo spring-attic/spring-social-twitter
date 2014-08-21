@@ -23,15 +23,21 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
+import org.springframework.social.twitter.api.StreamEvent;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamWarningEvent;
 import org.springframework.social.twitter.api.Tweet;
+import org.springframework.social.twitter.api.TwitterProfile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class StreamDispatcher implements Runnable {
-
+	private static final Log logger = LogFactory.getLog(StreamDispatcher.class);
+	
 	private final List<StreamListener> listeners;
 
 	private ObjectMapper objectMapper;
@@ -50,6 +56,9 @@ class StreamDispatcher implements Runnable {
 		objectMapper.addMixInAnnotations(Tweet.class, TweetMixin.class);
 		objectMapper.addMixInAnnotations(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
 		objectMapper.addMixInAnnotations(StreamWarningEvent.class, StreamWarningEventMixin.class);
+		objectMapper.addMixInAnnotations(StreamEvent.class, StreamEventMixin.class);
+		objectMapper.addMixInAnnotations(DirectMessage.class, DirectMessageMixin.class);
+		objectMapper.addMixInAnnotations(TwitterProfile.class, TwitterProfileMixin.class);
 		active = new AtomicBoolean(true);
 	}
 
@@ -60,6 +69,8 @@ class StreamDispatcher implements Runnable {
 			
 			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
 			
+			logger.debug(line);
+			
 			try {
 				if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
 					handleTweet(line);
@@ -69,6 +80,11 @@ class StreamDispatcher implements Runnable {
 					handleDelete(line);
 				} else if (line.startsWith("{\"warning")) {
 					handleWarning(line);
+				} else if (line.startsWith("{\"event")) {
+					handleEvent(line);
+				}
+				else if (line.startsWith("{\"direct_message")) {
+					handleDirectMessage(line);
 				}
 			} catch (IOException e) {
 				// TODO: Should only happen if Jackson doesn't know how to map the line
@@ -120,6 +136,29 @@ class StreamDispatcher implements Runnable {
 			Future<?> result = pool.submit((new Runnable() {
 				public void run() {
 					listener.onWarning(warningEvent);
+				}
+			}));
+		}
+	}
+	
+	private void handleEvent(String line) throws IOException {
+		final StreamEvent event = objectMapper.readValue(line, StreamEvent.class);
+		for (final StreamListener listener : listeners) {
+			Future<?> result = pool.submit((new Runnable() {
+				public void run() {
+					listener.onEvent(event);
+				}
+			}));
+		}
+	}
+	
+	private void handleDirectMessage(String line) throws IOException {
+		String messagePart = objectMapper.readTree(line).get("direct_message").toString();
+		final DirectMessage directMessage = objectMapper.readValue(messagePart, DirectMessage.class);
+		for (final StreamListener listener : listeners) {
+			Future<?> result = pool.submit((new Runnable() {
+				public void run() {
+					listener.onDirectMessage(directMessage);
 				}
 			}));
 		}
