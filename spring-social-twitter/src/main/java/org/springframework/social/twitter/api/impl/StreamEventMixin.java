@@ -17,6 +17,8 @@ package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
 
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.social.twitter.api.StreamEvent;
 import org.springframework.social.twitter.api.TwitterProfile;
 import org.springframework.social.twitter.api.impl.StreamEventMixin.StreamEventDeserializer;
@@ -32,7 +34,16 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @JsonDeserialize(using=StreamEventDeserializer.class)
 abstract class StreamEventMixin extends TwitterObjectMixin {
 
-	static final class StreamEventDeserializer extends AbstractTwitterDeserializer<StreamEvent> {
+    private static TwitterProfile toProfile(final JsonNode node) throws IOException {
+        if (null == node || node.isNull() || node.isMissingNode()) {
+            return null;
+        }
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new TwitterModule());
+        return mapper.reader(TwitterProfile.class).readValue(node);
+    }
+
+    static final class StreamEventDeserializer extends JsonDeserializer<StreamEvent> {
 		@Override
 		public StreamEvent deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
 			final JsonNode node = jp.readValueAs(JsonNode.class);
