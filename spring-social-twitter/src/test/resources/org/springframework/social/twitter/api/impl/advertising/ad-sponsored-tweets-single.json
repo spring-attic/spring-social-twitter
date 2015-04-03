@@ -1,0 +1,54 @@
+{
+    "data": {
+        "contributors": null,
+        "coordinates": null,
+        "created_at": "Thu Jun 25 03:45:00 +0000 2015",
+        "entities": {
+            "hashtags": [
+                {
+                    "indices": [
+                        60,
+                        64
+                    ],
+                    "text": "ads"
+                }
+            ],
+            "symbols": [],
+            "urls": [],
+            "user_mentions": []
+        },
+        "favorite_count": 0,
+        "favorited": false,
+        "geo": null,
+        "id": 613915770712514560,
+        "id_str": "613915770712514560",
+        "in_reply_to_screen_name": null,
+        "in_reply_to_status_id": null,
+        "in_reply_to_status_id_str": null,
+        "in_reply_to_user_id": null,
+        "in_reply_to_user_id_str": null,
+        "lang": "en",
+        "place": null,
+        "retweet_count": 0,
+        "retweeted": false,
+        "scopes": {
+            "followers": false
+        },
+        "source": "<a href=\"http://spring.io\" rel=\"nofollow\">Spring Website</a>",
+        "text": "Hey, here is a sponsored tweet that we are creating via #ads API.",
+        "truncated": false,
+        "user": {
+            "id": 390472547,
+            "id_str": "390472547"
+        }
+    },
+    "data_type": "status",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj",
+            "as_user_id": 390472547,
+            "status": "Hey, here is a promoted-only tweet that we are creating via #ads API.",
+            "trim_user": true
+        }
+    }
+}

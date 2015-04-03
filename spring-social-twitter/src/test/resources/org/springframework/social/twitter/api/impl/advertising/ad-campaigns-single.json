@@ -1,0 +1,29 @@
+{
+  "data": {
+    "account_id": "1ga1yn",
+    "created_at": "2015-02-09T00:00:00Z",
+    "currency": "USD",
+    "daily_budget_amount_local_micro": 40000000,
+    "deleted": false,
+    "end_time": null,
+    "funding_instrument_id": "yyyy",
+    "id": "92ph",
+    "name": "My First Campaign",
+    "paused": false,
+    "standard_delivery": true,
+    "start_time": "2015-02-09T00:00:00Z",
+    "total_budget_amount_local_micro": 500000000,
+    "updated_at": "2015-02-09T00:00:00Z"
+  },
+  "data_type": "campaign",
+  "request": {
+    "params": {
+      "account_id": "1ga1yn",
+      "daily_budget_amount_local_micro": 50000000,
+      "funding_instrument_id": "yyyy",
+      "name": "My First Campaign",
+      "start_time": "2015-02-09T00:00:00Z",
+      "total_budget_amount_local_micro": 500000000
+    }
+  }
+}

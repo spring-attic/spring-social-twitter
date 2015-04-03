@@ -1,0 +1,162 @@
+{
+    "data": [
+        {
+            "name": "4.0",
+            "number": "4.0",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "1"
+        },
+        {
+            "name": "4.1",
+            "number": "4.1",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "2"
+        },
+        {
+            "name": "4.2",
+            "number": "4.2",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "3"
+        },
+        {
+            "name": "4.3",
+            "number": "4.3",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "4"
+        },
+        {
+            "name": "5.0",
+            "number": "5.0",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "5"
+        },
+        {
+            "name": "5.1",
+            "number": "5.1",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "6"
+        },
+        {
+            "name": "6.0",
+            "number": "6.0",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "7"
+        },
+        {
+            "name": "6.1",
+            "number": "6.1",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "8"
+        },
+        {
+            "name": "7.0",
+            "number": "7.0",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "9"
+        },
+        {
+            "name": "7.1",
+            "number": "7.1",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "a"
+        },
+        {
+            "name": "8.0",
+            "number": "8.0",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "j"
+        },
+        {
+            "name": "8.3",
+            "number": "8.3",
+            "platform": "iOS",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "m"
+        },
+        {
+            "name": "Cupcake",
+            "number": "1.5",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "b"
+        },
+        {
+            "name": "Donut",
+            "number": "1.6",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "c"
+        },
+        {
+            "name": "Eclair",
+            "number": "2.0",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "d"
+        },
+        {
+            "name": "Froyo",
+            "number": "2.2",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "e"
+        },
+        {
+            "name": "Gingerbread",
+            "number": "2.3",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "f"
+        },
+        {
+            "name": "Honeycomb",
+            "number": "3.0",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "g"
+        },
+        {
+            "name": "Ice Cream Sandwich",
+            "number": "4.0",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "h"
+        },
+        {
+            "name": "Jelly Bean",
+            "number": "4.1",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "i"
+        },
+        {
+            "name": "Kit Kat",
+            "number": "4.4",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "k"
+        },
+        {
+            "name": "Lollipop",
+            "number": "5.0",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "l"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {}
+    }
+}

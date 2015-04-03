@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "placements": [
+                [
+                    "ALL_ON_TWITTER"
+                ]
+            ],
+            "product_type": "PROMOTED_ACCOUNT"
+        }
+    ],
+    "data_type": "placement",
+    "request": {
+        "params": {
+            "product_type": "PROMOTED_ACCOUNT"
+        }
+    }
+}

@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.social.twitter.api.Place;
+import org.springframework.social.twitter.api.PlaceType;
 import org.springframework.social.twitter.api.Place.GeoPoint;
 import org.springframework.social.twitter.api.Place.Geometry;
 import org.springframework.social.twitter.api.Place.GeometryType;
-import org.springframework.social.twitter.api.PlaceType;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -38,7 +38,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class PlaceMixin extends TwitterObjectMixin {
+public abstract class PlaceMixin extends TwitterObjectMixin {
 	
 	@JsonCreator
 	public PlaceMixin(

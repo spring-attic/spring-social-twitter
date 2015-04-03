@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api.impl;
 import org.springframework.http.HttpStatus;
 
 @SuppressWarnings("serial")
-class StreamCreationException extends Exception {
+public class StreamCreationException extends Exception {
 	
 	private HttpStatus httpStatus;
 

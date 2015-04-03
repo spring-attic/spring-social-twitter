@@ -1,12 +1,12 @@
 /*
  * Copyright 2014 the original author or authors.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,6 +16,16 @@
 package org.springframework.social.twitter.api;
 
 import org.springframework.social.ApiBinding;
+import org.springframework.social.twitter.api.advertising.AdvertisingOperations;
+import org.springframework.social.twitter.api.advertising.CampaignOperations;
+import org.springframework.social.twitter.api.advertising.LineItemOperations;
+import org.springframework.social.twitter.api.advertising.PromotionOperations;
+import org.springframework.social.twitter.api.advertising.StatisticsOperations;
+import org.springframework.social.twitter.api.advertising.TailoredAudienceOperations;
+import org.springframework.social.twitter.api.advertising.TargetingCriteriaDiscoveryOperations;
+import org.springframework.social.twitter.api.advertising.TargetingCriteriaOperations;
+import org.springframework.social.twitter.api.ton.TonOperations;
+import org.springframework.social.twitter.api.upload.UploadOperations;
 import org.springframework.web.client.RestOperations;
 
 
@@ -26,57 +36,116 @@ import org.springframework.web.client.RestOperations;
  * @author Craig Walls
  */
 public interface Twitter extends ApiBinding {
-	
-	/**
-	 * @return the portion of the Twitter API containing the block operations.
-	 */
-	BlockOperations blockOperations();
-	
-	/**
-	 * @return the portion of the Twitter API containing the direct message operations.
-	 */
-	DirectMessageOperations directMessageOperations();
 
-	/**
-	 * @return the portion of the Twitter API containing the friends and followers operations.
-	 */
-	FriendOperations friendOperations();
+    /**
+     * @return the portion of the Twitter API containing the block operations.
+     */
+    BlockOperations blockOperations();
 
-	/**
-	 * @return the portion of the Twitter API containing the geo location operations.
-	 */
-	GeoOperations geoOperations();
+    /**
+     * @return the portion of the Twitter API containing the direct message operations.
+     */
+    DirectMessageOperations directMessageOperations();
 
-	/**
-	 * @return the portion of the Twitter API containing the user list operations.
-	 */
-	ListOperations listOperations();
+    /**
+     * @return the portion of the Twitter API containing the friends and followers operations.
+     */
+    FriendOperations friendOperations();
 
-	/**
-	 * @return the portion of the Twitter API containing the search operations.
-	 */
-	SearchOperations searchOperations();
+    /**
+     * @return the portion of the Twitter API containing the geo location operations.
+     */
+    GeoOperations geoOperations();
 
-	/**
-	 * @return the portion of the Twitter API containing the streaming operations.
-	 */
-	StreamingOperations streamingOperations();
-	
-	/**
-	 * @return the portion of the Twitter API containing the tweet and timeline operations.
-	 */
-	TimelineOperations timelineOperations();
+    /**
+     * @return the portion of the Twitter API containing the user list operations.
+     */
+    ListOperations listOperations();
 
-	/**
-	 * @return the portion of the Twitter API containing the user operations.
-	 */
-	UserOperations userOperations();
+    /**
+     * @return the portion of the Twitter API containing the search operations.
+     */
+    SearchOperations searchOperations();
 
-	/**
-	 * Returns the underlying {@link RestOperations} object allowing for consumption of Twitter endpoints that may not be otherwise covered by the API binding.
-	 * The RestOperations object returned is configured to include an OAuth "Authorization" header on all requests.
-	 * @return a RestOperations object instrumented for including an OAuth Authorization header on requests.
-	 */
-	RestOperations restOperations();
+    /**
+     * @return the portion of the Twitter API containing the streaming operations.
+     */
+    StreamingOperations streamingOperations();
 
+    /**
+     * @return the portion of the Twitter API containing the tweet and timeline operations.
+     */
+    TimelineOperations timelineOperations();
+
+    /**
+     * @return the portion of the Twitter API containing the user operations.
+     */
+    UserOperations userOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the advertising operations.
+     */
+    AdvertisingOperations advertisingOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the promoted tweet operations.
+     */
+    PromotionOperations promotionOperations();
+
+    /**
+     * 
+     * @return the portion of the Twitter ADS API containing operations for advertising statistics.
+     */
+    StatisticsOperations statisticsOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the campaign operations.
+     */
+    CampaignOperations campaignOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the line items operations.
+     */
+    LineItemOperations lineItemOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the targeting criteria operations.
+     */
+    TargetingCriteriaOperations targetingCriteriaOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the targeting criteria discovery operations.
+     */
+    TargetingCriteriaDiscoveryOperations targetingCriteriaDiscoveryOperations();
+
+    /**
+     * @return the portion of the Twitter ADS API containing the tailored audience operations.
+     */
+    TailoredAudienceOperations tailoredAudienceOperations();
+
+    /**
+     * @return the Twitter Object Nest operations.
+     */
+    TonOperations tonOperations();
+
+    /**
+     * @return operations for uploading non-chunked media.
+     */
+    UploadOperations uploadOperations();
+
+    /**
+     * Returns the underlying {@link RestOperations} object allowing for consumption of Twitter endpoints that may not be otherwise covered by the API
+     * binding.
+     * The RestOperations object returned is configured to include an OAuth "Authorization" header on all requests.
+     * 
+     * @return a RestOperations object instrumented for including an OAuth Authorization header on requests.
+     */
+    RestOperations restOperations();
+
+    /**
+     * Retrieve dynamic settings inherent to the setup of the twitter api.
+     * 
+     * @return an implementation of {@link Settings} responsible for communicating the settings
+     */
+    Settings settings();
 }

@@ -24,6 +24,7 @@ import java.util.List;
  * @author Craig Walls
  */
 public class Trends extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private final Date time;
 	private final List<Trend> trends;
 

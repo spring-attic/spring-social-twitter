@@ -15,6 +15,7 @@
  */
 package org.springframework.social.twitter.api;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,7 +26,8 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
  * Offers an extraData property for carrying any data in response from Twitter that won't be otherwise mapped to any properties of the subclass.
  * @author Craig Walls
  */
-public class TwitterObject {
+public class TwitterObject implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	private Map<String, Object> extraData;
 

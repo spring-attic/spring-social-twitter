@@ -15,11 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
+
+
 /**
  * Represents a single trending topic.
  * @author Craig Walls
  */
 public class Trend extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private final String name;
 
 	private final String query;

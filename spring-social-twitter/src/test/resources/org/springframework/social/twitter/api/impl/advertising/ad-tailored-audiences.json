@@ -1,0 +1,32 @@
+{
+    "data": [
+        {
+            "audience_size": null,
+            "audience_type": "CRM",
+            "created_at": "2015-06-08T20:13:40Z",
+            "deleted": false,
+            "id": "qq4u",
+            "list_type": "TWITTER_ID",
+            "name": "twitter%20ids",
+            "partner_source": "OTHER",
+            "reasons_not_targetable": [
+                "PROCESSING",
+                "TOO_SMALL"
+            ],
+            "targetable": false,
+            "targetable_types": [
+                "CRM",
+                "EXCLUDED_CRM"
+            ],
+            "updated_at": "2015-06-08T20:13:40Z"
+        }
+    ],
+    "data_type": "tailored_audiences",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "account_id": "gq0vqj"
+        }
+    },
+    "total_count": 1
+}

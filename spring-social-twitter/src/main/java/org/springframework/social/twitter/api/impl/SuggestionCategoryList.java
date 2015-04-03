@@ -26,5 +26,5 @@ import org.springframework.social.twitter.api.SuggestionCategory;
  * @author Craig Walls
  */
 @SuppressWarnings("serial")
-class SuggestionCategoryList extends ArrayList<SuggestionCategory> {
+public class SuggestionCategoryList extends ArrayList<SuggestionCategory> {
 }

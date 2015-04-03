@@ -22,6 +22,7 @@ import java.util.List;
  * @author Craig Walls
  */
 public class Place extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 
 	private final String id;
 	

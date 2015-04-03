@@ -31,7 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class UserListMixin extends TwitterObjectMixin {
+public abstract class UserListMixin extends TwitterObjectMixin {
 
 	@JsonCreator
 	UserListMixin(

@@ -22,6 +22,7 @@ import java.util.Date;
  * @author Craig Walls
  */
 public class DirectMessage extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private final long id;
 	private final String text;
 	private final TwitterProfile sender;

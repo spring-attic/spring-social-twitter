@@ -1,12 +1,12 @@
 /*
  * Copyright 2014 the original author or authors.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import static org.springframework.social.twitter.api.impl.SearchParametersUtil.*;
+import static org.springframework.social.twitter.api.impl.SearchParametersUtil.buildQueryParametersFromSearchParameters;
 
 import java.util.List;
 
@@ -31,78 +31,120 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Implementation of {@link SearchOperations}, providing a binding to Twitter's search and trend-oriented REST resources.
+ * 
  * @author Craig Walls
  */
-class SearchTemplate extends AbstractTwitterOperations implements SearchOperations {
+public class SearchTemplate extends AbstractTwitterOperations implements SearchOperations {
+    private static final MultiValueMap<String, Object> EMPTY_DATA = new LinkedMultiValueMap<String, Object>();
+    private final RestTemplate restTemplate;
 
-	private final RestTemplate restTemplate;
+    public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
+        super(isAuthorizedForUser, isAuthorizedForApp);
+        this.restTemplate = restTemplate;
+    }
 
-	public SearchTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
-		super(isAuthorizedForUser, isAuthorizedForApp);
-		this.restTemplate = restTemplate;
-	}
+    @Override
+    public SearchResults search(String query) {
+        return this.search(new SearchParameters(query));
+    }
 
-	public SearchResults search(String query) {
-		return this.search(new SearchParameters(query));
-	}
+    @Override
+    public SearchResults search(String query, int resultsPerPage) {
+        SearchParameters p = new SearchParameters(query).count(resultsPerPage);
+        return this.search(p);
+    }
 
-	public SearchResults search(String query, int resultsPerPage) {
-		SearchParameters p = new SearchParameters(query).count(resultsPerPage);
-		return this.search(p);
-	}
+    @Override
+    public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
+        SearchParameters p = new SearchParameters(query).count(resultsPerPage).sinceId(sinceId);
+        if (maxId > 0) {
+            p.maxId(maxId);
+        }
+        return this.search(p);
+    }
 
-	public SearchResults search(String query, int resultsPerPage, long sinceId, long maxId) {
-		SearchParameters p = new SearchParameters(query).count(resultsPerPage).sinceId(sinceId);
-		if (maxId > 0) {
-			p.maxId(maxId);
-		}
-		return this.search(p);
-	}
+    @Override
+    public SearchResults search(SearchParameters searchParameters) {
+        requireEitherUserOrAppAuthorization();
+        Assert.notNull(searchParameters);
+        return restTemplate.getForObject(
+                new TwitterApiBuilderForUri()
+                        .withResource(TwitterApiUriResourceForStandard.SEARCH_TWEETS)
+                        .withArgument(buildQueryParametersFromSearchParameters(searchParameters))
+                        .build(),
+                SearchResults.class);
+    }
 
-	public SearchResults search(SearchParameters searchParameters) {
-		requireEitherUserOrAppAuthorization();
-		Assert.notNull(searchParameters);
-		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
-		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
-	}
+    @Override
+    public List<SavedSearch> getSavedSearches() {
+        requireUserAuthorization();
+        return restTemplate.getForObject(
+                new TwitterApiBuilderForUri()
+                        .withResource(TwitterApiUriResourceForStandard.SAVED_SEARCHES_LIST)
+                        .build(),
+                SavedSearchList.class);
+    }
 
-	public List<SavedSearch> getSavedSearches() {
-		requireUserAuthorization();
-		return restTemplate.getForObject(buildUri("saved_searches/list.json"), SavedSearchList.class);
-	}
+    @Override
+    public SavedSearch getSavedSearch(long searchId) {
+        requireUserAuthorization();
+        return restTemplate.getForObject(
+                new TwitterApiBuilderForUri()
+                        .withResource(TwitterApiUriResourceForStandard.SAVED_SEARCHES_SHOW)
+                        .withArgument("search_id", searchId)
+                        .build(),
+                SavedSearch.class);
+    }
 
-	public SavedSearch getSavedSearch(long searchId) {
-		requireUserAuthorization();
-		return restTemplate.getForObject(buildUri("saved_searches/show/" + searchId + ".json"), SavedSearch.class);
-	}
+    @Override
+    public SavedSearch createSavedSearch(String query) {
+        requireUserAuthorization();
+        return restTemplate.postForObject(
+                new TwitterApiBuilderForUri()
+                        .withResource(TwitterApiUriResourceForStandard.SAVED_SEARCHES_CREATE)
+                        .build(),
+                new RestRequestBodyBuilder()
+                        .withField("query", query)
+                        .build(),
+                SavedSearch.class);
+    }
 
-	public SavedSearch createSavedSearch(String query) {		
-		requireUserAuthorization();
-		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
-		data.set("query", query);
-		return restTemplate.postForObject(buildUri("saved_searches/create.json"), data, SavedSearch.class);
-	}
+    @Override
+    public void deleteSavedSearch(long searchId) {
+        requireUserAuthorization();
+        restTemplate.postForObject(
+                new TwitterApiBuilderForUri()
+                        .withResource(TwitterApiUriResourceForStandard.SAVED_SEARCHES_DESTROY)
+                        .withArgument("search_id", searchId)
+                        .build(),
+                EMPTY_DATA,
+                SavedSearch.class);
+    }
 
-	public void deleteSavedSearch(long searchId) {
-		requireUserAuthorization();
-		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
-		restTemplate.postForObject(buildUri("saved_searches/destroy/" + searchId + ".json"), data, SavedSearch.class);
-	}
-	
-	// Trends
+    // Trends
 
-	public Trends getLocalTrends(long whereOnEarthId) {
-		return getLocalTrends(whereOnEarthId, false);
-	}
+    @Override
+    public Trends getLocalTrends(long whereOnEarthId) {
+        return getLocalTrends(whereOnEarthId, false);
+    }
 
-	public Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags) {
-		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("id",String.valueOf(whereOnEarthId));
-		if(excludeHashtags) {
-			parameters.set("exclude", "hashtags");
-		}
-		return restTemplate.getForObject(buildUri("trends/place.json", parameters), LocalTrendsHolder.class).getTrends();
-	}
+    @Override
+    public Trends getLocalTrends(long whereOnEarthId, boolean excludeHashtags) {
+        requireEitherUserOrAppAuthorization();
+
+        LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+        parameters.set("id", String.valueOf(whereOnEarthId));
+        if (excludeHashtags) {
+            parameters.set("exclude", "hashtags");
+        }
+
+        return restTemplate.getForObject(
+                new TwitterApiBuilderForUri()
+                        .withResource(TwitterApiUriResourceForStandard.TRENDS_PLACE)
+                        .withArgument(parameters)
+                        .build(),
+                LocalTrendsHolder.class
+                ).getTrends();
+    }
 
 }

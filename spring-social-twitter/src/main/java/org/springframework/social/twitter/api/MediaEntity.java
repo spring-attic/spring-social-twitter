@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -19,134 +19,144 @@ import java.io.Serializable;
 import java.util.Arrays;
 
 /**
- * <p>A representation of embedded media entity.</p>
+ * <p>
+ * A representation of embedded media entity.
+ * </p>
+ *
  * @author bowen
  */
 public class MediaEntity extends TwitterObject implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private long id;
+    private final long id;
 
-	private String mediaHttp;
+    private final String mediaHttp;
 
-	private String mediaHttps;
+    private final String mediaHttps;
 
-	private String url;
+    private final String url;
 
-	private String display;
+    private final String display;
 
-	private String expanded;
+    private final String expanded;
 
-	private String type;
+    private final String type;
 
-	private int[] indices;
+    private final int[] indices;
 
-	public MediaEntity(long id, String mediaHttp, String mediaHttps, String url, String display, String expanded, String type, int[] indices) {
-		this.id = id;
-		this.mediaHttp = mediaHttp;
-		this.mediaHttps = mediaHttps;
-		this.url = url;
-		this.display = display;
-		this.expanded = expanded;
-		this.type = type;
-		this.indices = indices;
-	}
+    private final VideoInfoMediaEntity videoInfo;
 
+    public MediaEntity(
+            long id,
+            String mediaHttp,
+            String mediaHttps,
+            String url,
+            String display,
+            String expanded,
+            String type,
+            int[] indices,
+            VideoInfoMediaEntity videoInfo) {
 
-	public long getId() {
-		return this.id;
-	}
-
-
-	public String getMediaUrl() {
-		return this.mediaHttp;
-	}
-
-
-	public String getMediaSecureUrl() {
-		return this.mediaHttps;
-	}
+        this.id = id;
+        this.mediaHttp = mediaHttp;
+        this.mediaHttps = mediaHttps;
+        this.url = url;
+        this.display = display;
+        this.expanded = expanded;
+        this.type = type;
+        this.indices = indices;
+        this.videoInfo = videoInfo;
+    }
 
 
-	public String getType() {
-		return this.type;
-	}
+    public long getId() {
+        return id;
+    }
 
 
-	public String getDisplayUrl() {
-		return display;
-	}
+    public String getMediaUrl() {
+        return mediaHttp;
+    }
 
 
-	public String getExpandedUrl() {
-		return this.expanded;
-	}
+    public String getMediaSecureUrl() {
+        return mediaHttps;
+    }
 
 
-	public String getUrl() {
-		return this.url;
-	}
+    public String getType() {
+        return type;
+    }
 
 
-	public int[] getIndices() {
-		if (this.indices == null || this.indices.length <= 0) {
-			return new int[0];
-		}
-		return this.indices;
-	}
+    public String getDisplayUrl() {
+        return display;
+    }
 
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-
-		MediaEntity that = (MediaEntity) o;
-
-		if (id != that.id) {
-			return false;
-		}
-		if (display != null ? !display.equals(that.display) : that.display != null) {
-			return false;
-		}
-		if (expanded != null ? !expanded.equals(that.expanded) : that.expanded != null) {
-			return false;
-		}
-		if (!Arrays.equals(indices, that.indices)) {
-			return false;
-		}
-		if (mediaHttp != null ? !mediaHttp.equals(that.mediaHttp) : that.mediaHttp != null) {
-			return false;
-		}
-		if (mediaHttps != null ? !mediaHttps.equals(that.mediaHttps) : that.mediaHttps != null) {
-			return false;
-		}
-		if (type != null ? !type.equals(that.type) : that.type != null) {
-			return false;
-		}
-		if (url != null ? !url.equals(that.url) : that.url != null) {
-			return false;
-		}
-
-		return true;
-	}
+    public String getExpandedUrl() {
+        return expanded;
+    }
 
 
-	@Override
-	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + (mediaHttp != null ? mediaHttp.hashCode() : 0);
-		result = 31 * result + (mediaHttps != null ? mediaHttps.hashCode() : 0);
-		result = 31 * result + (url != null ? url.hashCode() : 0);
-		result = 31 * result + (display != null ? display.hashCode() : 0);
-		result = 31 * result + (expanded != null ? expanded.hashCode() : 0);
-		result = 31 * result + (type != null ? type.hashCode() : 0);
-		result = 31 * result + (indices != null ? Arrays.hashCode(indices) : 0);
-		return result;
-	}
+    public String getUrl() {
+        return url;
+    }
+
+
+    public int[] getIndices() {
+        if (indices == null || indices.length <= 0)
+            return new int[0];
+        return indices;
+    }
+
+
+    public VideoInfoMediaEntity getVideoInfo() {
+        return videoInfo;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+
+        final MediaEntity that = (MediaEntity) o;
+
+        if (id != that.id)
+            return false;
+        if (display != null ? !display.equals(that.display) : that.display != null)
+            return false;
+        if (expanded != null ? !expanded.equals(that.expanded) : that.expanded != null)
+            return false;
+        if (!Arrays.equals(indices, that.indices))
+            return false;
+        if (mediaHttp != null ? !mediaHttp.equals(that.mediaHttp) : that.mediaHttp != null)
+            return false;
+        if (mediaHttps != null ? !mediaHttps.equals(that.mediaHttps) : that.mediaHttps != null)
+            return false;
+        if (type != null ? !type.equals(that.type) : that.type != null)
+            return false;
+        if (url != null ? !url.equals(that.url) : that.url != null)
+            return false;
+
+        return true;
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (mediaHttp != null ? mediaHttp.hashCode() : 0);
+        result = 31 * result + (mediaHttps != null ? mediaHttps.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (display != null ? display.hashCode() : 0);
+        result = 31 * result + (expanded != null ? expanded.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (indices != null ? Arrays.hashCode(indices) : 0);
+        return result;
+    }
 }

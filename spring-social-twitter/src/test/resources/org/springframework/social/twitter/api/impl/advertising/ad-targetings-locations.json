@@ -1,0 +1,1209 @@
+{
+    "data": [
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00601, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "10c4b91189877846"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00602, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f6069e863e29e322"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00603, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "84e681a9fb76656f"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00606, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "03ee27c08cf99bea"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00610, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f39bb92424252cee"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00612, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "8f88713a5e8554ff"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00617, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f8c8159b1d3f7066"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00623, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "aefcbacb526e53da"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00624, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "df348c4baca1af62"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00627, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e6bdc25f3891c234"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00631, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "08abe8ac0336121d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00637, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "05eb0d4ee979e713"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00638, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f0f8bd125cde4f21"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00641, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6749c6ec3750f8b8"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00646, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7c366cd1746ec4c3"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00647, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d52e6b1178829431"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00650, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "06a5d4d9926ae0d1"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00653, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "8eed404cd06d3b8e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00656, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2d97991042e47f5e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00659, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "158a9252b5c7defa"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00660, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6c08f2abe7b507e4"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00662, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0d5db929f44b3e55"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00664, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "8297417c95ed1be9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00667, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "48febe80ae06a1e6"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00669, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "c20ec2e2d23d8f49"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00670, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "87f4090520bd0af8"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00674, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ba19e640b3606cc3"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00676, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0b12a33b75f5d424"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00677, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7702a1eec8ad59dc"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00678, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e19b9b8fe74091d6"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00680, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "5fffa373a235d503"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00682, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "be46d1ad49b7f709"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00683, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1427cef4bfe4b1f5"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00685, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "759cc5105247c254"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00687, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "46d9c1e6feee7862"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00690, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ef0c4d0b119688d0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00692, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6111c0dee6afe75d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00693, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "aad8199bef272bc0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00698, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "00d9edc0a738ef0e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00703, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ed8cffead51813dd"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00704, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "df1044486e47f59d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00705, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "70a2f975db6d44d4"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00707, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "01ce2b94c85c1d33"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00714, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "73cac73531e89f45"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00715, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a8889fd843731ea0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00716, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d21d308cda909c5f"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00717, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "78e2d47d7caa0c26"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00718, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4e881e54531db20a"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00719, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "adb120e81315d214"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00720, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4cc0b8a3324d7e2b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00723, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a6f1846278109db3"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00725, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "9ed90dee8326e226"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00727, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "cc33f54d28bc4e66"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00728, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "b8a0975a3165d2a4"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00729, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "13dbef9f15d8550c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00730, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "b4982e47106ddf96"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00731, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ba47f68cc80ba5a8"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00735, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "31b7472a8e8eb878"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00736, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0b82fd85fda99f44"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00738, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e6c985aa615630da"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00739, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "13eeec620e030e11"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00740, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e508fde1895f891b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00741, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "8796b2daabc2abd3"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00745, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "890ab7011cc7ff78"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00751, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d7c99f3aade6c27b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00754, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7c58431cc36ced44"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00757, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "da88ec573bdfd515"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00765, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "746a8042a797f478"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00766, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "626bbabb1f7672e4"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00767, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6a66d6cf8502016e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00769, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ef2ce925849898ca"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00771, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4b4188ff2f5e24e9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00772, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2a598038265144ed"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00773, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "defce7c35d298a58"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00775, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "17cda568c7332098"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00777, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "38e680d73b8e0e5b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00778, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "da19493cf4a9645e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00780, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "17309a1190f93986"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00782, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "36c504b4f6305a84"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00783, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6f578dff45e1a364"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00784, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e902da078da923a0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00791, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "81ddcc92db12a17d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00794, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0e330bc22b69681c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00795, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7eb6840d762bac41"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00901, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7bce94d60a807b8b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00907, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4066187134ab3f74"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00909, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "9a3b0aa4818459bd"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00911, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "b03aa4e82928c5b6"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00912, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "10d376a1acbc8392"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00913, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a259aa8e9b87068e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00915, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ebbab9870ecdede6"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00917, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "9b59d8b48c8045c3"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00918, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6dd33636ef199a97"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00920, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7b5a22775b02738a"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00921, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "afc161bb3cc6bcdf"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00923, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "62c060bd53cb5974"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00924, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e2eb9f69e2a03186"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00925, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "46346fd43c822341"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00926, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d5a189cf2e450ba9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00927, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "016f7b28d6d60b82"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00934, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d681aa602bbaa544"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00949, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "b74071a9248f9727"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00952, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "938864a7f01baa85"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00953, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d2f5b181644cff15"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00956, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0f6dd6901184e5d9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00957, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a3d47daefc97d442"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00959, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "30e77caf1add63f0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00961, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a247a1e1c0ab2e75"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00962, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f9ac8efa93685dbb"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00965, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "c3ec5a31c46e9eda"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00966, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a7d8b63ffc06ddd9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00968, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "c92ae06a575c2e56"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00969, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a31cd52c51512a66"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00976, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "08497554d7838172"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00979, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7e6fadb868dff83f"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00982, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7a784f3c428976ba"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00983, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1ceef7de602037a9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00985, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "db3785c25ec07c05"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "00987, PR, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2efd29f25df089f2"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01000 / Bourg-en-Bresse, FR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "02ce6b8a6211cb1e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01000, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "44e09b48a57c693b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01001 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "388c514e2869630d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01001, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "b468a4da63b00bd0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01002 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3f22db49e7725e2a"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01002, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6787aff1d1588039"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01003 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6c6278843c06bb0a"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01003, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7384577f5a475a2d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01004 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7b7e1327b314a2c2"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01005 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4436caf7417c874b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01005, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0b475fec75987346"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01005, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7565f8535782a8bb"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01006 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "136330cac61dc83b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01007 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "73b6155506af6439"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01007, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3614542efb7cff54"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01007, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2b8f08e82ecaafe7"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01008 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "11ef27775ca90e5f"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01008, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "227b9a58d926589c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01009 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "300871b3f49baa3d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01009, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6888d37ec6fa3d17"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01010 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7472a2fd18cf31f2"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01010 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3e4d4d54909cd152"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01010, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "b3a60da78a1dcde6"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01010, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6bd00f2f7b9daafb"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01011, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "496eebfe319326e1"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01012 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2b0b90c1024a0944"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01012, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2bb6204f6b9fcfb7"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01012, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d815c7194dadedd1"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01013 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4472beedb240320e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01013, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "e4be0d92e6795520"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01015 / Vitoria-Gasteiz, ES",
+            "targeting_type": "LOCATION",
+            "targeting_value": "077a16d4b8f37448"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01015, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1cf3019d3d4f508c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01016, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4f0fd49eb317c2ff"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01017, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "06a9f48a1849f01a"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01019, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6b11c65ce8424b67"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01020 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "69f39b1738244f6f"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01020, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "205bced14e952344"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01020, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3abd162d5fbe2066"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01022, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1b48e0ad26d9077c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01022, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1e0c7ee5d333c2c5"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01026, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3db93400cfd24782"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01026, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "08722390374b219c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01027, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "d606c01ed8161619"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01028, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "dd967f462d338fab"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01030 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "429ca0892b9b2700"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01030, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "c63450ea8d21df02"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01030, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "38c9d0ef756869a6"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01031, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "00f3d9855f63f8a5"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01031, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "eab8f5661b84c3ff"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01032, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "9893ff8ef8acd373"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01033, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "625babd754013949"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01033, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1146f758eaa1cb13"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01034, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f9d2caafdeb47ed1"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01035, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "42688abb61249316"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01035, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "fa1c7aa4c35fb963"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01036, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0307dbcaa665b4f9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01037, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "01ca11e289119c72"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01038, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "cbb05d349f323c16"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01039, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ae0e8c0cae80c6b9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01040 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "32ea23bdc0fc06b0"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01040, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2fc5aa29f1e53d1f"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01040, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "31a41bfedc241e98"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01049, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "2f341c8d6d25c23d"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01050 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "34b4f65184210d04"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01050, BR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "6e1a73ad2e6d661e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01050, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "ef768ba694e456d3"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01050, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "4700bd18dc2fb166"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01053, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "c27dec25eb6fb8a4"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01054, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3add3f42201c8ad9"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01056, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "7de8b973018103ca"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01057, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "bcedbfa397784b8c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01060 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "25c05d558aca0750"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01060, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "989e89030fbb9194"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01060, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "1f6aaa28bb8e315b"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01062, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "3e35bddba1c05b80"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01063, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "46d30f7f32968c63"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01068, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "a887d99ec70103bf"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01069, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "66af4fe8f2f4bdcd"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01070 / Seyhan, TR",
+            "targeting_type": "LOCATION",
+            "targeting_value": "21c8118c31bb518a"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01070, MA, US",
+            "targeting_type": "LOCATION",
+            "targeting_value": "f49db7bbebe3b257"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "01070, MX",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0d7a95bc769961d4"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": "1c27vt9rbi8d60ayq0u3awo3k",
+    "request": {
+        "params": {}
+    }
+}

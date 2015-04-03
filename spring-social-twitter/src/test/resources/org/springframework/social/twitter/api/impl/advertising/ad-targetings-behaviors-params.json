@@ -1,0 +1,42 @@
+{
+    "data": [
+        {
+            "audience_size": 4521480,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs0",
+            "name": "In market: new vehicle",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2420480,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrz",
+            "name": "Vehicle purchase: 48+ months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        }
+    ],
+    "data_type": "behaviors",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "behavior_ids": [
+                "lfrz",
+                "lfs0"
+            ],
+            "sort_by": [
+                "name-asc"
+            ]
+        }
+    },
+    "total_count": 2
+}

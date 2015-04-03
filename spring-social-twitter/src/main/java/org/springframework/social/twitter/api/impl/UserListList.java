@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class UserListList {
+public class UserListList {
 	private final CursoredList<UserList> list;
 
 	@JsonCreator

@@ -27,7 +27,7 @@ import java.util.Date;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class TwitterProfileMixin extends TwitterObjectMixin {
+public abstract class TwitterProfileMixin extends TwitterObjectMixin {
 	@JsonCreator
 	TwitterProfileMixin(
 			@JsonProperty("id") long id, 

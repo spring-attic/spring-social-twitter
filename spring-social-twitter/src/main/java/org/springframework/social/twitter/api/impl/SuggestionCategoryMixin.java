@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Mixin class for adding Jackson annotations to SuggestionCategory.
  * @author Craig Walls
  */
-abstract class SuggestionCategoryMixin extends TwitterObjectMixin {
+public abstract class SuggestionCategoryMixin extends TwitterObjectMixin {
 	@JsonCreator
 	SuggestionCategoryMixin(
 			@JsonProperty("name") String name, 

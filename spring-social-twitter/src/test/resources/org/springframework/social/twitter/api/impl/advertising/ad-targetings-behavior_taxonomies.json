@@ -1,0 +1,1368 @@
+{
+    "data": [
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1",
+            "name": "Auto (DLX Auto powered by Polk)",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2",
+            "name": "Aftermarket",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "3",
+            "name": "In market",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "4",
+            "name": "Max in market",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "5",
+            "name": "Motorcycle",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "6",
+            "name": "Near market",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "7",
+            "name": "Owners",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "8",
+            "name": "Vehicle price or age",
+            "parent_id": "1",
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "9",
+            "name": "CPG brands",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:09Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "a",
+            "name": "Bakery buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "b",
+            "name": "Baking & cooking supplies buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "c",
+            "name": "Beverage buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "d",
+            "name": "Cereal buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "e",
+            "name": "Children's food & product buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "f",
+            "name": "Condiments & sauces buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "g",
+            "name": "Dairy & egg buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "h",
+            "name": "Frozen food buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "i",
+            "name": "Health & beauty buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "j",
+            "name": "Household supplies buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "k",
+            "name": "Meat & seafood buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "l",
+            "name": "Pet care buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:10Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "m",
+            "name": "Soup buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "n",
+            "name": "Sweets & snack buyers",
+            "parent_id": "9",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "o",
+            "name": "CPG BuyStyles",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "p",
+            "name": "CPG categories",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "q",
+            "name": "Alcohol beverage buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "r",
+            "name": "Bakery buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "s",
+            "name": "Baking & cooking supplies buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "t",
+            "name": "Beverage buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "u",
+            "name": "Cereal buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "v",
+            "name": "Children's food & product buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "w",
+            "name": "Condiments & sauces buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "x",
+            "name": "Dairy & egg buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:11Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "y",
+            "name": "Deli food buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "z",
+            "name": "Frozen food buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "10",
+            "name": "Gift & party supplies buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "11",
+            "name": "Grocery spending behavior",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "12",
+            "name": "Health & beauty buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "13",
+            "name": "Health food buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "14",
+            "name": "Household supplies buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "15",
+            "name": "Meat & seafood buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "16",
+            "name": "Packaged meals, grains & pasta buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "17",
+            "name": "Pet care buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "18",
+            "name": "Soup buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "19",
+            "name": "Sweets & snack buyers",
+            "parent_id": "p",
+            "updated_at": "2015-01-21T21:47:12Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1a",
+            "name": "Demographics",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1b",
+            "name": "Age",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1c",
+            "name": "Charitable donor",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1d",
+            "name": "College graduate",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1e",
+            "name": "DMA",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1f",
+            "name": "Dwelling type",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1g",
+            "name": "Family position",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1h",
+            "name": "Gender",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1i",
+            "name": "Generation",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1j",
+            "name": "Heritage",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1k",
+            "name": "Hobbies",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:13Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1l",
+            "name": "Home ownership",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1m",
+            "name": "Home renter",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1n",
+            "name": "Length of residence",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1o",
+            "name": "Marital status",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1p",
+            "name": "Number of adults in household",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1q",
+            "name": "Occupation",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1r",
+            "name": "Occupation category",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1s",
+            "name": "Pet owner",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1t",
+            "name": "Political party affiliation",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1u",
+            "name": "Presence in household",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:23Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1v",
+            "name": "Presence of family member age",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1w",
+            "name": "Spanish speaking",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1x",
+            "name": "Personal travel",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1y",
+            "name": "Veteran in household",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:47:14Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "1z",
+            "name": "Finance",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "20",
+            "name": "Bank/credit activity",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "21",
+            "name": "Credit card holders",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "22",
+            "name": "Credit worthiness",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "23",
+            "name": "Estimated household income",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "24",
+            "name": "Financial services",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "25",
+            "name": "Home value",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "26",
+            "name": "Investments",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "27",
+            "name": "Net worth",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "28",
+            "name": "Lifestyles",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "29",
+            "name": "Philanthropy",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2a",
+            "name": "Retail brands",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:15Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2b",
+            "name": "Children's products",
+            "parent_id": "2a",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2c",
+            "name": "Clothing, shoes & accessories",
+            "parent_id": "2a",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2d",
+            "name": "Consumer electronics",
+            "parent_id": "2a",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2e",
+            "name": "Retail categories",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2f",
+            "name": "Automotive products buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2g",
+            "name": "Children's products buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2h",
+            "name": "Consumer electronics buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2i",
+            "name": "Corporate attire buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2j",
+            "name": "Fitness buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2k",
+            "name": "Gift and flower buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2l",
+            "name": "Health & wellness buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2m",
+            "name": "Home & garden buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:16Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2n",
+            "name": "Home improvement buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2o",
+            "name": "Men's fashion & apparel buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2p",
+            "name": "Outdoor sports buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2q",
+            "name": "Pet supply buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2r",
+            "name": "Senior's products buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2s",
+            "name": "Small & home office product buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2t",
+            "name": "Women's accessories",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2u",
+            "name": "Women's fashion & apparel buyers",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2v",
+            "name": "Seasonal",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2w",
+            "name": "Fall ",
+            "parent_id": "2v",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2x",
+            "name": "Spring",
+            "parent_id": "2v",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2y",
+            "name": "Summer",
+            "parent_id": "2v",
+            "updated_at": "2015-01-21T21:47:17Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "2z",
+            "name": "Winter",
+            "parent_id": "2v",
+            "updated_at": "2015-01-21T21:47:18Z"
+        },
+        {
+            "created_at": "2014-12-08T21:55:58Z",
+            "id": "30",
+            "name": "Subscription services",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:18Z"
+        },
+        {
+            "created_at": "2015-01-21T21:47:24Z",
+            "id": "31",
+            "name": "Travel",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:47:24Z",
+            "id": "32",
+            "name": "Business travel",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:47:24Z",
+            "id": "33",
+            "name": "Frequent flyers",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:47:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:22Z",
+            "id": "34",
+            "name": "Auto",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:51:22Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:22Z",
+            "id": "35",
+            "name": "Current vehicle",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:22Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:22Z",
+            "id": "36",
+            "name": "Likely country of origin",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:22Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "37",
+            "name": "Likely in market",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "38",
+            "name": "Likely in market timing",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "39",
+            "name": "Likely new vehicle brand",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3a",
+            "name": "Likely new vehicle payment preference",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3b",
+            "name": "Likely purchase vehicle feature",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3c",
+            "name": "Likely purchase vehicle segment",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3d",
+            "name": "New car purchase activity",
+            "parent_id": "34",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3e",
+            "name": "Country of origin",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3f",
+            "name": "Education",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3g",
+            "name": "Ethnicity",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3h",
+            "name": "Home age",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3i",
+            "name": "Home date",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3j",
+            "name": "Home loan",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3k",
+            "name": "Home purchase amount",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:23Z",
+            "id": "3l",
+            "name": "Home size",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:23Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3m",
+            "name": "Household size",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3n",
+            "name": "Income",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3o",
+            "name": "Life event",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3p",
+            "name": "Net worth",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3q",
+            "name": "Property type",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3r",
+            "name": "Residence characteristics",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3s",
+            "name": "Telephone behavior",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3t",
+            "name": "Work role/location",
+            "parent_id": "1a",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3u",
+            "name": "Affluency",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3v",
+            "name": "Auto insurance",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3w",
+            "name": "Credit card type",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3x",
+            "name": "Health insurance",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3y",
+            "name": "Home insurance",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "3z",
+            "name": "Life insurance",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "40",
+            "name": "Likely retirement/college savings plan ownership",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:24Z",
+            "id": "41",
+            "name": "Likely securities ownership",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:24Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "42",
+            "name": "Method of payment",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "43",
+            "name": "Other insurance",
+            "parent_id": "1z",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "44",
+            "name": "Geo",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "45",
+            "name": "DMA",
+            "parent_id": "44",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "46",
+            "name": "States",
+            "parent_id": "44",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "47",
+            "name": "Entertainment",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "48",
+            "name": "Home improvement",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "49",
+            "name": "Interest",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4a",
+            "name": "Investing / finance",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4b",
+            "name": "Likely behavior",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4c",
+            "name": "Likely magazine",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4d",
+            "name": "Likely magazine type",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4e",
+            "name": "Likely newspaper",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4f",
+            "name": "Likely radio format",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:25Z",
+            "id": "4g",
+            "name": "Likely radio type",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:25Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4h",
+            "name": "Likely television channel",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4i",
+            "name": "Likely television pay-per-view",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4j",
+            "name": "Likely television pay-per-view last 12 months",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4k",
+            "name": "Likely television technology",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4l",
+            "name": "Outdoor activities",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4m",
+            "name": "Personicx",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4n",
+            "name": "Reading",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4o",
+            "name": "Sports",
+            "parent_id": "28",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4p",
+            "name": "Causes supported financially",
+            "parent_id": "29",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4q",
+            "name": "Likely contribution method",
+            "parent_id": "29",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4r",
+            "name": "Likely contribution organization",
+            "parent_id": "29",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4s",
+            "name": "Likely participation",
+            "parent_id": "29",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4t",
+            "name": "Politics",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4u",
+            "name": "Likely political, public or civic activities",
+            "parent_id": "4t",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4v",
+            "name": "Political party",
+            "parent_id": "4t",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:26Z",
+            "id": "4w",
+            "name": "State political districts",
+            "parent_id": "4t",
+            "updated_at": "2015-01-21T21:51:26Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "4x",
+            "name": "Apparel",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "4y",
+            "name": "Apparel type",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "4z",
+            "name": "Automotive",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "50",
+            "name": "Baby products",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "51",
+            "name": "Beauty",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "52",
+            "name": "Retailer type",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "53",
+            "name": "Specialty store buyer",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "54",
+            "name": "Standard retail store buyer",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "55",
+            "name": "Tools",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "56",
+            "name": "Upscale store buyer",
+            "parent_id": "2e",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "57",
+            "name": "Technology",
+            "parent_id": null,
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "58",
+            "name": "Consumer electronics & accessories",
+            "parent_id": "57",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "59",
+            "name": "Electronics / computers",
+            "parent_id": "57",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "5a",
+            "name": "Gaming consoles, video games and accessories",
+            "parent_id": "57",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "5b",
+            "name": "Television & video",
+            "parent_id": "57",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:27Z",
+            "id": "5c",
+            "name": "Airline",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:51:27Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:28Z",
+            "id": "5d",
+            "name": "Hotel",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:51:28Z"
+        },
+        {
+            "created_at": "2015-01-21T21:51:28Z",
+            "id": "5e",
+            "name": "Travel services",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:51:28Z"
+        }
+    ],
+    "data_type": "behavior_taxonomies",
+    "next_cursor": null,
+    "request": {
+        "params": {}
+    },
+    "total_count": 194
+}

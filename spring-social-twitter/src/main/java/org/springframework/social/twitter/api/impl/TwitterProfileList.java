@@ -24,5 +24,5 @@ import org.springframework.social.twitter.api.TwitterProfile;
  * @author Craig Walls
  */
 @SuppressWarnings("serial")
-class TwitterProfileList extends ArrayList<TwitterProfile> {
+public class TwitterProfileList extends ArrayList<TwitterProfile> {
 }

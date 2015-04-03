@@ -15,6 +15,7 @@
  */
 package org.springframework.social.twitter.api;
 
+
 /**
  * Represents a new place that could be created. 
  * This is the type returned from calls to {@link GeoOperations#findSimilarPlaces(double, double, String)}.

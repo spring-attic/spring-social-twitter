@@ -1,0 +1,12 @@
+{
+    "data": [
+        "MOBILE_CONVERSION_TRANSACTION_VALUE",
+        "INSTALLED_APP_CATEGORY_TARGETING"
+    ],
+    "data_type": "features",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj"
+        }
+    }
+}

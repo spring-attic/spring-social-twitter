@@ -1,0 +1,23 @@
+{
+    "data": [
+        {
+            "name": "Games: Music",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qown"
+        },
+        {
+            "name": "Music & Audio",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox2"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {
+            "q": "music",
+            "store": "GOOGLE_PLAY"
+        }
+    }
+}

@@ -1,0 +1,932 @@
+{
+    "data": [
+        {
+            "manufacturer": "Amazon",
+            "name": "Amazon Kindle Fire",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1l"
+        },
+        {
+            "manufacturer": "Amazon",
+            "name": "Amazon Kindle Fire 10\"",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1k"
+        },
+        {
+            "manufacturer": "Amazon",
+            "name": "Amazon Kindle Fire HD 7\"",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "d"
+        },
+        {
+            "manufacturer": "Amazon",
+            "name": "Amazon Kindle Fire HD 8.9\"",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1m"
+        },
+        {
+            "manufacturer": "Fujitsu",
+            "name": "Fujitsu Arrows V",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "30"
+        },
+        {
+            "manufacturer": "Fujitsu",
+            "name": "Fujitsu Arrows X",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2x"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Google Droid Bionic",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1h"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Google Droid Razr",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2i"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Google Galaxy Nexus",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "11"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Google Nexus 4",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "j"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Google Nexus 5",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2k"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Google Nexus 7",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "b"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Butterfly",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2l"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Desire",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "41"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Desire 500",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3g"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Desire C",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1c"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Desire HD",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1a"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Desire S",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "10"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Desire X",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2h"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Evo",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "28"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Evo 4G",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1e"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC J",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2p"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC J Butterfly",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1b"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "a"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One M8",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "34"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One Mini",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2o"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One S",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "y"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One V",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1d"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One X",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "c"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC One X+",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2q"
+        },
+        {
+            "manufacturer": "HTC",
+            "name": "HTC Sensation",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2m"
+        },
+        {
+            "manufacturer": "Huawei",
+            "name": "Huawei Ascend",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "32"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1v"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad 2",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1w"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad 3",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1x"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad 4",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1y"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad Air",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "20"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad Air 2",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "48"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad mini",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1z"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad mini 2",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "49"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPad mini 3",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4a"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 3GS",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1q"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 4",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1r"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 4S",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1s"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 5",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1t"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 5C",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "22"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 5S",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "21"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 6",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "46"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 6 Plus",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "47"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPod Touch",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1u"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG G2",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3h"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Motion 4G",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "p"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus G Pro",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3l"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus L3",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "r"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus L5",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "s"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus L5 II",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3t"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus L7",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1f"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus L7 II",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2u"
+        },
+        {
+            "manufacturer": "LG",
+            "name": "LG Optimus L9",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1i"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Droid Razr HD",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "z"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Droid Razr M",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "m"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Droid Ultra",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3c"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Moto G",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "33"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Moto X",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "39"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Motoluxe",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1j"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola RAZR D3",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3o"
+        },
+        {
+            "manufacturer": "Google",
+            "name": "Motorola Razr i",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1n"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Ace",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "23"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy A3",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4d"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy A5",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4e"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Ace",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "7"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Ace 2",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "9"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Ace 3",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3i"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Ace II X",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3j"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Ace Plus",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "t"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Core",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2w"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Exhibit",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3v"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Grand",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "i"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Grand 2",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3q"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Grand Duos",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "26"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Grand Quattro",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3d"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Mega",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3f"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Mini",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "l"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Mini 2",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "x"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Nexus",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "25"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Note",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "k"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Note 4",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4f"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Note II",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Note III",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2g"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Pocket",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "w"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1g"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S Advance",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "8"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S Duos",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "15"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S II",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S III",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S III Alpha",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "18"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S III mini",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S Plus",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "h"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S2 Duos",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3y"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S2 Plus",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "40"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S4",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2r"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S4 Mini",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2n"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S4 Mini Duos",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "36"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S5",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "35"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S6",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4b"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy S6 Edge",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "4c"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Tab",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "v"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Tab 2",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "e"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Trend",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "38"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Trend Plus",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "42"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy W",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "u"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Win Duos",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3k"
+        },
+        {
+            "manufacturer": "Samsung",
+            "name": "Samsung Galaxy Y",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "6"
+        },
+        {
+            "manufacturer": "Sharp",
+            "name": "Sharp Aquos EX",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2z"
+        },
+        {
+            "manufacturer": "Sharp",
+            "name": "Sharp Aquos Zeta",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3s"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia A",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "n"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia Acro",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "19"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia Acro HD",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "o"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia AX",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "14"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia J",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2y"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia L",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3e"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia M",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "45"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia miro",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "13"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia P",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "24"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia S",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "q"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia SP",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2s"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia Tipo",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "16"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia U",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "f"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia UL",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "3n"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia VL",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "31"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia Z",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "g"
+        },
+        {
+            "manufacturer": "Sony",
+            "name": "Sony Xperia Z1",
+            "platform": "Android",
+            "targeting_type": "DEVICE",
+            "targeting_value": "2t"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {}
+    }
+}

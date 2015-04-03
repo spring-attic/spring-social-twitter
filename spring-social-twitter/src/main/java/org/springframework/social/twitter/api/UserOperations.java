@@ -36,7 +36,7 @@ public interface UserOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	long getProfileId();
-	
+
 	/**
 	 * Retrieves the authenticated user's Twitter screen name
 	 * @return the user's screen name
@@ -72,11 +72,11 @@ public interface UserOperations {
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	TwitterProfile getUserProfile(long userId);
-	
+
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of user IDs.
 	 * Supports either user or application authorization.
-	 * @param userIds The user IDs to retrieve profiles for
+	 * @param userIds identifies the ids of users which will be fetch from the authenticating twitter account.
 	 * @return a list of Twitter profiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
@@ -86,16 +86,16 @@ public interface UserOperations {
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of screen names.
 	 * Supports either user or application authorization.
-	 * @param screenNames The screen names to retrieve profiles for
+	 * @param screenNames identifies the screen names of users which will be fetch from the authenticating twitter account.
 	 * @return a list of Twitter profiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
 	List<TwitterProfile> getUsers(String... screenNames);
-	
+
 	/**
 	 * Searches for up to 20 users that match a given query.
-	 * @param query The search query
+	 * @param query defines the query against which users will be retrieved.
 	 * @return a list of Twitter profiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -104,7 +104,7 @@ public interface UserOperations {
 
 	/**
 	 * Searches for users that match a given query.
-	 * @param query The search query
+	 * @param query defines the query against which users will be retrieved.
 	 * @param page the page of search results to return
 	 * @param pageSize the number of {@link TwitterProfile}s per page. Maximum of 20 per page.
 	 * @return a list of Twitter profiles

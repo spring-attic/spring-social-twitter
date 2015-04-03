@@ -1,0 +1,33 @@
+{
+  "request": {
+    "params": {
+      "account_id": "0ga0yn"
+    }
+  },
+  "data": [
+    {
+      "name": "C1-oldlalala-generic",
+      "start_time": "2014-05-15T00:12:00Z",
+      "reasons_not_servable": [
+        "EXPIRED",
+        "PAUSED_BY_ADVERTISER"
+      ],
+      "servable": false,
+      "daily_budget_amount_local_micro": 10000000,
+      "end_time": "2014-05-16T22:00:00Z",
+      "funding_instrument_id": "ik58g",
+      "standard_delivery": true,
+      "total_budget_amount_local_micro": 45000000,
+      "id": "1850jm",
+      "paused": true,
+      "account_id": "0ga0yn",
+      "currency": "USD",
+      "created_at": "2014-05-15T01:17:47Z",
+      "updated_at": "2014-05-16T20:41:38Z",
+      "deleted": false
+    }
+  ],
+  "data_type": "campaign",
+  "total_count": 71,
+  "next_cursor": "18l3ms5c"
+}

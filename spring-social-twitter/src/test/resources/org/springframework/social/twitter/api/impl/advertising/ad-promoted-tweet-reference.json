@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "approval_status": "ACCEPTED",
+            "created_at": "2015-06-27T00:21:53Z",
+            "deleted": false,
+            "id": "tifo",
+            "line_item_id": "b51j",
+            "paused": false,
+            "tweet_id": "614564626060062720",
+            "updated_at": "2015-06-30T00:21:53Z"
+        }
+    ],
+    "data_type": "promoted_tweet",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "account_id": "0ga0yn"
+        }
+    },
+    "total_count": 1
+}

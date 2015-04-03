@@ -1,0 +1,2410 @@
+{
+    "data": [
+        {
+            "audience_size": 6713220,
+            "behavior_taxonomy_id": "y",
+            "id": "lfls",
+            "name": "Deli food buyers",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 7092400,
+            "behavior_taxonomy_id": "16",
+            "id": "lflt",
+            "name": "Packaged meals, grains & pasta buyers",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4961940,
+            "behavior_taxonomy_id": "w",
+            "id": "lfmh",
+            "name": "Marinades & sauces",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5357680,
+            "behavior_taxonomy_id": "w",
+            "id": "lfmi",
+            "name": "Mayonnaise & spreads",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5331840,
+            "behavior_taxonomy_id": "w",
+            "id": "lfmj",
+            "name": "Pasta sauce",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2656320,
+            "behavior_taxonomy_id": "w",
+            "id": "lfmk",
+            "name": "Pickles & olives",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3443680,
+            "behavior_taxonomy_id": "x",
+            "id": "lfml",
+            "name": "Cottage cheese & sour cream",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4093000,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmm",
+            "name": "Deli bulk meat",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 964380,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmn",
+            "name": "Deli condiments",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3531120,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmo",
+            "name": "Deli dips/spreads/toppings",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2256160,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmp",
+            "name": "Deli entrees",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5695360,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmq",
+            "name": "Deli prepared/pre-packaged",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 951660,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmr",
+            "name": "Deli pre-sliced cheese",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1510080,
+            "behavior_taxonomy_id": "y",
+            "id": "lfms",
+            "name": "Deli pre-sliced meat",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3309980,
+            "behavior_taxonomy_id": "y",
+            "id": "lfmt",
+            "name": "Deli salads",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2264480,
+            "behavior_taxonomy_id": "z",
+            "id": "lfmu",
+            "name": "Frozen appetizers & snacks",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2228060,
+            "behavior_taxonomy_id": "z",
+            "id": "lfmv",
+            "name": "Frozen bread & dough",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3118420,
+            "behavior_taxonomy_id": "z",
+            "id": "lfmw",
+            "name": "Frozen breakfast",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1393620,
+            "behavior_taxonomy_id": "z",
+            "id": "lfmx",
+            "name": "Frozen desserts",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 692040,
+            "behavior_taxonomy_id": "z",
+            "id": "lfmy",
+            "name": "Frozen ethnic foods",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1863060,
+            "behavior_taxonomy_id": "z",
+            "id": "lfmz",
+            "name": "Frozen fruit",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1706400,
+            "behavior_taxonomy_id": "z",
+            "id": "lfn0",
+            "name": "Frozen pasta",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3502520,
+            "behavior_taxonomy_id": "z",
+            "id": "lfn1",
+            "name": "Frozen pizza",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3781600,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn2",
+            "name": "Antiperspirants & deodorants",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1225200,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn3",
+            "name": "Eye care",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4295080,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn4",
+            "name": "Feminine care",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2539460,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn5",
+            "name": "First aid",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1931200,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn6",
+            "name": "Gastrointestinal",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1965240,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn7",
+            "name": "Men's grooming",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2274920,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn8",
+            "name": "Shaving care & hair removal",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2831720,
+            "behavior_taxonomy_id": "12",
+            "id": "lfn9",
+            "name": "Skin care",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2772480,
+            "behavior_taxonomy_id": "14",
+            "id": "lfna",
+            "name": "Air deodorizers & fresheners",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4187760,
+            "behavior_taxonomy_id": "14",
+            "id": "lfnb",
+            "name": "Bath tissue",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2026880,
+            "behavior_taxonomy_id": "14",
+            "id": "lfnc",
+            "name": "Batteries",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3754880,
+            "behavior_taxonomy_id": "14",
+            "id": "lfnd",
+            "name": "Dish & dishwasher detergent",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2165620,
+            "behavior_taxonomy_id": "14",
+            "id": "lfne",
+            "name": "Disposable serveware",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2764420,
+            "behavior_taxonomy_id": "14",
+            "id": "lfnf",
+            "name": "Facial tissue",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4161340,
+            "behavior_taxonomy_id": "14",
+            "id": "lfng",
+            "name": "Paper towels",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2866340,
+            "behavior_taxonomy_id": "14",
+            "id": "lfnh",
+            "name": "Trash bags",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5088620,
+            "behavior_taxonomy_id": "16",
+            "id": "lfni",
+            "name": "Dry pasta",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3483880,
+            "behavior_taxonomy_id": "16",
+            "id": "lfnj",
+            "name": "Mac & cheese",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2204780,
+            "behavior_taxonomy_id": "16",
+            "id": "lfnk",
+            "name": "Packaged noodle & rice dishes",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3825060,
+            "behavior_taxonomy_id": "16",
+            "id": "lfnl",
+            "name": "Rice",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1570480,
+            "behavior_taxonomy_id": "17",
+            "id": "lfnm",
+            "name": "Cat litter",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 671320,
+            "behavior_taxonomy_id": "17",
+            "id": "lfnn",
+            "name": "Cat treats",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2962700,
+            "behavior_taxonomy_id": "17",
+            "id": "lfno",
+            "name": "Dog treats",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1934580,
+            "behavior_taxonomy_id": "17",
+            "id": "lfnp",
+            "name": "Natural pet food & products",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2543520,
+            "behavior_taxonomy_id": "17",
+            "id": "lfnq",
+            "name": "Pet accessories",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4568580,
+            "behavior_taxonomy_id": "12",
+            "id": "lfnr",
+            "name": "Oral care",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3251460,
+            "behavior_taxonomy_id": "4",
+            "id": "lfns",
+            "name": "Max in market: body style: crossover vehicle",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3426440,
+            "behavior_taxonomy_id": "4",
+            "id": "lfnt",
+            "name": "Max in market: body style: entry/economy/compact",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1225140,
+            "behavior_taxonomy_id": "4",
+            "id": "lfnu",
+            "name": "Max in market: body style: full-size sedan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1728940,
+            "behavior_taxonomy_id": "4",
+            "id": "lfnv",
+            "name": "Max in market: body style: full-size SUV",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2197020,
+            "behavior_taxonomy_id": "4",
+            "id": "lfnw",
+            "name": "Max in market: body style: hybrid/alternative fuel",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2726640,
+            "behavior_taxonomy_id": "4",
+            "id": "lfnx",
+            "name": "Max in market: body style: luxury sedan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2584960,
+            "behavior_taxonomy_id": "4",
+            "id": "lfny",
+            "name": "Max in market: body style: luxury SUV",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3222940,
+            "behavior_taxonomy_id": "4",
+            "id": "lfnz",
+            "name": "Max in market: body style: midsize car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1636760,
+            "behavior_taxonomy_id": "4",
+            "id": "lfo0",
+            "name": "Max in market: body style: minivan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2802760,
+            "behavior_taxonomy_id": "4",
+            "id": "lfo1",
+            "name": "Max in market: body style: pickup truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3459640,
+            "behavior_taxonomy_id": "4",
+            "id": "lfo2",
+            "name": "Max in market: body style: small/mid-size SUV",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2121560,
+            "behavior_taxonomy_id": "4",
+            "id": "lfo3",
+            "name": "Max in market: body style: sports car/convertible",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4930080,
+            "behavior_taxonomy_id": "4",
+            "id": "lfo4",
+            "name": "Max in market: all body styles",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 236580,
+            "behavior_taxonomy_id": "7",
+            "id": "lfo5",
+            "name": "Owners: make: Acura",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 137300,
+            "behavior_taxonomy_id": "7",
+            "id": "lfo6",
+            "name": "Owners: make: Audi",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 339980,
+            "behavior_taxonomy_id": "7",
+            "id": "lfo7",
+            "name": "Owners: make: BMW",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 327460,
+            "behavior_taxonomy_id": "7",
+            "id": "lfo8",
+            "name": "Owners: make: Buick",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 218900,
+            "behavior_taxonomy_id": "7",
+            "id": "lfo9",
+            "name": "Owners: make: Cadillac",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 948920,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoa",
+            "name": "Owners: make: Chevrolet car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1682700,
+            "behavior_taxonomy_id": "7",
+            "id": "lfob",
+            "name": "Owners: make: Chevrolet truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2348760,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoc",
+            "name": "Owners: make: Chrysler",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 293620,
+            "behavior_taxonomy_id": "7",
+            "id": "lfod",
+            "name": "Owners: make: Dodge car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 864180,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoe",
+            "name": "Owners: make: RAM truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 900440,
+            "behavior_taxonomy_id": "7",
+            "id": "lfof",
+            "name": "Owners: make: Ford car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1924940,
+            "behavior_taxonomy_id": "7",
+            "id": "lfog",
+            "name": "Owners: make: Ford truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 589840,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoh",
+            "name": "Owners: make: GMC",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1702340,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoi",
+            "name": "Owners: make: Honda",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 21580,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoj",
+            "name": "Owners: make: Hummer",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 454380,
+            "behavior_taxonomy_id": "7",
+            "id": "lfok",
+            "name": "Owners: make: Hyundai",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 142120,
+            "behavior_taxonomy_id": "7",
+            "id": "lfol",
+            "name": "Owners: make: Infiniti",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 43920,
+            "behavior_taxonomy_id": "7",
+            "id": "lfom",
+            "name": "Owners: make: Isuzu",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 35660,
+            "behavior_taxonomy_id": "7",
+            "id": "lfon",
+            "name": "Owners: make: Jaguar",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 691840,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoo",
+            "name": "Owners: make: Jeep",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 304160,
+            "behavior_taxonomy_id": "7",
+            "id": "lfop",
+            "name": "Owners: make: Kia",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 57020,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoq",
+            "name": "Owners: make: Land Rover",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 313960,
+            "behavior_taxonomy_id": "7",
+            "id": "lfor",
+            "name": "Owners: make: Lexus",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 142720,
+            "behavior_taxonomy_id": "7",
+            "id": "lfos",
+            "name": "Owners: make: Lincoln",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 351580,
+            "behavior_taxonomy_id": "7",
+            "id": "lfot",
+            "name": "Owners: make: Mazda",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 299460,
+            "behavior_taxonomy_id": "7",
+            "id": "lfou",
+            "name": "Owners: make: Mercedes",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 224700,
+            "behavior_taxonomy_id": "7",
+            "id": "lfov",
+            "name": "Owners: make: Mercury",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 51500,
+            "behavior_taxonomy_id": "7",
+            "id": "lfow",
+            "name": "Owners: make: Mini",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 170760,
+            "behavior_taxonomy_id": "7",
+            "id": "lfox",
+            "name": "Owners: make: Mitsubishi",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1041160,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoy",
+            "name": "Owners: make: Nissan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 427100,
+            "behavior_taxonomy_id": "7",
+            "id": "lfoz",
+            "name": "Owners: make: Pontiac",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 46300,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp0",
+            "name": "Owners: make: Porsche",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 42260,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp1",
+            "name": "Owners: make: Saab",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 211280,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp2",
+            "name": "Owners: make: Saturn",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 274020,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp3",
+            "name": "Owners: make: Subaru",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 54260,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp4",
+            "name": "Owners: make: Suzuki",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2203500,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp5",
+            "name": "Owners: make: Toyota",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 392280,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp6",
+            "name": "Owners: make: Volkswagen",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 168100,
+            "behavior_taxonomy_id": "7",
+            "id": "lfp7",
+            "name": "Owners: make: Volvo",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 157620,
+            "behavior_taxonomy_id": "3",
+            "id": "lfp8",
+            "name": "Make: Acura",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 106320,
+            "behavior_taxonomy_id": "3",
+            "id": "lfp9",
+            "name": "Make: Audi",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 227600,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpa",
+            "name": "Make: BMW",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 207740,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpb",
+            "name": "Make: Buick",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 144440,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpc",
+            "name": "Make: Cadillac",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 586380,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpd",
+            "name": "Make: Chevrolet car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1171280,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpe",
+            "name": "Make: Chevrolet truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1555720,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpf",
+            "name": "Make: Chrysler",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 210560,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpg",
+            "name": "Make: Dodge car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 563740,
+            "behavior_taxonomy_id": "3",
+            "id": "lfph",
+            "name": "Make: RAM truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 553100,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpi",
+            "name": "Make: Ford car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1327100,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpj",
+            "name": "Make: Ford truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 407060,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpk",
+            "name": "Make: GMC",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1153220,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpl",
+            "name": "Make: Honda",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 335040,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpm",
+            "name": "Make: Hyundai",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 94160,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpn",
+            "name": "Make: Infiniti",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 23960,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpp",
+            "name": "Make: Jaguar",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 454120,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpq",
+            "name": "Make: Jeep",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 218280,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpr",
+            "name": "Make: Kia",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 39140,
+            "behavior_taxonomy_id": "3",
+            "id": "lfps",
+            "name": "Make: Land Rover",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 215500,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpt",
+            "name": "Make: Lexus",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 93220,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpu",
+            "name": "Make: Lincoln",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 222180,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpv",
+            "name": "Make: Mazda",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 204020,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpw",
+            "name": "Make: Mercedes",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 38000,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpy",
+            "name": "Make: Mini",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 104240,
+            "behavior_taxonomy_id": "3",
+            "id": "lfpz",
+            "name": "Make: Mitsubishi",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 650220,
+            "behavior_taxonomy_id": "3",
+            "id": "lfq0",
+            "name": "Make: Nissan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 30760,
+            "behavior_taxonomy_id": "3",
+            "id": "lfq2",
+            "name": "Make: Porsche",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 202020,
+            "behavior_taxonomy_id": "3",
+            "id": "lfq5",
+            "name": "Make: Subaru",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1448040,
+            "behavior_taxonomy_id": "3",
+            "id": "lfq7",
+            "name": "Make: Toyota",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 250780,
+            "behavior_taxonomy_id": "3",
+            "id": "lfq8",
+            "name": "Make: Volkswagen",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 113300,
+            "behavior_taxonomy_id": "3",
+            "id": "lfq9",
+            "name": "Make: Volvo",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 82420,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqa",
+            "name": "Used: make: Acura",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 42820,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqb",
+            "name": "Used: make: Audi",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 122300,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqc",
+            "name": "Used: make: BMW",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 161900,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqd",
+            "name": "Used: make: Buick",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 103700,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqe",
+            "name": "Used: make: Cadillac",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 511780,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqf",
+            "name": "Used: make: Chevrolet car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 850480,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqg",
+            "name": "Used: make: Chevrolet truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1163080,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqh",
+            "name": "Used: make: Chrysler",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 164300,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqi",
+            "name": "Used: make: Dodge car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 436320,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqj",
+            "name": "Used: make: RAM truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 474300,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqk",
+            "name": "Used: make: Ford car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 994880,
+            "behavior_taxonomy_id": "3",
+            "id": "lfql",
+            "name": "Used: make: Ford truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 297060,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqm",
+            "name": "Used: make: GMC",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 792000,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqn",
+            "name": "Used: make: Honda",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 209640,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqp",
+            "name": "Used: make: Hyundai",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 52800,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqq",
+            "name": "Used: make: Infiniti",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 13920,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqs",
+            "name": "Used: make: Jaguar",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 344720,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqt",
+            "name": "Used: make: Jeep",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 141600,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqu",
+            "name": "Used: make: Kia",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 20360,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqv",
+            "name": "Used: make: Land Rover",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 113940,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqw",
+            "name": "Used: make: Lexus",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 67880,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqx",
+            "name": "Used: make: Lincoln",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 169660,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqy",
+            "name": "Used: make: Mazda",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 106840,
+            "behavior_taxonomy_id": "3",
+            "id": "lfqz",
+            "name": "Used: make: Mercedes",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 18760,
+            "behavior_taxonomy_id": "3",
+            "id": "lfr1",
+            "name": "Used: make: Mini",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 78800,
+            "behavior_taxonomy_id": "3",
+            "id": "lfr2",
+            "name": "Used: make: Mitsubishi",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 501060,
+            "behavior_taxonomy_id": "3",
+            "id": "lfr3",
+            "name": "Used: make: Nissan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 16160,
+            "behavior_taxonomy_id": "3",
+            "id": "lfr5",
+            "name": "Used: make: Porsche",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 112480,
+            "behavior_taxonomy_id": "3",
+            "id": "lfr8",
+            "name": "Used: make: Subaru",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1072180,
+            "behavior_taxonomy_id": "3",
+            "id": "lfra",
+            "name": "Used: make: Toyota",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 134480,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrb",
+            "name": "Used: make: Volkswagen",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 58940,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrc",
+            "name": "Used: make: Volvo",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3186440,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrd",
+            "name": "Used: body style: entry/economy/compact",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4161740,
+            "behavior_taxonomy_id": "3",
+            "id": "lfre",
+            "name": "Used: body style: midsize car",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4351200,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrf",
+            "name": "Used: body style: small/mid-size SUV",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3522660,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrg",
+            "name": "Used: body style: full-size SUV",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4068280,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrh",
+            "name": "Used: body style: luxury sedan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3549680,
+            "behavior_taxonomy_id": "3",
+            "id": "lfri",
+            "name": "Used: body style: pickup truck",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2975040,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrj",
+            "name": "Used: body style: minivan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4359140,
+            "behavior_taxonomy_id": "3",
+            "id": "lfrk",
+            "name": "Used: body style: sports car/convertible",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 7308760,
+            "behavior_taxonomy_id": "8",
+            "id": "lfrl",
+            "name": "Vehicle price: $20k or under",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4370600,
+            "behavior_taxonomy_id": "8",
+            "id": "lfrm",
+            "name": "Vehicle price: $20k to $30k",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 622160,
+            "behavior_taxonomy_id": "8",
+            "id": "lfrn",
+            "name": "Vehicle price: $30k to $40k",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 572780,
+            "behavior_taxonomy_id": "8",
+            "id": "lfro",
+            "name": "Vehicle price: $40k to $50k",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 339260,
+            "behavior_taxonomy_id": "8",
+            "id": "lfrp",
+            "name": "Vehicle price: $50k to $75k",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 33320,
+            "behavior_taxonomy_id": "8",
+            "id": "lfrq",
+            "name": "Vehicle price: $75k or higher",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 800800,
+            "behavior_taxonomy_id": "5",
+            "id": "lfrr",
+            "name": "Motorcycle owner",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5615180,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrs",
+            "name": "Auto parts buyer",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5712240,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrt",
+            "name": "Auto service buyer",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1721020,
+            "behavior_taxonomy_id": "2",
+            "id": "lfru",
+            "name": "Vehicle purchase: 0-6 months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1274580,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrv",
+            "name": "Vehicle purchase: 7-12 months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1705440,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrw",
+            "name": "Vehicle purchase: 13-24 months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1039480,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrx",
+            "name": "Vehicle purchase: 25-36 months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 637840,
+            "behavior_taxonomy_id": "2",
+            "id": "lfry",
+            "name": "Vehicle purchase: 37-48 months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2420480,
+            "behavior_taxonomy_id": "2",
+            "id": "lfrz",
+            "name": "Vehicle purchase: 48+ months ago",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 4521480,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs0",
+            "name": "In market: new vehicle",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 7871600,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs1",
+            "name": "In market: new or used vehicle",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 5101140,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs2",
+            "name": "In market: used vehicle",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 3236800,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs3",
+            "name": "Used: body style: crossover vehicle",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 931500,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs4",
+            "name": "Used: body style: full-size sedan",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1375080,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs5",
+            "name": "Used: body style: hybrid/alternative fuel",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 863560,
+            "behavior_taxonomy_id": "3",
+            "id": "lfs6",
+            "name": "Used: body style: luxury SUV",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1796160,
+            "behavior_taxonomy_id": "8",
+            "id": "lfs7",
+            "name": "Vehicle age: 0-1 years old",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1175900,
+            "behavior_taxonomy_id": "8",
+            "id": "lfs8",
+            "name": "Vehicle age: 2 years old",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 1126800,
+            "behavior_taxonomy_id": "8",
+            "id": "lfs9",
+            "name": "Vehicle age: 3 years old",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 2013800,
+            "behavior_taxonomy_id": "8",
+            "id": "lfsa",
+            "name": "Vehicle age: 4-5 years old",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        },
+        {
+            "audience_size": 6862540,
+            "behavior_taxonomy_id": "8",
+            "id": "lfsb",
+            "name": "Vehicle age: 6-10 years old",
+            "partner_source": "Datalogix",
+            "targetable_types": [
+                "BEHAVIOR",
+                "NEGATIVE_BEHAVIOR",
+                "BEHAVIOR_LOOKALIKE_EXPANDED"
+            ]
+        }
+    ],
+    "data_type": "behaviors",
+    "next_cursor": "1927jmyo",
+    "request": {
+        "params": {}
+    },
+    "total_count": 1082
+}

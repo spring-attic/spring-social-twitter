@@ -22,7 +22,7 @@ import java.util.List;
  * @author Craig Walls
  */
 public class AccountSettings extends TwitterObject {
-
+	private static final long serialVersionUID = 1L;
 	private boolean alwaysUseHttps;
 	private boolean discoverableByEmail;
 	private boolean discoverableByMobilePhone;

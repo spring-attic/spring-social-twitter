@@ -37,11 +37,12 @@ import com.fasterxml.jackson.databind.JsonNode;
  * Deserializer to read local trends data into a LocalTrendsHolder object.
  * @author Craig Walls
  */
-class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
+public class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 
 	@Override
 	public LocalTrendsHolder deserialize(JsonParser jp, DeserializationContext ctxt)
 			throws IOException, JsonProcessingException {
+		
 		JsonNode node = jp.readValueAs(JsonNode.class);
 		Iterator<JsonNode> dayIt = node.iterator();
 		if(dayIt.hasNext()) {

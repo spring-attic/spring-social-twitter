@@ -1,0 +1,145 @@
+{
+    "data": [
+        {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Thu Dec 04 17:56:40 +0000 2014",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "ift.tt/1tLavU9",
+                        "expanded_url": "http://ift.tt/1tLavU9",
+                        "indices": [
+                            60,
+                            82
+                        ],
+                        "url": "http://t.co/cfxJOQ9zpF"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 0,
+            "favorited": false,
+            "geo": null,
+            "id": 540565364179226624,
+            "id_str": "540565364179226624",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "lang": "en",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 0,
+            "retweeted": false,
+            "source": "<a href=\"http://ifttt.com\" rel=\"nofollow\">IFTTT</a>",
+            "text": "MemeTV wants to bring meme-worthy TV clips to Tumblr and... http://t.co/cfxJOQ9zpF",
+            "truncated": false,
+            "user": {
+                "id": 390472547,
+                "id_str": "390472547"
+            }
+        },
+        {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Wed Dec 03 18:16:12 +0000 2014",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "ift.tt/1FNdtx9",
+                        "expanded_url": "http://ift.tt/1FNdtx9",
+                        "indices": [
+                            65,
+                            87
+                        ],
+                        "url": "http://t.co/KaDdqeiuEC"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 1,
+            "favorited": false,
+            "geo": null,
+            "id": 540207892818046976,
+            "id_str": "540207892818046976",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "lang": "en",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 1,
+            "retweeted": false,
+            "source": "<a href=\"http://ifttt.com\" rel=\"nofollow\">IFTTT</a>",
+            "text": "Demand Founder Raises $20 Million at a $100 Million Valuation... http://t.co/KaDdqeiuEC",
+            "truncated": false,
+            "user": {
+                "id": 390472547,
+                "id_str": "390472547"
+            }
+        },
+        {
+            "contributors": null,
+            "coordinates": null,
+            "created_at": "Wed Dec 03 05:37:46 +0000 2014",
+            "entities": {
+                "hashtags": [],
+                "symbols": [],
+                "urls": [
+                    {
+                        "display_url": "ift.tt/1yHTS03",
+                        "expanded_url": "http://ift.tt/1yHTS03",
+                        "indices": [
+                            63,
+                            85
+                        ],
+                        "url": "http://t.co/euEvKnf2Dl"
+                    }
+                ],
+                "user_mentions": []
+            },
+            "favorite_count": 0,
+            "favorited": false,
+            "geo": null,
+            "id": 540017026572750848,
+            "id_str": "540017026572750848",
+            "in_reply_to_screen_name": null,
+            "in_reply_to_status_id": null,
+            "in_reply_to_status_id_str": null,
+            "in_reply_to_user_id": null,
+            "in_reply_to_user_id_str": null,
+            "lang": "en",
+            "place": null,
+            "possibly_sensitive": false,
+            "retweet_count": 0,
+            "retweeted": false,
+            "source": "<a href=\"http://ifttt.com\" rel=\"nofollow\">IFTTT</a>",
+            "text": "FCC Commish Alleges That Netflix Is Working To \u201cEffectively... http://t.co/euEvKnf2Dl",
+            "truncated": false,
+            "user": {
+                "id": 390472547,
+                "id_str": "390472547"
+            }
+        }
+    ],
+    "data_type": "status",
+    "next_cursor": "c-43p4tt3bshs0",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj",
+            "count": 3,
+            "trim_user": true,
+            "user_ids": [
+                "390472547"
+            ]
+        }
+    }
+}

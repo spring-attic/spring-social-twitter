@@ -1,0 +1,17 @@
+{
+    "data": [
+        {
+            "name": "Cupcake",
+            "number": "1.5",
+            "platform": "Android",
+            "targeting_type": "PLATFORM_VERSION",
+            "targeting_value": "b"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {
+            "q": "cupcake"
+        }
+    }
+}

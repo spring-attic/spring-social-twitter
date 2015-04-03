@@ -1,0 +1,437 @@
+{
+    "data": [
+        {
+            "billed_engagements": [
+                580
+            ],
+            "billed_follows": [
+                0
+            ],
+            "conversion_app_open": [
+                0
+            ],
+            "conversion_custom": [
+                787
+            ],
+            "conversion_order_quantity": [
+                839859181793000000
+            ],
+            "conversion_sale_amount": [
+                815929856027000000
+            ],
+            "end_time": "2015-06-26T07:00:00Z",
+            "granularity": "DAY",
+            "id": "9q1o2",
+            "mobile_conversion_installs": [
+                0
+            ],
+            "mobile_conversion_installs_breakdown": {
+                "assisted": [
+                    0
+                ],
+                "post_engagement": [
+                    0
+                ],
+                "post_view": [
+                    0
+                ],
+                "total": [
+                    0
+                ]
+            },
+            "mobile_conversion_re_engages": [
+                0
+            ],
+            "mobile_conversion_re_engages_breakdown": {
+                "assisted": [
+                    0
+                ],
+                "post_engagement": [
+                    0
+                ],
+                "post_view": [
+                    0
+                ],
+                "total": [
+                    0
+                ]
+            },
+            "promoted_account_follow_rate": [
+                0.0
+            ],
+            "promoted_account_follows": [
+                0
+            ],
+            "promoted_account_impressions": [
+                0
+            ],
+            "promoted_account_profile_visits": [
+                0
+            ],
+            "promoted_tweet_app_install_attempts": [
+                0
+            ],
+            "promoted_tweet_app_open_attempts": [
+                0
+            ],
+            "promoted_tweet_search_card_engagements": [
+                0
+            ],
+            "promoted_tweet_search_clicks": [
+                37
+            ],
+            "promoted_tweet_search_engagement_rate": [
+                0.00763807285546416
+            ],
+            "promoted_tweet_search_engagements": [
+                39
+            ],
+            "promoted_tweet_search_favorites": [
+                4
+            ],
+            "promoted_tweet_search_follows": [
+                1
+            ],
+            "promoted_tweet_search_impressions": [
+                5106
+            ],
+            "promoted_tweet_search_replies": [
+                0
+            ],
+            "promoted_tweet_search_retweets": [
+                1
+            ],
+            "promoted_tweet_search_url_clicks": [
+                7
+            ],
+            "promoted_tweet_timeline_card_engagements": [
+                0
+            ],
+            "promoted_tweet_timeline_clicks": [
+                2142
+            ],
+            "promoted_tweet_timeline_engagement_rate": [
+                0.01030786792589964
+            ],
+            "promoted_tweet_timeline_engagements": [
+                2411
+            ],
+            "promoted_tweet_timeline_favorites": [
+                125
+            ],
+            "promoted_tweet_timeline_follows": [
+                32
+            ],
+            "promoted_tweet_timeline_impressions": [
+                233899
+            ],
+            "promoted_tweet_timeline_replies": [
+                4
+            ],
+            "promoted_tweet_timeline_retweets": [
+                52
+            ],
+            "promoted_tweet_timeline_url_clicks": [
+                750
+            ],
+            "segment": {
+                "name": "Female",
+                "segmentation_type": "GENDER",
+                "segmentation_value": "f"
+            },
+            "start_time": "2015-06-25T07:00:00Z"
+        },
+        {
+            "billed_engagements": [
+                3808
+            ],
+            "billed_follows": [
+                0
+            ],
+            "conversion_app_open": [
+                1
+            ],
+            "conversion_custom": [
+                3730
+            ],
+            "conversion_order_quantity": [
+                3991367805412000000
+            ],
+            "conversion_sale_amount": [
+                4005833005824000000
+            ],
+            "end_time": "2015-06-26T07:00:00Z",
+            "granularity": "DAY",
+            "id": "9q1o2",
+            "mobile_conversion_installs": [
+                1
+            ],
+            "mobile_conversion_installs_breakdown": {
+                "assisted": [
+                    0
+                ],
+                "post_engagement": [
+                    0
+                ],
+                "post_view": [
+                    1
+                ],
+                "total": [
+                    1
+                ]
+            },
+            "mobile_conversion_re_engages": [
+                1
+            ],
+            "mobile_conversion_re_engages_breakdown": {
+                "assisted": [
+                    0
+                ],
+                "post_engagement": [
+                    0
+                ],
+                "post_view": [
+                    1
+                ],
+                "total": [
+                    1
+                ]
+            },
+            "promoted_account_follow_rate": [
+                0.0
+            ],
+            "promoted_account_follows": [
+                0
+            ],
+            "promoted_account_impressions": [
+                0
+            ],
+            "promoted_account_profile_visits": [
+                0
+            ],
+            "promoted_tweet_app_install_attempts": [
+                0
+            ],
+            "promoted_tweet_app_open_attempts": [
+                0
+            ],
+            "promoted_tweet_search_card_engagements": [
+                0
+            ],
+            "promoted_tweet_search_clicks": [
+                65
+            ],
+            "promoted_tweet_search_engagement_rate": [
+                0.009875846501128669
+            ],
+            "promoted_tweet_search_engagements": [
+                70
+            ],
+            "promoted_tweet_search_favorites": [
+                1
+            ],
+            "promoted_tweet_search_follows": [
+                2
+            ],
+            "promoted_tweet_search_impressions": [
+                7088
+            ],
+            "promoted_tweet_search_replies": [
+                0
+            ],
+            "promoted_tweet_search_retweets": [
+                3
+            ],
+            "promoted_tweet_search_url_clicks": [
+                14
+            ],
+            "promoted_tweet_timeline_card_engagements": [
+                0
+            ],
+            "promoted_tweet_timeline_clicks": [
+                11416
+            ],
+            "promoted_tweet_timeline_engagement_rate": [
+                0.017759754600910973
+            ],
+            "promoted_tweet_timeline_engagements": [
+                13791
+            ],
+            "promoted_tweet_timeline_favorites": [
+                406
+            ],
+            "promoted_tweet_timeline_follows": [
+                103
+            ],
+            "promoted_tweet_timeline_impressions": [
+                776531
+            ],
+            "promoted_tweet_timeline_replies": [
+                32
+            ],
+            "promoted_tweet_timeline_retweets": [
+                193
+            ],
+            "promoted_tweet_timeline_url_clicks": [
+                5112
+            ],
+            "segment": {
+                "name": "Male",
+                "segmentation_type": "GENDER",
+                "segmentation_value": "m"
+            },
+            "start_time": "2015-06-25T07:00:00Z"
+        },
+        {
+            "billed_engagements": [
+                123
+            ],
+            "billed_follows": [
+                0
+            ],
+            "conversion_app_open": [
+                0
+            ],
+            "conversion_custom": [
+                107
+            ],
+            "conversion_order_quantity": [
+                115488249065000000
+            ],
+            "conversion_sale_amount": [
+                105890654732000000
+            ],
+            "end_time": "2015-06-26T07:00:00Z",
+            "granularity": "DAY",
+            "id": "9q1o2",
+            "mobile_conversion_installs": [
+                0
+            ],
+            "mobile_conversion_installs_breakdown": {
+                "assisted": [
+                    0
+                ],
+                "post_engagement": [
+                    0
+                ],
+                "post_view": [
+                    0
+                ],
+                "total": [
+                    0
+                ]
+            },
+            "mobile_conversion_re_engages": [
+                0
+            ],
+            "mobile_conversion_re_engages_breakdown": {
+                "assisted": [
+                    0
+                ],
+                "post_engagement": [
+                    0
+                ],
+                "post_view": [
+                    0
+                ],
+                "total": [
+                    0
+                ]
+            },
+            "promoted_account_follow_rate": [
+                0.0
+            ],
+            "promoted_account_follows": [
+                0
+            ],
+            "promoted_account_impressions": [
+                0
+            ],
+            "promoted_account_profile_visits": [
+                0
+            ],
+            "promoted_tweet_app_install_attempts": [
+                0
+            ],
+            "promoted_tweet_app_open_attempts": [
+                0
+            ],
+            "promoted_tweet_search_card_engagements": [
+                0
+            ],
+            "promoted_tweet_search_clicks": [
+                17
+            ],
+            "promoted_tweet_search_engagement_rate": [
+                0.02422145328719723
+            ],
+            "promoted_tweet_search_engagements": [
+                21
+            ],
+            "promoted_tweet_search_favorites": [
+                2
+            ],
+            "promoted_tweet_search_follows": [
+                4
+            ],
+            "promoted_tweet_search_impressions": [
+                867
+            ],
+            "promoted_tweet_search_replies": [
+                0
+            ],
+            "promoted_tweet_search_retweets": [
+                0
+            ],
+            "promoted_tweet_search_url_clicks": [
+                6
+            ],
+            "promoted_tweet_timeline_card_engagements": [
+                0
+            ],
+            "promoted_tweet_timeline_clicks": [
+                425
+            ],
+            "promoted_tweet_timeline_engagement_rate": [
+                0.014507801909376712
+            ],
+            "promoted_tweet_timeline_engagements": [
+                503
+            ],
+            "promoted_tweet_timeline_favorites": [
+                12
+            ],
+            "promoted_tweet_timeline_follows": [
+                9
+            ],
+            "promoted_tweet_timeline_impressions": [
+                34671
+            ],
+            "promoted_tweet_timeline_replies": [
+                2
+            ],
+            "promoted_tweet_timeline_retweets": [
+                10
+            ],
+            "promoted_tweet_timeline_url_clicks": [
+                174
+            ],
+            "segment": {
+                "name": "Unknown",
+                "segmentation_type": "GENDER",
+                "segmentation_value": "unknown"
+            },
+            "start_time": "2015-06-25T07:00:00Z"
+        }
+    ],
+    "data_type": "stats",
+    "request": {
+        "params": {
+            "account_id": "9q1o2",
+            "end_time": "2015-06-26T07:00:00Z",
+            "granularity": "DAY",
+            "segmentation_type": "GENDER",
+            "start_time": "2015-06-25T07:00:00Z"
+        }
+    }
+}

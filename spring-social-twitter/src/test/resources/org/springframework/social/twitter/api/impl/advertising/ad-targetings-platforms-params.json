@@ -1,0 +1,15 @@
+{
+    "data": [
+        {
+            "name": "BlackBerry phones and tablets",
+            "targeting_type": "PLATFORM",
+            "targeting_value": "2"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {
+            "q": "blackberry"
+        }
+    }
+}

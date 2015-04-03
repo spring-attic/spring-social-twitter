@@ -1,0 +1,19 @@
+{
+    "data": {
+        "approval_status": "ACCEPTED",
+        "created_at": "2015-04-13T20:42:39Z",
+        "deleted": false,
+        "id": "gq0vqj",
+        "name": "Account for the user @unkown",
+        "salt": "abababababababababababababababab",
+        "timezone": "America/Los_Angeles",
+        "timezone_switch_at": null,
+        "updated_at": "2015-07-13T20:17:34Z"
+    },
+    "data_type": "account",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj"
+        }
+    }
+}

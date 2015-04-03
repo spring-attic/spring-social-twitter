@@ -1,0 +1,22 @@
+{
+    "data": [
+        {
+            "approval_status": "ACCEPTED",
+            "created_at": "2015-07-02T00:51:44Z",
+            "deleted": false,
+            "id": "3goc",
+            "line_item_id": "b6im",
+            "paused": false,
+            "updated_at": "2015-07-02T00:51:44Z",
+            "user_id": "390472547"
+        }
+    ],
+    "data_type": "promoted_account",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "account_id": "gq0vqj"
+        }
+    },
+    "total_count": 1
+}

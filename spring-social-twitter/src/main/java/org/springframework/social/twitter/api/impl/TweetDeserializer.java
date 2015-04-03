@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,119 +40,181 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * Custom Jackson deserializer for tweets. Tweets can't be simply mapped like other Twitter model objects because the JSON structure
  * varies between the search API and the timeline API. This deserializer determine which structure is in play and creates a tweet from it.
+ * 
  * @author Craig Walls
  */
 class TweetDeserializer extends JsonDeserializer<Tweet> {
+    private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 
-	@Override
-	public Tweet deserialize(final JsonParser jp, final DeserializationContext ctx) throws IOException {
-		final JsonNode node = jp.readValueAs(JsonNode.class);
-		if (null == node || node.isMissingNode() || node.isNull()) {
-			return null;
-		}
-		final Tweet tweet = this.deserialize(node);
-		jp.skipChildren();
-		return tweet;
-	}
+    @Override
+    public Tweet deserialize(final JsonParser jp, final DeserializationContext ctx) throws IOException {
+        final JsonNode node = jp.readValueAs(JsonNode.class);
+        if (null == node || node.isMissingNode() || node.isNull())
+            return null;
+        final Tweet tweet = this.deserialize(node);
+        jp.skipChildren();
+        return tweet;
+    }
 
+    public Tweet deserialize(JsonNode node) throws IOException, JsonProcessingException {
+        final long id = node.path("id").asLong();
+        final String text = node.path("text").asText();
+        if (id <= 0 || text == null || text.isEmpty())
+            return null;
 
-	public Tweet deserialize(JsonNode node) throws IOException, JsonProcessingException {
-		final String id = node.path("id").asText();
-		final String text = node.path("text").asText();
-		if (id == null  || text == null || text.isEmpty()) {
-			return null;
-		}
-		JsonNode fromUserNode = node.get("user");
-		String dateFormat = TIMELINE_DATE_FORMAT;
-		String fromScreenName = fromUserNode.get("screen_name").asText();
-		long fromId = fromUserNode.get("id").asLong();
-		String fromImageUrl = fromUserNode.get("profile_image_url").asText(); 
-		Date createdAt = toDate(node.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
-		String source = node.get("source").asText();
-		JsonNode toUserIdNode = node.get("in_reply_to_user_id");
-		Long toUserId = toUserIdNode != null ? toUserIdNode.asLong() : null;
-		JsonNode languageCodeNode = node.get("lang");
-		String languageCode = languageCodeNode != null && !languageCodeNode.isNull() ? languageCodeNode.asText() : null;
-		Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
-		JsonNode inReplyToStatusIdNode = node.get("in_reply_to_status_id");
-		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.asLong() : null;
-		tweet.setInReplyToStatusId(inReplyToStatusId);
-		JsonNode inReplyToUserIdNode = node.get("in_reply_to_user_id");
-		Long inReplyUsersId = inReplyToUserIdNode != null && !inReplyToUserIdNode.isNull() ? inReplyToUserIdNode.asLong() : null;
-		tweet.setInReplyToUserId(inReplyUsersId);
-		tweet.setInReplyToScreenName(node.path("in_reply_to_screen_name").asText());
-		JsonNode retweetCountNode = node.get("retweet_count");
-		Integer retweetCount = retweetCountNode != null && !retweetCountNode.isNull() ? retweetCountNode.asInt() : null;
-		tweet.setRetweetCount(retweetCount);
-		JsonNode retweetedNode = node.get("retweeted");
-		JsonNode retweetedStatusNode = node.get("retweeted_status");
-		boolean retweeted = retweetedNode != null && !retweetedNode.isNull() ? retweetedNode.asBoolean() : false;
-		tweet.setRetweeted(retweeted);
-		Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedStatusNode) : null;
-		tweet.setRetweetedStatus(retweetedStatus);
-		JsonNode favoritedNode = node.get("favorited");
-		boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.asBoolean() : false;
-		tweet.setFavorited(favorited);
-		JsonNode favoriteCountNode = node.get("favorite_count");
-		Integer favoriteCount = favoriteCountNode != null && !favoriteCountNode.isNull() ? favoriteCountNode.asInt() : null;
-		tweet.setFavoriteCount(favoriteCount);
-		Entities entities = toEntities(node.get("entities"), text);
-		tweet.setEntities(entities);
-		TwitterProfile user = toProfile(fromUserNode);
-		tweet.setUser(user);
-		return tweet;
-	}
+        final Tweet tweet = readTweetFromJson(node, id, text);
+        readReplyParameters(node, tweet);
+        readRetweetParameters(node, tweet);
+        readFavoriteParameters(node, tweet);
+        readTruncatedParameters(node, tweet);
+        readSensitivityParameters(node, tweet);
+        return tweet;
+    }
 
-	private ObjectMapper createMapper() {
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new TwitterModule());
-		return mapper;
-	}
-	
-	private Date toDate(String dateString, DateFormat dateFormat) {
-		if (dateString == null) {
-			return null;
-		}
-	
-		try {
-			return dateFormat.parse(dateString);
-		} catch (ParseException e) {
-			return null;
-		}
-	}
+    @SuppressWarnings("deprecation")
+    private Tweet readTweetFromJson(JsonNode node, Long id, String text) throws IOException {
+        final JsonNode fromUserNode = node.get("user");
+        final String dateFormat = TIMELINE_DATE_FORMAT;
 
-	// passing in text to fetch ticker symbol pseudo-entities
-	private Entities toEntities(final JsonNode node, String text) throws IOException {
-		if (null == node || node.isNull() || node.isMissingNode()) {
-			return null;
-		}
-		final ObjectMapper mapper = this.createMapper();
-		Entities entities = mapper.readerFor(Entities.class).readValue(node);
-		extractTickerSymbolEntitiesFromText(text, entities);
-		return entities;
-	}
+        String fromScreenName = null;
+        final JsonNode fromScreenNameNode = fromUserNode.get("screen_name");
+        if (fromScreenNameNode != null)
+            fromScreenName = fromScreenNameNode.asText();
 
-	private void extractTickerSymbolEntitiesFromText(String text, Entities entities) {
-		Pattern pattern = Pattern.compile("\\$[A-Za-z]+");
-		Matcher matcher = pattern.matcher(text);
-		while (matcher.find()) {
-			MatchResult matchResult = matcher.toMatchResult();
-			String tickerSymbol = matchResult.group().substring(1);
-			String url = "https://twitter.com/search?q=%24" + tickerSymbol + "&src=ctag";
-			entities.getTickerSymbols().add(new TickerSymbolEntity(tickerSymbol, url, new int[] {matchResult.start(), matchResult.end()}));
-		}
-	}
+        Long fromId = null;
+        final JsonNode fromIdNode = fromUserNode.get("id");
+        if (fromIdNode != null)
+            fromId = fromIdNode.asLong();
 
+        String fromImageUrl = null;
+        final JsonNode fromImageUrlNode = fromUserNode.get("profile_image_url");
+        if (fromImageUrlNode != null)
+            fromImageUrl = fromImageUrlNode.asText();
 
-	private TwitterProfile toProfile(final JsonNode node) throws IOException {
-		if (null == node || node.isNull() || node.isMissingNode()) {
-			return null;
-		}
-		final ObjectMapper mapper = this.createMapper();
-		return mapper.readerFor(TwitterProfile.class).readValue(node);
-	}
+        final Date createdAt = toDate(node.get("created_at").asText(), new SimpleDateFormat(dateFormat, Locale.ENGLISH));
+        final String source = node.get("source").asText();
 
+        Long toUserId = null;
+        final JsonNode toUserIdNode = node.get("in_reply_to_user_id");
+        if (toUserIdNode != null)
+            toUserId = toUserIdNode.asLong();
 
-	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
+        JsonNode languageCodeNode = node.get("lang");
+        String languageCode = languageCodeNode != null && !languageCodeNode.isNull() ? languageCodeNode.asText() : null;
+
+        final Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
+        readUserAndEntities(node, fromUserNode, text, tweet);
+        return tweet;
+    }
+
+    private void readUserAndEntities(JsonNode node, JsonNode fromUserNode, String text, Tweet tweet) throws IOException {
+        final Entities entities = toEntities(node.get("entities"), text);
+        tweet.setEntities(entities);
+
+        final Entities extendedEntities = toEntities(node.get("extended_entities"), text);
+        tweet.setExtendedEntities(extendedEntities);
+
+        final TwitterProfile user = toProfile(fromUserNode);
+        tweet.setUser(user);
+    }
+
+    private void readFavoriteParameters(JsonNode node, Tweet tweet) {
+        final JsonNode favoritedNode = node.get("favorited");
+        final boolean favorited = favoritedNode != null && !favoritedNode.isNull() ? favoritedNode.asBoolean() : false;
+        tweet.setFavorited(favorited);
+
+        final JsonNode favoriteCountNode = node.get("favorite_count");
+        final Integer favoriteCount = favoriteCountNode != null && !favoriteCountNode.isNull() ? favoriteCountNode.asInt() : null;
+        tweet.setFavoriteCount(favoriteCount);
+    }
+
+    private void readTruncatedParameters(JsonNode node, Tweet tweet) {
+        final JsonNode truncatedNode = node.get("truncated");
+        if (truncatedNode != null)
+            tweet.setTruncated(truncatedNode.asBoolean());
+    }
+
+    private void readSensitivityParameters(JsonNode node, Tweet tweet) {
+        final JsonNode possiblySensitiveNode = node.get("possibly_sensitive");
+        if (possiblySensitiveNode != null)
+            tweet.setPossiblySensitive(possiblySensitiveNode.asBoolean());
+    }
+
+    private void readRetweetParameters(JsonNode node, Tweet tweet) throws JsonProcessingException, IOException {
+        final JsonNode retweetCountNode = node.get("retweet_count");
+        final Integer retweetCount = retweetCountNode != null && !retweetCountNode.isNull() ? retweetCountNode.asInt() : null;
+        tweet.setRetweetCount(retweetCount);
+
+        final JsonNode retweetedNode = node.get("retweeted");
+        final boolean retweeted = retweetedNode != null && !retweetedNode.isNull() ? retweetedNode.asBoolean() : false;
+        tweet.setRetweeted(retweeted);
+
+        final JsonNode retweetedStatusNode = node.get("retweeted_status");
+        final Tweet retweetedStatus = retweetedStatusNode != null ? this.deserialize(retweetedStatusNode) : null;
+        tweet.setRetweetedStatus(retweetedStatus);
+    }
+
+    private void readReplyParameters(JsonNode node, Tweet tweet) {
+        final JsonNode inReplyToStatusIdNode = node.get("in_reply_to_status_id");
+        final Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.asLong() : null;
+        tweet.setInReplyToStatusId(inReplyToStatusId);
+
+        final JsonNode inReplyToUserIdNode = node.get("in_reply_to_user_id");
+        final Long inReplyUsersId = inReplyToUserIdNode != null && !inReplyToUserIdNode.isNull() ? inReplyToUserIdNode.asLong() : null;
+        tweet.setInReplyToUserId(inReplyUsersId);
+
+        final JsonNode inReplyToScreenNameNode = node.get("in_reply_to_screen_name");
+        final String inReplyToScreenName =
+            inReplyToScreenNameNode != null && !inReplyToScreenNameNode.isNull() ? inReplyToScreenNameNode.asText() : null;
+        tweet.setInReplyToScreenName(inReplyToScreenName);
+    }
+
+    private ObjectMapper createMapper() {
+        final ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new TwitterModule());
+        return mapper;
+    }
+
+    private Date toDate(String dateString, DateFormat dateFormat) {
+        if (dateString == null)
+            return null;
+
+        try {
+            return dateFormat.parse(dateString);
+        }
+        catch (final ParseException e) {
+            return null;
+        }
+    }
+
+    // passing in text to fetch ticker symbol pseudo-entities
+    @SuppressWarnings("deprecation")
+    private Entities toEntities(final JsonNode node, String text) throws IOException {
+        if (null == node || node.isNull() || node.isMissingNode())
+            return null;
+        final ObjectMapper mapper = createMapper();
+        final Entities entities = mapper.reader(Entities.class).readValue(node);
+        extractTickerSymbolEntitiesFromText(text, entities);
+        return entities;
+    }
+
+    private void extractTickerSymbolEntitiesFromText(String text, Entities entities) {
+        final Pattern pattern = Pattern.compile("\\$[A-Za-z]+");
+        final Matcher matcher = pattern.matcher(text);
+        while (matcher.find()) {
+            final MatchResult matchResult = matcher.toMatchResult();
+            final String tickerSymbol = matchResult.group().substring(1);
+            final String url = "https://twitter.com/search?q=%24" + tickerSymbol + "&src=ctag";
+            entities.getTickerSymbols().add(new TickerSymbolEntity(tickerSymbol, url, new int[] {matchResult.start(), matchResult.end()}));
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private TwitterProfile toProfile(final JsonNode node) throws IOException {
+        if (null == node || node.isNull() || node.isMissingNode())
+            return null;
+        final ObjectMapper mapper = createMapper();
+        return mapper.reader(TwitterProfile.class).readValue(node);
+    }
 
 }

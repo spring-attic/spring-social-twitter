@@ -1,0 +1,66 @@
+{
+    "data": [
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 3GS",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1q"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 4",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1r"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 4S",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1s"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 5",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "1t"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 5C",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "22"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 5S",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "21"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 6",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "46"
+        },
+        {
+            "manufacturer": "Apple",
+            "name": "iPhone 6 Plus",
+            "platform": "iOS",
+            "targeting_type": "DEVICE",
+            "targeting_value": "47"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {
+            "q": "iphone"
+        }
+    }
+}

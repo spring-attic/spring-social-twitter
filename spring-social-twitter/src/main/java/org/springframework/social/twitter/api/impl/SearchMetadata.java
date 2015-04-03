@@ -1,4 +1,4 @@
-package org.springframework.social.twitter.api;
+package org.springframework.social.twitter.api.impl;
 
 /**
  * Represents the cursor metadata associated with a search query via the Twitter Search API.

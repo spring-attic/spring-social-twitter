@@ -23,7 +23,7 @@ import org.springframework.util.MultiValueMap;
  * Subclassed by {@link UserStreamParameters} and {@link FilterStreamParameters}.
  * @author Craig Walls
  */
-abstract class AbstractStreamParameters {
+public abstract class AbstractStreamParameters {
 	
 	protected StringBuffer track = new StringBuffer();
 	

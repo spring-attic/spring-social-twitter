@@ -28,7 +28,7 @@ import org.springframework.web.client.RestTemplate;
  * Implementation of {@link FriendTemplate}, providing a binding to Twitter's friends and followers-oriented REST resources.
  * @author Craig Walls
  */
-class FriendTemplate extends AbstractTwitterOperations implements FriendOperations {
+public class FriendTemplate extends AbstractTwitterOperations implements FriendOperations {
 	
 	private final RestTemplate restTemplate;
 
@@ -43,9 +43,13 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 
 	public CursoredList<TwitterProfile> getFriendsInCursor(long cursor) {
 		requireUserAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		return restTemplate.getForObject(buildUri("friends/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.build(),
+				CursoredTwitterProfileUsersList.class
+			).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFriends(long userId) {
@@ -54,10 +58,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 
 	public CursoredList<TwitterProfile> getFriendsInCursor(long userId, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("friends/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("user_id", String.valueOf(userId))
+					.build(),
+				CursoredTwitterProfileUsersList.class
+			).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFriends(String screenName) {
@@ -66,10 +74,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<TwitterProfile> getFriendsInCursor(String screenName, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("screen_name", String.valueOf(screenName));
-		return restTemplate.getForObject(buildUri("friends/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("screen_name", String.valueOf(screenName))
+					.build(),
+				CursoredTwitterProfileUsersList.class
+			).getList();
 	}
 	
 	public CursoredList<Long> getFriendIds() {
@@ -78,7 +90,13 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getFriendIdsInCursor(long cursor) {
 		requireUserAuthorization();
-		return restTemplate.getForObject(buildUri("friends/ids.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDS_IDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public CursoredList<Long> getFriendIds(long userId) {
@@ -87,10 +105,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getFriendIdsInCursor(long userId, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDS_IDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("user_id", String.valueOf(userId))
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public CursoredList<Long> getFriendIds(String screenName) {
@@ -99,10 +121,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getFriendIdsInCursor(String screenName, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("screen_name", screenName);
-		return restTemplate.getForObject(buildUri("friends/ids.json", parameters), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDS_IDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("screen_name", screenName)
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFollowers() {
@@ -111,9 +137,13 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<TwitterProfile> getFollowersInCursor(long cursor) {
 		requireUserAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		return restTemplate.getForObject(buildUri("followers/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FOLLOWERS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.build(),
+				CursoredTwitterProfileUsersList.class
+			).getList();
 	}
 	
 	public CursoredList<TwitterProfile> getFollowers(long userId) {
@@ -122,10 +152,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<TwitterProfile> getFollowersInCursor(long userId, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("followers/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FOLLOWERS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("user_id", String.valueOf(userId))
+					.build(),
+				CursoredTwitterProfileUsersList.class
+			).getList();
 	}
 
 	public CursoredList<TwitterProfile> getFollowers(String screenName) {
@@ -134,10 +168,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<TwitterProfile> getFollowersInCursor(String screenName, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("screen_name", String.valueOf(screenName));
-		return restTemplate.getForObject(buildUri("followers/list.json", parameters), CursoredTwitterProfileUsersList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FOLLOWERS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("screen_name", String.valueOf(screenName))
+					.build(),
+				CursoredTwitterProfileUsersList.class
+			).getList();
 	}
 
 	public CursoredList<Long> getFollowerIds() {
@@ -146,7 +184,13 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getFollowerIdsInCursor(long cursor) {
 		requireUserAuthorization();
-		return restTemplate.getForObject(buildUri("followers/ids.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FOLLOWERS_IDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public CursoredList<Long> getFollowerIds(long userId) {
@@ -155,10 +199,14 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getFollowerIdsInCursor(long userId, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("user_id", String.valueOf(userId));
-		return restTemplate.getForObject(buildUri("followers/ids.json", parameters), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FOLLOWERS_IDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("user_id", String.valueOf(userId))
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public CursoredList<Long> getFollowerIds(String screenName) {
@@ -167,62 +215,110 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getFollowerIdsInCursor(String screenName, long cursor) {
 		requireEitherUserOrAppAuthorization();
-		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-		parameters.set("cursor", String.valueOf(cursor));
-		parameters.set("screen_name", screenName);
-		return restTemplate.getForObject(buildUri("followers/ids.json", parameters), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FOLLOWERS_IDS)
+					.withArgument("cursor", String.valueOf(cursor))
+					.withArgument("screen_name", screenName)
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public String follow(long userId) {
 		requireUserAuthorization();
-		return (String) restTemplate.postForObject(buildUri("friendships/create.json", "user_id", String.valueOf(userId)), EMPTY_DATA, Map.class).get("screen_name");
+		return (String) restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_CREATE)
+					.withArgument("user_id", String.valueOf(userId))
+					.build(),
+				EMPTY_DATA,
+				Map.class
+			).get("screen_name");
 	}
 
 	public String follow(String screenName) {
 		requireUserAuthorization();
-		return (String) restTemplate.postForObject(buildUri("friendships/create.json", "screen_name", screenName), EMPTY_DATA, Map.class).get("screen_name");
+		return (String) restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_CREATE)
+					.withArgument("screen_name", screenName)
+					.build(),
+				EMPTY_DATA,
+				Map.class
+			).get("screen_name");
 	}
 	
 	public String unfollow(long userId) {
 		requireUserAuthorization();
-		return (String) restTemplate.postForObject(buildUri("friendships/destroy.json", "user_id", String.valueOf(userId)), EMPTY_DATA, Map.class).get("screen_name");
+		return (String) restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_DESTROY)
+					.withArgument("user_id", String.valueOf(userId))
+					.build(),
+				EMPTY_DATA,
+				Map.class
+			).get("screen_name");
 	}
 
 	public String unfollow(String screenName) {
 		requireUserAuthorization();
-		return (String) restTemplate.postForObject(buildUri("friendships/destroy.json", "screen_name", screenName), EMPTY_DATA, Map.class).get("screen_name");
+		return (String) restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_DESTROY)
+					.withArgument("screen_name", screenName)
+					.build(),
+				EMPTY_DATA,
+				Map.class
+			).get("screen_name");
 	}
 	
 	public TwitterProfile enableNotifications(long userId) {
 		requireUserAuthorization();
-		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.set("user_id", String.valueOf(userId));
-		params.set("device", "true");
-		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
+		return restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_UPDATE)
+					.withArgument("user_id", String.valueOf(userId))
+					.withArgument("device", "true")
+					.build(),
+				EMPTY_DATA,
+				TwitterProfile.class);
 	}
 	
 	public TwitterProfile enableNotifications(String screenName) {
 		requireUserAuthorization();
-		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.set("screen_name", screenName);
-		params.set("device", "true");
-		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
+		return restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_UPDATE)
+					.withArgument("screen_name", screenName)
+					.withArgument("device", "true")
+					.build(),
+				EMPTY_DATA,
+				TwitterProfile.class);
 	}
 
 	public TwitterProfile disableNotifications(long userId) {
 		requireUserAuthorization();
-		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.set("user_id", String.valueOf(userId));
-		params.set("device", "false");
-		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
+		return restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_UPDATE)
+					.withArgument("user_id", String.valueOf(userId))
+					.withArgument("device", "false")
+					.build(),
+				EMPTY_DATA,
+				TwitterProfile.class);
 	}
 	
 	public TwitterProfile disableNotifications(String screenName) {
 		requireUserAuthorization();
-		LinkedMultiValueMap<String, String> params = new LinkedMultiValueMap<String, String>();
-		params.set("screen_name", screenName);
-		params.set("device", "false");
-		return restTemplate.postForObject(buildUri("friendships/update.json", params), EMPTY_DATA, TwitterProfile.class);
+		return restTemplate.postForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_UPDATE)
+					.withArgument("screen_name", screenName)
+					.withArgument("device", "false")
+					.build(),
+				EMPTY_DATA,
+				TwitterProfile.class);
 	}
 
 	public CursoredList<Long> getIncomingFriendships() {
@@ -231,7 +327,13 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getIncomingFriendships(long cursor) {
 		requireUserAuthorization();
-		return restTemplate.getForObject(buildUri("friendships/incoming.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_INCOMING)
+					.withArgument("cursor", String.valueOf(cursor))
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 
 	public CursoredList<Long> getOutgoingFriendships() {
@@ -240,7 +342,13 @@ class FriendTemplate extends AbstractTwitterOperations implements FriendOperatio
 	
 	public CursoredList<Long> getOutgoingFriendships(long cursor) {
 		requireUserAuthorization();
-		return restTemplate.getForObject(buildUri("friendships/outgoing.json", "cursor", String.valueOf(cursor)), CursoredLongList.class).getList();
+		return restTemplate.getForObject(
+				new TwitterApiBuilderForUri()
+					.withResource(TwitterApiUriResourceForStandard.FRIENDSHIPS_OUTGOING)
+					.withArgument("cursor", String.valueOf(cursor))
+					.build(),
+				CursoredLongList.class
+			).getList();
 	}
 	
 	private static final MultiValueMap<String, Object> EMPTY_DATA = new LinkedMultiValueMap<String, Object>();
