@@ -25,10 +25,7 @@ import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.social.twitter.api.Entities;
-import org.springframework.social.twitter.api.TickerSymbolEntity;
-import org.springframework.social.twitter.api.Tweet;
-import org.springframework.social.twitter.api.TwitterProfile;
+import org.springframework.social.twitter.api.*;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -99,7 +96,13 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		tweet.setEntities(entities);
 		TwitterProfile user = toProfile(fromUserNode);
 		tweet.setUser(user);
-		return tweet;
+        JsonNode coordinatesNode = node.get("coordinates");
+        Coordinates coordinates = toCoordinates(coordinatesNode);
+        tweet.setCoordinates(coordinates);
+        JsonNode placeNode = node.get("place");
+        Place place = toPlace(placeNode);
+        tweet.setPlace(place);
+        return tweet;
 	}
 
 	private ObjectMapper createMapper() {
@@ -151,6 +154,22 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		return mapper.reader(TwitterProfile.class).readValue(node);
 	}
 
+
+    private Coordinates toCoordinates(final  JsonNode node) throws IOException {
+        if (null == node || node.isNull() || node.isMissingNode()) {
+            return null;
+        }
+        final ObjectMapper mapper = this.createMapper();
+        return mapper.reader(Coordinates.class).readValue(node);
+    }
+
+    private Place toPlace(final JsonNode node) throws IOException {
+        if (null == node || node.isNull() || node.isMissingNode()) {
+            return null;
+        }
+        final ObjectMapper mapper = this.createMapper();
+        return mapper.reader(Place.class).readValue(node);
+    }
 
 	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 

@@ -1,0 +1,113 @@
+{
+    "created_at": "Tue Aug 12 16:22:57 +0000 2014",
+    "id": 499229564082880512,
+    "id_str": "499229564082880512",
+    "text": "I'm at N&amp;S  Boks-Kick Boks w\/ @iiiaydn https:\/\/t.co\/vvJNFvmgQc",
+    "source": "\u003ca href=\"http:\/\/foursquare.com\" rel=\"nofollow\"\u003eFoursquare\u003c\/a\u003e",
+    "truncated": false,
+    "in_reply_to_status_id": null,
+    "in_reply_to_status_id_str": null,
+    "in_reply_to_user_id": null,
+    "in_reply_to_user_id_str": null,
+    "in_reply_to_screen_name": null,
+    "user": {
+        "id": 580020135,
+        "id_str": "580020135",
+        "name": "s\u0131koles",
+        "screen_name": "CrkAlii",
+        "location": "",
+        "description": "FB rh+ - m\u00fcstakbel Maden M\u00fch. -Eski\u015fehir\/\u0130stanbul-\u0130stinye",
+        "url": null,
+        "entities": {
+            "description": {
+                "urls": []
+            }
+        },
+        "protected": false,
+        "followers_count": 157,
+        "friends_count": 103,
+        "listed_count": 0,
+        "created_at": "Mon May 14 14:45:20 +0000 2012",
+        "favourites_count": 210,
+        "utc_offset": 10800,
+        "time_zone": "Istanbul",
+        "geo_enabled": true,
+        "verified": false,
+        "statuses_count": 2461,
+        "lang": "tr",
+        "contributors_enabled": false,
+        "is_translator": false,
+        "is_translation_enabled": false,
+        "profile_background_color": "131516",
+        "profile_background_image_url": "http:\/\/pbs.twimg.com\/profile_background_images\/378800000040605543\/1344ce81b38e69ef7d95472e2c995604.jpeg",
+        "profile_background_image_url_https": "https:\/\/pbs.twimg.com\/profile_background_images\/378800000040605543\/1344ce81b38e69ef7d95472e2c995604.jpeg",
+        "profile_background_tile": true,
+        "profile_image_url": "http:\/\/pbs.twimg.com\/profile_images\/493881038742228992\/TPRIsYwM_normal.jpeg",
+        "profile_image_url_https": "https:\/\/pbs.twimg.com\/profile_images\/493881038742228992\/TPRIsYwM_normal.jpeg",
+        "profile_banner_url": "https:\/\/pbs.twimg.com\/profile_banners\/580020135\/1373452248",
+        "profile_link_color": "009999",
+        "profile_sidebar_border_color": "FFFFFF",
+        "profile_sidebar_fill_color": "DDEEF6",
+        "profile_text_color": "333333",
+        "profile_use_background_image": true,
+        "default_profile": false,
+        "default_profile_image": false,
+        "following": false,
+        "follow_request_sent": false,
+        "notifications": false
+    },
+    "geo": {
+        "type": "Point",
+        "coordinates": [41.11890391, 29.05450750]
+    },
+    "coordinates": {
+        "type": "Point",
+        "coordinates": [29.05450750, 41.11890391]
+    },
+    "place": {
+        "id": "5e02a0f0d91c76d2",
+        "url": "https:\/\/api.twitter.com\/1.1\/geo\/id\/5e02a0f0d91c76d2.json",
+        "place_type": "city",
+        "name": "\u0130stanbul",
+        "full_name": "\u0130stanbul",
+        "country_code": "TR",
+        "country": "T\u00fcrkiye",
+        "contained_within": [],
+        "bounding_box": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [28.6321043, 40.8027337],
+                    [29.3783413, 40.8027337],
+                    [29.3783413, 41.2399073],
+                    [28.6321043, 41.2399073]
+                ]
+            ]
+        },
+        "attributes": {}
+    },
+    "contributors": null,
+    "retweet_count": 0,
+    "favorite_count": 0,
+    "entities": {
+        "hashtags": [],
+        "symbols": [],
+        "urls": [{
+            "url": "https:\/\/t.co\/vvJNFvmgQc",
+            "expanded_url": "https:\/\/www.swarmapp.com\/crkalii\/checkin\/53ea3f4e11d28be59d0b672b?s=DLLsioTOHrRMyydQGdMmJjk1C_U&ref=tw",
+            "display_url": "swarmapp.com\/crkalii\/checki\u2026",
+            "indices": [43, 66]
+        }],
+        "user_mentions": [{
+            "screen_name": "IiiAydn",
+            "name": "\u0130rem Ayd\u0131n",
+            "id": 2301788073,
+            "id_str": "2301788073",
+            "indices": [34, 42]
+        }]
+    },
+    "favorited": false,
+    "retweeted": false,
+    "possibly_sensitive": false,
+    "lang": "en"
+}

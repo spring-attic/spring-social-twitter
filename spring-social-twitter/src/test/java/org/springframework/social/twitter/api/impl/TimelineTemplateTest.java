@@ -15,6 +15,8 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.http.HttpStatus.*;
@@ -29,13 +31,7 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.social.DuplicateStatusException;
 import org.springframework.social.OperationNotPermittedException;
-import org.springframework.social.twitter.api.Entities;
-import org.springframework.social.twitter.api.MessageTooLongException;
-import org.springframework.social.twitter.api.OEmbedOptions;
-import org.springframework.social.twitter.api.OEmbedTweet;
-import org.springframework.social.twitter.api.TickerSymbolEntity;
-import org.springframework.social.twitter.api.Tweet;
-import org.springframework.social.twitter.api.TweetData;
+import org.springframework.social.twitter.api.*;
 
 
 /**
@@ -275,7 +271,37 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertSingleTweet(tweet);
 	}
 
-	@Test
+    @Test
+    public void getStatusWithLocation() throws Exception {
+        mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
+                .andExpect(method(GET))
+                .andRespond(withSuccess(jsonResource("status-with-location"), APPLICATION_JSON));
+
+        Tweet tweet = twitter.timelineOperations().getStatus(12345);
+        assertThat(tweet.getCoordinates().getLatitude(), is(equalTo(41.11890391)));
+        assertThat(tweet.getCoordinates().getLongitude(), is(equalTo(29.0545075)));
+        assertThat(tweet.getCoordinates().getType(), is(equalTo("Point")));
+        assertThat(tweet.getPlace().getId(), is(equalTo("5e02a0f0d91c76d2")));
+
+        assertThat(tweet.getPlace().getPlaceType(), is(equalTo(PlaceType.CITY)));
+        assertThat(tweet.getPlace().getName(), is(equalTo("İstanbul")));
+        assertThat(tweet.getPlace().getFullName(), is(equalTo("İstanbul")));
+        assertThat(tweet.getPlace().getCountryCode(), is(equalTo("TR")));
+        assertThat(tweet.getPlace().getCountry(), is(equalTo("Türkiye")));
+        assertThat(tweet.getPlace().getBoundingBox().getType(), is(equalTo(Place.GeometryType.POLYGON)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().size(), is(1));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).size(), is(4));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(0).getLatitude(), is(equalTo(40.8027337)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(0).getLongitude(), is(equalTo(28.6321043)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(1).getLatitude(), is(equalTo(40.8027337)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(1).getLongitude(), is(equalTo(29.3783413)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(2).getLatitude(), is(equalTo(41.2399073)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(2).getLongitude(), is(equalTo(29.3783413)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(3).getLatitude(), is(equalTo(41.2399073)));
+        assertThat(tweet.getPlace().getBoundingBox().getCoordinates().get(0).get(3).getLongitude(), is(equalTo(28.6321043)));
+    }
+
+    @Test
 	public void getStatus_appAuthorization() {
 		appAuthMockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/show/12345.json?include_entities=true"))
 			.andExpect(method(GET))

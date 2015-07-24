@@ -16,7 +16,9 @@
 package org.springframework.social.twitter.api.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import org.springframework.social.twitter.api.Place;
 
 /**
  * Mixin class for adding Jackson annotations to Tweet. 

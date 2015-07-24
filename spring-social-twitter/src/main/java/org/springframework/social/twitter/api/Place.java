@@ -39,7 +39,7 @@ public class Place extends TwitterObject {
 	
 	private List<Place> containedWithin;
 	
-	private List<GeoPoint> boundingBox;
+	private Geometry boundingBox;
 	
 	private Geometry geometry;
 
@@ -108,17 +108,17 @@ public class Place extends TwitterObject {
 	public List<Place> getContainedWithin() {
 		return containedWithin;
 	}
-	
-	/**
-	 * @return a list of points defining a box that fully contains the place's geometry.
-	 */
-	public List<GeoPoint> getBoundingBox() {
-		return boundingBox;
-	}
-	
-	/**
+
+    /**
+     * @return the place's bounding box.
+     */
+    public Geometry getBoundingBox() {
+        return boundingBox;
+    }
+
+    /**
 	 * @return the place's geometry.
-	 */
+    */
 	public Geometry getGeometry() {
 		return geometry;
 	}

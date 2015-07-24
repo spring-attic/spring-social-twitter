@@ -1,3 +1,8 @@
+.idea/
+*.iml
+/**/*.iml
+*.ipr
+*.iws
 .classpath
 .project
 .settings
@@ -11,3 +16,4 @@ spring-social-core/src/test/java/exploration
 **/.project
 **/.settings
 **/bin
+/bin

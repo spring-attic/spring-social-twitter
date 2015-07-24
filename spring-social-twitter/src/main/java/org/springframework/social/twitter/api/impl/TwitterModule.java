@@ -68,6 +68,7 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(AccountSettings.SleepTime.class, AccountSettingsMixin.SleepTimeMixin.class);
 		context.setMixInAnnotations(AccountSettings.TrendLocation.class, AccountSettingsMixin.TrendLocationMixin.class);
 		context.setMixInAnnotations(OEmbedTweet.class, OEmbedTweetMixin.class);
+        context.setMixInAnnotations(Coordinates.class, CoordinatesMixin.class);
 	}
 
 }

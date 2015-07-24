@@ -43,6 +43,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertPlace(place);
 	}
 
+
 	@Test
 	public void getPlace_polygonGeometry() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/geo/id/0bba15b36bd9e8cc.json"))
@@ -61,6 +62,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(28.548427, polyPoints.get(2).getLatitude(), 0.000001);
 		assertEquals(-81.63666, polyPoints.get(2).getLongitude(), 0.000001);
 	}
+
 
 	@Test
 	public void getPlace_multipolygonGeometry() {
@@ -106,6 +108,7 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(28.587731, poly3.get(4).getLatitude(), 0.000001);
 		assertEquals(-81.382777, poly3.get(4).getLongitude(), 0.000001);
 	}
+
 
 	@Test
 	public void reverseGeoCode_pointOnly() {
@@ -263,15 +266,16 @@ public class GeoTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("United States", containedWithin.getCountry());
 		assertEquals("US", containedWithin.getCountryCode());
 		assertEquals(PlaceType.POINT_OF_INTEREST, containedWithin.getPlaceType());
-		List<GeoPoint> boundingBox = place.getBoundingBox();
-		assertEquals(-122.40061283111572, boundingBox.get(0).getLongitude(), 0.000001);
-		assertEquals(37.78211205989559, boundingBox.get(0).getLatitude(), 0.000001);
-		assertEquals(-122.40061283111572, boundingBox.get(1).getLongitude(), 0.000001);
-		assertEquals(37.78211205989559, boundingBox.get(1).getLatitude(), 0.000001);
-		assertEquals(-122.40061283111572, boundingBox.get(2).getLongitude(), 0.000001);
-		assertEquals(37.78211205989559, boundingBox.get(2).getLatitude(), 0.000001);
-		assertEquals(-122.40061283111572, boundingBox.get(3).getLongitude(), 0.000001);
-		assertEquals(37.78211205989559, boundingBox.get(3).getLatitude(), 0.000001);
+        //List<GeoPoint> boundingBox = place.getBoundingBox();
+        Geometry boundingBox = place.getBoundingBox();
+		assertEquals(-122.40061283111572, boundingBox.getCoordinates().get(0).get(0).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.getCoordinates().get(0).get(0).getLatitude(), 0.000001);
+		assertEquals(-122.40061283111572, boundingBox.getCoordinates().get(0).get(1).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.getCoordinates().get(0).get(1).getLatitude(), 0.000001);
+		assertEquals(-122.40061283111572, boundingBox.getCoordinates().get(0).get(2).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.getCoordinates().get(0).get(2).getLatitude(), 0.000001);
+		assertEquals(-122.40061283111572, boundingBox.getCoordinates().get(0).get(3).getLongitude(), 0.000001);
+		assertEquals(37.78211205989559, boundingBox.getCoordinates().get(0).get(3).getLatitude(), 0.000001);
 		Geometry geometry = place.getGeometry();
 		assertEquals(GeometryType.POINT, geometry.getType());
 		List<List<GeoPoint>> coordinates = geometry.getCoordinates();
