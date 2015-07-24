@@ -17,12 +17,19 @@ package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.HttpMessageNotWritableException;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.MultiValueMap;
 
 /**
@@ -31,6 +38,18 @@ import org.springframework.util.MultiValueMap;
  */
 class TwitterEscapingFormHttpMessageConverter extends FormHttpMessageConverter {
 
+	TwitterEscapingFormHttpMessageConverter() {
+		setCharset(Charset.forName("UTF-8"));
+		List<HttpMessageConverter<?>> partConverters = new ArrayList<HttpMessageConverter<?>>();
+		partConverters.add(new ByteArrayHttpMessageConverter());
+		StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		stringHttpMessageConverter.setWriteAcceptCharset(false);
+		partConverters.add(stringHttpMessageConverter);
+		partConverters.add(new ResourceHttpMessageConverter());
+		setPartConverters(partConverters);
+	}
+	
+	
 	@Override
 	public void write(MultiValueMap<String, ?> map, MediaType contentType, HttpOutputMessage outputMessage) 
 			throws IOException, HttpMessageNotWritableException {
