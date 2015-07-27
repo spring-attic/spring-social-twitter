@@ -33,7 +33,6 @@ import org.springframework.social.twitter.api.TwitterProfile;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,7 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * varies between the search API and the timeline API. This deserializer determine which structure is in play and creates a tweet from it.
  * @author Craig Walls
  */
-class TweetDeserializer extends JsonDeserializer<Tweet> {
+class TweetDeserializer extends AbstractTwitterDeserializer<Tweet> {
 
 	@Override
 	public Tweet deserialize(final JsonParser jp, final DeserializationContext ctx) throws IOException {
@@ -101,12 +100,6 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		tweet.setUser(user);
 		return tweet;
 	}
-
-	private ObjectMapper createMapper() {
-		final ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new TwitterModule());
-		return mapper;
-	}
 	
 	private Date toDate(String dateString, DateFormat dateFormat) {
 		if (dateString == null) {
@@ -141,16 +134,6 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 			entities.getTickerSymbols().add(new TickerSymbolEntity(tickerSymbol, url, new int[] {matchResult.start(), matchResult.end()}));
 		}
 	}
-
-
-	private TwitterProfile toProfile(final JsonNode node) throws IOException {
-		if (null == node || node.isNull() || node.isMissingNode()) {
-			return null;
-		}
-		final ObjectMapper mapper = this.createMapper();
-		return mapper.reader(TwitterProfile.class).readValue(node);
-	}
-
 
 	private static final String TIMELINE_DATE_FORMAT = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";
 

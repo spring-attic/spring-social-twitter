@@ -15,11 +15,13 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import static org.junit.Assert.*;
-import static org.springframework.http.HttpMethod.*;
-import static org.springframework.http.MediaType.*;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
+import static org.junit.Assert.assertEquals;
+import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,7 +30,9 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
+import org.springframework.social.twitter.api.StreamEvent;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamWarningEvent;
 import org.springframework.social.twitter.api.Tweet;
@@ -57,6 +61,8 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(4, listener.tweetsReceived.size());
 		assertEquals(2, listener.deletesReceived.size());
 		assertEquals(1, listener.limitsReceived.size());
+		assertEquals(2, listener.eventsReceived.size());
+		assertEquals(1, listener.directMessagesReceived.size());
 	}
 	
 	@Test
@@ -88,6 +94,8 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		List<StreamDeleteEvent> deletesReceived = new ArrayList<StreamDeleteEvent>();
 		List<Integer> limitsReceived = new ArrayList<Integer>();
 		List<StreamWarningEvent> warningsReceived = new ArrayList<StreamWarningEvent>();
+		List<StreamEvent> eventsReceived = new ArrayList<StreamEvent>();
+		List<DirectMessage> directMessagesReceived = new ArrayList<DirectMessage>();
 		private int stopAfter = Integer.MAX_VALUE;
 		
 		public MockStreamListener(int stopAfter) {
@@ -111,6 +119,16 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		
 		public void onWarning(StreamWarningEvent warningEvent) {
 			warningsReceived.add(warningEvent);
+			messageReceived();
+		}
+		
+		public void onEvent(StreamEvent event) {
+			eventsReceived.add(event);
+			messageReceived();
+		}
+		
+		public void onDirectMessage(DirectMessage directMessage) {
+			directMessagesReceived.add(directMessage);
 			messageReceived();
 		}
 
