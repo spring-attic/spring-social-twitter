@@ -316,7 +316,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("oembed"), APPLICATION_JSON));
 
-		OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(357251561744916480L);
+		OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(String.valueOf(357251561744916480L));
 		assertOEmbedTweet(oembed);
 	}
 
@@ -326,7 +326,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 			.andExpect(method(GET))
 			.andRespond(withSuccess(jsonResource("oembed"), APPLICATION_JSON));
 
-		OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(357251561744916480L, 
+		OEmbedTweet oembed = twitter.timelineOperations().getStatusOEmbed(String.valueOf(357251561744916480L), 
 				new OEmbedOptions().maxWidth(300)
 								   .hideMedia()
 								   .hideThread()
@@ -677,6 +677,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 	// private helper
 	private Resource getUploadResource(final String filename, String content) {
 		Resource resource = new ByteArrayResource(content.getBytes()) {
+			@Override
 			public String getFilename() throws IllegalStateException {
 				return filename;
 			};

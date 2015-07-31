@@ -58,6 +58,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 
 	public Tweet deserialize(JsonNode node) throws IOException, JsonProcessingException {
 		final long id = node.path("id").asLong();
+		final String idStr = node.path("id_str").asText();
 		final String text = node.path("text").asText();
 		if (id <= 0 || text == null || text.isEmpty()) {
 			return null;
@@ -72,7 +73,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		JsonNode toUserIdNode = node.get("in_reply_to_user_id");
 		Long toUserId = toUserIdNode != null ? toUserIdNode.asLong() : null;
 		String languageCode = node.get("lang").asText();
-		Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
+		Tweet tweet = new Tweet(id, idStr, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
 		JsonNode inReplyToStatusIdNode = node.get("in_reply_to_status_id");
 		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.asLong() : null;
 		tweet.setInReplyToStatusId(inReplyToStatusId);
