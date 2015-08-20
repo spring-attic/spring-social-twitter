@@ -120,7 +120,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> request = new LinkedMultiValueMap<String, Object>();
 		request.set("list_id", String.valueOf(listId));
-		restTemplate.postForObject(buildUri("lists/destroy.json"), request, UserList.class);
+		restTemplate.postForObject(buildUri("lists/destroy.json"), request, String.class);
 	}
 
 	public CursoredList<TwitterProfile> getListMembers(long listId) {
