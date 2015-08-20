@@ -1,3 +1,15 @@
+Spring Social Twitter 1.1.1.RELEASE (August 20, 2015)
+=====================================================
+Improvements
+ * Add id_str to Tweet. (Pull request #75)
+ * Update to latest Spring IO plugin (Pull request #86)
+ * Add profileBannerUrl property to TwitterProfile (Pull request #73)
+
+Bug Fixes
+ * Fix leaky executor in stream reader implementation. (SOCIALTW-82)
+ * Fix encoding problem by setting encoding to UTF-8. (SOCIALTW-37)
+
+
 Spring Social Twitter 1.1.0.RC1 (September 2, 2013)
 ===================================================
 Improvments

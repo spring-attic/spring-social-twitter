@@ -85,6 +85,9 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 				errorText = (String) errors;
 			}
 		}
+		
+		System.out.println("ERROR:   " + statusCode + " :: " + errorText);
+		
 
 		if (statusCode == HttpStatus.BAD_REQUEST) {
 			if (errorText.contains("Rate limit exceeded.")) {

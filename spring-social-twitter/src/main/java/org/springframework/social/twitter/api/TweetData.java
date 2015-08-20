@@ -69,6 +69,14 @@ public class TweetData {
 		return mediaResource != null;
 	}
 	
+	public MultiValueMap<String, Object> toUploadMediaParameters() {
+		MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
+		if (mediaResource != null) {
+			params.set("media", mediaResource);
+		}
+		return params;
+	}
+	
 	public MultiValueMap<String, Object> toRequestParameters() {
 		MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
 		params.set("status", message);
@@ -81,9 +89,6 @@ public class TweetData {
 		}
 		if (displayCoordinates) {
 			params.set("display_coordinates", "true");
-		}
-		if (mediaResource != null) {
-			params.set("media", mediaResource);
 		}
 		if (placeId != null) {
 			params.set("place_id", placeId);

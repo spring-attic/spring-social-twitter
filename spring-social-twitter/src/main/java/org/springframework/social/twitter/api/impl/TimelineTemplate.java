@@ -29,6 +29,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Implementation of {@link TimelineOperations}, providing a binding to Twitter's tweet and timeline-oriented REST resources.
  * @author Craig Walls
@@ -173,15 +176,26 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		requireUserAuthorization();
 		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
 		tweetParams.add("status", message);
-		tweetParams.add("media", media);
 		tweetParams.putAll(details.toParameterMap());
-		return restTemplate.postForObject(buildUri("statuses/update_with_media.json"), tweetParams, Tweet.class);
+		if (media != null) {
+			MultiValueMap<String, Object> uploadParams = new LinkedMultiValueMap<String, Object>();
+			uploadParams.set("media", media);
+			MediaUploadResponse response = restTemplate.postForObject("https://upload.twitter.com/1.1/media/upload.json", 
+					uploadParams, MediaUploadResponse.class);
+			tweetParams.set("media_ids", response.getMediaId());
+		}
+		return restTemplate.postForObject(buildUri("statuses/update.json"), tweetParams, Tweet.class);
 	}
 
 	public Tweet updateStatus(TweetData tweetData) {
 		requireUserAuthorization();
-		String uriPath = tweetData.hasMedia() ? "statuses/update_with_media.json" : "statuses/update.json";
-		return restTemplate.postForObject(buildUri(uriPath), tweetData.toRequestParameters(), Tweet.class);
+		MultiValueMap<String, Object> postParameters = tweetData.toRequestParameters();
+		if (tweetData.hasMedia()) {
+			MediaUploadResponse response = restTemplate.postForObject("https://upload.twitter.com/1.1/media/upload.json", 
+					tweetData.toUploadMediaParameters(), MediaUploadResponse.class);
+			postParameters.set("media_ids", response.getMediaId());
+		}
+		return restTemplate.postForObject(buildUri("statuses/update.json"), postParameters, Tweet.class);
 	}
 	
 	public void deleteStatus(long tweetId) {
@@ -260,5 +274,17 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet> {}
+	
+	@JsonIgnoreProperties(ignoreUnknown=true)
+	private static class MediaUploadResponse {
+		
+		@JsonProperty("media_id")
+		private String mediaId;
+		
+		public String getMediaId() {
+			return mediaId;
+		}
+		
+	}
 	
 }

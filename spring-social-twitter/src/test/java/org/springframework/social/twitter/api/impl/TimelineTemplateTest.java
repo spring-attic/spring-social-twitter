@@ -361,10 +361,14 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void updateStatus_withImage() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update_with_media.json"))
+		mockServer.expect(requestTo("https://upload.twitter.com/1.1/media/upload.json"))
+			.andExpect(method(POST))
+			.andRespond(withSuccess(jsonResource("media-upload"), APPLICATION_JSON));
+	
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 				.andExpect(method(POST))
+				.andExpect(content().string("status=Test+Message&media_ids=553639437322563584"))
 				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-		// TODO: Match body content to ensure fields and photo are included
 		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
 		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").withMedia(photo));
 		assertSingleTweet(tweet);
@@ -418,10 +422,14 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 
 	@Test
 	public void updateStatus_withImageAndLocation_() {
-		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update_with_media.json"))
+		mockServer.expect(requestTo("https://upload.twitter.com/1.1/media/upload.json"))
+			.andExpect(method(POST))
+			.andRespond(withSuccess(jsonResource("media-upload"), APPLICATION_JSON));
+	
+		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 				.andExpect(method(POST))
+				.andExpect(content().string("status=Test+Message&lat=-111.2&long=123.1&media_ids=553639437322563584"))
 				.andRespond(withSuccess(jsonResource("status"), APPLICATION_JSON));
-		// TODO: Match body content to ensure fields and photo are included
 		Resource photo = getUploadResource("photo.jpg", "PHOTO DATA");
 		Tweet tweet = twitter.timelineOperations().updateStatus(new TweetData("Test Message").atLocation(123.1f, -111.2f).withMedia(photo));
 		assertSingleTweet(tweet);
