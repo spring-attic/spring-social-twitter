@@ -59,6 +59,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	private String textColor;
 	private String linkColor;
 	private boolean showAllInlineMedia;
+    private String profileBannerUrl;
 	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -338,7 +339,14 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	public String getLinkColor() {
 		return linkColor;
 	}
-	
+
+    /**
+     * The URL to the banner image shown on the user's Twitter profile page
+     */
+    public String getProfileBannerUrl() {
+        return profileBannerUrl;
+    }
+
 	/**
 	 * Whether or not the user has selected to see all inline media from everyone.
 	 * If false, they will only see inline media from the users they follow.
@@ -348,7 +356,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 		return showAllInlineMedia;
 	}
 
-	@Override
+    @Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
