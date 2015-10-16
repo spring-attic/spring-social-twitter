@@ -46,6 +46,42 @@ public class Tweet extends TwitterObject implements Serializable {
 	private Entities entities;
 	private TwitterProfile user;
 
+	/**
+	 * Constructs a Tweet
+	 * 
+	 * @param id The tweet's ID
+	 * @param text The tweet's text
+	 * @param createdAt Date Tweet was created
+	 * @param fromUser The username of the author of the tweet.
+	 * @param profileImageUrl The URL to the profile picture of the tweet's author.
+	 * @param toUserId The user ID of the user to whom the tweet is targeted.
+	 * @param fromUserId The user ID of the tweet's author.
+	 * @param languageCode The language code
+	 * @param source The source of the tweet.
+	 * 
+	 * @deprecated Use other constructor with String ID instead.
+	 */
+	@Deprecated
+	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
+		this(id, String.valueOf(id), text, createdAt, fromUser, profileImageUrl, toUserId, fromUserId, languageCode, source);
+	}
+
+	/**
+	 * Constructs a Tweet
+	 * 
+	 * @param id The tweet's ID
+	 * @param idStr The tweet's ID as a String
+	 * @param text The tweet's text
+	 * @param createdAt Date Tweet was created
+	 * @param fromUser The username of the author of the tweet.
+	 * @param profileImageUrl The URL to the profile picture of the tweet's author.
+	 * @param toUserId The user ID of the user to whom the tweet is targeted.
+	 * @param fromUserId The user ID of the tweet's author.
+	 * @param languageCode The language code
+	 * @param source The source of the tweet.
+	 * 
+	 * @deprecated Use other constructor with String ID instead.
+	 */
 	public Tweet(long id, String idStr, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
 		this.idStr = idStr;
