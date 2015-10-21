@@ -189,7 +189,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	public Tweet updateStatus(TweetData tweetData) {
 		requireUserAuthorization();
-		MultiValueMap<String, Object> postParameters = tweetData.toRequestParameters();
+		MultiValueMap<String, Object> postParameters = tweetData.toTweetParameters();
 		if (tweetData.hasMedia()) {
 			MediaUploadResponse response = restTemplate.postForObject("https://upload.twitter.com/1.1/media/upload.json", 
 					tweetData.toUploadMediaParameters(), MediaUploadResponse.class);

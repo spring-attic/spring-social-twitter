@@ -77,7 +77,25 @@ public class TweetData {
 		return params;
 	}
 	
+	/**
+	 * Produce request parameters for a Tweet.
+	 * @return a {@link MultiValueMap} of request parameters.
+	 * @deprecated Use {{@link #toTweetParameters()} instead. Deprecated because the "media" parameter no longer applies in Twitter's API, but kept here for backward compatibility.
+	 */
+	@Deprecated
 	public MultiValueMap<String, Object> toRequestParameters() {
+		MultiValueMap<String, Object> tweetParameters = toTweetParameters();
+		if (mediaResource != null) {		
+			tweetParameters.set("media", mediaResource);		
+		}
+		return tweetParameters;
+	}
+
+	/**
+	 * Produce request parameters for a Tweet.
+	 * @return a {@link MultiValueMap} of request parameters.
+	 */
+	public MultiValueMap<String, Object> toTweetParameters() {
 		MultiValueMap<String, Object> params = new LinkedMultiValueMap<String, Object>();
 		params.set("status", message);
 		if (inReplyToStatusId != null) {
