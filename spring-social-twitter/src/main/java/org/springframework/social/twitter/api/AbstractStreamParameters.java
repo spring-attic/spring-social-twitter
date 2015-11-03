@@ -31,6 +31,8 @@ abstract class AbstractStreamParameters {
 	
 	protected boolean stallWarnings = false;
 
+	protected String language;
+
 	public AbstractStreamParameters() {}
 	
 	/**
@@ -69,6 +71,11 @@ abstract class AbstractStreamParameters {
 		this.stallWarnings = stallWarnings;
 		return this;
 	}
+
+	public AbstractStreamParameters language(String language) {
+		this.language = language;
+		return this;
+	}
 	
 	/**
 	 * @return the track parameters as they'll be sent in the streaming request.
@@ -94,6 +101,9 @@ abstract class AbstractStreamParameters {
 		}
 		if (stallWarnings) {
 			parameterMap.set("stall_warnings", "true");
+		}
+		if (language != null) {
+			parameterMap.set("language", language);
 		}
 		return parameterMap;
 	}
