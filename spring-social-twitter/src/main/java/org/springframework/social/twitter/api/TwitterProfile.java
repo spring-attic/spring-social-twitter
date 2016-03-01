@@ -65,8 +65,8 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 		return serialVersionUID;
 	}
 
-	public TwitterProfile(long id, String screenName, String name, String url, String profileImageUrl, String description, String location, Date createdDate) {
-		this.id_str = String.valueOf(id);
+	public TwitterProfile(String id, String screenName, String name, String url, String profileImageUrl, String description, String location, Date createdDate) {
+		this.id_str = id;
 		this.screenName = screenName;
 		this.name = name;
 		this.url = url;

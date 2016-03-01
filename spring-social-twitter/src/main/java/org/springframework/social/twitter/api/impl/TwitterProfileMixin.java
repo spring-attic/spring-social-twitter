@@ -30,7 +30,7 @@ import java.util.Date;
 abstract class TwitterProfileMixin extends TwitterObjectMixin {
 	@JsonCreator
 	TwitterProfileMixin(
-			@JsonProperty("id") long id, 
+			@JsonProperty("id") String id,
 			@JsonProperty("screen_name") String screenName, 
 			@JsonProperty("name") String name, 
 			@JsonProperty("url") String url, 
