@@ -26,7 +26,7 @@ import java.util.Date;
 public class TwitterProfile extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 2L;
 
-	private final String id_str;
+	private final String id;
 	private final String screenName;
 	private final String name;
 	private final String url;
@@ -66,7 +66,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	}
 
 	public TwitterProfile(String id, String screenName, String name, String url, String profileImageUrl, String description, String location, Date createdDate) {
-		this.id_str = id;
+		this.id = id;
 		this.screenName = screenName;
 		this.name = name;
 		this.url = url;
@@ -82,7 +82,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	 * @return The user's Twitter ID
 	 */
 	public String getId() {
-		return id_str;
+		return id;
 	}
 
 	/**
@@ -391,7 +391,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 		if (geoEnabled != that.geoEnabled) {
 			return false;
 		}
-		if (id_str != null ? !id_str.equals(that.id_str) : that.id_str != null) {
+		if (id != null ? !id.equals(that.id) : that.id != null) {
 			return false;
 		}
 		if (isProtected != that.isProtected) {
@@ -473,7 +473,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int result = (id_str != null ? id_str.hashCode() : 0);
+		int result = (id != null ? id.hashCode() : 0);
 		result = 31 * result + (screenName != null ? screenName.hashCode() : 0);
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (url != null ? url.hashCode() : 0);
