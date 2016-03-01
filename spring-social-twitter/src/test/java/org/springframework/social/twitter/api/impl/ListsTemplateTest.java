@@ -645,14 +645,14 @@ public class ListsTemplateTest extends AbstractTwitterApiTest {
 	private void assertListMembers(List<TwitterProfile> members) {
 		assertEquals(2, members.size());
 		TwitterProfile profile1 = members.get(0);
-		assertEquals(14846645, profile1.getId());
+		assertEquals("14846645", profile1.getId());
 		assertEquals("royclarkson", profile1.getScreenName());
 		assertEquals("Roy Clarkson", profile1.getName());
 		assertEquals("Follower of mobile, social, and web technology trends. I write lots of code, and work at SpringSource.", 
 				profile1.getDescription());
 		assertEquals("Atlanta, GA, USA", profile1.getLocation());
 		TwitterProfile profile2 = members.get(1);
-		assertEquals(14718006, profile2.getId());
+		assertEquals("14718006", profile2.getId());
 		assertEquals("kdonald", profile2.getScreenName());
 		assertEquals("Keith Donald", profile2.getName());
 		assertEquals("SpringSource co-founder", profile2.getDescription());

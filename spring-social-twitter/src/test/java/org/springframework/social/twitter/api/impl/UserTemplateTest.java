@@ -41,7 +41,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/account/verify_credentials.json"))
 				.andExpect(method(GET))
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
-		assertEquals(161064614, twitter.userOperations().getProfileId());
+		assertEquals("161064614", twitter.userOperations().getProfileId());
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile();
-		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getId());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -99,7 +99,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile(12345);
-		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getId());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -116,7 +116,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = appAuthTwitter.userOperations().getUserProfile(12345);
-		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getId());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -132,7 +132,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile("artnames");
-		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getId());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -149,7 +149,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 				.andRespond(withSuccess(jsonResource("twitter-profile"), APPLICATION_JSON));
 
 		TwitterProfile profile = appAuthTwitter.userOperations().getUserProfile("artnames");
-		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getId());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());

@@ -134,9 +134,9 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	private void assertSingleDirectMessage(DirectMessage message) {
 		assertEquals(23456, message.getId());
 		assertEquals("Back at ya", message.getText());
-		assertEquals(13579, message.getSender().getId());
+		assertEquals("13579", message.getSender().getId());
 		assertEquals("kdonald", message.getSender().getScreenName());
-		assertEquals(24680, message.getRecipient().getId());
+		assertEquals("24680", message.getRecipient().getId());
 		assertEquals("rclarkson", message.getRecipient().getScreenName());
 	}
 	
@@ -154,16 +154,16 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(2, messages.size());
 		assertEquals(12345, messages.get(0).getId());
 		assertEquals("Hello there", messages.get(0).getText());
-		assertEquals(24680, messages.get(0).getSender().getId());
+		assertEquals("24680", messages.get(0).getSender().getId());
 		assertEquals("rclarkson", messages.get(0).getSender().getScreenName());
-		assertEquals(13579, messages.get(0).getRecipient().getId());
+		assertEquals("13579", messages.get(0).getRecipient().getId());
 		assertEquals("kdonald", messages.get(0).getRecipient().getScreenName());
 		// assertTimelineDateEquals("Tue Jul 13 17:38:21 +0000 2010", messages.get(0).getCreatedAt());
 		assertEquals(23456, messages.get(1).getId());
 		assertEquals("Back at ya", messages.get(1).getText());
-		assertEquals(13579, messages.get(1).getSender().getId());
+		assertEquals("13579", messages.get(1).getSender().getId());
 		assertEquals("kdonald", messages.get(1).getSender().getScreenName());
-		assertEquals(24680, messages.get(1).getRecipient().getId());
+		assertEquals("24680", messages.get(1).getRecipient().getId());
 		assertEquals("rclarkson", messages.get(1).getRecipient().getScreenName());
 	}
 

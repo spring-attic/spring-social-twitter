@@ -40,7 +40,7 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 		this.restTemplate = restTemplate;
 	}
 
-	public long getProfileId() {
+	public String getProfileId() {
 		requireUserAuthorization();
 		return getUserProfile().getId();
 	}
