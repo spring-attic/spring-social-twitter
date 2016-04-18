@@ -17,6 +17,7 @@ package org.springframework.social.twitter.api.impl;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -69,6 +70,8 @@ class StreamDispatcher implements Runnable {
 					handleDelete(line);
 				} else if (line.startsWith("{\"warning")) {
 					handleWarning(line);
+				} else {
+					handleEvent(line);
 				}
 			} catch (IOException e) {
 				// TODO: Should only happen if Jackson doesn't know how to map the line
@@ -120,6 +123,17 @@ class StreamDispatcher implements Runnable {
 			Future<?> result = pool.submit((new Runnable() {
 				public void run() {
 					listener.onWarning(warningEvent);
+				}
+			}));
+		}
+	}
+
+	private void handleEvent(String line) throws IOException {
+		final Map event = objectMapper.readValue(line, Map.class);
+		for (final StreamListener listener : listeners) {
+			Future<?> result = pool.submit((new Runnable() {
+				public void run() {
+					listener.onEvent(event);
 				}
 			}));
 		}
