@@ -113,20 +113,24 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
 		Stream stream = new ThreadedStreamConsumer() {
 			protected StreamReader getStreamReader() throws StreamCreationException {
-				return createStream(HttpMethod.POST, USER_STREAM_URL, parameters.toParameterMap(), listeners);
+				return createStream(HttpMethod.POST, USER_STREAM_URL, parameters.toParameterMap(), listeners, 4);
 			}
 		};
 		stream.open();
 		return stream;
 	}
-	
+
 	private StreamReader createStream(HttpMethod method, String streamUrl, MultiValueMap<String, String> body, List<StreamListener> listeners) throws StreamCreationException {
+		return createStream(method, streamUrl, body, listeners, 8192);
+	}
+
+	private StreamReader createStream(HttpMethod method, String streamUrl, MultiValueMap<String, String> body, List<StreamListener> listeners, int bufferSize) throws StreamCreationException {
 		try {
 			ClientHttpResponse response = executeRequest(method, streamUrl, body);
 			if (response.getStatusCode().value() > 200) {
 				throw new StreamCreationException("Unable to create stream", response.getStatusCode());
 			}
-			return new StreamReaderImpl(response.getBody(), listeners);
+			return new StreamReaderImpl(response.getBody(), listeners, bufferSize);
 		} catch (IOException e) {
 			throw new StreamCreationException("Unable to create stream.", e);
 		}

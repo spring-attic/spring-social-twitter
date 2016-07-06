@@ -23,106 +23,130 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.springframework.social.twitter.api.StreamDeleteEvent;
-import org.springframework.social.twitter.api.StreamListener;
-import org.springframework.social.twitter.api.StreamWarningEvent;
-import org.springframework.social.twitter.api.Tweet;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.social.twitter.api.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class StreamDispatcher implements Runnable {
 
-	private final List<StreamListener> listeners;
+    private final List<StreamListener> listeners;
 
-	private ObjectMapper objectMapper;
-	
-	private AtomicBoolean active;
+    private ObjectMapper objectMapper;
 
-	private final Queue<String> queue;
-	
-	private final ExecutorService pool;
+    private AtomicBoolean active;
 
-	public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
-		this.queue = queue;
-		this.listeners = listeners;
-		pool = Executors.newCachedThreadPool();
-		objectMapper = new ObjectMapper();
-		objectMapper.addMixInAnnotations(Tweet.class, TweetMixin.class);
-		objectMapper.addMixInAnnotations(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
-		objectMapper.addMixInAnnotations(StreamWarningEvent.class, StreamWarningEventMixin.class);
-		active = new AtomicBoolean(true);
-	}
+    private final Queue<String> queue;
 
-	public void run() {
-		while(active.get()) {
-			String line = queue.poll();
-			if(line == null || line.length() == 0) return;
-			
-			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
-			
-			try {
-				if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
-					handleTweet(line);
-				} else if (line.startsWith("{\"limit")) {
-					handleLimit(line);
-				} else if (line.startsWith("{\"delete")) {
-					handleDelete(line);
-				} else if (line.startsWith("{\"warning")) {
-					handleWarning(line);
-				}
-			} catch (IOException e) {
-				// TODO: Should only happen if Jackson doesn't know how to map the line
-			}
-		}
-	}
-	
-	public void stop() {
-		active.set(false);
-		pool.shutdown();
-	}
-	
-	private void handleDelete(String line) throws IOException {
-		final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
-		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
-				public void run() {
-					listener.onDelete(deleteEvent);
-				}
-			}));
-		}
-	}
+    private final ExecutorService pool;
 
-	private void handleLimit(String line) throws IOException {
-		final TrackLimitEvent limitEvent = objectMapper.readValue(line, TrackLimitEvent.class);
-		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
-				public void run() {
-					listener.onLimit(limitEvent.getNumberOfLimitedTweets());
-				}
-			}));
-		}
-	}
+    public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
+        this.queue = queue;
+        this.listeners = listeners;
+        pool = Executors.newCachedThreadPool();
+        objectMapper = new ObjectMapper();
+        objectMapper.addMixIn(Tweet.class, TweetMixin.class)
+                .addMixIn(StreamDeleteEvent.class, StreamDeleteEventMixin.class)
+                .addMixIn(StreamWarningEvent.class, StreamWarningEventMixin.class)
+                .addMixIn(DirectMessage.class, DirectMessageMixin.class)
+                .addMixIn(TwitterProfile.class, TwitterProfileMixin.class);
+        active = new AtomicBoolean(true);
+    }
 
-	private void handleTweet(String line) throws IOException {
-		final Tweet tweet = objectMapper.readValue(line, Tweet.class);
-		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
-				public void run() {
-					listener.onTweet(tweet);
-				}
-			}));
-		}
-	}
-	
-	private void handleWarning(String line) throws IOException {
-		final StreamWarningEvent warningEvent = objectMapper.readValue(line, StreamWarningEvent.class);
-		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
-				public void run() {
-					listener.onWarning(warningEvent);
-				}
-			}));
-		}
-	}
-	
+    public void run() {
+        while (active.get()) {
+            String line = queue.poll();
+            if (line == null || line.length() == 0) return;
+
+            // TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events,
+
+            try {
+                if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
+                    handleTweet(line);
+                } else if (line.startsWith("{\"limit")) {
+                    handleLimit(line);
+                } else if (line.startsWith("{\"delete")) {
+                    handleDelete(line);
+                } else if (line.startsWith("{\"warning")) {
+                    handleWarning(line);
+                } else if (line.startsWith("{\"direct_message")) {
+                    handleDirectMessage(line);
+                }
+            } catch (IOException e) {
+                // TODO: Should only happen if Jackson doesn't know how to map the line
+            }
+        }
+    }
+
+    public void stop() {
+        active.set(false);
+        pool.shutdown();
+    }
+
+    private void handleDelete(String line) throws IOException {
+        final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
+        for (final StreamListener listener : listeners) {
+            pool.submit((new Runnable() {
+                public void run() {
+                    listener.onDelete(deleteEvent);
+                }
+            }));
+        }
+    }
+
+    private void handleLimit(String line) throws IOException {
+        final TrackLimitEvent limitEvent = objectMapper.readValue(line, TrackLimitEvent.class);
+        for (final StreamListener listener : listeners) {
+            pool.submit((new Runnable() {
+                public void run() {
+                    listener.onLimit(limitEvent.getNumberOfLimitedTweets());
+                }
+            }));
+        }
+    }
+
+    private void handleTweet(String line) throws IOException {
+        final Tweet tweet = objectMapper.readValue(line, Tweet.class);
+        for (final StreamListener listener : listeners) {
+            pool.submit((new Runnable() {
+                public void run() {
+                    listener.onTweet(tweet);
+                }
+            }));
+        }
+    }
+
+    private void handleWarning(String line) throws IOException {
+        final StreamWarningEvent warningEvent = objectMapper.readValue(line, StreamWarningEvent.class);
+        for (final StreamListener listener : listeners) {
+            pool.submit((new Runnable() {
+                public void run() {
+                    listener.onWarning(warningEvent);
+                }
+            }));
+        }
+    }
+
+    private void handleDirectMessage(String line) throws IOException {
+        final DirectMessage directMessage = objectMapper.readValue(line, DMHolder.class).directMessage;
+        for (final StreamListener listener : listeners) {
+            pool.submit((new Runnable() {
+                public void run() {
+                    listener.onDirectMessage(directMessage);
+                }
+            }));
+        }
+
+    }
+
+    static class DMHolder {
+
+        final DirectMessage directMessage;
+
+        @JsonCreator
+        public DMHolder(@JsonProperty("direct_message") DirectMessage directMessage) {
+            this.directMessage = directMessage;
+        }
+    }
 }

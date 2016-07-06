@@ -44,5 +44,10 @@ public interface StreamListener {
 	 * @param warningEvent a warning event
 	 */
 	void onWarning(StreamWarningEvent warningEvent);
-	
+
+	/**
+	 * Called when a new  {@link DirectMessage} is available on the stream
+	 * @param directMessage
+     */
+	void onDirectMessage(DirectMessage directMessage);
 }
