@@ -17,7 +17,6 @@ package org.springframework.social.twitter.api.impl;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import org.springframework.social.twitter.api.TwitterProfile;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,11 +30,11 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 abstract class DirectMessageMixin extends TwitterObjectMixin {
-
+	@JsonCreator
 	DirectMessageMixin(
-			@JsonProperty("id") long id, 
-			@JsonProperty("text") String text, 
-			@JsonProperty("sender") TwitterProfile sender, 
-			@JsonProperty("recipient") TwitterProfile receipient, 
+			@JsonProperty("id") long id,
+			@JsonProperty("text") String text,
+			@JsonProperty("sender") TwitterProfile sender,
+			@JsonProperty("recipient") TwitterProfile receipient,
 			@JsonProperty("created_at") @JsonDeserialize(using=TimelineDateDeserializer.class) Date createdAt) {}
 }
