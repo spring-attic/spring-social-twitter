@@ -43,6 +43,9 @@ import org.springframework.web.client.RestTemplate;
  * @author Craig Walls
  */
 class StreamingTemplate extends AbstractTwitterOperations implements StreamingOperations {
+
+	//The defualt buffer size to use for the underlying buffered reader.
+	private static final int DEFAULT_BUFFERS_SIZE = 8192;
 	
 	private final RestTemplate restTemplate;
 					
@@ -109,11 +112,15 @@ class StreamingTemplate extends AbstractTwitterOperations implements StreamingOp
 	}
 	
 	public Stream user(final UserStreamParameters parameters, final List<StreamListener> listeners) {
+		return user(parameters, listeners, DEFAULT_BUFFERS_SIZE);
+	}
+
+	public Stream user(final UserStreamParameters parameters, final List<StreamListener> listeners, final int bufferSize) {
 		Assert.notNull(parameters, "StreamFilter may not be null");
 		Assert.notEmpty(listeners, "Listeners collection may not be null or empty");
 		Stream stream = new ThreadedStreamConsumer() {
 			protected StreamReader getStreamReader() throws StreamCreationException {
-				return createStream(HttpMethod.POST, USER_STREAM_URL, parameters.toParameterMap(), listeners, 4);
+				return createStream(HttpMethod.POST, USER_STREAM_URL, parameters.toParameterMap(), listeners, bufferSize);
 			}
 		};
 		stream.open();

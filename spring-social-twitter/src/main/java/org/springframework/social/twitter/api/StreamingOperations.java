@@ -71,4 +71,13 @@ public interface StreamingOperations {
 	
 	Stream user(UserStreamParameters parameters, List<StreamListener> listeners);
 
+	/**
+	 * Monitor a user stream.
+	 *
+	 * @param parameters the parameters for the user stream
+	 * @param listeners the listener's to monitor the stream
+	 * @param bufferSize the buffer size to use for the underlying stream. Use a lower value if you encounter buffering on low volume streams.
+     * @return the user stream
+     */
+	Stream user(final UserStreamParameters parameters, final List<StreamListener> listeners, final int bufferSize);
 }
