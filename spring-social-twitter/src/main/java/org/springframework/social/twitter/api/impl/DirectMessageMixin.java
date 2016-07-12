@@ -17,12 +17,12 @@ package org.springframework.social.twitter.api.impl;
 
 import java.util.Date;
 
-import org.springframework.social.twitter.api.TwitterProfile;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+import org.springframework.social.twitter.api.TwitterProfile;
 
 /**
  * Mixin class for adding Jackson annotations to DirectMessage.
