@@ -47,9 +47,6 @@ class StreamReaderImpl implements StreamReader {
 	
 	private final ScheduledThreadPoolExecutor executor;
 
-	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners) {
-		this(inputStream, listeners, 8192);
-	}
 
 	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners, int bufferSize) {
 		this.inputStream = inputStream;
