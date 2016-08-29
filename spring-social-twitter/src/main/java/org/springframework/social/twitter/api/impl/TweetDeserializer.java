@@ -72,7 +72,8 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		String source = node.get("source").asText();
 		JsonNode toUserIdNode = node.get("in_reply_to_user_id");
 		Long toUserId = toUserIdNode != null ? toUserIdNode.asLong() : null;
-		String languageCode = node.get("lang").asText();
+		JsonNode languageCodeNode = node.get("lang");
+		String languageCode = languageCodeNode != null && !languageCodeNode.isNull() ? languageCodeNode.asText() : null;
 		Tweet tweet = new Tweet(id, idStr, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
 		JsonNode inReplyToStatusIdNode = node.get("in_reply_to_status_id");
 		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.asLong() : null;
