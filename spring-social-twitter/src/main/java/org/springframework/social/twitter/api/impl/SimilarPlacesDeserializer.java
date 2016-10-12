@@ -39,7 +39,7 @@ class SimilarPlacesDeserializer extends JsonDeserializer<SimilarPlacesResponse> 
 		String token = resultNode.get("token").textValue();
 		JsonNode placesNode = resultNode.get("places");
 		@SuppressWarnings("unchecked")
-		List<Place> places = (List<Place>) mapper.reader(new TypeReference<List<Place>>() {}).readValue(placesNode);
+		List<Place> places = (List<Place>) mapper.readerFor(new TypeReference<List<Place>>() {}).readValue(placesNode);
 		return new SimilarPlacesResponse(places, token);
 	}
 }

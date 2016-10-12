@@ -21,7 +21,6 @@ import java.util.List;
 import org.springframework.core.io.Resource;
 import org.springframework.social.twitter.api.OEmbedOptions;
 import org.springframework.social.twitter.api.OEmbedTweet;
-import org.springframework.social.twitter.api.StatusDetails;
 import org.springframework.social.twitter.api.TimelineOperations;
 import org.springframework.social.twitter.api.Tweet;
 import org.springframework.social.twitter.api.TweetData;
@@ -163,30 +162,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	public Tweet updateStatus(String message, Resource media) {
 		return updateStatus(new TweetData(message).withMedia(media));
 	}
-
-	public Tweet updateStatus(String message, StatusDetails details) {
-		requireUserAuthorization();
-		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
-		tweetParams.add("status", message);
-		tweetParams.putAll(details.toParameterMap());
-		return restTemplate.postForObject(buildUri("statuses/update.json"), tweetParams, Tweet.class);
-	}
-
-	public Tweet updateStatus(String message, Resource media, StatusDetails details) {
-		requireUserAuthorization();
-		MultiValueMap<String, Object> tweetParams = new LinkedMultiValueMap<String, Object>();
-		tweetParams.add("status", message);
-		tweetParams.putAll(details.toParameterMap());
-		if (media != null) {
-			MultiValueMap<String, Object> uploadParams = new LinkedMultiValueMap<String, Object>();
-			uploadParams.set("media", media);
-			MediaUploadResponse response = restTemplate.postForObject("https://upload.twitter.com/1.1/media/upload.json", 
-					uploadParams, MediaUploadResponse.class);
-			tweetParams.set("media_ids", response.getMediaId());
-		}
-		return restTemplate.postForObject(buildUri("statuses/update.json"), tweetParams, Tweet.class);
-	}
-
+	
 	public Tweet updateStatus(TweetData tweetData) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> postParameters = tweetData.toTweetParameters();

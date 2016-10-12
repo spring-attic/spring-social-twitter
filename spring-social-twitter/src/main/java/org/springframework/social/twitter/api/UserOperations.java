@@ -76,6 +76,7 @@ public interface UserOperations {
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of user IDs.
 	 * Supports either user or application authorization.
+	 * @param userIds The user IDs to retrieve profiles for
 	 * @return a list of Twitter profiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
@@ -85,6 +86,7 @@ public interface UserOperations {
 	/**
 	 * Retrieves a list of Twitter profiles for the given list of screen names.
 	 * Supports either user or application authorization.
+	 * @param screenNames The screen names to retrieve profiles for
 	 * @return a list of Twitter profiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
@@ -93,6 +95,7 @@ public interface UserOperations {
 	
 	/**
 	 * Searches for up to 20 users that match a given query.
+	 * @param query The search query
 	 * @return a list of Twitter profiles
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
@@ -101,6 +104,7 @@ public interface UserOperations {
 
 	/**
 	 * Searches for users that match a given query.
+	 * @param query The search query
 	 * @param page the page of search results to return
 	 * @param pageSize the number of {@link TwitterProfile}s per page. Maximum of 20 per page.
 	 * @return a list of Twitter profiles

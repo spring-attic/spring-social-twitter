@@ -30,6 +30,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
@@ -56,7 +57,7 @@ class LocalTrendsDeserializer extends JsonDeserializer<LocalTrendsHolder> {
 			return new LocalTrendsHolder(new Trends(createdAt, trends));
 		}
 		
-		throw ctxt.mappingException(LocalTrendsHolder.class);
+		throw new JsonMappingException(jp, "Processing " + LocalTrendsHolder.class.getName());
 	}
 	
 	private static final String LOCAL_TREND_DATE_FORMAT = "yyyy-mm-dd'T'HH:mm:ss'Z'";
