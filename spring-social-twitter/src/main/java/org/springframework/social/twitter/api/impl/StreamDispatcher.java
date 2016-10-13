@@ -23,23 +23,27 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.StreamDeleteEvent;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamWarningEvent;
 import org.springframework.social.twitter.api.Tweet;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.social.twitter.api.TwitterProfile;
 
 class StreamDispatcher implements Runnable {
 
 	private final List<StreamListener> listeners;
 
 	private ObjectMapper objectMapper;
-	
+
 	private AtomicBoolean active;
 
 	private final Queue<String> queue;
-	
+
 	private final ExecutorService pool;
 
 	public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
@@ -47,9 +51,11 @@ class StreamDispatcher implements Runnable {
 		this.listeners = listeners;
 		pool = Executors.newCachedThreadPool();
 		objectMapper = new ObjectMapper();
-		objectMapper.addMixInAnnotations(Tweet.class, TweetMixin.class);
-		objectMapper.addMixInAnnotations(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
-		objectMapper.addMixInAnnotations(StreamWarningEvent.class, StreamWarningEventMixin.class);
+        objectMapper.addMixIn(Tweet.class, TweetMixin.class)
+                .addMixIn(StreamDeleteEvent.class, StreamDeleteEventMixin.class)
+                .addMixIn(StreamWarningEvent.class, StreamWarningEventMixin.class)
+                .addMixIn(DirectMessage.class, DirectMessageMixin.class)
+                .addMixIn(TwitterProfile.class, TwitterProfileMixin.class);
 		active = new AtomicBoolean(true);
 	}
 
@@ -57,9 +63,9 @@ class StreamDispatcher implements Runnable {
 		while(active.get()) {
 			String line = queue.poll();
 			if(line == null || line.length() == 0) return;
-			
-			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
-			
+
+			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events,
+
 			try {
 				if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
 					handleTweet(line);
@@ -69,18 +75,20 @@ class StreamDispatcher implements Runnable {
 					handleDelete(line);
 				} else if (line.startsWith("{\"warning")) {
 					handleWarning(line);
-				}
+				} else if (line.startsWith("{\"direct_message")) {
+                    handleDirectMessage(line);
+                }
 			} catch (IOException e) {
 				// TODO: Should only happen if Jackson doesn't know how to map the line
 			}
 		}
 	}
-	
+
 	public void stop() {
 		active.set(false);
 		pool.shutdown();
 	}
-	
+
 	private void handleDelete(String line) throws IOException {
 		final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
 		for (final StreamListener listener : listeners) {
@@ -113,7 +121,7 @@ class StreamDispatcher implements Runnable {
 			}));
 		}
 	}
-	
+
 	private void handleWarning(String line) throws IOException {
 		final StreamWarningEvent warningEvent = objectMapper.readValue(line, StreamWarningEvent.class);
 		for (final StreamListener listener : listeners) {
@@ -124,5 +132,26 @@ class StreamDispatcher implements Runnable {
 			}));
 		}
 	}
-	
+
+    private void handleDirectMessage(String line) throws IOException {
+        final DirectMessage directMessage = objectMapper.readValue(line, DMHolder.class).directMessage;
+        for (final StreamListener listener : listeners) {
+            pool.submit((new Runnable() {
+                public void run() {
+                    listener.onDirectMessage(directMessage);
+                }
+            }));
+        }
+    }
+
+    //Wrapper for the direct_message json element
+    static class DMHolder {
+
+        final DirectMessage directMessage;
+
+        @JsonCreator
+        public DMHolder(@JsonProperty("direct_message") DirectMessage directMessage) {
+            this.directMessage = directMessage;
+        }
+    }
 }

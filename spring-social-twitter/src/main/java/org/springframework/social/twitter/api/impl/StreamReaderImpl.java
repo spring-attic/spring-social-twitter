@@ -15,6 +15,8 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +26,6 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.social.twitter.api.StreamListener;
@@ -45,14 +46,19 @@ class StreamReaderImpl implements StreamReader {
 	private final ScheduledFuture<?> future;
 	
 	private final ScheduledThreadPoolExecutor executor;
-	
-	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners) {
+
+
+	public StreamReaderImpl(InputStream inputStream, List<StreamListener> listeners, int bufferSize) {
 		this.inputStream = inputStream;
-		this.reader = new BufferedReader(new InputStreamReader(inputStream));
+		try {
+			this.reader = new BufferedReader(new InputStreamReader(inputStream), bufferSize);
+		} catch (Exception e) {
+			throw new StreamingException("Unable to create reader", e);
+		}
 		queue = new ConcurrentLinkedQueue<String>();
 		dispatcher = new StreamDispatcher(queue, listeners);
 		executor = new ScheduledThreadPoolExecutor(10);
-		future = executor.scheduleAtFixedRate(dispatcher, 0, 10, TimeUnit.MILLISECONDS);
+		future = executor.scheduleAtFixedRate(dispatcher, 0, 10, MILLISECONDS);
 		open = new AtomicBoolean(true);
 	}
 	
@@ -80,5 +86,4 @@ class StreamReaderImpl implements StreamReader {
 			inputStream.close();
 		} catch(IOException ignore) {}
 	}
-
 }
