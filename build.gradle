@@ -25,8 +25,8 @@ configure(allprojects - docProjects) {
     group = 'org.springframework.social'
 
     compileJava {
-        sourceCompatibility=1.5
-        targetCompatibility=1.5
+        sourceCompatibility=1.7
+        targetCompatibility=1.7
     }
     compileTestJava {
         sourceCompatibility=1.7
@@ -68,7 +68,7 @@ configure(allprojects - docProjects) {
 
     dependencies {
         testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
-        testCompile ("junit:junit-dep:$junitVersion")
+        testCompile ("junit:junit:$junitVersion")
         testCompile ("org.mockito:mockito-core:$mockitoVersion")
         testCompile ("org.springframework:spring-test:$springVersion")
     }
@@ -275,7 +275,7 @@ configure(rootProject) {
     }
 
     task wrapper(type: Wrapper) {
-        gradleVersion = '1.12'
+        gradleVersion = '3.0'
     }
 
 }

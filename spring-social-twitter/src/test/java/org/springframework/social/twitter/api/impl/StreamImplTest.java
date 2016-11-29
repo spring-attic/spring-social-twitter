@@ -16,7 +16,6 @@
 package org.springframework.social.twitter.api.impl;
 
 import static java.util.Arrays.*;
-import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.*;
 
 import java.io.InputStream;

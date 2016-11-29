@@ -342,6 +342,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 
     /**
      * The URL to the banner image shown on the user's Twitter profile page
+     * @return The URL to the banner image shown on the user's Twitter profile page
      */
     public String getProfileBannerUrl() {
         return profileBannerUrl;

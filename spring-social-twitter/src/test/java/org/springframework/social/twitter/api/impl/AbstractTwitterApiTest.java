@@ -56,7 +56,7 @@ public abstract class AbstractTwitterApiTest {
 	}
 	
 	protected void assertSingleTweet(Tweet tweet, boolean isSearchResult) {
-		assertEquals(12345, tweet.getId());
+		assertEquals("12345", tweet.getId());
 		assertEquals("Tweet 1", tweet.getText());
 		assertEquals("habuma", tweet.getFromUser());
 		assertEquals(112233, tweet.getFromUserId());
@@ -115,7 +115,7 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals(2, tweets.size());
 		assertSingleTweet(tweets.get(0), isSearchResult);
 		Tweet tweet2 = tweets.get(1);
-		assertEquals(54321, tweet2.getId());
+		assertEquals("54321", tweet2.getId());
 		assertEquals("Tweet 2", tweet2.getText());
 		assertEquals("rclarkson", tweet2.getFromUser());
 		assertEquals(332211, tweet2.getFromUserId());

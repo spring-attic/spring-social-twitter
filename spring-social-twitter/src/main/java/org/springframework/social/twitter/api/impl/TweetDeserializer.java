@@ -57,10 +57,9 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 
 
 	public Tweet deserialize(JsonNode node) throws IOException, JsonProcessingException {
-		final long id = node.path("id").asLong();
-		final String idStr = node.path("id_str").asText();
+		final String id = node.path("id").asText();
 		final String text = node.path("text").asText();
-		if (id <= 0 || text == null || text.isEmpty()) {
+		if (id == null  || text == null || text.isEmpty()) {
 			return null;
 		}
 		JsonNode fromUserNode = node.get("user");
@@ -74,7 +73,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 		Long toUserId = toUserIdNode != null ? toUserIdNode.asLong() : null;
 		JsonNode languageCodeNode = node.get("lang");
 		String languageCode = languageCodeNode != null && !languageCodeNode.isNull() ? languageCodeNode.asText() : null;
-		Tweet tweet = new Tweet(id, idStr, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
+		Tweet tweet = new Tweet(id, text, createdAt, fromScreenName, fromImageUrl, toUserId, fromId, languageCode, source);
 		JsonNode inReplyToStatusIdNode = node.get("in_reply_to_status_id");
 		Long inReplyToStatusId = inReplyToStatusIdNode != null && !inReplyToStatusIdNode.isNull() ? inReplyToStatusIdNode.asLong() : null;
 		tweet.setInReplyToStatusId(inReplyToStatusId);
@@ -128,7 +127,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 			return null;
 		}
 		final ObjectMapper mapper = this.createMapper();
-		Entities entities = mapper.reader(Entities.class).readValue(node);
+		Entities entities = mapper.readerFor(Entities.class).readValue(node);
 		extractTickerSymbolEntitiesFromText(text, entities);
 		return entities;
 	}
@@ -150,7 +149,7 @@ class TweetDeserializer extends JsonDeserializer<Tweet> {
 			return null;
 		}
 		final ObjectMapper mapper = this.createMapper();
-		return mapper.reader(TwitterProfile.class).readValue(node);
+		return mapper.readerFor(TwitterProfile.class).readValue(node);
 	}
 
 

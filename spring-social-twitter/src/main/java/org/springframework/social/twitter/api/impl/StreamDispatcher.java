@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.social.twitter.api.StreamDeleteEvent;
@@ -47,9 +46,9 @@ class StreamDispatcher implements Runnable {
 		this.listeners = listeners;
 		pool = Executors.newCachedThreadPool();
 		objectMapper = new ObjectMapper();
-		objectMapper.addMixInAnnotations(Tweet.class, TweetMixin.class);
-		objectMapper.addMixInAnnotations(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
-		objectMapper.addMixInAnnotations(StreamWarningEvent.class, StreamWarningEventMixin.class);
+		objectMapper.addMixIn(Tweet.class, TweetMixin.class);
+		objectMapper.addMixIn(StreamDeleteEvent.class, StreamDeleteEventMixin.class);
+		objectMapper.addMixIn(StreamWarningEvent.class, StreamWarningEventMixin.class);
 		active = new AtomicBoolean(true);
 	}
 
@@ -84,7 +83,7 @@ class StreamDispatcher implements Runnable {
 	private void handleDelete(String line) throws IOException {
 		final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
 		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
+			pool.submit((new Runnable() {
 				public void run() {
 					listener.onDelete(deleteEvent);
 				}
@@ -95,7 +94,7 @@ class StreamDispatcher implements Runnable {
 	private void handleLimit(String line) throws IOException {
 		final TrackLimitEvent limitEvent = objectMapper.readValue(line, TrackLimitEvent.class);
 		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
+			pool.submit((new Runnable() {
 				public void run() {
 					listener.onLimit(limitEvent.getNumberOfLimitedTweets());
 				}
@@ -106,7 +105,7 @@ class StreamDispatcher implements Runnable {
 	private void handleTweet(String line) throws IOException {
 		final Tweet tweet = objectMapper.readValue(line, Tweet.class);
 		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
+			pool.submit((new Runnable() {
 				public void run() {
 					listener.onTweet(tweet);
 				}
@@ -117,7 +116,7 @@ class StreamDispatcher implements Runnable {
 	private void handleWarning(String line) throws IOException {
 		final StreamWarningEvent warningEvent = objectMapper.readValue(line, StreamWarningEvent.class);
 		for (final StreamListener listener : listeners) {
-			Future<?> result = pool.submit((new Runnable() {
+			pool.submit((new Runnable() {
 				public void run() {
 					listener.onWarning(warningEvent);
 				}
