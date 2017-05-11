@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonIgnoreType
-class CursoredLongList {
+public class CursoredLongList {
 
 	private final CursoredList<Long> list;
 

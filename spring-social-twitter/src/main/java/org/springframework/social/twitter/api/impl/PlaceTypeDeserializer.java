@@ -24,7 +24,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-class PlaceTypeDeserializer extends JsonDeserializer<PlaceType> {
+public class PlaceTypeDeserializer extends JsonDeserializer<PlaceType> {
 
 	@Override
 	public PlaceType deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {

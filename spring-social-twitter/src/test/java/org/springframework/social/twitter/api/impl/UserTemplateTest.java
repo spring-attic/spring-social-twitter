@@ -30,6 +30,7 @@ import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
 import org.springframework.social.twitter.api.SuggestionCategory;
 import org.springframework.social.twitter.api.TwitterProfile;
+import org.springframework.social.twitter.api.impl.AccountSettingsData;
 
 /**
  * @author Craig Walls

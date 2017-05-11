@@ -17,7 +17,6 @@ package org.springframework.social.twitter.api.impl;
 
 import java.util.List;
 
-import org.springframework.social.twitter.api.SearchMetadata;
 import org.springframework.social.twitter.api.Tweet;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -30,7 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class SearchResultsMixin extends TwitterObjectMixin {
+public abstract class SearchResultsMixin extends TwitterObjectMixin {
 
 	@JsonCreator
 	SearchResultsMixin(

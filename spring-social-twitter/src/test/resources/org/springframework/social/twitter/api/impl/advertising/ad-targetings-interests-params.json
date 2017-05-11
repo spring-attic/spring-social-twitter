@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "name": "Hobbies and interests/Birdwatching",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13002"
+        },
+        {
+            "name": "Pets/Birds",
+            "targeting_type": "INTEREST",
+            "targeting_value": "19001"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "q": "bird"
+        }
+    }
+}

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
  * Deserializer to read date values from Twitter timeline entries.
  * @author Craig Walls
  */
-class TimelineDateDeserializer extends JsonDeserializer<Date> {
+public class TimelineDateDeserializer extends JsonDeserializer<Date> {
 
 	@Override
 	public Date deserialize(JsonParser jp, DeserializationContext ctxt)

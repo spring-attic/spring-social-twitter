@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
 @JsonDeserialize(using = LocalTrendsDeserializer.class)
-class LocalTrendsHolder {
+public class LocalTrendsHolder {
 	
 	private final Trends trends;
 

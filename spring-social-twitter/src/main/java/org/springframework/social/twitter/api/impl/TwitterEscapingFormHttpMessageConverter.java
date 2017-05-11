@@ -36,7 +36,7 @@ import org.springframework.util.MultiValueMap;
  * Custom FormHttpMessageConverter that meets Twitter's non-RFC1738 escaping of asterisks ('*').
  * @author Craig Walls
  */
-class TwitterEscapingFormHttpMessageConverter extends FormHttpMessageConverter {
+public class TwitterEscapingFormHttpMessageConverter extends FormHttpMessageConverter {
 
 	TwitterEscapingFormHttpMessageConverter() {
 		setCharset(Charset.forName("UTF-8"));

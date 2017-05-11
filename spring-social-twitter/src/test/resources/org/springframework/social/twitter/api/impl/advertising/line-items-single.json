@@ -1,0 +1,30 @@
+{
+  "data": {
+    "account_id": "hkk5",
+    "bid_unit": "LINK_CLICK",
+    "bid_amount_local_micro": 1750000,
+    "campaign_id": "7wdy",
+    "created_at": "2012-11-30T22:58:11Z",
+    "currency": "GBP",
+    "deleted": false,
+    "id": "69ob",
+    "include_sentiment": null,
+    "paused": false,
+    "product_type":"PROMOTED_ACCOUNT",
+    "placements": [
+        "ALL_ON_TWITTER",
+        "PUBLISHER_NETWORK"
+    ],
+    "updated_at": "2012-11-30T22:58:11Z",
+    "objective": "FOLLOWERS",
+    "optimization": "DEFAULT",
+    "primary_web_event_tag": null
+  },
+  "data_type": "line_item",
+  "request": {
+    "params": {
+      "account_id": "hkk5",
+      "line_item_id": "69ob"
+    }
+  }
+}

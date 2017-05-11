@@ -26,5 +26,5 @@ import org.springframework.social.twitter.api.SavedSearch;
  * @author Craig Walls
  */
 @SuppressWarnings("serial")
-class SavedSearchList extends ArrayList<SavedSearch> {
+public class SavedSearchList extends ArrayList<SavedSearch> {
 }

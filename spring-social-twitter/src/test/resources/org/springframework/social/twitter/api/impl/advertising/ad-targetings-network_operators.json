@@ -1,0 +1,1209 @@
+{
+    "data": [
+        {
+            "country_code": "GB",
+            "name": "3",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "4i"
+        },
+        {
+            "country_code": "ID",
+            "name": "3",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6e"
+        },
+        {
+            "country_code": "AU",
+            "name": "3",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "at"
+        },
+        {
+            "country_code": "SE",
+            "name": "3",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "f6"
+        },
+        {
+            "country_code": "IE",
+            "name": "3",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gv"
+        },
+        {
+            "country_code": "IT",
+            "name": "3 Italia",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "cv"
+        },
+        {
+            "country_code": "AU",
+            "name": "3GIS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "az"
+        },
+        {
+            "country_code": "UA",
+            "name": "3Mob",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ha"
+        },
+        {
+            "country_code": "SE",
+            "name": "42 Telecom AB",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fj"
+        },
+        {
+            "country_code": "SE",
+            "name": "42 Telecom LTD",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "g2"
+        },
+        {
+            "country_code": "NL",
+            "name": "6GMOBILE B.V.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "d8"
+        },
+        {
+            "country_code": "AU",
+            "name": "AAPT",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ay"
+        },
+        {
+            "country_code": "PH",
+            "name": "ABS-CBN",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "cc"
+        },
+        {
+            "country_code": "IE",
+            "name": "Access Telecom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gu"
+        },
+        {
+            "country_code": "AU",
+            "name": "Advanced Communications Technologies Pty. Ltd.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "b8"
+        },
+        {
+            "country_code": "US",
+            "name": "Advantage",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2l"
+        },
+        {
+            "country_code": "BR",
+            "name": "aeiou",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6u"
+        },
+        {
+            "country_code": "US",
+            "name": "Aeris",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1b"
+        },
+        {
+            "country_code": "FR",
+            "name": "Afone",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8q"
+        },
+        {
+            "country_code": "NL",
+            "name": "AGMS Netherlands B.V.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ds"
+        },
+        {
+            "country_code": "US",
+            "name": "Airadigm",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2t"
+        },
+        {
+            "country_code": "IN",
+            "name": "AIRCEL",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7z"
+        },
+        {
+            "country_code": "DE",
+            "name": "Airdata",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "aa"
+        },
+        {
+            "country_code": "US",
+            "name": "Airlink PCS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "14"
+        },
+        {
+            "country_code": "AU",
+            "name": "Airnet",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "av"
+        },
+        {
+            "country_code": "US",
+            "name": "Airpeak",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1i"
+        },
+        {
+            "country_code": "US",
+            "name": "Airtel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2m"
+        },
+        {
+            "country_code": "IN",
+            "name": "AirTel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7w"
+        },
+        {
+            "country_code": "CA",
+            "name": "Airtel Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "j"
+        },
+        {
+            "country_code": "GB",
+            "name": "Airtel-Vodafone",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "46"
+        },
+        {
+            "country_code": "GB",
+            "name": "Airwave",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "53"
+        },
+        {
+            "country_code": "TH",
+            "name": "AIS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ec"
+        },
+        {
+            "country_code": "TH",
+            "name": "AIS 3G",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ee"
+        },
+        {
+            "country_code": "TH",
+            "name": "AIS GSM 1800",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ek"
+        },
+        {
+            "country_code": "SA",
+            "name": "Al Jawal (STC )",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6w"
+        },
+        {
+            "country_code": "US",
+            "name": "Alaska Digitel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "15"
+        },
+        {
+            "country_code": "CA",
+            "name": "Aliant Mobility",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5j"
+        },
+        {
+            "country_code": "US",
+            "name": "Alltel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2r"
+        },
+        {
+            "country_code": "US",
+            "name": "Alltel US",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3l"
+        },
+        {
+            "country_code": "SE",
+            "name": "Alltele F\u00f6retag Sverige AB",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fg"
+        },
+        {
+            "country_code": "CA",
+            "name": "ALO",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5a"
+        },
+        {
+            "country_code": "MY",
+            "name": "Altel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "e6"
+        },
+        {
+            "country_code": "BR",
+            "name": "Amazonia Celular",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6p"
+        },
+        {
+            "country_code": "US",
+            "name": "AmeriLink PCS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1s"
+        },
+        {
+            "country_code": "US",
+            "name": "Appalachian Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3q"
+        },
+        {
+            "country_code": "TW",
+            "name": "APTG",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "hf"
+        },
+        {
+            "country_code": "GB",
+            "name": "aql",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "4q"
+        },
+        {
+            "country_code": "NL",
+            "name": "ASPIDER Solutions Nederland B.V.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "dh"
+        },
+        {
+            "country_code": "FR",
+            "name": "Astrium SAS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8r"
+        },
+        {
+            "country_code": "US",
+            "name": "AT&T",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1d"
+        },
+        {
+            "country_code": "MY",
+            "name": "ATUR 450",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "dx"
+        },
+        {
+            "country_code": "JP",
+            "name": "au",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5z"
+        },
+        {
+            "country_code": "AU",
+            "name": "Ausgrid Corporation",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "b4"
+        },
+        {
+            "country_code": "CO",
+            "name": "AVANTEL",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "c5"
+        },
+        {
+            "country_code": "TR",
+            "name": "Avea",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "77"
+        },
+        {
+            "country_code": "ID",
+            "name": "AXIS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "66"
+        },
+        {
+            "country_code": "TR",
+            "name": "Aycell",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "78"
+        },
+        {
+            "country_code": "ES",
+            "name": "Barablu",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7n"
+        },
+        {
+            "country_code": "MY",
+            "name": "Baraka Telecom Sdn Bhd (MVNE)",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "e4"
+        },
+        {
+            "country_code": "BE",
+            "name": "BASE",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bv"
+        },
+        {
+            "country_code": "RU",
+            "name": "Baykalwestcom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "99"
+        },
+        {
+            "country_code": "CA",
+            "name": "BC Tel Mobility (Telus)",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5k"
+        },
+        {
+            "country_code": "RU",
+            "name": "Beeline",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "9h"
+        },
+        {
+            "country_code": "UA",
+            "name": "Beeline",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "h5"
+        },
+        {
+            "country_code": "SE",
+            "name": "Beepsend AB",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ft"
+        },
+        {
+            "country_code": "CA",
+            "name": "Bell",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "d"
+        },
+        {
+            "country_code": "CA",
+            "name": "Bell / Telus / SaskTel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "a"
+        },
+        {
+            "country_code": "CA",
+            "name": "Bell(Virgin mobile)",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "a1"
+        },
+        {
+            "country_code": "AU",
+            "name": "BHP Billiton",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "be"
+        },
+        {
+            "country_code": "US",
+            "name": "Big River Broadband",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "42"
+        },
+        {
+            "country_code": "US",
+            "name": "Big Sky Mobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3n"
+        },
+        {
+            "country_code": "IT",
+            "name": "Blu",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "cu"
+        },
+        {
+            "country_code": "CL",
+            "name": "Blue Two Chile S.A.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "et"
+        },
+        {
+            "country_code": "NL",
+            "name": "BodyTrace Netherlands B.V.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "dp"
+        },
+        {
+            "country_code": "ZA",
+            "name": "Bokamoso Consortium",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gl"
+        },
+        {
+            "country_code": "US",
+            "name": "Boost",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "40"
+        },
+        {
+            "country_code": "FR",
+            "name": "Bouygues",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8l"
+        },
+        {
+            "country_code": "BR",
+            "name": "Brasil Telecom GSM",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6n"
+        },
+        {
+            "country_code": "NL",
+            "name": "Breezz Nederland B.V.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "dl"
+        },
+        {
+            "country_code": "GB",
+            "name": "BT",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3e"
+        },
+        {
+            "country_code": "ES",
+            "name": "BT",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7f"
+        },
+        {
+            "country_code": "IT",
+            "name": "BT Italia",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "cq"
+        },
+        {
+            "country_code": "US",
+            "name": "Bug Tussel Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3x"
+        },
+        {
+            "country_code": "US",
+            "name": "C Spire Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3w"
+        },
+        {
+            "country_code": "GB",
+            "name": "Cable & Wireless Guernsey / Sure Mobile (Jersey)",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "52"
+        },
+        {
+            "country_code": "GB",
+            "name": "Cable & Wireless UK",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "57"
+        },
+        {
+            "country_code": "GB",
+            "name": "Cable & Wireless Worldwide",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "4a"
+        },
+        {
+            "country_code": "ZA",
+            "name": "Cape Town Metropolitan Council",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gk"
+        },
+        {
+            "country_code": "US",
+            "name": "Caprock",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1j"
+        },
+        {
+            "country_code": "NL",
+            "name": "CapX B.V.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "dj"
+        },
+        {
+            "country_code": "US",
+            "name": "Carolina Phone",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "r"
+        },
+        {
+            "country_code": "TH",
+            "name": "CAT CDMA",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ed"
+        },
+        {
+            "country_code": "DE",
+            "name": "CCC Event",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ah"
+        },
+        {
+            "country_code": "UA",
+            "name": "CDMA Ukraine",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "hc"
+        },
+        {
+            "country_code": "MY",
+            "name": "Celcom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "e1"
+        },
+        {
+            "country_code": "ZA",
+            "name": "Cell C",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gf"
+        },
+        {
+            "country_code": "US",
+            "name": "Cell One Amarillo",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2g"
+        },
+        {
+            "country_code": "IN",
+            "name": "CellOne",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "81"
+        },
+        {
+            "country_code": "US",
+            "name": "Cellular One",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "23"
+        },
+        {
+            "country_code": "US",
+            "name": "Cellular One of East Texas",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2k"
+        },
+        {
+            "country_code": "US",
+            "name": "Cellular Properties",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "x"
+        },
+        {
+            "country_code": "CL",
+            "name": "Celupago S.A.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ew"
+        },
+        {
+            "country_code": "ID",
+            "name": "Ceria",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6c"
+        },
+        {
+            "country_code": "AU",
+            "name": "Challenge Networks Pty. Ltd.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "b7"
+        },
+        {
+            "country_code": "US",
+            "name": "Chariton Valley",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1p"
+        },
+        {
+            "country_code": "US",
+            "name": "Choice Phone",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "y"
+        },
+        {
+            "country_code": "TW",
+            "name": "Chunghwa LDM",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "hg"
+        },
+        {
+            "country_code": "TW",
+            "name": "Chungwa",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "hi"
+        },
+        {
+            "country_code": "CL",
+            "name": "Cibeles Telecom S.A.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "f0"
+        },
+        {
+            "country_code": "US",
+            "name": "Cincinnati Bell",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2y"
+        },
+        {
+            "country_code": "US",
+            "name": "Cingular Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1f"
+        },
+        {
+            "country_code": "CA",
+            "name": "CityTel Mobility",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5m"
+        },
+        {
+            "country_code": "AR",
+            "name": "Claro",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "9t"
+        },
+        {
+            "country_code": "CO",
+            "name": "Claro",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "c2"
+        },
+        {
+            "country_code": "CL",
+            "name": "Claro",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "eq"
+        },
+        {
+            "country_code": "PE",
+            "name": "Claro (TIM)",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "h2"
+        },
+        {
+            "country_code": "BR",
+            "name": "Claro BR",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6k"
+        },
+        {
+            "country_code": "IE",
+            "name": "Clever Communications",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gx"
+        },
+        {
+            "country_code": "GB",
+            "name": "Cloud9",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3j"
+        },
+        {
+            "country_code": "SE",
+            "name": "CLX Networks AB",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "g4"
+        },
+        {
+            "country_code": "US",
+            "name": "Coleman County Telecom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2n"
+        },
+        {
+            "country_code": "CO",
+            "name": "Colombia Telecomunicaciones S.A.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "by"
+        },
+        {
+            "country_code": "GB",
+            "name": "COLT Mobile Telecommunications Limited",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "48"
+        },
+        {
+            "country_code": "FR",
+            "name": "Com4Innov",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8y"
+        },
+        {
+            "country_code": "US",
+            "name": "Commnet Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "27"
+        },
+        {
+            "country_code": "ES",
+            "name": "Compatel Limited",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7s"
+        },
+        {
+            "country_code": "AU",
+            "name": "Compatel Limited",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bd"
+        },
+        {
+            "country_code": "SE",
+            "name": "Compatel Limited",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fz"
+        },
+        {
+            "country_code": "FR",
+            "name": "Completel Mobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8f"
+        },
+        {
+            "country_code": "US",
+            "name": "Concho",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2x"
+        },
+        {
+            "country_code": "US",
+            "name": "Consolidated Telcom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1y"
+        },
+        {
+            "country_code": "ES",
+            "name": "Consorcio de Telecomunicaciones Avanzadas, S.A.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7q"
+        },
+        {
+            "country_code": "US",
+            "name": "Convey",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1e"
+        },
+        {
+            "country_code": "SE",
+            "name": "CoolTEL Aps",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fv"
+        },
+        {
+            "country_code": "US",
+            "name": "Corr",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "25"
+        },
+        {
+            "country_code": "AU",
+            "name": "Crazy John's",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bf"
+        },
+        {
+            "country_code": "US",
+            "name": "Cricket Communications",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2i"
+        },
+        {
+            "country_code": "BR",
+            "name": "CTBC Celular",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6r"
+        },
+        {
+            "country_code": "PH",
+            "name": "Cure",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "cb"
+        },
+        {
+            "country_code": "BR",
+            "name": "Datora",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6o"
+        },
+        {
+            "country_code": "DE",
+            "name": "DB Netz AG",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "a6"
+        },
+        {
+            "country_code": "DE",
+            "name": "DB Telematik",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "aj"
+        },
+        {
+            "country_code": "DE",
+            "name": "Debitel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "an"
+        },
+        {
+            "country_code": "AU",
+            "name": "Department of Defence",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ar"
+        },
+        {
+            "country_code": "AU",
+            "name": "Dialogue Communications Pty. Ltd.",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ba"
+        },
+        {
+            "country_code": "MY",
+            "name": "DiGi",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "e7"
+        },
+        {
+            "country_code": "MY",
+            "name": "DiGi Telecommunications",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "dy"
+        },
+        {
+            "country_code": "ES",
+            "name": "DigiMobil",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7m"
+        },
+        {
+            "country_code": "VE",
+            "name": "Digitel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "9w"
+        },
+        {
+            "country_code": "VE",
+            "name": "Digitel GSM",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "9x"
+        },
+        {
+            "country_code": "SE",
+            "name": "Digitel Mobile Srl",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fs"
+        },
+        {
+            "country_code": "IN",
+            "name": "Dishnet Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "82"
+        },
+        {
+            "country_code": "SE",
+            "name": "djuice",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fc"
+        },
+        {
+            "country_code": "CA",
+            "name": "DMTS",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "9"
+        },
+        {
+            "country_code": "IN",
+            "name": "DOLPHIN",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "83"
+        },
+        {
+            "country_code": "DE",
+            "name": "Dolphin Telecom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "a7"
+        },
+        {
+            "country_code": "TH",
+            "name": "dtac",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ej"
+        },
+        {
+            "country_code": "TH",
+            "name": "dtac TriNet",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "eg"
+        },
+        {
+            "country_code": "RU",
+            "name": "DTC",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "97"
+        },
+        {
+            "country_code": "AE",
+            "name": "du",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bx"
+        },
+        {
+            "country_code": "US",
+            "name": "Dutch Harbor",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2e"
+        },
+        {
+            "country_code": "DE",
+            "name": "E-Plus",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "a4"
+        },
+        {
+            "country_code": "US",
+            "name": "Easterbrooke",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2w"
+        },
+        {
+            "country_code": "CA",
+            "name": "EastLink",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5b"
+        },
+        {
+            "country_code": "CO",
+            "name": "Edatel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bz"
+        },
+        {
+            "country_code": "GB",
+            "name": "EE",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "54"
+        },
+        {
+            "country_code": "MY",
+            "name": "Electcoms Wireless Sdn Bhd",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ea"
+        },
+        {
+            "country_code": "NL",
+            "name": "Elephant Talk Communications Premium Rate Services",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "d0"
+        },
+        {
+            "country_code": "BE",
+            "name": "Elephant Talk Communications Schweiz GmbH",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bu"
+        },
+        {
+            "country_code": "IT",
+            "name": "Elsacom",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ck"
+        },
+        {
+            "country_code": "CO",
+            "name": "EMCALI",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "c1"
+        },
+        {
+            "country_code": "US",
+            "name": "Emery Telcom Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3v"
+        },
+        {
+            "country_code": "JP",
+            "name": "eMobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5v"
+        },
+        {
+            "country_code": "IE",
+            "name": "eMobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gw"
+        },
+        {
+            "country_code": "CO",
+            "name": "Emtelsa",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "c0"
+        },
+        {
+            "country_code": "US",
+            "name": "Endless Mountains Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1c"
+        },
+        {
+            "country_code": "CL",
+            "name": "entel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "eo"
+        },
+        {
+            "country_code": "US",
+            "name": "Epic Touch",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1z"
+        },
+        {
+            "country_code": "ZA",
+            "name": "Ericsson South Africa (Pty) Ltd",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "gp"
+        },
+        {
+            "country_code": "ES",
+            "name": "Eroski",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7o"
+        },
+        {
+            "country_code": "ID",
+            "name": "Esia",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "6f"
+        },
+        {
+            "country_code": "AE",
+            "name": "Etisalat",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "bw"
+        },
+        {
+            "country_code": "EG",
+            "name": "Etisalat",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "f4"
+        },
+        {
+            "country_code": "IN",
+            "name": "Etisalat DB(cheers)",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8a"
+        },
+        {
+            "country_code": "RU",
+            "name": "ETK",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "94"
+        },
+        {
+            "country_code": "ES",
+            "name": "Euskaltel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7e"
+        },
+        {
+            "country_code": "SE",
+            "name": "EuTel AB",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fp"
+        },
+        {
+            "country_code": "CA",
+            "name": "Execulink",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "5c"
+        },
+        {
+            "country_code": "TW",
+            "name": "FarEasTone",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "he"
+        },
+        {
+            "country_code": "US",
+            "name": "Farmers Cellular",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1g"
+        },
+        {
+            "country_code": "US",
+            "name": "Farmers Wireless",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2o"
+        },
+        {
+            "country_code": "CA",
+            "name": "Fido",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "c"
+        },
+        {
+            "country_code": "CA",
+            "name": "FIRST",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2"
+        },
+        {
+            "country_code": "US",
+            "name": "First Cellular",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "2u"
+        },
+        {
+            "country_code": "DE",
+            "name": "First Telecom GmbH",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "ag"
+        },
+        {
+            "country_code": "GB",
+            "name": "FleXtel Limited",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "4g"
+        },
+        {
+            "country_code": "GB",
+            "name": "FMS Solutions Ltd",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "47"
+        },
+        {
+            "country_code": "SE",
+            "name": "Fogg Mobile AB",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "fu"
+        },
+        {
+            "country_code": "ES",
+            "name": "Fonyou",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "7k"
+        },
+        {
+            "country_code": "FR",
+            "name": "Free Mobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "8i"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": "9mxdk55xbdthjv0rt9lgzak9vk",
+    "request": {
+        "params": {}
+    }
+}

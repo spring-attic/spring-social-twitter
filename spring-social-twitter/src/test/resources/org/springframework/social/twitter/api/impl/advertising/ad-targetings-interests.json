@@ -1,0 +1,1009 @@
+{
+    "data": [
+        {
+            "name": "Books and literature/Biographies and memoirs",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1001"
+        },
+        {
+            "name": "Books and literature/Business and finance",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1002"
+        },
+        {
+            "name": "Books and literature/Comics",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1003"
+        },
+        {
+            "name": "Books and literature/Cookbooks, food, and wine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1004"
+        },
+        {
+            "name": "Books and literature/Health, mind, and body",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1005"
+        },
+        {
+            "name": "Books and literature/Mystery and crime",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1006"
+        },
+        {
+            "name": "Books and literature/Nonfiction",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1007"
+        },
+        {
+            "name": "Books and literature/Politics and current events",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1008"
+        },
+        {
+            "name": "Books and literature/Romance",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1009"
+        },
+        {
+            "name": "Books and literature/Books news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "1010"
+        },
+        {
+            "name": "Movies and television/Action and adventure",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2001"
+        },
+        {
+            "name": "Movies and television/Animation",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2002"
+        },
+        {
+            "name": "Movies and television/Bollywood",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2003"
+        },
+        {
+            "name": "Movies and television/Business and news",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2004"
+        },
+        {
+            "name": "Movies and television/Comedy",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2005"
+        },
+        {
+            "name": "Movies and television/Documentary",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2006"
+        },
+        {
+            "name": "Movies and television/Drama",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2007"
+        },
+        {
+            "name": "Movies and television/Foreign",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2008"
+        },
+        {
+            "name": "Movies and television/Horror",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2009"
+        },
+        {
+            "name": "Movies and television/Independent",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2010"
+        },
+        {
+            "name": "Movies and television/Music",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2011"
+        },
+        {
+            "name": "Movies and television/Reality TV",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2012"
+        },
+        {
+            "name": "Movies and television/Romance",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2013"
+        },
+        {
+            "name": "Movies and television/Sci-fi and fantasy",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2014"
+        },
+        {
+            "name": "Movies and television/Sports themed",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2015"
+        },
+        {
+            "name": "Movies and television/Movie news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "2016"
+        },
+        {
+            "name": "Music and radio/Alternative",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3001"
+        },
+        {
+            "name": "Music and radio/Blues",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3002"
+        },
+        {
+            "name": "Music and radio/Christian and gospel",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3003"
+        },
+        {
+            "name": "Music and radio/Classical",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3004"
+        },
+        {
+            "name": "Music and radio/Country",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3005"
+        },
+        {
+            "name": "Music and radio/DJs",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3006"
+        },
+        {
+            "name": "Music and radio/Dance",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3007"
+        },
+        {
+            "name": "Music and radio/Electronic",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3008"
+        },
+        {
+            "name": "Music and radio/Hip hop and rap",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3009"
+        },
+        {
+            "name": "Music and radio/Indie spotlight",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3010"
+        },
+        {
+            "name": "Music and radio/Jazz",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3011"
+        },
+        {
+            "name": "Music and radio/Latino",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3012"
+        },
+        {
+            "name": "Music and radio/Metal",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3013"
+        },
+        {
+            "name": "Music and radio/Pop",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3014"
+        },
+        {
+            "name": "Music and radio/R&B and soul",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3015"
+        },
+        {
+            "name": "Music and radio/Reggae",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3016"
+        },
+        {
+            "name": "Music and radio/Rock",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3017"
+        },
+        {
+            "name": "Music and radio/Talk radio",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3018"
+        },
+        {
+            "name": "Music and radio/Venues",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3019"
+        },
+        {
+            "name": "Music and radio/World",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3020"
+        },
+        {
+            "name": "Music and radio/Music news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "3021"
+        },
+        {
+            "name": "Gaming/Board gaming",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4001"
+        },
+        {
+            "name": "Gaming/Computer gaming",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4002"
+        },
+        {
+            "name": "Gaming/Console gaming",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4003"
+        },
+        {
+            "name": "Gaming/Mobile gaming",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4004"
+        },
+        {
+            "name": "Gaming/Online gaming",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4005"
+        },
+        {
+            "name": "Gaming/Roleplaying games",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4006"
+        },
+        {
+            "name": "Gaming/Gaming news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "4007"
+        },
+        {
+            "name": "Automotive/Car culture",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5001"
+        },
+        {
+            "name": "Automotive/Convertibles",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5002"
+        },
+        {
+            "name": "Automotive/Hybrid and electric vehicles",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5003"
+        },
+        {
+            "name": "Automotive/Luxury",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5004"
+        },
+        {
+            "name": "Automotive/Minivans",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5005"
+        },
+        {
+            "name": "Automotive/Motorcycles",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5006"
+        },
+        {
+            "name": "Automotive/Offroad vehicles",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5007"
+        },
+        {
+            "name": "Automotive/Performance vehicles",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5008"
+        },
+        {
+            "name": "Automotive/Sedans",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5009"
+        },
+        {
+            "name": "Automotive/SUVs",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5010"
+        },
+        {
+            "name": "Automotive/Trucks",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5011"
+        },
+        {
+            "name": "Automotive/Vintage cars",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5012"
+        },
+        {
+            "name": "Automotive/Automotive news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "5013"
+        },
+        {
+            "name": "Business/Advertising",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6001"
+        },
+        {
+            "name": "Business/Biotech and biomedical",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6002"
+        },
+        {
+            "name": "Business/Business software",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6003"
+        },
+        {
+            "name": "Business/Construction",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6004"
+        },
+        {
+            "name": "Business/Government",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6005"
+        },
+        {
+            "name": "Business/Green solutions",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6006"
+        },
+        {
+            "name": "Business/Human resources",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6007"
+        },
+        {
+            "name": "Business/Marketing",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6008"
+        },
+        {
+            "name": "Business/Entrepreneurship",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6009"
+        },
+        {
+            "name": "Business/Investors and patents",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6010"
+        },
+        {
+            "name": "Business/Small business",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6011"
+        },
+        {
+            "name": "Business/Nonprofit",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6012"
+        },
+        {
+            "name": "Business/Leadership",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6013"
+        },
+        {
+            "name": "Business/Technology",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6014"
+        },
+        {
+            "name": "Business/Organized labor and unions",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6015"
+        },
+        {
+            "name": "Business/Business news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "6016"
+        },
+        {
+            "name": "Careers/Financial aid and scholarships",
+            "targeting_type": "INTEREST",
+            "targeting_value": "7001"
+        },
+        {
+            "name": "Careers/Job fairs",
+            "targeting_type": "INTEREST",
+            "targeting_value": "7002"
+        },
+        {
+            "name": "Careers/Job search",
+            "targeting_type": "INTEREST",
+            "targeting_value": "7003"
+        },
+        {
+            "name": "Careers/U.S. military",
+            "targeting_type": "INTEREST",
+            "targeting_value": "7004"
+        },
+        {
+            "name": "Careers/Career news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "7005"
+        },
+        {
+            "name": "Life stages/Auto intenders",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8001"
+        },
+        {
+            "name": "Life stages/Empty nesters",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8002"
+        },
+        {
+            "name": "Life stages/Moms",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8003"
+        },
+        {
+            "name": "Life stages/Dads",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8004"
+        },
+        {
+            "name": "Life stages/College students",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8005"
+        },
+        {
+            "name": "Life stages/Newlyweds",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8006"
+        },
+        {
+            "name": "Life stages/Veterans",
+            "targeting_type": "INTEREST",
+            "targeting_value": "8007"
+        },
+        {
+            "name": "Education/Adult education",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9001"
+        },
+        {
+            "name": "Education/College life",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9002"
+        },
+        {
+            "name": "Education/Language learning",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9003"
+        },
+        {
+            "name": "Education/Graduate school",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9004"
+        },
+        {
+            "name": "Education/Homeschooling",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9005"
+        },
+        {
+            "name": "Education/Special education",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9006"
+        },
+        {
+            "name": "Education/Online education",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9007"
+        },
+        {
+            "name": "Education/Education news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "9008"
+        },
+        {
+            "name": "Family and parenting/Babies and toddlers",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10001"
+        },
+        {
+            "name": "Family and parenting/Daycare and preschool",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10002"
+        },
+        {
+            "name": "Family and parenting/Parenting K-6 kids",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10003"
+        },
+        {
+            "name": "Family and parenting/Parenting teens",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10004"
+        },
+        {
+            "name": "Family and parenting/Pregnancy",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10005"
+        },
+        {
+            "name": "Family and parenting/Special needs kids",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10006"
+        },
+        {
+            "name": "Family and parenting/Elder care",
+            "targeting_type": "INTEREST",
+            "targeting_value": "10007"
+        },
+        {
+            "name": "Events/Music festivals and concerts",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11001"
+        },
+        {
+            "name": "Events/Movie festivals",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11002"
+        },
+        {
+            "name": "Events/Sporting events",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11003"
+        },
+        {
+            "name": "Events/Holidays",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11004"
+        },
+        {
+            "name": "Events/Political elections",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11005"
+        },
+        {
+            "name": "Events/Entertainment awards",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11006"
+        },
+        {
+            "name": "Events/Tech tradeshows",
+            "targeting_type": "INTEREST",
+            "targeting_value": "11007"
+        },
+        {
+            "name": "Food and drink/American cuisine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12001"
+        },
+        {
+            "name": "Food and drink/Bars and nightlife",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12002"
+        },
+        {
+            "name": "Food and drink/Barbecues and grilling",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12003"
+        },
+        {
+            "name": "Food and drink/Beer",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12004"
+        },
+        {
+            "name": "Food and drink/Cajun and Creole",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12005"
+        },
+        {
+            "name": "Food and drink/Chinese cuisine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12006"
+        },
+        {
+            "name": "Food and drink/Cocktails and beer",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12007"
+        },
+        {
+            "name": "Food and drink/Coffee and tea",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12008"
+        },
+        {
+            "name": "Food and drink/Desserts and baking",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12009"
+        },
+        {
+            "name": "Food and drink/Dining out",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12010"
+        },
+        {
+            "name": "Food and drink/Ethnic foods",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12011"
+        },
+        {
+            "name": "Food and drink/Fast food",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12012"
+        },
+        {
+            "name": "Food and drink/Fine dining",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12013"
+        },
+        {
+            "name": "Food and drink/French cuisine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12014"
+        },
+        {
+            "name": "Food and drink/Cooking",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12015"
+        },
+        {
+            "name": "Food and drink/Italian cuisine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12016"
+        },
+        {
+            "name": "Food and drink/Japanese cuisine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12017"
+        },
+        {
+            "name": "Food and drink/Liquor and spirits",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12018"
+        },
+        {
+            "name": "Food and drink/Mexican cuisine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12019"
+        },
+        {
+            "name": "Food and drink/Vegan",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12020"
+        },
+        {
+            "name": "Food and drink/Vegetarian",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12021"
+        },
+        {
+            "name": "Food and drink/Wine",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12022"
+        },
+        {
+            "name": "Food and drink/Foodie news and general info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "12023"
+        },
+        {
+            "name": "Hobbies and interests/Arts and crafts",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13001"
+        },
+        {
+            "name": "Hobbies and interests/Birdwatching",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13002"
+        },
+        {
+            "name": "Hobbies and interests/Boating",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13003"
+        },
+        {
+            "name": "Hobbies and interests/Performance arts",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13004"
+        },
+        {
+            "name": "Hobbies and interests/Chess",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13005"
+        },
+        {
+            "name": "Hobbies and interests/Cigars",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13006"
+        },
+        {
+            "name": "Hobbies and interests/Drawing and sketching",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13007"
+        },
+        {
+            "name": "Hobbies and interests/Freelance writing",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13008"
+        },
+        {
+            "name": "Hobbies and interests/Genealogy",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13009"
+        },
+        {
+            "name": "Hobbies and interests/Guitar",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13010"
+        },
+        {
+            "name": "Hobbies and interests/Gambling",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13011"
+        },
+        {
+            "name": "Hobbies and interests/Jewelry making",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13012"
+        },
+        {
+            "name": "Hobbies and interests/Needlework",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13013"
+        },
+        {
+            "name": "Hobbies and interests/Painting",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13014"
+        },
+        {
+            "name": "Hobbies and interests/Photography",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13015"
+        },
+        {
+            "name": "Hobbies and interests/Sci-fi and fantasy",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13016"
+        },
+        {
+            "name": "Hobbies and interests/Scrapbooking",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13017"
+        },
+        {
+            "name": "Hobbies and interests/Screenwriting",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13018"
+        },
+        {
+            "name": "Hobbies and interests/Shopping",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13019"
+        },
+        {
+            "name": "Hobbies and interests/Stamps and coins",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13020"
+        },
+        {
+            "name": "Hobbies and interests/Celebrity fan and gossip",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13021"
+        },
+        {
+            "name": "Hobbies and interests/Comedy",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13022"
+        },
+        {
+            "name": "Hobbies and interests/Dance",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13023"
+        },
+        {
+            "name": "Hobbies and interests/Modeling",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13024"
+        },
+        {
+            "name": "Hobbies and interests/Cartoons",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13025"
+        },
+        {
+            "name": "Hobbies and interests/Design",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13026"
+        },
+        {
+            "name": "Hobbies and interests/Astrology",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13027"
+        },
+        {
+            "name": "Hobbies and interests/Paranormal phenomena",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13028"
+        },
+        {
+            "name": "Hobbies and interests/Exercise and fitness",
+            "targeting_type": "INTEREST",
+            "targeting_value": "13029"
+        },
+        {
+            "name": "Home and garden/Appliances",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14001"
+        },
+        {
+            "name": "Home and garden/Entertaining at home",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14002"
+        },
+        {
+            "name": "Home and garden/Gardening",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14003"
+        },
+        {
+            "name": "Home and garden/Home repair",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14004"
+        },
+        {
+            "name": "Home and garden/Interior decorating",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14005"
+        },
+        {
+            "name": "Home and garden/Landscaping",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14006"
+        },
+        {
+            "name": "Home and garden/Remodeling and construction",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14007"
+        },
+        {
+            "name": "Home and garden/General info",
+            "targeting_type": "INTEREST",
+            "targeting_value": "14008"
+        },
+        {
+            "name": "Law, government, and politics/Legal issues",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15001"
+        },
+        {
+            "name": "Law, government, and politics/Government resources",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15002"
+        },
+        {
+            "name": "Law, government, and politics/Politics",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15003"
+        },
+        {
+            "name": "Law, government, and politics/Commentary",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15004"
+        },
+        {
+            "name": "Law, government, and politics/Conservative",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15005"
+        },
+        {
+            "name": "Law, government, and politics/Liberal",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15006"
+        },
+        {
+            "name": "Law, government, and politics/Nonpartisan",
+            "targeting_type": "INTEREST",
+            "targeting_value": "15007"
+        },
+        {
+            "name": "Personal finance/Banking",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16001"
+        },
+        {
+            "name": "Personal finance/Beginning investing",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16002"
+        },
+        {
+            "name": "Personal finance/Credit, debt, and loans",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16003"
+        },
+        {
+            "name": "Personal finance/Financial news",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16004"
+        },
+        {
+            "name": "Personal finance/Financial planning",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16005"
+        },
+        {
+            "name": "Personal finance/Hedge funds",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16006"
+        },
+        {
+            "name": "Personal finance/Insurance",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16007"
+        },
+        {
+            "name": "Personal finance/Investing",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16008"
+        },
+        {
+            "name": "Personal finance/Mortgage",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16009"
+        },
+        {
+            "name": "Personal finance/Mutual funds",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16010"
+        },
+        {
+            "name": "Personal finance/Options",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16011"
+        },
+        {
+            "name": "Personal finance/Real estate",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16012"
+        },
+        {
+            "name": "Personal finance/Retirement planning",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16013"
+        },
+        {
+            "name": "Personal finance/Stocks",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16014"
+        },
+        {
+            "name": "Personal finance/Tax planning",
+            "targeting_type": "INTEREST",
+            "targeting_value": "16015"
+        },
+        {
+            "name": "Society/Dating",
+            "targeting_type": "INTEREST",
+            "targeting_value": "17001"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": "1913ge0w",
+    "request": {
+        "params": {}
+    }
+}

@@ -25,5 +25,5 @@ import org.springframework.social.twitter.api.DirectMessage;
  * @author Craig Walls
  */
 @SuppressWarnings("serial")
-class DirectMessageList extends ArrayList<DirectMessage> {
+public class DirectMessageList extends ArrayList<DirectMessage> {
 }

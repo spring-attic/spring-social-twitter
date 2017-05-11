@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class TrendMixin extends TwitterObjectMixin {
+public abstract class TrendMixin extends TwitterObjectMixin {
 
 	@JsonCreator
 	TrendMixin(@JsonProperty("name") String name, @JsonProperty("query") String query) {}

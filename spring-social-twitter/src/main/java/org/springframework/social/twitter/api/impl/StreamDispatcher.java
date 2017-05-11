@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -34,11 +34,11 @@ class StreamDispatcher implements Runnable {
 	private final List<StreamListener> listeners;
 
 	private ObjectMapper objectMapper;
-	
+
 	private AtomicBoolean active;
 
 	private final Queue<String> queue;
-	
+
 	private final ExecutorService pool;
 
 	public StreamDispatcher(Queue<String> queue, List<StreamListener> listeners) {
@@ -56,9 +56,9 @@ class StreamDispatcher implements Runnable {
 		while(active.get()) {
 			String line = queue.poll();
 			if(line == null || line.length() == 0) return;
-			
-			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events, 
-			
+
+			// TODO: handle scrub_geo, status_withheld, user_withheld, disconnect, friends, events,
+
 			try {
 				if (line.contains("in_reply_to_status_id_str")) { // TODO: This is kinda hacky
 					handleTweet(line);
@@ -74,12 +74,12 @@ class StreamDispatcher implements Runnable {
 			}
 		}
 	}
-	
+
 	public void stop() {
 		active.set(false);
 		pool.shutdown();
 	}
-	
+
 	private void handleDelete(String line) throws IOException {
 		final StreamDeleteEvent deleteEvent = objectMapper.readValue(line, StreamDeleteEvent.class);
 		for (final StreamListener listener : listeners) {
@@ -112,7 +112,7 @@ class StreamDispatcher implements Runnable {
 			}));
 		}
 	}
-	
+
 	private void handleWarning(String line) throws IOException {
 		final StreamWarningEvent warningEvent = objectMapper.readValue(line, StreamWarningEvent.class);
 		for (final StreamListener listener : listeners) {
@@ -123,5 +123,5 @@ class StreamDispatcher implements Runnable {
 			}));
 		}
 	}
-	
+
 }

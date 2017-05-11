@@ -1,0 +1,157 @@
+{
+    "data": {
+        "billed_engagements": [
+            0,
+            0,
+            0
+        ],
+        "billed_follows": [
+            0,
+            0,
+            0
+        ],
+        "end_time": "2015-05-04T07:00:00Z",
+        "granularity": "DAY",
+        "id": "8484d",
+        "promoted_account_follow_rate": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "promoted_account_follows": [
+            0,
+            0,
+            0
+        ],
+        "promoted_account_impressions": [
+            0,
+            0,
+            0
+        ],
+        "promoted_account_profile_visits": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_app_install_attempts": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_app_open_attempts": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_card_engagements": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_clicks": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_engagement_rate": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "promoted_tweet_search_engagements": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_favorites": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_follows": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_impressions": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_replies": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_retweets": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_search_url_clicks": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_card_engagements": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_clicks": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_engagement_rate": [
+            0.0,
+            0.0,
+            0.0
+        ],
+        "promoted_tweet_timeline_engagements": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_favorites": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_follows": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_impressions": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_replies": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_retweets": [
+            0,
+            0,
+            0
+        ],
+        "promoted_tweet_timeline_url_clicks": [
+            0,
+            0,
+            0
+        ],
+        "start_time": "2015-05-01T07:00:00Z"
+    },
+    "data_type": "stats",
+    "request": {
+        "params": {
+            "account_id": "hahaj",
+            "end_time": "2015-05-04T07:00:00Z",
+            "granularity": "DAY",
+            "start_time": "2015-05-01T07:00:00Z"
+        }
+    }
+}

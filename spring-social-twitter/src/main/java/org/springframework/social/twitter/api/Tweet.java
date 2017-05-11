@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -20,6 +20,7 @@ import java.util.Date;
 
 /**
  * Represents a Twitter status update (e.g., a "tweet").
+ * 
  * @author Craig Walls
  */
 public class Tweet extends TwitterObject implements Serializable {
@@ -42,7 +43,10 @@ public class Tweet extends TwitterObject implements Serializable {
 	private Tweet retweetedStatus;
 	private boolean favorited;
 	private Integer favoriteCount;
+	private Boolean truncated;
+	private Boolean possiblySensitive;
 	private Entities entities;
+	private Entities extendedEntities;
 	private TwitterProfile user;
 
 	/**
@@ -98,202 +102,230 @@ public class Tweet extends TwitterObject implements Serializable {
 		this.source = source;		
 	}
 
-	/**
-	 * The text of the tweet. If this tweet is a retweet of another tweet, the text may be preceeded with "RT \@someuser" and may be truncated at the end.
-	 * To get the raw, unmodified text of the original tweet, use {@link #getUnmodifiedText()}. 
-	 * @return The text of the tweet.
-	 */
-	public String getText() {
-		return text;
-	}
-	
-	/**
-	 * Returns the unmodified text of the tweet.
-	 * If this tweet is a retweet, it returns the text of the original tweet.
-	 * If it is not a retweet, then this method will return the same value as {@link #getText()}.
-	 * @return The unmodified text of the tweet.
-	 */
-	public String getUnmodifiedText() {
-		return isRetweet() ? retweetedStatus.getText() : getText();
-	}
+    /**
+     * The text of the tweet. If this tweet is a retweet of another tweet, the text may be preceeded with "RT \@someuser" and may be truncated at the
+     * end.
+     * To get the raw, unmodified text of the original tweet, use {@link #getUnmodifiedText()}.
+     * 
+     * @return The text of the tweet.
+     */
+    public String getText() {
+        return text;
+    }
 
-	public Date getCreatedAt() {
-		return createdAt;
-	}
+    /**
+     * Returns the unmodified text of the tweet.
+     * If this tweet is a retweet, it returns the text of the original tweet.
+     * If it is not a retweet, then this method will return the same value as {@link #getText()}.
+     * 
+     * @return The unmodified text of the tweet.
+     */
+    public String getUnmodifiedText() {
+        return isRetweet() ? retweetedStatus.getText() : getText();
+    }
 
-	public String getFromUser() {
-		return fromUser;
-	}
+    public Date getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setFromUser(String fromUser) {
-		this.fromUser = fromUser;
-	}
+    public String getFromUser() {
+        return fromUser;
+    }
 
-	public String getId() {
+    public void setFromUser(String fromUser) {
+        this.fromUser = fromUser;
+    }
+    
+    public String getId() {
 		return id;
 	}
 
-	public String getProfileImageUrl() {
-		return profileImageUrl;
-	}
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
 
-	public void setProfileImageUrl(String profileImageUrl) {
-		this.profileImageUrl = profileImageUrl;
-	}
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 
-	public Long getToUserId() {
-		return toUserId;
-	}
+    public Long getToUserId() {
+        return toUserId;
+    }
 
-	public void setToUserId(Long toUserId) {
-		this.toUserId = toUserId;
-	}
+    public void setToUserId(Long toUserId) {
+        this.toUserId = toUserId;
+    }
 
-	public long getFromUserId() {
-		return fromUserId;
-	}
-	
-	public void setInReplyToStatusId(Long inReplyToStatusId) {
-		this.inReplyToStatusId = inReplyToStatusId;
-	}
-	
-	public Long getInReplyToStatusId() {
-		return inReplyToStatusId;
-	}
+    public long getFromUserId() {
+        return fromUserId;
+    }
 
-	public void setFromUserId(long fromUserId) {
-		this.fromUserId = fromUserId;
-	}
+    public void setInReplyToStatusId(Long inReplyToStatusId) {
+        this.inReplyToStatusId = inReplyToStatusId;
+    }
 
-	public String getLanguageCode() {
-		return languageCode;
-	}
+    public Long getInReplyToStatusId() {
+        return inReplyToStatusId;
+    }
 
-	public void setLanguageCode(String languageCode) {
-		this.languageCode = languageCode;
-	}
+    public void setFromUserId(long fromUserId) {
+        this.fromUserId = fromUserId;
+    }
 
-	public String getSource() {
-		return source;
-	}
+    public String getLanguageCode() {
+        return languageCode;
+    }
 
-	public void setSource(String source) {
-		this.source = source;
-	}
+    public void setLanguageCode(String languageCode) {
+        this.languageCode = languageCode;
+    }
 
-	public void setRetweetCount(Integer retweetCount) {
-		this.retweetCount = retweetCount;		
-	}
-	
-	/**
-	 * The number of times this tweet has been retweeted.
-	 * Only available in timeline results. 
-	 * getRetweetCount() will return null for Tweet objects returned in search results.
-	 * @return the number of times the tweet has been retweeted or null if that information is unavailable
-	 */
-	public Integer getRetweetCount() {
-		return retweetCount;
-	}
-	
-	public void setRetweeted(boolean retweeted) {
-		this.retweeted = retweeted;
-	}
+    public String getSource() {
+        return source;
+    }
 
-	public boolean isRetweeted() {
-		return retweeted;
-	}
-	
-	public Tweet getRetweetedStatus() {
-		return this.retweetedStatus;
-	}
+    public void setSource(String source) {
+        this.source = source;
+    }
 
-	public void setRetweetedStatus(final Tweet tweet) {
-		this.retweetedStatus = tweet;
-	}
-	
-	public boolean isRetweet() {
-		return this.retweetedStatus != null;
-	}
+    public void setRetweetCount(Integer retweetCount) {
+        this.retweetCount = retweetCount;
+    }
 
-	public void setFavorited(boolean favorited) {
-		this.favorited = favorited;
-	}
+    /**
+     * The number of times this tweet has been retweeted.
+     * Only available in timeline results.
+     * getRetweetCount() will return null for Tweet objects returned in search results.
+     * 
+     * @return the number of times the tweet has been retweeted or null if that information is unavailable
+     */
+    public Integer getRetweetCount() {
+        return retweetCount;
+    }
 
-	public boolean isFavorited() {
-		return favorited;
-	}
-	
-	public void setFavoriteCount(Integer favoriteCount) {
-		this.favoriteCount = favoriteCount;
-	}
-	
-	public Integer getFavoriteCount() {
-		return favoriteCount;
-	}
+    public void setRetweeted(boolean retweeted) {
+        this.retweeted = retweeted;
+    }
 
-	public Entities getEntities() {
-		return this.entities;
-	}
-	
-	public void setEntities(final Entities ent) {
-		this.entities = ent;
-	}
+    public boolean isRetweeted() {
+        return retweeted;
+    }
 
-	public boolean hasMentions() {
-		if (this.entities == null) {
-			return false;
-		}
-		return !this.entities.getMentions().isEmpty();
-	}
+    public Tweet getRetweetedStatus() {
+        return this.retweetedStatus;
+    }
 
-	public boolean hasMedia() {
-		if (this.entities == null) {
-			return false;
-		}
-		return !this.entities.getMedia().isEmpty();
-	}
+    public void setRetweetedStatus(final Tweet tweet) {
+        this.retweetedStatus = tweet;
+    }
 
-	public boolean hasUrls() {
-		if (this.entities == null) {
-			return false;
-		}
-		return !this.entities.getUrls().isEmpty();
-	}
+    public boolean isRetweet() {
+        return this.retweetedStatus != null;
+    }
 
-	public boolean hasTags() {
-		if (this.entities == null) {
-			return false;
-		}
-		return !this.entities.getHashTags().isEmpty();
-	}
-	
-	public TwitterProfile getUser() {
-		return this.user;
-	}
-	
-	public void setUser(final TwitterProfile prof) {
-		this.user = prof;
-	}
+    public void setFavorited(boolean favorited) {
+        this.favorited = favorited;
+    }
 
-	public Long getInReplyToUserId() {
-		return inReplyToUserId;
-	}
+    public boolean isFavorited() {
+        return favorited;
+    }
 
-	public void setInReplyToUserId(final Long inReplyToUserId) {
-		this.inReplyToUserId = inReplyToUserId;
-	}
+    public void setFavoriteCount(Integer favoriteCount) {
+        this.favoriteCount = favoriteCount;
+    }
 
-	public String getInReplyToScreenName() {
-		return inReplyToScreenName;
-	}
+    public Integer getFavoriteCount() {
+        return favoriteCount;
+    }
 
-	public void setInReplyToScreenName(final String inReplyToScreenName) {
-		this.inReplyToScreenName = inReplyToScreenName;
-	}
+    public void setTruncated(Boolean truncated) {
+        this.truncated = truncated;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
+    public Boolean isTruncated() {
+        return truncated;
+    }
+
+    public void setPossiblySensitive(Boolean possiblySensitive) {
+        this.possiblySensitive = possiblySensitive;
+    }
+
+    public Boolean isPossiblySensitive() {
+        return possiblySensitive;
+    }
+
+    public Entities getEntities() {
+        return this.entities;
+    }
+
+    public void setEntities(final Entities ent) {
+        this.entities = ent;
+    }
+
+    public void setExtendedEntities(Entities extendedEntities) {
+        this.extendedEntities = extendedEntities;
+    }
+
+    public Entities getExtendedEntities() {
+        return extendedEntities;
+    }
+
+    public boolean hasMentions() {
+        if (this.entities == null) {
+            return false;
+        }
+        return !this.entities.getMentions().isEmpty();
+    }
+
+    public boolean hasMedia() {
+        if (this.entities == null) {
+            return false;
+        }
+        return !this.entities.getMedia().isEmpty();
+    }
+
+    public boolean hasUrls() {
+        if (this.entities == null) {
+            return false;
+        }
+        return !this.entities.getUrls().isEmpty();
+    }
+
+    public boolean hasTags() {
+        if (this.entities == null) {
+            return false;
+        }
+        return !this.entities.getHashTags().isEmpty();
+    }
+
+    public TwitterProfile getUser() {
+        return this.user;
+    }
+
+    public void setUser(final TwitterProfile prof) {
+        this.user = prof;
+    }
+
+    public Long getInReplyToUserId() {
+        return inReplyToUserId;
+    }
+
+    public void setInReplyToUserId(final Long inReplyToUserId) {
+        this.inReplyToUserId = inReplyToUserId;
+    }
+
+    public String getInReplyToScreenName() {
+        return inReplyToScreenName;
+    }
+
+    public void setInReplyToScreenName(final String inReplyToScreenName) {
+        this.inReplyToScreenName = inReplyToScreenName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+    	if (this == o) {
 			return true;
 		}
 		if (o == null || getClass() != o.getClass()) {
@@ -355,11 +387,11 @@ public class Tweet extends TwitterObject implements Serializable {
 		}
 	
 		return true;
-	}
+    }
 
-	@Override
-	public int hashCode() {
-		int result = (id != null ? id.hashCode() : 0);
+    @Override
+    public int hashCode() {
+    	int result = (id != null ? id.hashCode() : 0);
 		result = 31 * result + (text != null ? text.hashCode() : 0);
 		result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
 		result = 31 * result + (fromUser != null ? fromUser.hashCode() : 0);
@@ -377,5 +409,5 @@ public class Tweet extends TwitterObject implements Serializable {
 		result = 31 * result + (entities != null ? entities.hashCode() : 0);
 		result = 31 * result + (user != null ? user.hashCode() : 0);
 		return result;
-	}
+    }
 }

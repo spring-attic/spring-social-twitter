@@ -15,11 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
+
+
 /**
  * A stream event indicating that a tweet should be removed from the client.
  * @author Craig Walls
  */
 public class StreamDeleteEvent extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 
 	private final long tweetId;
 	

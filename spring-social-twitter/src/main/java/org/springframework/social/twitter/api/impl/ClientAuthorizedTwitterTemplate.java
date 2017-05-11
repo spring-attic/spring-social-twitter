@@ -23,7 +23,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
  * the API binding needs to use OAuth 1.0a for user requests and OAuth 2 for client requests.
  * @author Craig Walls
  */
-class ClientAuthorizedTwitterTemplate extends AbstractOAuth2ApiBinding {
+public class ClientAuthorizedTwitterTemplate extends AbstractOAuth2ApiBinding {
 
 	public ClientAuthorizedTwitterTemplate(String clientToken) {
 		super(clientToken);

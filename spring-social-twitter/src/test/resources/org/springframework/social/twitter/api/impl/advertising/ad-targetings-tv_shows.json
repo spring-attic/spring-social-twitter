@@ -1,0 +1,312 @@
+{
+    "request":{
+        "params":{
+
+        }
+    },
+    "data":[
+        {
+            "name":"Debate 2014 - Presidente",
+            "id":10032876335,
+            "estimated_users":1000,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"2014 FIBA World Cup",
+            "id":10032994279,
+            "estimated_users":1000,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Teleton 2014",
+            "id":10034234711,
+            "estimated_users":49903,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Debate 2014 - Governadores",
+            "id":10033124297,
+            "estimated_users":1000,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Ol\u00EDmpiadas de Inverno Sochi 2014",
+            "id":10028488857,
+            "estimated_users":1000,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Academy Awards 2015",
+            "id":10028635956,
+            "estimated_users":23707,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Samba Bras\u00EDlia",
+            "id":10032742639,
+            "estimated_users":1000,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Circuito banco do Brasil",
+            "id":10034146629,
+            "estimated_users":1000,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"NBA",
+            "id":10031646970,
+            "estimated_users":128587,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Frozen",
+            "id":10034447890,
+            "estimated_users":1000,
+            "genre":"MOVIES"
+        },
+        {
+            "name":"Golden Globe 2015",
+            "id":10028597044,
+            "estimated_users":14947,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"F\u00F3rmula 1",
+            "id":10029035313,
+            "estimated_users":60390,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"SuperStar",
+            "id":10029301064,
+            "estimated_users":169753,
+            "genre":"REALITY"
+        },
+        {
+            "name":"Copa Am\u00E9rica",
+            "id":10036396046,
+            "estimated_users":150438,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"The Brit Awards 2015",
+            "id":10035547851,
+            "estimated_users":17563,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Game of Thrones",
+            "id":10028727706,
+            "estimated_users":132304,
+            "genre":"SCI_FI"
+        },
+        {
+            "name":"Grammy Awards 2015",
+            "id":10028654902,
+            "estimated_users":70907,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Billboard Music Awards 2015",
+            "id":10029792412,
+            "estimated_users":176727,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"UEFA Champions League Soccer",
+            "id":10029008212,
+            "estimated_users":348578,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Saturday Night Live",
+            "id":10028727700,
+            "estimated_users":20231,
+            "genre":"COMEDY"
+        },
+        {
+            "name":"People's Choice Awards 2015",
+            "id":10028587449,
+            "estimated_users":44997,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"American Music Awards",
+            "id":10034396305,
+            "estimated_users":18106,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Copa do Mundo de Futebol Feminino de 2015",
+            "id":10037239015,
+            "estimated_users":27914,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Copa Libertadores",
+            "id":10029035271,
+            "estimated_users":258211,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Memorial Day 2015",
+            "id":10037100917,
+            "estimated_users":18200,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"The Walking Dead",
+            "id":10028588302,
+            "estimated_users":132870,
+            "genre":"DRAMA"
+        },
+        {
+            "name":"The Vampire Diaries",
+            "id":10028762216,
+            "estimated_users":197347,
+            "genre":"SCI_FI"
+        },
+        {
+            "name":"Copa do Rei",
+            "id":10035422924,
+            "estimated_users":32048,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Screen Actors Guild Awards 2015",
+            "id":10028603569,
+            "estimated_users":2478,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Miss Universo 2014",
+            "id":10035406593,
+            "estimated_users":5539,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Bola de ouro FIFA",
+            "id":10035453999,
+            "estimated_users":10496,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Os Simpsons",
+            "id":10028414416,
+            "estimated_users":67212,
+            "genre":"COMEDY"
+        },
+        {
+            "name":"Campeonatos Estaduais",
+            "id":10029035307,
+            "estimated_users":206048,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Mil e uma noites",
+            "id":10036412471,
+            "estimated_users":17860,
+            "genre":"SOAP_OPERA"
+        },
+        {
+            "name":"The Ellen Degeneres Show",
+            "id":10033820068,
+            "estimated_users":344783,
+            "genre":"TALK"
+        },
+        {
+            "name":"Once Upon a Time",
+            "id":10028597068,
+            "estimated_users":58570,
+            "genre":"SCI_FI"
+        },
+        {
+            "name":"American Horror Story",
+            "id":10028597049,
+            "estimated_users":76608,
+            "genre":"DRAMA"
+        },
+        {
+            "name":"Doctor Who",
+            "id":10032051182,
+            "estimated_users":29086,
+            "genre":"SCI_FI"
+        },
+        {
+            "name":"Arrow",
+            "id":10028635048,
+            "estimated_users":73832,
+            "genre":"SCI_FI"
+        },
+        {
+            "name":"Scandal",
+            "id":10028635050,
+            "estimated_users":21248,
+            "genre":"DRAMA"
+        },
+        {
+            "name":"Tomorrowland Brasil",
+            "id":10037121738,
+            "estimated_users":217308,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Father's Day 2015",
+            "id":10037100922,
+            "estimated_users":1054,
+            "genre":"SPECIAL"
+        },
+        {
+            "name":"Futebol NFL",
+            "id":10033407327,
+            "estimated_users":101464,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Amistosos Internacionais",
+            "id":10033116280,
+            "estimated_users":64836,
+            "genre":"SPORTS"
+        },
+        {
+            "name":"Supernatural",
+            "id":10028407900,
+            "estimated_users":154066,
+            "genre":"SCI_FI"
+        },
+        {
+            "name":"Pretty Little Liars",
+            "id":10028787788,
+            "estimated_users":143969,
+            "genre":"DRAMA"
+        },
+        {
+            "name":"Glee",
+            "id":10028587441,
+            "estimated_users":100278,
+            "genre":"DRAMA"
+        },
+        {
+            "name":"Breaking Bad",
+            "id":10028694298,
+            "estimated_users":52420,
+            "genre":"DRAMA"
+        },
+        {
+            "name":"The Taste Brasil",
+            "id":10036434776,
+            "estimated_users":7989,
+            "genre":"REALITY"
+        },
+        {
+            "name":"Campeonato espanhol",
+            "id":10029035055,
+            "estimated_users":27136,
+            "genre":"SPORTS"
+        }
+    ],
+    "data_type":"targeting_criterion",
+    "total_count":2188,
+    "next_cursor":"c-1e"
+}

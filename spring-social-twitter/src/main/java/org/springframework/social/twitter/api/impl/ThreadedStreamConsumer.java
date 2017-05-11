@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.springframework.social.twitter.api.Stream;
 import org.springframework.social.twitter.api.StreamingException;
 
-abstract class ThreadedStreamConsumer extends Thread implements Stream {
+public abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		
 	private AtomicBoolean open;
 
@@ -91,9 +91,9 @@ abstract class ThreadedStreamConsumer extends Thread implements Stream {
 		} catch (InterruptedException e1) {}
 	}
 
-	static final long HTTP_ERROR_SLEEP_MAX = 320000;
+	public static final long HTTP_ERROR_SLEEP_MAX = 320000;
 
-	static final long NETWORK_ERROR_SLEEP_MAX = 16000;
+	public static final long NETWORK_ERROR_SLEEP_MAX = 16000;
 
 	private static final long MIN_WAIT = 250;
 

@@ -25,5 +25,5 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using = TweetDeserializer.class)
-abstract class TweetMixin extends TwitterObjectMixin {
+public abstract class TweetMixin extends TwitterObjectMixin {
 }

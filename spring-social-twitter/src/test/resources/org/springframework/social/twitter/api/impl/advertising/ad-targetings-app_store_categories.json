@@ -1,0 +1,512 @@
+{
+    "data": [
+        {
+            "name": "Books",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qou9"
+        },
+        {
+            "name": "Books & References",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow6"
+        },
+        {
+            "name": "Business",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoua"
+        },
+        {
+            "name": "Business",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow7"
+        },
+        {
+            "name": "Catalogs",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoub"
+        },
+        {
+            "name": "Comics",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow8"
+        },
+        {
+            "name": "Communication",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow9"
+        },
+        {
+            "name": "Education",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouc"
+        },
+        {
+            "name": "Education",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowa"
+        },
+        {
+            "name": "Entertainment",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoud"
+        },
+        {
+            "name": "Entertainment",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowb"
+        },
+        {
+            "name": "Finance",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoue"
+        },
+        {
+            "name": "Finance",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowc"
+        },
+        {
+            "name": "Food & Drink",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouf"
+        },
+        {
+            "name": "Games: Action",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouh"
+        },
+        {
+            "name": "Games: Action",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowe"
+        },
+        {
+            "name": "Games: Adventure",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoui"
+        },
+        {
+            "name": "Games: Adventure",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowf"
+        },
+        {
+            "name": "Games: Arcade",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouj"
+        },
+        {
+            "name": "Games: Arcade",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowg"
+        },
+        {
+            "name": "Games: Board",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouk"
+        },
+        {
+            "name": "Games: Board",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowh"
+        },
+        {
+            "name": "Games: Card",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoul"
+        },
+        {
+            "name": "Games: Card",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowi"
+        },
+        {
+            "name": "Games: Casino",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoum"
+        },
+        {
+            "name": "Games: Casino",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowj"
+        },
+        {
+            "name": "Games: Casual",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowk"
+        },
+        {
+            "name": "Games: Dice",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoun"
+        },
+        {
+            "name": "Games: Educational",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouo"
+        },
+        {
+            "name": "Games: Educational",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowl"
+        },
+        {
+            "name": "Games: Family",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoup"
+        },
+        {
+            "name": "Games: Family",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowm"
+        },
+        {
+            "name": "Games: Music",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouq"
+        },
+        {
+            "name": "Games: Music",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qown"
+        },
+        {
+            "name": "Games: Puzzle",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qour"
+        },
+        {
+            "name": "Games: Puzzle",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowo"
+        },
+        {
+            "name": "Games: Racing",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qous"
+        },
+        {
+            "name": "Games: Racing",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowp"
+        },
+        {
+            "name": "Games: Role Playing",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qout"
+        },
+        {
+            "name": "Games: Role Playing",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowq"
+        },
+        {
+            "name": "Games: Simulation",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouu"
+        },
+        {
+            "name": "Games: Simulation",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowr"
+        },
+        {
+            "name": "Games: Sports",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouv"
+        },
+        {
+            "name": "Games: Sports",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qows"
+        },
+        {
+            "name": "Games: Strategy",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouw"
+        },
+        {
+            "name": "Games: Strategy",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowt"
+        },
+        {
+            "name": "Games: Trivia",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoux"
+        },
+        {
+            "name": "Games: Trivia",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowu"
+        },
+        {
+            "name": "Games: Word",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouy"
+        },
+        {
+            "name": "Games: Word",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowv"
+        },
+        {
+            "name": "Health & Fitness",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qouz"
+        },
+        {
+            "name": "Health & Fitness",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoww"
+        },
+        {
+            "name": "Libraries & Demo",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowx"
+        },
+        {
+            "name": "Lifestyle",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qov0"
+        },
+        {
+            "name": "Lifestyle",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowy"
+        },
+        {
+            "name": "Live Wallpaper",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qowz"
+        },
+        {
+            "name": "Media & Video",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox0"
+        },
+        {
+            "name": "Medical",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qov1"
+        },
+        {
+            "name": "Medical",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox1"
+        },
+        {
+            "name": "Music",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qov2"
+        },
+        {
+            "name": "Music & Audio",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox2"
+        },
+        {
+            "name": "Navigation",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qov3"
+        },
+        {
+            "name": "News",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qov4"
+        },
+        {
+            "name": "News & Magazines",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox3"
+        },
+        {
+            "name": "Newsstand",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qov5"
+        },
+        {
+            "name": "Personalization",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox4"
+        },
+        {
+            "name": "Photo & Video",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qovy"
+        },
+        {
+            "name": "Photography",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox5"
+        },
+        {
+            "name": "Productivity",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qovz"
+        },
+        {
+            "name": "Productivity",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox6"
+        },
+        {
+            "name": "Reference",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow0"
+        },
+        {
+            "name": "Shopping",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox7"
+        },
+        {
+            "name": "Social",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox8"
+        },
+        {
+            "name": "Social Networking",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow1"
+        },
+        {
+            "name": "Sports",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow2"
+        },
+        {
+            "name": "Sports",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qox9"
+        },
+        {
+            "name": "Tools",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoxa"
+        },
+        {
+            "name": "Transportation",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoxb"
+        },
+        {
+            "name": "Travel",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow3"
+        },
+        {
+            "name": "Travel & Local",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoxc"
+        },
+        {
+            "name": "Utilities",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow4"
+        },
+        {
+            "name": "Weather",
+            "os_type": "IOS",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qow5"
+        },
+        {
+            "name": "Weather",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoxd"
+        },
+        {
+            "name": "Widgets",
+            "os_type": "ANDROID",
+            "targeting_type": "APP_STORE_CATEGORY",
+            "targeting_value": "qoxe"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {}
+    }
+}

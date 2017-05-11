@@ -1,0 +1,28 @@
+{
+    "data": {
+        "able_to_fund": true,
+        "account_id": "gq0vqj",
+        "cancelled": false,
+        "created_at": "2015-04-13T20:42:39Z",
+        "credit_limit_local_micro": 0,
+        "credit_remaining_local_micro": null,
+        "currency": "USD",
+        "deleted": false,
+        "description": "(no payment method has been set up yet)",
+        "end_time": null,
+        "funded_amount_local_micro": 0,
+        "id": "hxcnv",
+        "paused": false,
+        "reasons_not_able_to_fund": [],
+        "start_time": "2015-04-13T20:42:39Z",
+        "type": "CREDIT_CARD",
+        "updated_at": "2015-04-13T20:42:39Z"
+    },
+    "data_type": "funding_instrument",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj",
+            "funding_instrument_id": "hxcnv"
+        }
+    }
+}

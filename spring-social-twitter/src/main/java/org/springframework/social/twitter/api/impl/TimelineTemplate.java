@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -33,10 +33,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Implementation of {@link TimelineOperations}, providing a binding to Twitter's tweet and timeline-oriented REST resources.
+ *
  * @author Craig Walls
  */
+@SuppressWarnings("deprecation")
 class TimelineTemplate extends AbstractTwitterOperations implements TimelineOperations {
-	
+
 	private final RestTemplate restTemplate;
 
 	public TimelineTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
@@ -51,14 +53,14 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	public List<Tweet> getHomeTimeline(int pageSize) {
 		return getHomeTimeline(pageSize, 0, 0);
 	}
-	
+
 	public List<Tweet> getHomeTimeline(int pageSize, long sinceId, long maxId) {
 		requireUserAuthorization();
 		MultiValueMap<String, String> parameters = PagingUtils.buildPagingParametersWithCount(pageSize, sinceId, maxId);
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("statuses/home_timeline.json", parameters), TweetList.class);
 	}
-	
+
 	public List<Tweet> getUserTimeline() {
 		return getUserTimeline(20, 0, 0);
 	}
@@ -120,7 +122,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("statuses/mentions_timeline.json", parameters), TweetList.class);
 	}
-	
+
 	public List<Tweet> getRetweetsOfMe() {
 		return getRetweetsOfMe(1, 20, 0, 0);
 	}
@@ -142,11 +144,11 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("statuses/show/" + tweetId + ".json", parameters), Tweet.class);
 	}
-	
+
 	public OEmbedTweet getStatusOEmbed(String tweetId) {
 		return getStatusOEmbed(tweetId, new OEmbedOptions());
 	}
-	
+
 	public OEmbedTweet getStatusOEmbed(String tweetId, OEmbedOptions options) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> parameters = options.toRequestParameters();
@@ -154,7 +156,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		return restTemplate.getForObject(buildUri("statuses/oembed.json", parameters), OEmbedTweet.class);
 	}
 
-	
+
 	public Tweet updateStatus(String message) {
 		return updateStatus(new TweetData(message));
 	}
@@ -162,18 +164,18 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 	public Tweet updateStatus(String message, Resource media) {
 		return updateStatus(new TweetData(message).withMedia(media));
 	}
-	
+
 	public Tweet updateStatus(TweetData tweetData) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> postParameters = tweetData.toTweetParameters();
 		if (tweetData.hasMedia()) {
-			MediaUploadResponse response = restTemplate.postForObject("https://upload.twitter.com/1.1/media/upload.json", 
+			MediaUploadResponse response = restTemplate.postForObject("https://upload.twitter.com/1.1/media/upload.json",
 					tweetData.toUploadMediaParameters(), MediaUploadResponse.class);
 			postParameters.set("media_ids", response.getMediaId());
 		}
 		return restTemplate.postForObject(buildUri("statuses/update.json"), postParameters, Tweet.class);
 	}
-	
+
 	public void deleteStatus(long tweetId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
@@ -221,7 +223,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("favorites/list.json", parameters), TweetList.class);
 	}
-	
+
 	public List<Tweet> getFavorites(String screenName) {
 		return getFavorites(screenName, 20);
 	}
@@ -233,7 +235,7 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 		parameters.set("include_entities", "true");
 		return restTemplate.getForObject(buildUri("favorites/list.json", parameters), TweetList.class);
 	}
-	
+
 	public void addToFavorites(long tweetId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
@@ -250,17 +252,17 @@ class TimelineTemplate extends AbstractTwitterOperations implements TimelineOper
 
 	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet> {}
-	
+
 	@JsonIgnoreProperties(ignoreUnknown=true)
 	private static class MediaUploadResponse {
-		
+
 		@JsonProperty("media_id")
 		private String mediaId;
-		
+
 		public String getMediaId() {
 			return mediaId;
 		}
-		
+
 	}
-	
+
 }

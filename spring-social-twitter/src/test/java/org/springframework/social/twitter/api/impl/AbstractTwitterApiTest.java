@@ -5,7 +5,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -15,8 +15,12 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
+import java.math.MathContext;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
@@ -30,13 +34,15 @@ import org.springframework.social.twitter.api.UrlEntity;
 import org.springframework.test.web.client.MockRestServiceServer;
 
 public abstract class AbstractTwitterApiTest {
+    protected static final String UTF8 = "utf-8";
+    protected static final MathContext ROUNDER = MathContext.DECIMAL32;
 
 	protected TwitterTemplate twitter;
-	
+
 	protected TwitterTemplate appAuthTwitter;
-	
+
 	protected MockRestServiceServer mockServer;
-	
+
 	protected MockRestServiceServer appAuthMockServer;
 
 	@Before
@@ -46,15 +52,19 @@ public abstract class AbstractTwitterApiTest {
 		appAuthTwitter = new TwitterTemplate("APP_ACCESS_TOKEN");
 		appAuthMockServer = MockRestServiceServer.createServer(appAuthTwitter.getRestTemplate());
 	}
-	
+
 	protected Resource jsonResource(String filename) {
 		return new ClassPathResource(filename + ".json", getClass());
 	}
+	
+	protected Resource dataResource(String filename) {
+        return new ClassPathResource(filename, getClass());
+    }
 
 	protected void assertSingleTweet(Tweet tweet) {
 		assertSingleTweet(tweet, false);
 	}
-	
+
 	protected void assertSingleTweet(Tweet tweet, boolean isSearchResult) {
 		assertEquals("12345", tweet.getId());
 		assertEquals("Tweet 1", tweet.getText());
@@ -70,9 +80,9 @@ public abstract class AbstractTwitterApiTest {
 		} else {
 			assertNull(tweet.getRetweetCount());
 		}
-		
+
 		assertEquals(1001, (int) tweet.getFavoriteCount());
-		
+
 		assertTrue(tweet.isFavorited());
 		Entities entities = tweet.getEntities();
 		List<HashTagEntity> hashtags = entities.getHashTags();
@@ -106,11 +116,11 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals(23, mention2.getIndices()[0]);
 		assertEquals(37, mention2.getIndices()[1]);
 	}
-	
+
 	protected void assertTimelineTweets(List<Tweet> tweets) {
 		assertTimelineTweets(tweets, false);
 	}
-	
+
 	protected void assertTimelineTweets(List<Tweet> tweets, boolean isSearchResult) {
 		assertEquals(2, tweets.size());
 		assertSingleTweet(tweets.get(0), isSearchResult);
@@ -129,5 +139,12 @@ public abstract class AbstractTwitterApiTest {
 		}
 		Entities entities = tweet2.getEntities();
 		assertEquals(0, entities.getHashTags().size());
+	}
+	
+	protected List<Integer> intArrayToIntegerList(int[] values) {
+		List<Integer> list = new ArrayList<>();
+		for (int value : values)
+			list.add(value);
+		return list;
 	}
 }

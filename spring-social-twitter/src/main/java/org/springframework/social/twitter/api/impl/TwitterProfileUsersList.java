@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-class TwitterProfileUsersList {
+public class TwitterProfileUsersList {
 
 	private final CursoredList<TwitterProfile> list;
 

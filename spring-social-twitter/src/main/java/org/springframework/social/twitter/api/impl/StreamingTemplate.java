@@ -42,7 +42,7 @@ import org.springframework.web.client.RestTemplate;
 /**
  * @author Craig Walls
  */
-class StreamingTemplate extends AbstractTwitterOperations implements StreamingOperations {
+public class StreamingTemplate extends AbstractTwitterOperations implements StreamingOperations {
 	
 	private final RestTemplate restTemplate;
 					

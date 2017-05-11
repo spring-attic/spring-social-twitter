@@ -1,0 +1,54 @@
+{
+    "data": [
+        {
+            "country_code": "US",
+            "name": "Big Sky Mobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3n"
+        },
+        {
+            "country_code": "US",
+            "name": "Lycamobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "41"
+        },
+        {
+            "country_code": "US",
+            "name": "MobileTel",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1a"
+        },
+        {
+            "country_code": "US",
+            "name": "SeaMobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "1x"
+        },
+        {
+            "country_code": "US",
+            "name": "T-Mobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "11"
+        },
+        {
+            "country_code": "US",
+            "name": "telna Mobile",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3r"
+        },
+        {
+            "country_code": "US",
+            "name": "Virgin Mobile US",
+            "targeting_type": "NETWORK_OPERATOR",
+            "targeting_value": "3k"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "country_code": "US",
+            "q": "Mobile"
+        }
+    }
+}

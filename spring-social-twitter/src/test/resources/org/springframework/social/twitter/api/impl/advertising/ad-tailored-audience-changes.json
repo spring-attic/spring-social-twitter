@@ -1,0 +1,18 @@
+{
+  "data_type": "tailored_audience_change",
+  "data": {
+    "input_file_path": "/ta_partner/3wyo1gwuqF7_Lhr",
+    "tailored_audience_id": "13sf",
+    "state": "COMPLETED",
+    "id": "9q0",
+    "operation": "ADD"
+  },
+  "request": {
+    "params": {
+      "tailored_audience_id": "13sf",
+      "input_file_path": "/1.1/ton/data/ta_partner/3wyo1gwuqF7_Lhr",
+      "operation": "ADD",
+      "account_id": "abc1"
+    }
+  }
+}

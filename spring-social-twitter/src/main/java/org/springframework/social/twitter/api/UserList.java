@@ -15,11 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
+
+
 /**
  * Represents a user-defined list.
  * @author Craig Walls
  */
 public class UserList extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private final long id;
 	private final String name;
 	private final String fullName;

@@ -30,7 +30,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.springframework.social.twitter.api.StreamListener;
 import org.springframework.social.twitter.api.StreamingException;
 
-class StreamReaderImpl implements StreamReader {
+public class StreamReaderImpl implements StreamReader {
 	
 	private AtomicBoolean open;
 		

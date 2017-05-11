@@ -15,7 +15,7 @@
  */
 package org.springframework.social.twitter.api.impl;
 
-interface StreamReader {
+public interface StreamReader {
 
 	void next();
 

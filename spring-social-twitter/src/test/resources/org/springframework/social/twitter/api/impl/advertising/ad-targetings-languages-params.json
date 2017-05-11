@@ -1,0 +1,16 @@
+{
+    "data": [
+        {
+            "name": "Norwegian",
+            "targeting_type": "LANGUAGE",
+            "targeting_value": "no"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "q": "norwegian"
+        }
+    }
+}

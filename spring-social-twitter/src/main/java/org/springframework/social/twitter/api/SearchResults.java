@@ -17,6 +17,8 @@ package org.springframework.social.twitter.api;
 
 import java.util.List;
 
+import org.springframework.social.twitter.api.impl.SearchMetadata;
+
 /**
  * Represents the results of a Twitter search, including matching {@link Tweet}s
  * and any metadata associated with that search.
@@ -24,6 +26,7 @@ import java.util.List;
  * @author Craig Walls
  */
 public class SearchResults extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private List<Tweet> tweets;
 	private SearchMetadata metadata;
 	private boolean lastPage;

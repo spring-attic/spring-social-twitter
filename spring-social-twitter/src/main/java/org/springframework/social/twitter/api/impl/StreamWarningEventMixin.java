@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(using=StreamWarningEventDeserializer.class)
-abstract class StreamWarningEventMixin extends TwitterObjectMixin {
+public abstract class StreamWarningEventMixin extends TwitterObjectMixin {
 
 	static final class StreamWarningEventDeserializer extends JsonDeserializer<StreamWarningEvent> {
 		@Override

@@ -1,0 +1,14 @@
+{
+    "data": {
+        "input_file_path": "/ta_partner/985495847/jvndHDh-482AdNa.txt",
+        "list_type": "HANDLE"
+    },
+    "data_type": "global_opt_out",
+    "request": {
+        "params": {
+            "account_id": "0ga0yn",
+            "input_file_path": "/ta_partner/985495847/jvndHDh-482AdNa.txt",
+            "list_type": "HANDLE"
+        }
+    }
+}

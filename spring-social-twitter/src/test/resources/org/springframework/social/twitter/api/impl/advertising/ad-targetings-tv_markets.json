@@ -1,0 +1,110 @@
+{
+    "data": [
+        {
+            "country_code": "FR",
+            "id": "6",
+            "locale": "fr-FR",
+            "name": "France"
+        },
+        {
+            "country_code": "CL",
+            "id": "i",
+            "locale": "es-CL",
+            "name": "Chile"
+        },
+        {
+            "country_code": "DE",
+            "id": "a",
+            "locale": "de-DE",
+            "name": "Germany"
+        },
+        {
+            "country_code": "NL",
+            "id": "p",
+            "locale": "nl-NL",
+            "name": "Netherlands"
+        },
+        {
+            "country_code": "US",
+            "id": "1",
+            "locale": "en-US",
+            "name": "United States"
+        },
+        {
+            "country_code": "VE",
+            "id": "k",
+            "locale": "es-VE",
+            "name": "Venezuela"
+        },
+        {
+            "country_code": "BR",
+            "id": "5",
+            "locale": "pt-BR",
+            "name": "Brazil"
+        },
+        {
+            "country_code": "MX",
+            "id": "d",
+            "locale": "es-MX",
+            "name": "Mexico"
+        },
+        {
+            "country_code": "CO",
+            "id": "g",
+            "locale": "es-CO",
+            "name": "Colombia"
+        },
+        {
+            "country_code": "GB",
+            "id": "2",
+            "locale": "en-GB",
+            "name": "United Kingdom"
+        },
+        {
+            "country_code": "AR",
+            "id": "c",
+            "locale": "es-AR",
+            "name": "Argentina"
+        },
+        {
+            "country_code": "JP",
+            "id": "9",
+            "locale": "ja-JP",
+            "name": "Japan"
+        },
+        {
+            "country_code": "CA",
+            "id": "3",
+            "locale": "en-CA",
+            "name": "Canada"
+        },
+        {
+            "country_code": "ES",
+            "id": "7",
+            "locale": "es-ES",
+            "name": "Spain"
+        },
+        {
+            "country_code": "IT",
+            "id": "b",
+            "locale": "it-IT",
+            "name": "Italy"
+        },
+        {
+            "country_code": "US",
+            "id": "4",
+            "locale": "es-US",
+            "name": "United States - Hispanic"
+        },
+        {
+            "country_code": "IE",
+            "id": "f",
+            "locale": "en-IE",
+            "name": "Ireland"
+        }
+    ],
+    "data_type": "tv_market",
+    "request": {
+        "params": {}
+    }
+}

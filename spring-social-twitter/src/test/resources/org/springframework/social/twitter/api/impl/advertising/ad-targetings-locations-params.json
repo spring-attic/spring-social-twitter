@@ -1,0 +1,59 @@
+{
+    "data": [
+        {
+            "location_type": "CITY",
+            "name": "Palo, Huesca, Aragon, Spain",
+            "targeting_type": "LOCATION",
+            "targeting_value": "63b6d114834a77e5"
+        },
+        {
+            "location_type": "CITY",
+            "name": "Palo, Eastern Visayas, Republic of the Philippines",
+            "targeting_type": "LOCATION",
+            "targeting_value": "00dddffa1a4337f7"
+        },
+        {
+            "location_type": "CITY",
+            "name": "Palo del Colle, Bari, Puglia, Italy",
+            "targeting_type": "LOCATION",
+            "targeting_value": "388bbc752bdec0d4"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "22337, Huesca, Aragon, Spain",
+            "targeting_type": "LOCATION",
+            "targeting_value": "776b0d5f31219aaa"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "52324, IA, USA",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0a230aaf5993f79e"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "94303, CA, USA",
+            "targeting_type": "LOCATION",
+            "targeting_value": "0fe0bf9dce1a5019"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "94301, CA, USA",
+            "targeting_type": "LOCATION",
+            "targeting_value": "205edf12aa812e1c"
+        },
+        {
+            "location_type": "POSTAL_CODE",
+            "name": "94306, CA, USA",
+            "targeting_type": "LOCATION",
+            "targeting_value": "09dce9f0d7e0a871"
+        }
+    ],
+    "data_type": "targeting_criterion",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "q": "Palo%20Alto"
+        }
+    }
+}

@@ -1,0 +1,46 @@
+{
+  "data": [
+    {
+      "account_id": "hkk5",
+      "cancelled": false,
+      "created_at": "2012-11-08T02:31:46Z",
+      "credit_limit_local_micro": 1000000000,
+      "currency": "USD",
+      "deleted": true,
+      "description": "MasterCard ending in 1234",
+      "end_time": null,
+      "funded_amount_local_micro": 100000000,
+      "id": "hw6ie",
+      "start_time": "2012-11-08T02:31:46Z",
+      "type": "CREDIT_CARD",
+      "updated_at": "2012-11-20T23:20:35Z"
+    },
+    {
+      "account_id": "hkk5",
+      "cancelled": false,
+      "created_at": "2013-05-30T18:16:38Z",
+      "credit_limit_local_micro": 150000000000,
+      "credit_remaining_local_micro": 123661919751,
+      "currency": "GBP",
+      "deleted": false,
+      "description": "FakeNike - Credit Line",
+      "end_time": null,
+      "funded_amount_local_micro": 0,
+      "id": "i1234",
+      "start_time": "2013-05-30T04:00:00Z",
+      "type": "CREDIT_LINE",
+      "updated_at": "2013-05-30T18:16:38Z"
+    }
+  ],
+  "data_type": "funding_instrument",
+  "request": {
+    "params": {
+      "account_id": "hkk5",
+      "funding_instrument_ids": [
+        "hw6ie"
+      ],
+      "with_deleted": true
+    }
+  },
+  "total_count": 1
+}

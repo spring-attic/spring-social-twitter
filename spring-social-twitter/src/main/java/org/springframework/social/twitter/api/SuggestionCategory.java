@@ -15,11 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
+
+
 /**
  * Represents a suggestion category; a category of users that Twitter may suggest that a user follow.
  * @author Craig Walls
  */
 public class SuggestionCategory extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private final String name;
 	private final String slug;
 	private final int size;

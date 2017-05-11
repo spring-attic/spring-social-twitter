@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class DirectMessageMixin extends TwitterObjectMixin {
+public abstract class DirectMessageMixin extends TwitterObjectMixin {
 	@JsonCreator
 	DirectMessageMixin(
 			@JsonProperty("id") long id, 

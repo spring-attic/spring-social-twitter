@@ -27,7 +27,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown=true)
-abstract class SavedSearchMixin extends TwitterObjectMixin {
+public abstract class SavedSearchMixin extends TwitterObjectMixin {
 	@JsonCreator
 	SavedSearchMixin(
 			@JsonProperty("id") long id,

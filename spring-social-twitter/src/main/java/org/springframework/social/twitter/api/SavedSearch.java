@@ -22,6 +22,7 @@ import java.util.Date;
  * @author Craig Walls
  */
 public class SavedSearch extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 	private final long id;
 
 	private final String name;

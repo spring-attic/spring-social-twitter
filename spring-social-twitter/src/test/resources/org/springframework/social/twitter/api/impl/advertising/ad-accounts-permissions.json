@@ -1,0 +1,14 @@
+{
+    "data": {
+        "permissions": [
+            "ACCOUNT_ADMIN"
+        ],
+        "user_id": 390472547
+    },
+    "data_type": "user_access",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj"
+        }
+    }
+}

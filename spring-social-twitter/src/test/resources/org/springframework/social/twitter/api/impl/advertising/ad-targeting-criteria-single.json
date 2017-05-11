@@ -1,0 +1,26 @@
+{
+    "data": {
+        "account_id": "gq0vqj",
+        "created_at": "2015-07-23T23:14:37Z",
+        "deleted": false,
+        "id": "31l8r",
+        "line_item_id": "bcrv",
+        "name": "Mobile audience targeting",
+        "tailored_audience_expansion": false,
+        "tailored_audience_type": "EXCLUDED_MOBILE",
+        "targeting_type": "TAILORED_AUDIENCE",
+        "targeting_value": "qsb3",
+        "updated_at": "2015-07-23T23:14:37Z"
+    },
+    "data_type": "targeting_criterion",
+    "request": {
+        "params": {
+            "account_id": "gq0vqj",
+            "line_item_id": "bcrv",
+            "tailored_audience_expansion": false,
+            "tailored_audience_type": "EXCLUDED_MOBILE",
+            "targeting_type": "TAILORED_AUDIENCE",
+            "targeting_value": "qsb3"
+        }
+    }
+}

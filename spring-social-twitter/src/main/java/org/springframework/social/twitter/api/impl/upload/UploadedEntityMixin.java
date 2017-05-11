@@ -1,0 +1,38 @@
+/*
+ * Copyright 2014 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.springframework.social.twitter.api.impl.upload;
+
+import org.springframework.social.twitter.api.impl.TwitterObjectMixin;
+import org.springframework.social.twitter.api.upload.ImageEntity;
+import org.springframework.social.twitter.api.upload.VideoEntity;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public abstract class UploadedEntityMixin extends TwitterObjectMixin {
+
+	@JsonCreator
+	public UploadedEntityMixin(
+			@JsonProperty("media_id") long mediaId,
+			@JsonProperty("media_id_string")String mediaIdString, 
+			@JsonProperty("size")long size, 
+			@JsonProperty("expires_after_secs")long expiresAfterSecs, 
+			@JsonProperty("image")ImageEntity imageEntity, 
+			@JsonProperty("video")VideoEntity videoEntity) {}
+	
+}

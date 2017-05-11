@@ -34,7 +34,7 @@ import org.springframework.social.twitter.api.Trends;
  * Abstract model class representing a list of trends.
  * @author Craig Walls
  */
-class AbstractTrendsList {
+public class AbstractTrendsList {
 	private final List<Trends> list;
 
 	public AbstractTrendsList(Map<String, List<Trend>> trends, DateFormat dateFormat) {

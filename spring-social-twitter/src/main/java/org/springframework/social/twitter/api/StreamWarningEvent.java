@@ -15,11 +15,14 @@
  */
 package org.springframework.social.twitter.api;
 
+
+
 /**
  * A stream event warning that the client is stalling and is in danger of being disconnected.
  * @author Craig Walls
  */
 public class StreamWarningEvent extends TwitterObject {
+	private static final long serialVersionUID = 1L;
 
 	private final String code;
 	

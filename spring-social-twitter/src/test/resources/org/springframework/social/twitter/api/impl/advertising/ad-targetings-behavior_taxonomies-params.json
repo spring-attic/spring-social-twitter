@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "created_at": "2015-01-21T21:47:24Z",
+            "id": "33",
+            "name": "Frequent flyers",
+            "parent_id": "31",
+            "updated_at": "2015-01-21T21:47:24Z"
+        }
+    ],
+    "data_type": "behavior_taxonomies",
+    "next_cursor": null,
+    "request": {
+        "params": {
+            "behavior_taxonomy_ids": [
+                "33"
+            ],
+            "parent_behavior_taxonomy_ids": [
+                "31"
+            ]
+        }
+    },
+    "total_count": 1
+}

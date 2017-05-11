@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  * @author Craig Walls
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-abstract class TwitterObjectMixin {
+public abstract class TwitterObjectMixin {
 
 	@JsonAnySetter
 	abstract void add(String key, Object value);
