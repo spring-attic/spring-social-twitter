@@ -15,7 +15,15 @@
  */
 package org.springframework.social.twitter.api.impl;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.ResourceHttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.social.oauth1.AbstractOAuth1ApiBinding;
 import org.springframework.social.oauth2.OAuth2Operations;
@@ -165,8 +173,17 @@ public class TwitterTemplate extends AbstractOAuth1ApiBinding implements Twitter
 	}
 	
 	@Override
-	protected FormHttpMessageConverter getFormMessageConverter() {		
-		return new TwitterEscapingFormHttpMessageConverter();
+	protected FormHttpMessageConverter getFormMessageConverter() {
+		TwitterEscapingFormHttpMessageConverter converter = new TwitterEscapingFormHttpMessageConverter();
+		converter.setCharset(Charset.forName("UTF-8"));
+		List<HttpMessageConverter<?>> partConverters = new ArrayList<HttpMessageConverter<?>>();
+		partConverters.add(new ByteArrayHttpMessageConverter());
+		StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
+		stringHttpMessageConverter.setWriteAcceptCharset(false);
+		partConverters.add(stringHttpMessageConverter);
+		partConverters.add(new ResourceHttpMessageConverter());		
+		converter.setPartConverters(partConverters);
+		return converter;
 	}
 	
 	@Override
