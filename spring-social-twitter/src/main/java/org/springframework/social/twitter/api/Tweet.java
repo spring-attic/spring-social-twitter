@@ -44,6 +44,8 @@ public class Tweet extends TwitterObject implements Serializable {
 	private Integer favoriteCount;
 	private Entities entities;
 	private TwitterProfile user;
+	private StatusDetails statusDetails;
+	
 
 	/**
 	 * Constructs a Tweet
@@ -96,6 +98,14 @@ public class Tweet extends TwitterObject implements Serializable {
 		this.fromUserId = fromUserId;
 		this.languageCode = languageCode;
 		this.source = source;		
+	}
+	
+	public StatusDetails getStatusDetails(){
+		return statusDetails;
+	}
+	
+	public void setStatusDetails(StatusDetails statusDetails){
+		this.statusDetails=statusDetails;		
 	}
 
 	/**
