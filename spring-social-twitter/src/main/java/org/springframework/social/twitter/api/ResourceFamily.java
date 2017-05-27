@@ -29,6 +29,7 @@ public enum ResourceFamily {
 	APPLICATION("application"),
 	BLOCKS("blocks"),
 	DIRECT_MESSAGES("direct_messages"),
+	FAVORITES("favorites"),
 	FOLLOWERS("followers"),
 	FRIENDS("friends"),
 	FRIENDSHIPS("friendships"),
