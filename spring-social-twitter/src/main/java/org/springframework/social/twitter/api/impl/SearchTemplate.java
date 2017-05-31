@@ -61,7 +61,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 
 	public SearchResults search(SearchParameters searchParameters) {
 		requireEitherUserOrAppAuthorization();
-		Assert.notNull(searchParameters);
+		Assert.notNull(searchParameters, "Search parameters may not be null");
 		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
 		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
