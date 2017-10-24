@@ -116,7 +116,7 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 	// private helpers
 	
 	private void assertTwitterProfile(TwitterProfile blockedUser) {
-		assertEquals(161064614, blockedUser.getId());
+		assertEquals("161064614", blockedUser.getId());
 		assertEquals("artnames", blockedUser.getScreenName());
 		assertEquals("Art Names", blockedUser.getName());
 		assertEquals("I'm just a normal kinda guy", blockedUser.getDescription());
