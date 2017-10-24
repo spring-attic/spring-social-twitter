@@ -22,11 +22,13 @@ import java.util.Date;
  * Model class representing a Twitter user's profile information.
  * 
  * @author Craig Walls
+ * @author karthik
  */
 public class TwitterProfile extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private final long id;
+	private final String idStr;
 	private final String screenName;
 	private final String name;
 	private final String url;
@@ -66,7 +68,12 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	}
 
 	public TwitterProfile(long id, String screenName, String name, String url, String profileImageUrl, String description, String location, Date createdDate) {
+		this(id, String.valueOf(id), screenName, name, url, profileImageUrl, description, location, createdDate);
+	}
+
+	public TwitterProfile(long id, String idStr, String screenName, String name, String url, String profileImageUrl, String description, String location, Date createdDate) {
 		this.id = id;
+		this.idStr = idStr;
 		this.screenName = screenName;
 		this.name = name;
 		this.url = url;
@@ -83,6 +90,15 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	 */
 	public long getId() {
 		return id;
+	}
+
+	/**
+	 * The user's Twitter ID in String format
+	 * 
+	 * @return The user's Twitter ID in String format
+	 */
+	public String getIdStr() {
+		return idStr;
 	}
 
 	/**
@@ -422,6 +438,9 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 		if (verified != that.verified) {
 			return false;
 		}
+		if (idStr != null ? !idStr.equals(that.idStr) : that.idStr != null) {
+			return false;
+		}
 		if (backgroundColor != null ? !backgroundColor.equals(that.backgroundColor) : that.backgroundColor != null) {
 			return false;
 		}
@@ -475,6 +494,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	@Override
 	public int hashCode() {
 		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (idStr != null ? idStr.hashCode() : 0);
 		result = 31 * result + (screenName != null ? screenName.hashCode() : 0);
 		result = 31 * result + (name != null ? name.hashCode() : 0);
 		result = 31 * result + (url != null ? url.hashCode() : 0);
