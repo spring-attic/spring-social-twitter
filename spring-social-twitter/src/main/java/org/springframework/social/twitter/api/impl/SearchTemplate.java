@@ -61,7 +61,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 
 	public SearchResults search(SearchParameters searchParameters) {
 		requireEitherUserOrAppAuthorization();
-		Assert.notNull(searchParameters, "Search parameters may not be null");
+		Assert.notNull(searchParameters, "Search parameters must not be null");
 		MultiValueMap<String, String> parameters = buildQueryParametersFromSearchParameters(searchParameters);
 		return restTemplate.getForObject(buildUri("search/tweets.json", parameters),SearchResults.class);
 	}
@@ -76,7 +76,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		return restTemplate.getForObject(buildUri("saved_searches/show/" + searchId + ".json"), SavedSearch.class);
 	}
 
-	public SavedSearch createSavedSearch(String query) {		
+	public SavedSearch createSavedSearch(String query) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		data.set("query", query);
@@ -88,7 +88,7 @@ class SearchTemplate extends AbstractTwitterOperations implements SearchOperatio
 		MultiValueMap<String, Object> data = new LinkedMultiValueMap<String, Object>();
 		restTemplate.postForObject(buildUri("saved_searches/destroy/" + searchId + ".json"), data, SavedSearch.class);
 	}
-	
+
 	// Trends
 
 	public Trends getLocalTrends(long whereOnEarthId) {
