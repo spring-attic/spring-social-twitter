@@ -205,6 +205,17 @@ project('spring-social-twitter') {
     }
 }
 
+project("spring-social-twitter-autoconfigure") {
+    description = "Spring Social Twitter Auto-Configuration"
+    dependencies {
+      compile project(":spring-social-twitter")
+      compile("org.springframework.social:spring-social-autoconfigure:$springSocialVersion")
+      compile("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
+      testCompile("org.springframework.boot:spring-boot-test:$springBootVersion")
+      testCompile("org.assertj:assertj-core:1.0.0")
+    }
+}
+
 configure(rootProject) {
     description = 'Spring Social Twitter'
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 the original author or authors.
+ * Copyright 2012-2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,18 @@
  * limitations under the License.
  */
 
-rootProject.name = 'spring-social-twitter'
+package org.springframework.social.twitter.autoconfigure;
 
-include 'docs', 'docs:manual'
-def docs = findProject(':docs')
-docs.buildFileName = 'docs.gradle'
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.social.autoconfigure.SocialProperties;
 
-include 'spring-social-twitter'
-include 'spring-social-twitter-autoconfigure'
+/**
+ * Properties for Spring Social Twitter.
+ *
+ * @author Stephane Nicoll
+ * @since 1.2.0
+ */
+@ConfigurationProperties(prefix = "spring.social.twitter")
+public class TwitterProperties extends SocialProperties {
+
+}
