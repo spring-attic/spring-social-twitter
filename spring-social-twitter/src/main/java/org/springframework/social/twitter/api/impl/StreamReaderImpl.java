@@ -77,6 +77,7 @@ class StreamReaderImpl implements StreamReader {
 			future.cancel(true);
 			executor.shutdown();
 			dispatcher.stop();
+			executor.shutdown();
 			inputStream.close();
 		} catch(IOException ignore) {}
 	}
