@@ -18,6 +18,8 @@ package org.springframework.social.twitter.api.impl;
 import org.springframework.social.twitter.api.AccountSettings;
 import org.springframework.social.twitter.api.DirectMessage;
 import org.springframework.social.twitter.api.Entities;
+import org.springframework.social.twitter.api.ExtendedEntities;
+import org.springframework.social.twitter.api.ExtendedMedia;
 import org.springframework.social.twitter.api.HashTagEntity;
 import org.springframework.social.twitter.api.MediaEntity;
 import org.springframework.social.twitter.api.MentionEntity;
@@ -36,7 +38,8 @@ import org.springframework.social.twitter.api.UserList;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 /**
- * Jackson module for registering mixin annotations against Twitter model classes.
+ * Jackson module for registering mixin annotations against Twitter model
+ * classes.
  */
 @SuppressWarnings("serial")
 class TwitterModule extends SimpleModule {
@@ -44,7 +47,7 @@ class TwitterModule extends SimpleModule {
 	public TwitterModule() {
 		super("TwitterModule");
 	}
-	
+
 	@Override
 	public void setupModule(SetupContext context) {
 		context.setMixInAnnotations(TwitterProfile.class, TwitterProfileMixin.class);
@@ -59,6 +62,8 @@ class TwitterModule extends SimpleModule {
 		context.setMixInAnnotations(Place.class, PlaceMixin.class);
 		context.setMixInAnnotations(SimilarPlacesResponse.class, SimilarPlacesMixin.class);
 		context.setMixInAnnotations(Entities.class, EntitiesMixin.class);
+		context.setMixInAnnotations(ExtendedEntities.class, ExtendedEntitiesMixin.class);
+		context.setMixInAnnotations(ExtendedMedia.class, ExtendedMediaMixin.class);
 		context.setMixInAnnotations(HashTagEntity.class, HashTagEntityMixin.class);
 		context.setMixInAnnotations(MediaEntity.class, MediaEntityMixin.class);
 		context.setMixInAnnotations(MentionEntity.class, MentionEntityMixin.class);
