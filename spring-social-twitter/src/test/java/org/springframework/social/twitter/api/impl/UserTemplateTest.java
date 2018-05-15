@@ -60,6 +60,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile();
 		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getIdStr());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -100,6 +101,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile(12345);
 		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getIdStr());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -117,6 +119,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 		TwitterProfile profile = appAuthTwitter.userOperations().getUserProfile(12345);
 		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getIdStr());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -133,6 +136,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 		TwitterProfile profile = twitter.userOperations().getUserProfile("artnames");
 		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getIdStr());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
@@ -150,6 +154,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 
 		TwitterProfile profile = appAuthTwitter.userOperations().getUserProfile("artnames");
 		assertEquals(161064614, profile.getId());
+		assertEquals("161064614", profile.getIdStr());
 		assertEquals("artnames", profile.getScreenName());
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());

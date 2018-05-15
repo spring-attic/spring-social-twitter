@@ -25,8 +25,7 @@ import java.util.Date;
 public class Tweet extends TwitterObject implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private final long id;
-	private final String idStr;
+	private final String id;
 	private final String text;
 	private final Date createdAt;
 	private String fromUser;
@@ -82,9 +81,13 @@ public class Tweet extends TwitterObject implements Serializable {
 	 * 
 	 * @deprecated Use other constructor with String ID instead.
 	 */
+	@Deprecated
 	public Tweet(long id, String idStr, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
+		this(Long.toString(id), text, createdAt, fromUser, profileImageUrl, toUserId, fromUserId, languageCode, source);
+	}
+
+	public Tweet(String id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
 		this.id = id;
-		this.idStr = idStr;
 		this.text = text;
 		this.createdAt = createdAt;
 		this.fromUser = fromUser;
@@ -126,12 +129,8 @@ public class Tweet extends TwitterObject implements Serializable {
 		this.fromUser = fromUser;
 	}
 
-	public long getId() {
+	public String getId() {
 		return id;
-	}
-
-	public String getIdStr() {
-		return idStr;
 	}
 
 	public String getProfileImageUrl() {
@@ -309,9 +308,6 @@ public class Tweet extends TwitterObject implements Serializable {
 		if (id != tweet.id) {
 			return false;
 		}
-		if (idStr != null ? !idStr.equals(tweet.idStr) : tweet.idStr != null) {
-			return false;
-		}
 		if (retweeted != tweet.retweeted) {
 			return false;
 		}
@@ -363,8 +359,7 @@ public class Tweet extends TwitterObject implements Serializable {
 
 	@Override
 	public int hashCode() {
-		int result = (int) (id ^ (id >>> 32));
-		result = 31 * result + (idStr != null ? idStr.hashCode() : 0);
+		int result = (id != null ? id.hashCode() : 0);
 		result = 31 * result + (text != null ? text.hashCode() : 0);
 		result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
 		result = 31 * result + (fromUser != null ? fromUser.hashCode() : 0);

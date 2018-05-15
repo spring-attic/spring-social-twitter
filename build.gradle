@@ -7,7 +7,7 @@ buildscript {
         classpath 'me.champeau.gradle:gradle-javadoc-hotfix-plugin:0.1'
         classpath('org.asciidoctor:asciidoctor-gradle-plugin:0.7.0')
         classpath('org.asciidoctor:asciidoctor-java-integration:0.1.4.preview.1')
-        classpath('io.spring.gradle:spring-io-plugin:0.0.4.RELEASE')
+        classpath('io.spring.gradle:spring-io-plugin:0.0.6.RELEASE')
     }
 }
 
@@ -25,12 +25,12 @@ configure(allprojects - docProjects) {
     group = 'org.springframework.social'
 
     compileJava {
-        sourceCompatibility=1.5
-        targetCompatibility=1.5
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
     }
     compileTestJava {
-        sourceCompatibility=1.7
-        targetCompatibility=1.7
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
     }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = [
@@ -63,12 +63,13 @@ configure(allprojects - docProjects) {
 
     repositories {
         maven { url "http://repo.spring.io/libs-snapshot" }
+        maven { url "http://repo.spring.io/libs-milestone" }
         mavenLocal()
     }
 
     dependencies {
         testCompile ("org.hamcrest:hamcrest-library:$hamcrestVersion")
-        testCompile ("junit:junit-dep:$junitVersion")
+        testCompile ("junit:junit:$junitVersion")
         testCompile ("org.mockito:mockito-core:$mockitoVersion")
         testCompile ("org.springframework:spring-test:$springVersion")
     }
@@ -204,6 +205,17 @@ project('spring-social-twitter') {
     }
 }
 
+project("spring-social-twitter-autoconfigure") {
+    description = "Spring Social Twitter Auto-Configuration"
+    dependencies {
+      compile project(":spring-social-twitter")
+      compile("org.springframework.social:spring-social-autoconfigure:$springSocialVersion")
+      compile("org.springframework.boot:spring-boot-autoconfigure:$springBootVersion")
+      testCompile("org.springframework.boot:spring-boot-test:$springBootVersion")
+      testCompile("org.assertj:assertj-core:1.0.0")
+    }
+}
+
 configure(rootProject) {
     description = 'Spring Social Twitter'
 
@@ -275,7 +287,7 @@ configure(rootProject) {
     }
 
     task wrapper(type: Wrapper) {
-        gradleVersion = '1.12'
+        gradleVersion = '3.4'
     }
 
 }

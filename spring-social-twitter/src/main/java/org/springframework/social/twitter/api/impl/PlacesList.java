@@ -53,8 +53,8 @@ class PlacesList {
 			ObjectMapper mapper = new ObjectMapper();
 			mapper.registerModule(new TwitterModule());
 			jp.setCodec(mapper);
-			JsonNode treeNode = (JsonNode) jp.readValueAs(JsonNode.class).get("places");
-			return (List<Place>) mapper.reader(new TypeReference<List<Place>>() {}).readValue(treeNode);
+			JsonNode treeNode = jp.readValueAs(JsonNode.class).get("places");
+			return (List<Place>) mapper.readerFor(new TypeReference<List<Place>>() {}).readValue(treeNode);
 		}
 	}
 }
