@@ -450,7 +450,8 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/statuses/update.json"))
 			.andExpect(method(POST))
 			.andExpect(content().string("status=Really+long+message"))
-			.andRespond(withStatus(FORBIDDEN).body("{\"error\":\"Status is over 140 characters.\"}").contentType(APPLICATION_JSON));
+			.andRespond(withStatus(FORBIDDEN).body("{\"errors\":[{\"code\":186,\"message\":\"Tweet needs to be a bit shorter.\"}]}")
+            .contentType(APPLICATION_JSON));
 		twitter.timelineOperations().updateStatus("Really long message");
 	}
 	

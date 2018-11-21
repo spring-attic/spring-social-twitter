@@ -116,7 +116,8 @@ public class DirectMessageTemplateTest extends AbstractTwitterApiTest {
 	public void sendDirectMessage_toScreenName_tooLong() {
 		mockServer.expect(requestTo("https://api.twitter.com/1.1/direct_messages/new.json")).andExpect(method(POST))
 				.andExpect(content().string("screen_name=habuma&text=Really+long+message"))
-				.andRespond(withStatus(FORBIDDEN).body("{\"error\":\"There was an error sending your message: The text of your direct message is over 140 characters.\"}").contentType(APPLICATION_JSON));
+				.andRespond(withStatus(FORBIDDEN).body("{\"errors\":[{\"code\":354,\"message\":\"The text of your direct message is over the max character limit.\"}]}")
+                .contentType(APPLICATION_JSON));
 		twitter.directMessageOperations().sendDirectMessage("habuma", "Really long message");
 		mockServer.verify();
 	}

@@ -254,7 +254,7 @@ public interface TimelineOperations {
 	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
-	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 280 character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	Tweet updateStatus(String status);
@@ -265,7 +265,7 @@ public interface TimelineOperations {
 	 * @return the Tweet object
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws DuplicateStatusException if the status message duplicates a previously posted status.
-	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 140 character limit.
+	 * @throws MessageTooLongException if the length of the status message exceeds Twitter's 280 character limit.
 	 * @throws OperationNotPermittedException if the photo resource isn't a GIF, JPG, or PNG.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
