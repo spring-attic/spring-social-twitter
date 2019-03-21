@@ -38,7 +38,7 @@ public class TwitterAdapterTest {
 	public void fetchProfile() {
 		UserOperations userOperations = Mockito.mock(UserOperations.class);
 		Mockito.when(twitter.userOperations()).thenReturn(userOperations);
-		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith Donald", "http://twitter.com/kdonald", "http://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
+		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith Donald", "https://twitter.com/kdonald", "https://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
 		UserProfile profile = apiAdapter.fetchUserProfile(twitter);
 		assertEquals("Keith Donald", profile.getName());
 		assertEquals("Keith", profile.getFirstName());
@@ -51,7 +51,7 @@ public class TwitterAdapterTest {
 	public void fetchProfileFirstNameOnly() {
 		UserOperations userOperations = Mockito.mock(UserOperations.class);
 		Mockito.when(twitter.userOperations()).thenReturn(userOperations);
-		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith", "http://twitter.com/kdonald", "http://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
+		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith", "https://twitter.com/kdonald", "https://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
 		UserProfile profile = apiAdapter.fetchUserProfile(twitter);
 		assertEquals("Keith", profile.getName());
 		assertEquals("Keith", profile.getFirstName());
@@ -64,7 +64,7 @@ public class TwitterAdapterTest {
 	public void fetchProfileMiddleName() {
 		UserOperations userOperations = Mockito.mock(UserOperations.class);
 		Mockito.when(twitter.userOperations()).thenReturn(userOperations);
-		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith Preston Donald", "http://twitter.com/kdonald", "http://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
+		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith Preston Donald", "https://twitter.com/kdonald", "https://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
 		UserProfile profile = apiAdapter.fetchUserProfile(twitter);
 		assertEquals("Keith Preston Donald", profile.getName());
 		assertEquals("Keith", profile.getFirstName());
@@ -77,7 +77,7 @@ public class TwitterAdapterTest {
 	public void fetchProfileExtraWhitespace() {
 		UserOperations userOperations = Mockito.mock(UserOperations.class);
 		Mockito.when(twitter.userOperations()).thenReturn(userOperations);
-		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith 	Preston  Donald", "http://twitter.com/kdonald", "http://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
+		Mockito.when(userOperations.getUserProfile()).thenReturn(new TwitterProfile(123L, "kdonald", "Keith 	Preston  Donald", "https://twitter.com/kdonald", "https://twitter.com/kdonald/picture", "me", "melbourne, fl", new Date()));
 		UserProfile profile = apiAdapter.fetchUserProfile(twitter);
 		assertEquals("Keith 	Preston  Donald", profile.getName());
 		assertEquals("Keith", profile.getFirstName());
