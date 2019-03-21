@@ -60,7 +60,7 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals("Tweet 1", tweet.getText());
 		assertEquals("habuma", tweet.getFromUser());
 		assertEquals(112233, tweet.getFromUserId());
-		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet.getProfileImageUrl());
+		assertEquals("https://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet.getProfileImageUrl());
 		assertEquals("Spring Social Showcase", tweet.getSource());
 		assertEquals(1279042701000L, tweet.getCreatedAt().getTime());
 		assertEquals(Long.valueOf(123123123123L), tweet.getInReplyToStatusId());
@@ -87,8 +87,8 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals(10, urls.get(0).getIndices()[0]);
 		assertEquals(30, urls.get(0).getIndices()[1]);
 		assertEquals("fb.me/t35tur1", urls.get(0).getDisplayUrl());
-		assertEquals("http://fb.me/t35tur1", urls.get(0).getExpandedUrl());
-		assertEquals("http://t.co/t35tur1", urls.get(0).getUrl());
+		assertEquals("https://fb.me/t35tur1", urls.get(0).getExpandedUrl());
+		assertEquals("https://t.co/t35tur1", urls.get(0).getUrl());
 		List<MentionEntity> mentions = entities.getMentions();
 		assertEquals(2, mentions.size());
 		MentionEntity mention1 = mentions.get(0);
@@ -119,7 +119,7 @@ public abstract class AbstractTwitterApiTest {
 		assertEquals("Tweet 2", tweet2.getText());
 		assertEquals("rclarkson", tweet2.getFromUser());
 		assertEquals(332211, tweet2.getFromUserId());
-		assertEquals("http://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet2.getProfileImageUrl());
+		assertEquals("https://a3.twimg.com/profile_images/1205746571/me2_300.jpg", tweet2.getProfileImageUrl());
 		assertEquals("Twitter", tweet2.getSource());
 		assertEquals(1279654701000L, tweet2.getCreatedAt().getTime());
 		if (!isSearchResult) {
