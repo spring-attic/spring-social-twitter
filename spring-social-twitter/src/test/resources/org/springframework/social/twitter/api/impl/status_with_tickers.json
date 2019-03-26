@@ -5,7 +5,7 @@
 	"user" : {
 		"id" : 112233,
 		"screen_name" : "habuma",
-		"profile_image_url" : "http://a3.twimg.com/profile_images/1205746571/me2_300.jpg"
+		"profile_image_url" : "https://a3.twimg.com/profile_images/1205746571/me2_300.jpg"
 	},
 	"source" : "Spring Social Showcase",
 	"in_reply_to_user_id" : "332211",
@@ -27,12 +27,12 @@
 		"urls": [
 			{
 				"display_url": "fb.me/t35tur1", 
-				"expanded_url": "http://fb.me/t35tur1", 
+				"expanded_url": "https://fb.me/t35tur1", 
 				"indices": [
 					10, 
 					30
 				], 
-				"url": "http://t.co/t35tur1"
+				"url": "https://t.co/t35tur1"
 			}
 		],
 		"user_mentions": [

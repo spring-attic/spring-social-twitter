@@ -121,8 +121,8 @@ public class BlockTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Art Names", blockedUser.getName());
 		assertEquals("I'm just a normal kinda guy", blockedUser.getDescription());
 		assertEquals("Denton, TX", blockedUser.getLocation());
-		assertEquals("http://www.springsource.org", blockedUser.getUrl());
-		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", blockedUser.getProfileImageUrl());
+		assertEquals("https://www.springsource.org", blockedUser.getUrl());
+		assertEquals("https://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", blockedUser.getProfileImageUrl());
 	}
 	
 	private void assertBlockedUsers(CursoredList<TwitterProfile> friends) {
