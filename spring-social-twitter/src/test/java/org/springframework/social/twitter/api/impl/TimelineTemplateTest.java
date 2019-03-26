@@ -479,8 +479,8 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 			.andRespond(withSuccess(jsonResource("retweet-response"), APPLICATION_JSON));
 		Tweet retweet = twitter.timelineOperations().retweet(363048052157726721L);
 		assertEquals("363057792615071744", retweet.getId());
-		assertEquals("RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNx\u2026", retweet.getText());
-		assertEquals("Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNxUFLs5Dt #s2gx #java", retweet.getUnmodifiedText());
+		assertEquals("RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks https://t.co/zNx\u2026", retweet.getText());
+		assertEquals("Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks https://t.co/zNxUFLs5Dt #s2gx #java", retweet.getUnmodifiedText());
 		mockServer.verify();
 	}
 	
@@ -699,7 +699,7 @@ public class TimelineTemplateTest extends AbstractTwitterApiTest {
 		assertEquals(3153600000L, oembed.getCacheAge());
 		assertNull(oembed.getHeight());
 		assertEquals("<blockquote class=\"twitter-tweet\"><p>This does not bode well for those traveling out of DFW today. "
-				+ "<a href=\"http://t.co/r1dJT15q3w\">pic.twitter.com/r1dJT15q3w</a></p>&mdash; Craig Walls (@habuma) "
+				+ "<a href=\"https://t.co/r1dJT15q3w\">pic.twitter.com/r1dJT15q3w</a></p>&mdash; Craig Walls (@habuma) "
 				+ "<a href=\"https://twitter.com/habuma/statuses/357251561744916480\">July 16, 2013</a></blockquote>\n"
 				+ "<script async src=\"//platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>", oembed.getHtml());
 		assertEquals("Twitter", oembed.getProviderName());

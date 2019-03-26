@@ -28,7 +28,7 @@
                 "code": 7, 
                 "name": "Town"
             }, 
-            "url": "http://where.yahooapis.com/v1/place/2357024", 
+            "url": "https://where.yahooapis.com/v1/place/2357024", 
             "woeid": 2357024
         }
     ], 
