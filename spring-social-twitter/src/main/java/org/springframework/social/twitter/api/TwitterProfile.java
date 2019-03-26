@@ -149,7 +149,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	 * @return The URL of the user's profile.
 	 */
 	public String getProfileUrl() {
-		return "http://twitter.com/" + screenName;
+		return "https://twitter.com/" + screenName;
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class TwitterProfile extends TwitterObject implements Serializable {
 	
 	/**
 	 * Whether or not the user is verified with Twitter.
-	 * See http://support.twitter.com/groups/31-twitter-basics/topics/111-features/articles/119135-about-verified-accounts.
+	 * See https://support.twitter.com/groups/31-twitter-basics/topics/111-features/articles/119135-about-verified-accounts.
 	 * @return true if the user is verified
 	 */
 	public boolean isVerified() {
