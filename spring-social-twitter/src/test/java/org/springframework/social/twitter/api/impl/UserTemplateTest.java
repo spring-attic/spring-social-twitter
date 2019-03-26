@@ -64,8 +64,8 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
 		assertEquals("Denton, TX", profile.getLocation());
-		assertEquals("http://www.springsource.org", profile.getUrl());
-		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
+		assertEquals("https://www.springsource.org", profile.getUrl());
+		assertEquals("https://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 		assertTrue(profile.isNotificationsEnabled());
 		assertFalse(profile.isVerified());
 		assertTrue(profile.isGeoEnabled());
@@ -86,7 +86,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("C0DEED", profile.getSidebarBorderColor());
 		assertEquals("DDEEF6", profile.getSidebarFillColor());
 		assertEquals("C0DEED", profile.getBackgroundColor());
-		assertEquals("http://a3.twimg.com/a/1301419075/images/themes/theme1/bg.png", profile.getBackgroundImageUrl());
+		assertEquals("https://a3.twimg.com/a/1301419075/images/themes/theme1/bg.png", profile.getBackgroundImageUrl());
 		assertFalse(profile.isBackgroundImageTiled());
 		assertEquals("333333", profile.getTextColor());
 		assertEquals("0084B4", profile.getLinkColor());
@@ -104,8 +104,8 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
 		assertEquals("Denton, TX", profile.getLocation());
-		assertEquals("http://www.springsource.org", profile.getUrl());
-		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
+		assertEquals("https://www.springsource.org", profile.getUrl());
+		assertEquals("https://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 
 	@Test
@@ -121,8 +121,8 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
 		assertEquals("Denton, TX", profile.getLocation());
-		assertEquals("http://www.springsource.org", profile.getUrl());
-		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
+		assertEquals("https://www.springsource.org", profile.getUrl());
+		assertEquals("https://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 
 	@Test
@@ -137,8 +137,8 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
 		assertEquals("Denton, TX", profile.getLocation());
-		assertEquals("http://www.springsource.org", profile.getUrl());
-		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
+		assertEquals("https://www.springsource.org", profile.getUrl());
+		assertEquals("https://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 
 	@Test
@@ -154,8 +154,8 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("Art Names", profile.getName());
 		assertEquals("I'm just a normal kinda guy", profile.getDescription());
 		assertEquals("Denton, TX", profile.getLocation());
-		assertEquals("http://www.springsource.org", profile.getUrl());
-		assertEquals("http://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
+		assertEquals("https://www.springsource.org", profile.getUrl());
+		assertEquals("https://a1.twimg.com/sticky/default_profile_images/default_profile_4_normal.png", profile.getProfileImageUrl());
 	}
 
 	@Test
@@ -359,7 +359,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("US", settings.getTrendLocation().get(0).getCountryCode());
 		assertEquals("Atlanta", settings.getTrendLocation().get(0).getName());
 		assertEquals(23424977, settings.getTrendLocation().get(0).getParentId());
-		assertEquals("http://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
+		assertEquals("https://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
 		assertEquals(2357024, settings.getTrendLocation().get(0).getWhereOnEarthID());
 	}
 	
@@ -390,7 +390,7 @@ public class UserTemplateTest extends AbstractTwitterApiTest {
 		assertEquals("US", settings.getTrendLocation().get(0).getCountryCode());
 		assertEquals("Atlanta", settings.getTrendLocation().get(0).getName());
 		assertEquals(23424977, settings.getTrendLocation().get(0).getParentId());
-		assertEquals("http://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
+		assertEquals("https://where.yahooapis.com/v1/place/2357024", settings.getTrendLocation().get(0).getUrl());
 		assertEquals(2357024, settings.getTrendLocation().get(0).getWhereOnEarthID());
 		mockServer.verify();
 	}

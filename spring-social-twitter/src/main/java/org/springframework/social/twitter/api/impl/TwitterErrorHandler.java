@@ -127,7 +127,7 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 
 	private void handleServerErrors(HttpStatus statusCode) throws IOException {
 		if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR) {
-			throw new InternalServerErrorException("twitter", "Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.");
+			throw new InternalServerErrorException("twitter", "Something is broken at Twitter. Please see https://dev.twitter.com/pages/support to report the issue.");
 		} else if (statusCode == HttpStatus.BAD_GATEWAY) {
 			throw new ServerDownException("twitter", "Twitter is down or is being upgraded.");
 		} else if (statusCode == HttpStatus.SERVICE_UNAVAILABLE) {
