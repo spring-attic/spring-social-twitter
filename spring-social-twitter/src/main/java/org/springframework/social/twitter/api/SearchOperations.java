@@ -116,7 +116,7 @@ public interface SearchOperations {
 	/**
 	 * Retrieves the top 10 trending topics for a given location, identified by its "Where on Earth" (WOE) ID.
 	 * This includes hashtagged topics.
-	 * See http://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
+	 * See https://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
 	 * Supports either user or application authorization.
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @return A Trends object with the top 10 trending topics for the location.
@@ -127,7 +127,7 @@ public interface SearchOperations {
 
 	/**
 	 * Retrieves the top 10 trending topics for a given location, identified by its "Where on Earth" (WOE) ID.
-	 * See http://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
+	 * See https://developer.yahoo.com/geo/geoplanet/guide/concepts.html for more information on WOE.
 	 * Supports either user or application authorization.
 	 * @param whereOnEarthId the Where on Earth ID for the location to retrieve trend data.
 	 * @param excludeHashtags if true, hashtagged topics will be excluded from the trends list.
