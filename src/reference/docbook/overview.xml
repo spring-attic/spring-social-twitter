@@ -7,11 +7,11 @@
     <title>Introduction</title>
     
     <para>
-	    The Spring Social Twitter project is an extension to <ulink url="http://www.springframework.org/spring-social">Spring Social</ulink> that enables integration with Twitter.
+	    The Spring Social Twitter project is an extension to <ulink url="https://www.springframework.org/spring-social">Spring Social</ulink> that enables integration with Twitter.
 	</para>
 
 	<para>
-		<ulink url="http://www.twitter.com">Twitter</ulink> is a popular micro-blogging and social networking service, enabling people to communicate with each other 140 characters at a time.
+		<ulink url="https://www.twitter.com">Twitter</ulink> is a popular micro-blogging and social networking service, enabling people to communicate with each other 140 characters at a time.
 	</para>
 
 	<para>
@@ -54,7 +54,7 @@
 	</para>
 	
 	<para>
-		Consult <ulink url="http://docs.spring.io/spring-social/docs/1.0.x/reference/html/overview.html#overview-howtoget">Spring Social's reference documentation</ulink> for more information on Spring Social dependencies.
+		Consult <ulink url="https://docs.spring.io/spring-social/docs/1.0.x/reference/html/overview.html#overview-howtoget">Spring Social's reference documentation</ulink> for more information on Spring Social dependencies.
 	</para>
   </section>
 
