@@ -18,7 +18,7 @@ package org.springframework.social.twitter.api;
 /**
  * Represents an oEmbed Tweet object.
  * Useful for embedding content in a page using provider-defined HTML and/or data.
- * See the oEmbed specification at http://oembed.com/ and Twitter's https://dev.twitter.com/docs/api/1.1/get/statuses/oembed resource for more details.
+ * See the oEmbed specification at https://oembed.com/ and Twitter's https://dev.twitter.com/docs/api/1.1/get/statuses/oembed resource for more details.
  * @author Craig Walls
  */
 public class OEmbedTweet extends TwitterObject {

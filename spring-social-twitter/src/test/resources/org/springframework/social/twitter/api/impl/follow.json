@@ -3,7 +3,7 @@
    "friends_count" : 5,
    "profile_background_color" : "C0DEED",
    "url" : null,
-   "profile_background_image_url" : "http://a3.twimg.com/a/1297708673/images/themes/theme1/bg.png",
+   "profile_background_image_url" : "https://a3.twimg.com/a/1297708673/images/themes/theme1/bg.png",
    "description" : null,
    "screen_name" : "oizik2",
    "status": {
@@ -20,7 +20,7 @@
     "_comment" : "The source data element below did not have quotations around the URL which caused a problem. This was manually quoted here",
     
     
-    "source" : "<a href='http://www.ipeg.com.au' rel='nofollow'>iPeg - Test</a>",
+    "source" : "<a href='https://www.ipeg.com.au' rel='nofollow'>iPeg - Test</a>",
     "created_at" : "Tue Feb 01 09:35:27 +0000 2011",
     "id_str" : "32371442398007296",
     "place" : null,
@@ -57,5 +57,5 @@
    "follow_request_sent" : false,
    "profile_use_background_image" : true,
    "utc_offset" : null,
-   "profile_image_url" : "http://a2.twimg.com/sticky/default_profile_images/default_profile_1_normal.png"
+   "profile_image_url" : "https://a2.twimg.com/sticky/default_profile_images/default_profile_1_normal.png"
 }
