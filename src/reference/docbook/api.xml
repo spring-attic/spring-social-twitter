@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xml:id="apis" xmlns:xlink="http://www.w3.org/1999/xlink">
+<chapter xmlns="https://docbook.org/ns/docbook" version="5.0" xml:id="apis" xmlns:xlink="https://www.w3.org/1999/xlink">
 	<title>Twitter API Binding</title>
   
 	<para>
@@ -33,7 +33,7 @@ Twitter twitter = new TwitterTemplate();]]>
 	</para>
 	
 	<para>
-		If you are using Spring Social's <ulink url="http://docs.spring.io/spring-social/docs/1.0.x/reference/html/serviceprovider.html">service provider framework</ulink>, you can get an instance of <interfacename>Twitter</interfacename> from a <interfacename>Connection</interfacename>. 
+		If you are using Spring Social's <ulink url="https://docs.spring.io/spring-social/docs/1.0.x/reference/html/serviceprovider.html">service provider framework</ulink>, you can get an instance of <interfacename>Twitter</interfacename> from a <interfacename>Connection</interfacename>. 
 		For example, the following snippet calls <methodname>getApi()</methodname> on a connection to retrieve a <interfacename>Twitter</interfacename>:
 	</para>				
 	
