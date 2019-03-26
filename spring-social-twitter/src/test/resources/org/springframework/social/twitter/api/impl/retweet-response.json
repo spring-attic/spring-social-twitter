@@ -101,12 +101,12 @@
             "urls": [
                 {
                     "display_url": "bit.ly/s2gx13_reg", 
-                    "expanded_url": "http://bit.ly/s2gx13_reg", 
+                    "expanded_url": "https://bit.ly/s2gx13_reg", 
                     "indices": [
                         110, 
                         132
                     ], 
-                    "url": "http://t.co/zNxUFLs5Dt"
+                    "url": "https://t.co/zNxUFLs5Dt"
                 }
             ], 
             "user_mentions": []
@@ -127,7 +127,7 @@
         "retweet_count": 4, 
         "retweeted": true, 
         "source": "web", 
-        "text": "Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNxUFLs5Dt #s2gx #java", 
+        "text": "Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks https://t.co/zNxUFLs5Dt #s2gx #java", 
         "truncated": false, 
         "user": {
             "contributors_enabled": false, 
@@ -143,12 +143,12 @@
                     "urls": [
                         {
                             "display_url": "springone2gx.com", 
-                            "expanded_url": "http://www.springone2gx.com", 
+                            "expanded_url": "https://www.springone2gx.com", 
                             "indices": [
                                 0, 
                                 22
                             ], 
-                            "url": "http://t.co/Hr9wfCTiRh"
+                            "url": "https://t.co/Hr9wfCTiRh"
                         }
                     ]
                 }
@@ -168,10 +168,10 @@
             "name": "SpringOne 2GX 2013", 
             "notifications": false, 
             "profile_background_color": "C0DEED", 
-            "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png", 
+            "profile_background_image_url": "https://a0.twimg.com/images/themes/theme1/bg.png", 
             "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png", 
             "profile_background_tile": false, 
-            "profile_image_url": "http://a0.twimg.com/profile_images/3313206628/28864e56d47735b6c83216462f4ffdda_normal.png", 
+            "profile_image_url": "https://a0.twimg.com/profile_images/3313206628/28864e56d47735b6c83216462f4ffdda_normal.png", 
             "profile_image_url_https": "https://si0.twimg.com/profile_images/3313206628/28864e56d47735b6c83216462f4ffdda_normal.png", 
             "profile_link_color": "0084B4", 
             "profile_sidebar_border_color": "C0DEED", 
@@ -182,13 +182,13 @@
             "screen_name": "springone2gx", 
             "statuses_count": 26, 
             "time_zone": "Mountain Time (US & Canada)", 
-            "url": "http://t.co/Hr9wfCTiRh", 
+            "url": "https://t.co/Hr9wfCTiRh", 
             "utc_offset": -21600, 
             "verified": false
         }
     }, 
-    "source": "<a href=\"http://www.springframework.org/spring-social\" rel=\"nofollow\">Spring Social Showcase</a>", 
-    "text": "RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks http://t.co/zNx\u2026", 
+    "source": "<a href=\"https://www.springframework.org/spring-social\" rel=\"nofollow\">Spring Social Showcase</a>", 
+    "text": "RT @springone2gx: Reg now early bird discount before it goes! Save $$$ &amp; see awesome #springframework #groovy #grails talks https://t.co/zNx\u2026", 
     "truncated": false, 
     "user": {
         "contributors_enabled": false, 
@@ -204,12 +204,12 @@
                 "urls": [
                     {
                         "display_url": "springinaction.com", 
-                        "expanded_url": "http://www.springinaction.com", 
+                        "expanded_url": "https://www.manning.com/books/spring-in-action-fifth-edition?a_aid=habuma&a_bid=f205d999", 
                         "indices": [
                             0, 
                             22
                         ], 
-                        "url": "http://t.co/LRXkeMjg6N"
+                        "url": "https://t.co/LRXkeMjg6N"
                     }
                 ]
             }
@@ -229,10 +229,10 @@
         "name": "Craig Walls", 
         "notifications": false, 
         "profile_background_color": "9AE4E8", 
-        "profile_background_image_url": "http://a0.twimg.com/images/themes/theme1/bg.png", 
+        "profile_background_image_url": "https://a0.twimg.com/images/themes/theme1/bg.png", 
         "profile_background_image_url_https": "https://si0.twimg.com/images/themes/theme1/bg.png", 
         "profile_background_tile": false, 
-        "profile_image_url": "http://a0.twimg.com/profile_images/1205746571/me2_300_normal.jpg", 
+        "profile_image_url": "https://a0.twimg.com/profile_images/1205746571/me2_300_normal.jpg", 
         "profile_image_url_https": "https://si0.twimg.com/profile_images/1205746571/me2_300_normal.jpg", 
         "profile_link_color": "0000FF", 
         "profile_sidebar_border_color": "87BC44", 
@@ -243,7 +243,7 @@
         "screen_name": "habuma", 
         "statuses_count": 3989, 
         "time_zone": "Central Time (US & Canada)", 
-        "url": "http://t.co/LRXkeMjg6N", 
+        "url": "https://t.co/LRXkeMjg6N", 
         "utc_offset": -18000, 
         "verified": false
     }

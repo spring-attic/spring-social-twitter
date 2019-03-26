@@ -87,7 +87,7 @@ public class ApiErrorTest extends AbstractTwitterApiTest {
 				.andRespond(withServerError().body("Non-JSON body").contentType(APPLICATION_JSON));
 			twitter.timelineOperations().getHomeTimeline();
 		} catch (InternalServerErrorException e) {
-			assertEquals("Something is broken at Twitter. Please see http://dev.twitter.com/pages/support to report the issue.", e.getMessage());
+			assertEquals("Something is broken at Twitter. Please see https://dev.twitter.com/pages/support to report the issue.", e.getMessage());
 			throw e;
 		}
 	}

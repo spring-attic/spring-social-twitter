@@ -34,7 +34,7 @@ searching. Attempting other operations, such as tweeting will fail with
 an MissingAuthorizationException being thrown.
 
 If you are using Spring Social's
-http://docs.spring.io/spring-social/docs/1.0.x/reference/html/serviceprovider.html[service
+https://docs.spring.io/spring-social/docs/1.0.x/reference/html/serviceprovider.html[service
 provider framework], you can get an instance of Twitter from a
 Connection. For example, the following snippet calls getApi() on a
 connection to retrieve a Twitter:
