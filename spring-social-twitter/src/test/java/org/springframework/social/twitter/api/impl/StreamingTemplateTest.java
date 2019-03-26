@@ -41,7 +41,7 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 	@Test
 	@Ignore
 	public void filter() throws Exception {
-		mockServer.expect(requestTo("http://stream.twitter.com/1/statuses/filter.json"))
+		mockServer.expect(requestTo("https://stream.twitter.com/1/statuses/filter.json"))
 			.andExpect(method(POST))
 			.andExpect(content().string("track=dallas"))
 			.andRespond(withSuccess(new ClassPathResource("filter-stream-track.json"), APPLICATION_JSON));
@@ -63,7 +63,7 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 	@Ignore
 	public void filter_streamClosedByTwitter() throws Exception {
 		for(int i=0;i<3;i++) { // expect the stream to be reopened 3 times
-			mockServer.expect(requestTo("http://stream.twitter.com/1/statuses/filter.json"))
+			mockServer.expect(requestTo("https://stream.twitter.com/1/statuses/filter.json"))
 				.andExpect(method(POST))
 			.andExpect(content().string("track=dallas"))
 				.andRespond(withSuccess(new ClassPathResource("filter-stream-track.json"), APPLICATION_JSON));
