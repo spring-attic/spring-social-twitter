@@ -6,7 +6,7 @@
         [
             {
                 "country":"United States",
-                "url":"http:\/\/api.twitter.com\/1\/geo\/id\/851a1ba23cb8c6ee.json",
+                "url":"https:\/\/api.twitter.com\/1\/geo\/id\/851a1ba23cb8c6ee.json",
                 "bounding_box":
                 {
                     "type":"Polygon",
@@ -40,7 +40,7 @@
                 [
                     {
                         "country":"United States",
-                        "url":"http:\/\/api.twitter.com\/1\/geo\/id\/247f43d441defc03.json",
+                        "url":"https:\/\/api.twitter.com\/1\/geo\/id\/247f43d441defc03.json",
                         "country_code":"US",
                         "bounding_box":
                         {
@@ -84,7 +84,7 @@
             },
             {
                 "country":"United States",
-                "url":"http:\/\/api.twitter.com\/1\/geo\/id\/247f43d441defc03.json",
+                "url":"https:\/\/api.twitter.com\/1\/geo\/id\/247f43d441defc03.json",
                 "bounding_box":
                 {
                     "type":"Polygon",
@@ -119,7 +119,7 @@
                 [
                     {
                         "country":"United States",
-                        "url":"http:\/\/api.twitter.com\/1\/geo\/id\/5a110d312052166f.json",
+                        "url":"https:\/\/api.twitter.com\/1\/geo\/id\/5a110d312052166f.json",
                         "country_code":"US",
                         "bounding_box":
                         {
@@ -165,7 +165,7 @@
     "query":
     {
         "type":"similar_places",
-        "url":"http:\/\/api.twitter.com\/1\/geo\/similar_places.json?accuracy=&long=-122.400612831116&query=&autocomplete=&strict=false&granularity=&lat=37.7821120598956&name=Twitter%2520HQ&contained_within=",
+        "url":"https:\/\/api.twitter.com\/1\/geo\/similar_places.json?accuracy=&long=-122.400612831116&query=&autocomplete=&strict=false&granularity=&lat=37.7821120598956&name=Twitter%2520HQ&contained_within=",
         "params":
         {
             "accuracy":null,
@@ -187,4 +187,3 @@
         }
     }
 }
-

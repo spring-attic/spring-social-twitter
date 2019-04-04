@@ -13,7 +13,7 @@
             "user":
             {
                 "following":false,
-                "profile_background_image_url":"http:\/\/a3.twimg.com\/a\/1300224005\/images\/themes\/theme1\/bg.png",
+                "profile_background_image_url":"https:\/\/a3.twimg.com\/a\/1300224005\/images\/themes\/theme1\/bg.png",
                 "favourites_count":1,
                 "description":"",
                 "show_all_inline_media":false,
@@ -22,8 +22,8 @@
                 "geo_enabled":false,
                 "time_zone":"Central Time (US & Canada)",
                 "profile_text_color":"000000",
-                "url":"http:\/\/www.springinaction.com",
-                "profile_image_url":"http:\/\/a3.twimg.com\/profile_images\/1205746571\/me2_300_normal.jpg",
+                "url":"https:\/\/www.springinaction.com",
+                "profile_image_url":"https:\/\/a3.twimg.com\/profile_images\/1205746571\/me2_300_normal.jpg",
                 "profile_sidebar_fill_color":"e0ff92",
                 "id_str":"7078572",
                 "profile_background_tile":false,
@@ -63,7 +63,7 @@
             "user":
             {
                 "following":false,
-                "profile_background_image_url":"http:\/\/a3.twimg.com\/a\/1300224005\/images\/themes\/theme1\/bg.png",
+                "profile_background_image_url":"https:\/\/a3.twimg.com\/a\/1300224005\/images\/themes\/theme1\/bg.png",
                 "favourites_count":1,
                 "description":"",
                 "show_all_inline_media":false,
@@ -72,8 +72,8 @@
                 "geo_enabled":false,
                 "time_zone":"Central Time (US & Canada)",
                 "profile_text_color":"000000",
-                "url":"http:\/\/www.springinaction.com",
-                "profile_image_url":"http:\/\/a3.twimg.com\/profile_images\/1205746571\/me2_300_normal.jpg",
+                "url":"https:\/\/www.springinaction.com",
+                "profile_image_url":"https:\/\/a3.twimg.com\/profile_images\/1205746571\/me2_300_normal.jpg",
                 "profile_sidebar_fill_color":"e0ff92",
                 "id_str":"7078572",
                 "profile_background_tile":false,
@@ -107,4 +107,3 @@
      "next_cursor_str":"234567",
      "previous_cursor_str":"123456"
 }
-

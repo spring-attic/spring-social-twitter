@@ -5,14 +5,14 @@
       "trends":[
          {
             "promoted_content":null,
-            "url":"http:\/\/search.twitter.com\/search?q=Cool+Stuff",
+            "url":"https:\/\/search.twitter.com\/search?q=Cool+Stuff",
             "query":"Cool+Stuff",
             "events":null,
             "name":"Cool Stuff"
          },
          {
             "promoted_content":null,
-            "url":"http:\/\/search.twitter.com\/search?q=%23springsocial",
+            "url":"https:\/\/search.twitter.com\/search?q=%23springsocial",
             "query":"%23springsocial",
             "events":null,
             "name":"#springsocial"

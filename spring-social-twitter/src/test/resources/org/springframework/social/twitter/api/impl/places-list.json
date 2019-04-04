@@ -5,7 +5,7 @@
         [
             {
                 "country":"United States",
-                "url":"http:\/\/api.twitter.com\/1\/geo\/id\/488da0de4c92ac8e.json",
+                "url":"https:\/\/api.twitter.com\/1\/geo\/id\/488da0de4c92ac8e.json",
                 "bounding_box":
                 {
                     "type":"Polygon",
@@ -39,7 +39,7 @@
                 [
                     {
                         "country":"United States",
-                        "url":"http:\/\/api.twitter.com\/1\/geo\/id\/e0060cda70f5f341.json",
+                        "url":"https:\/\/api.twitter.com\/1\/geo\/id\/e0060cda70f5f341.json",
                         "country_code":"US",
                         "bounding_box":
                         {
@@ -82,7 +82,7 @@
             },
             {
                 "country":"United States",
-                "url":"http:\/\/api.twitter.com\/1\/geo\/id\/e0060cda70f5f341.json",
+                "url":"https:\/\/api.twitter.com\/1\/geo\/id\/e0060cda70f5f341.json",
                 "bounding_box":
                 {
                     "type":"Polygon",
@@ -116,7 +116,7 @@
                 [
                     {
                         "country":"United States",
-                        "url":"http:\/\/api.twitter.com\/1\/geo\/id\/96683cc9126741d1.json",
+                        "url":"https:\/\/api.twitter.com\/1\/geo\/id\/96683cc9126741d1.json",
                         "country_code":"US",
                         "bounding_box":null,
                         "attributes":
@@ -135,7 +135,7 @@
             },
             {
                 "country":"United States",
-                "url":"http:\/\/api.twitter.com\/1\/geo\/id\/96683cc9126741d1.json",
+                "url":"https:\/\/api.twitter.com\/1\/geo\/id\/96683cc9126741d1.json",
                 "bounding_box":null,
                 "country_code":"US",
                 "attributes":
@@ -154,7 +154,7 @@
     "query":
     {
         "type":"reverse_geocode",
-        "url":"http:\/\/api.twitter.com\/1\/geo\/reverse_geocode.json?accuracy=0&long=-96.745833&granularity=neighborhood&lat=33.050278",
+        "url":"https:\/\/api.twitter.com\/1\/geo\/reverse_geocode.json?accuracy=0&long=-96.745833&granularity=neighborhood&lat=33.050278",
         "params":
         {
             "accuracy":0,
@@ -171,4 +171,3 @@
         }
     }
 }
-
