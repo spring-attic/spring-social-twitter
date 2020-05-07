@@ -1,6 +1,6 @@
 buildscript {
     repositories {
-        maven { url 'http://repo.spring.io/plugins-release' }
+        maven { url 'https://repo.spring.io/plugins-release' }
     }
     dependencies {
         classpath 'org.springframework.build.gradle:docbook-reference-plugin:0.2.8'
@@ -25,12 +25,12 @@ configure(allprojects - docProjects) {
     group = 'org.springframework.social'
 
     compileJava {
-        sourceCompatibility=1.5
-        targetCompatibility=1.5
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
     }
     compileTestJava {
-        sourceCompatibility=1.7
-        targetCompatibility=1.7
+        sourceCompatibility=1.8
+        targetCompatibility=1.8
     }
 
     [compileJava, compileTestJava]*.options*.compilerArgs = [
@@ -64,6 +64,7 @@ configure(allprojects - docProjects) {
     repositories {
         maven { url "http://repo.spring.io/libs-snapshot" }
         mavenLocal()
+        mavenCentral()
     }
 
     dependencies {
@@ -154,7 +155,7 @@ configure(subprojects - docProjects) { subproject ->
 
     // Test against latest Spring Framework release
     configurations.springReleaseTestRuntime {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        resolutionStrategy.eachDependency { details ->
             if (details.requested.group == 'org.springframework') {
                 details.useVersion springReleaseVersion
             }
@@ -163,7 +164,7 @@ configure(subprojects - docProjects) { subproject ->
 
     // Test against latest Spring Framework snapshot
     configurations.springSnapshotTestRuntime {
-        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        resolutionStrategy.eachDependency { details ->
             if (details.requested.group == 'org.springframework') {
                 details.useVersion springSnapshotVersion
             }
@@ -274,13 +275,10 @@ configure(rootProject) {
         archives project(':docs').schemaZip
     }
 
-    task wrapper(type: Wrapper) {
-        gradleVersion = '1.12'
-    }
 
 }
 
-task updateRootDocs << {
+task updateRootDocs  {
     copy {
         from 'src/dist'
         into "${rootProject.projectDir}"

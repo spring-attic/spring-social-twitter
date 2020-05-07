@@ -29,6 +29,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	private final String idStr;
 	private final String text;
 	private final Date createdAt;
+	private String fullText;
 	private String fromUser;
 	private String profileImageUrl;
 	private Long toUserId;
@@ -290,6 +291,14 @@ public class Tweet extends TwitterObject implements Serializable {
 
 	public void setInReplyToScreenName(final String inReplyToScreenName) {
 		this.inReplyToScreenName = inReplyToScreenName;
+	}
+
+	public String getFullText() {
+		return fullText;
+	}
+
+	public void setFullText(String fullText) {
+		this.fullText = fullText;
 	}
 
 	@Override
