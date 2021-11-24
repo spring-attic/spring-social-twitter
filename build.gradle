@@ -318,7 +318,7 @@ allprojects {
            reports.html.required = false
            reports.junitXml.required = false
        }
-	   forkEvery = 100
+       forkEvery = 100
    }
    tasks.withType(JavaCompile).configureEach {
        options.incremental = true
