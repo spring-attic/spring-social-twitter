@@ -15,6 +15,8 @@
  */
 package org.springframework.social.twitter.api;
 
+import java.util.Map;
+
 /**
  * Listener interface for clients consuming data from a Twitter stream.
  * @author Craig Walls
@@ -44,5 +46,6 @@ public interface StreamListener {
 	 * @param warningEvent a warning event
 	 */
 	void onWarning(StreamWarningEvent warningEvent);
-	
+
+	void onEvent(Map event);
 }

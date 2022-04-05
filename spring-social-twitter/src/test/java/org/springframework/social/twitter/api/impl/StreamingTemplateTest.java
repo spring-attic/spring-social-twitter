@@ -24,6 +24,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -111,6 +112,11 @@ public class StreamingTemplateTest extends AbstractTwitterApiTest {
 		
 		public void onWarning(StreamWarningEvent warningEvent) {
 			warningsReceived.add(warningEvent);
+			messageReceived();
+		}
+
+		@Override
+		public void onEvent(Map event) {
 			messageReceived();
 		}
 
