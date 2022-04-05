@@ -34,24 +34,24 @@ import org.springframework.web.client.RestTemplate;
  * @author Craig Walls
  */
 class ListTemplate extends AbstractTwitterOperations implements ListOperations {
-	
+
 	private final RestTemplate restTemplate;
-					
+
 	public ListTemplate(RestTemplate restTemplate, boolean isAuthorizedForUser, boolean isAuthorizedForApp) {
 		super(isAuthorizedForUser, isAuthorizedForApp);
 		this.restTemplate = restTemplate;
 	}
-	
+
 	public List<UserList> getLists() {
 		requireUserAuthorization();
 		return restTemplate.getForObject(buildUri("lists/list.json"), UserSubscriptionList.class);
 	}
-	
+
 	public List<UserList> getLists(long userId) {
 		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("lists/list.json", "user_id", String.valueOf(userId)), UserSubscriptionList.class);
 	}
-	
+
 	public List<UserList> getLists(String screenName) {
 		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("lists/list.json", "screen_name", String.valueOf(screenName)), UserSubscriptionList.class);
@@ -103,7 +103,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		return restTemplate.getForObject(buildUri("lists/statuses.json", parameters), TweetList.class);
 	}
 
-	public UserList createList(String name, String description, boolean isPublic) {	
+	public UserList createList(String name, String description, boolean isPublic) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> request = buildListDataMap(name, description, isPublic);
 		return restTemplate.postForObject(buildUri("lists/create.json"), request, UserList.class);
@@ -128,11 +128,12 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		return restTemplate.getForObject(buildUri("lists/members.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 
-	public CursoredList<TwitterProfile> getListMembersInCursor(long listId, long cursor) {
+	public CursoredList<TwitterProfile> getListMembersInCursor(long listId, long cursor, int pageSize) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("list_id", String.valueOf(listId));
 		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
 		return restTemplate.getForObject(buildUri("lists/members.json", request), TwitterProfileUsersList.class).getList();
 	}
 
@@ -144,12 +145,13 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		return restTemplate.getForObject(buildUri("lists/members.json", parameters), TwitterProfileUsersList.class).getList();
 	}
 
-	public CursoredList<TwitterProfile> getListMembersInCursor(String screenName, String listSlug, long cursor) {
+	public CursoredList<TwitterProfile> getListMembersInCursor(String screenName, String listSlug, long cursor, int pageSize) {
 		requireEitherUserOrAppAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
 		parameters.set("cursor", String.valueOf(cursor));
+		parameters.set("count", String.valueOf(pageSize));
 		return restTemplate.getForObject(buildUri("lists/members.json", parameters), TwitterProfileUsersList.class).getList();
 	}
 
@@ -172,7 +174,7 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	public void removeFromList(long listId, long memberId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> request = new LinkedMultiValueMap<String, Object>();
-		request.set("user_id", String.valueOf(memberId)); 
+		request.set("user_id", String.valueOf(memberId));
 		request.set("list_id", String.valueOf(listId));
 		restTemplate.postForObject(buildUri("lists/members/destroy.json"), request, String.class);
 	}
@@ -180,24 +182,43 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 	public void removeFromList(long listId, String memberScreenName) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> request = new LinkedMultiValueMap<String, Object>();
-		request.set("screen_name", String.valueOf(memberScreenName)); 
+		request.set("screen_name", String.valueOf(memberScreenName));
 		request.set("list_id", String.valueOf(listId));
 		restTemplate.postForObject(buildUri("lists/members/destroy.json"), request, String.class);
 	}
 
-	public List<TwitterProfile> getListSubscribers(long listId) {
+	public CursoredList<TwitterProfile> getListSubscribers(long listId) {
 		requireEitherUserOrAppAuthorization();
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", "list_id", String.valueOf(listId)), TwitterProfileUsersList.class).getList();
 	}
 
-	public List<TwitterProfile> getListSubscribers(String screenName, String listSlug) {
+	public CursoredList<TwitterProfile> getListSubscribers(String screenName, String listSlug) {
 		requireEitherUserOrAppAuthorization();
 		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		parameters.set("owner_screen_name", screenName);
 		parameters.set("slug", listSlug);
 		return restTemplate.getForObject(buildUri("lists/subscribers.json", parameters), TwitterProfileUsersList.class).getList();
 	}
-	
+
+	public CursoredList<TwitterProfile> getListSubscribersInCursor(long listId, long cursor, int pageSize) {
+		requireEitherUserOrAppAuthorization();
+		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
+		request.set("list_id", String.valueOf(listId));
+		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
+		return restTemplate.getForObject(buildUri("lists/subscribers.json", request), TwitterProfileUsersList.class).getList();
+	}
+
+	public CursoredList<TwitterProfile> getListSubscribersInCursor(String screenName, String listSlug, long cursor, int pageSize){
+		requireEitherUserOrAppAuthorization();
+		LinkedMultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+		parameters.set("owner_screen_name", screenName);
+		parameters.set("slug", listSlug);
+		parameters.set("cursor", String.valueOf(cursor));
+		parameters.set("count", String.valueOf(pageSize));
+		return restTemplate.getForObject(buildUri("lists/subscribers.json", parameters), TwitterProfileUsersList.class).getList();
+	}
+
 	public UserList subscribe(long listId) {
 		requireUserAuthorization();
 		MultiValueMap<String, Object> request = new LinkedMultiValueMap<String, Object>();
@@ -238,20 +259,50 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		return restTemplate.getForObject(buildUri("lists/memberships.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
-	public CursoredList<UserList> getMembershipsInCursor(long userId, long cursor) {
+	public CursoredList<UserList> getMembershipsInCursor(long userId, long cursor, int pageSize) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("user_id", String.valueOf(userId));
 		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
 		return restTemplate.getForObject(buildUri("lists/memberships.json", request), UserListList.class).getList();
 	}
 
-	public CursoredList<UserList> getMembershipsInCursor(String screenName, long cursor) {
+	public CursoredList<UserList> getMembershipsInCursor(String screenName, long cursor, int pageSize) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("screen_name", screenName);
 		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
 		return restTemplate.getForObject(buildUri("lists/memberships.json", request), UserListList.class).getList();
+	}
+
+	public CursoredList<UserList> getOwnerships(long userId) {
+		requireEitherUserOrAppAuthorization();
+		return restTemplate.getForObject(buildUri("lists/ownerships.json", "user_id", String.valueOf(userId)), UserListList.class).getList();
+	}
+
+	public CursoredList<UserList> getOwnerships(String screenName) {
+		requireEitherUserOrAppAuthorization();
+		return restTemplate.getForObject(buildUri("lists/ownerships.json", "screen_name", screenName), UserListList.class).getList();
+	}
+
+	public CursoredList<UserList> getOwnershipsInCursor(long userId, long cursor, int pageSize) {
+		requireEitherUserOrAppAuthorization();
+		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
+		request.set("user_id", String.valueOf(userId));
+		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
+		return restTemplate.getForObject(buildUri("lists/ownerships.json", request), UserListList.class).getList();
+	}
+
+	public CursoredList<UserList> getOwnershipsInCursor(String screenName, long cursor, int pageSize) {
+		requireEitherUserOrAppAuthorization();
+		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
+		request.set("screen_name", screenName);
+		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
+		return restTemplate.getForObject(buildUri("lists/ownerships.json", request), UserListList.class).getList();
 	}
 
 	public CursoredList<UserList> getSubscriptions(long userId) {
@@ -264,19 +315,21 @@ class ListTemplate extends AbstractTwitterOperations implements ListOperations {
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", "screen_name", screenName), UserListList.class).getList();
 	}
 
-	public CursoredList<UserList> getSubscriptionsInCursor(long userId, long cursor) {
+	public CursoredList<UserList> getSubscriptionsInCursor(long userId, long cursor, int pageSize) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("user_id", String.valueOf(userId));
 		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", request), UserListList.class).getList();
 	}
 
-	public CursoredList<UserList> getSubscriptionsInCursor(String screenName, long cursor) {
+	public CursoredList<UserList> getSubscriptionsInCursor(String screenName, long cursor, int pageSize) {
 		requireEitherUserOrAppAuthorization();
 		MultiValueMap<String, String> request = new LinkedMultiValueMap<String, String>();
 		request.set("screen_name", screenName);
 		request.set("cursor", String.valueOf(cursor));
+		request.set("count", String.valueOf(pageSize));
 		return restTemplate.getForObject(buildUri("lists/subscriptions.json", request), UserListList.class).getList();
 	}
 

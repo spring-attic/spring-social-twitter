@@ -192,11 +192,12 @@ public interface ListOperations {
 	 * Supports either user or application authorization.
 	 * @param listId the ID of the list.
 	 * @param cursor the cursor to use when fetching the list members.
+	 * @param pageSize The number of {@link TwitterProfile}s per page. The default is 20, with a maximum of 5000 per page.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @return a list of {@link TwitterProfile}
 	 */
-	CursoredList<TwitterProfile> getListMembersInCursor(long listId, long cursor);
+	CursoredList<TwitterProfile> getListMembersInCursor(long listId, long cursor, int pageSize);
 
 	/**
 	 * Retrieves a list of Twitter profiles whose users are members of the list.
@@ -215,11 +216,12 @@ public interface ListOperations {
 	 * @param screenName the screen name of the list owner.
 	 * @param listSlug the slug of the list.
 	 * @param cursor the cursor to use when fetching the list members.
+	 * @param pageSize The number of {@link TwitterProfile}s per page. The default is 20, with a maximum of 5000 per page.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 * @return a list of {@link TwitterProfile}
 	 */
-	CursoredList<TwitterProfile> getListMembersInCursor(String screenName, String listSlug, long cursor);
+	CursoredList<TwitterProfile> getListMembersInCursor(String screenName, String listSlug, long cursor, int pageSize);
 
 	/**
 	 * Adds one or more new members to a user list.
@@ -305,7 +307,7 @@ public interface ListOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	List<TwitterProfile> getListSubscribers(long listId);
+	CursoredList<TwitterProfile> getListSubscribers(long listId);
 
 	/**
 	 * Retrieves the subscribers to a list.
@@ -316,7 +318,32 @@ public interface ListOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	List<TwitterProfile> getListSubscribers(String screenName, String listSlug);
+	CursoredList<TwitterProfile> getListSubscribers(String screenName, String listSlug);
+
+	/**
+	 * Retrieves the subscribers to a list.
+	 * Supports either user or application authorization.
+	 * @param listId the ID of the list.
+	 * @param cursor the cursor to use when fetching the list subscribers.
+	 * @param pageSize The number of {@link TwitterProfile}s per page. The default is 20, with a maximum of 5000 per page.
+	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<TwitterProfile> getListSubscribersInCursor(long listId, long cursor, int pageSize);
+
+	/**
+	 * Retrieves the subscribers to a list.
+	 * Supports either user or application authorization.
+	 * @param screenName the screen name of the list owner.
+	 * @param listSlug the slug of the list.
+	 * @param cursor the cursor to use when fetching the list subscribers.
+	 * @param pageSize The number of {@link TwitterProfile}s per page. The default is 20, with a maximum of 5000 per page.
+	 * @return a list of {@link TwitterProfile}s for the list's subscribers.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<TwitterProfile> getListSubscribersInCursor(String screenName, String listSlug, long cursor, int pageSize);
 
 	/**
 	 * Retrieves the lists that a given user is a member of.
@@ -343,22 +370,68 @@ public interface ListOperations {
 	 * Supports either user or application authorization.
 	 * @param userId the user ID
 	 * @param cursor the cursor to use when fetching the list memberships.
+	 * @param pageSize The number of {@link UserList}s per page. The default is 20, with a maximum of 1000 per page.
 	 * @return a list of {@link UserList}s that the user is a member of.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	CursoredList<UserList> getMembershipsInCursor(long userId, long cursor);
+	CursoredList<UserList> getMembershipsInCursor(long userId, long cursor, int pageSize);
 
 	/**
 	 * Retrieves the lists that a given user is a member of.
 	 * Supports either user or application authorization.
 	 * @param screenName the user's screen name
 	 * @param cursor the cursor to use when fetching the list memberships.
+	 * @param pageSize The number of {@link UserList}s per page. The default is 20, with a maximum of 1000 per page.
 	 * @return a list of {@link UserList}s that the user is a member of.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	CursoredList<UserList> getMembershipsInCursor(String screenName, long cursor);
+	CursoredList<UserList> getMembershipsInCursor(String screenName, long cursor, int pageSize);
+
+	/**
+	 * Retrieves the lists that a given user is owned by.
+	 * Supports either user or application authorization.
+	 * @param userId the user ID
+	 * @return a list of {@link UserList}s that the user is owned by.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getOwnerships(long userId);
+
+	/**
+	 * Retrieves the lists that a given user is owned by.
+	 * Supports either user or application authorization.
+	 * @param screenName the user's screen name
+	 * @return a list of {@link UserList}s that the user is owned by.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getOwnerships(String screenName);
+
+	/**
+	 * Retrieves the lists that a given user is owned by.
+	 * Supports either user or application authorization.
+	 * @param userId the user ID
+	 * @param cursor the cursor to use when fetching the list memberships.
+	 * @param pageSize The number of {@link UserList}s per page. The default is 20, with a maximum of 1000 per page.
+	 * @return a list of {@link UserList}s that the user is owned by.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getOwnershipsInCursor(long userId, long cursor, int pageSize);
+
+	/**
+	 * Retrieves the lists that a given user is owned by.
+	 * Supports either user or application authorization.
+	 * @param screenName the user's screen name
+	 * @param cursor the cursor to use when fetching the list memberships.
+	 * @param pageSize The number of {@link UserList}s per page. The default is 20, with a maximum of 1000 per page.
+	 * @return a list of {@link UserList}s that the user is owned by.
+	 * @throws ApiException if there is an error while communicating with Twitter.
+	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
+	 */
+	CursoredList<UserList> getOwnershipsInCursor(String screenName, long cursor, int pageSize);
 
 	/**
 	 * Retrieves the lists that a given user is subscribed to.
@@ -385,22 +458,24 @@ public interface ListOperations {
 	 * Supports either user or application authorization.
 	 * @param userId the user ID
 	 * @param cursor the cursor to use when fetching the list subscriptions.
+	 * @param pageSize The number of {@link UserList}s per page. The default is 20, with a maximum of 1000 per page.
 	 * @return a list of {@link UserList}s that the user is subscribed to.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	CursoredList<UserList> getSubscriptionsInCursor(long userId, long cursor);
+	CursoredList<UserList> getSubscriptionsInCursor(long userId, long cursor, int pageSize);
 
 	/**
 	 * Retrieves the lists that a given user is subscribed to.
 	 * Supports either user or application authorization.
 	 * @param screenName the user's screen name
 	 * @param cursor the cursor to use when fetching the list subscriptions.
+	 * @param pageSize The number of {@link UserList}s per page. The default is 20, with a maximum of 1000 per page.
 	 * @return a list of {@link UserList}s that the user is subscribed to.
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials or an application access token.
 	 */
-	CursoredList<UserList> getSubscriptionsInCursor(String screenName, long cursor);
+	CursoredList<UserList> getSubscriptionsInCursor(String screenName, long cursor, int pageSize);
 
 	/**
 	 * Checks to see if a given user is a member of a given list.
