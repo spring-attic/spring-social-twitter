@@ -145,8 +145,8 @@ class TwitterErrorHandler extends DefaultResponseErrorHandler {
 	}
 
 	private static final String INVALID_MESSAGE_RECIPIENT_TEXT = "You cannot send messages to users who are not following you.";
-	private static final String STATUS_TOO_LONG_TEXT = "Status is over 140 characters.";
-	private static final String MESSAGE_TOO_LONG_TEXT = "The text of your direct message is over 140 characters";
+	private static final String STATUS_TOO_LONG_TEXT = "Tweet needs to be a bit shorter.";
+	private static final String MESSAGE_TOO_LONG_TEXT = "The text of your direct message is over the max character limit.";
 	private static final String DUPLICATE_STATUS_TEXT = "Status is a duplicate.";
 	private static final String DAILY_RATE_LIMIT_TEXT = "User is over daily status update limit.";
 

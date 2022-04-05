@@ -109,7 +109,7 @@ public interface DirectMessageOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
 	 * @throws DuplicateStatusException if the message duplicates a previously sent message.
-	 * @throws MessageTooLongException if the message length exceeds Twitter's 140 character limit.
+	 * @throws MessageTooLongException if the message length exceeds Twitter's character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	DirectMessage sendDirectMessage(String toScreenName, String text);
@@ -125,7 +125,7 @@ public interface DirectMessageOperations {
 	 * @throws ApiException if there is an error while communicating with Twitter.
 	 * @throws InvalidMessageRecipientException if the recipient is not following the authenticating user.
 	 * @throws DuplicateStatusException if the message duplicates a previously sent message.
-	 * @throws MessageTooLongException if the message length exceeds Twitter's 140 character limit.
+	 * @throws MessageTooLongException if the message length exceeds Twitter's character limit.
 	 * @throws MissingAuthorizationException if TwitterTemplate was not created with OAuth credentials.
 	 */
 	DirectMessage sendDirectMessage(long toUserId, String text);
