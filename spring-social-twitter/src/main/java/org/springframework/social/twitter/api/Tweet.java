@@ -20,6 +20,7 @@ import java.util.Date;
 
 /**
  * Represents a Twitter status update (e.g., a "tweet").
+ *
  * @author Craig Walls
  */
 public class Tweet extends TwitterObject implements Serializable {
@@ -43,50 +44,74 @@ public class Tweet extends TwitterObject implements Serializable {
 	private boolean favorited;
 	private Integer favoriteCount;
 	private Entities entities;
+	private ExtendedEntities extendedEntities;
 	private TwitterProfile user;
 
 	/**
 	 * Constructs a Tweet
-	 * 
-	 * @param id The tweet's ID
-	 * @param text The tweet's text
-	 * @param createdAt Date Tweet was created
-	 * @param fromUser The username of the author of the tweet.
-	 * @param profileImageUrl The URL to the profile picture of the tweet's author.
-	 * @param toUserId The user ID of the user to whom the tweet is targeted.
-	 * @param fromUserId The user ID of the tweet's author.
-	 * @param languageCode The language code
-	 * @param source The source of the tweet.
-	 * 
+	 *
+	 * @param id
+	 *            The tweet's ID
+	 * @param text
+	 *            The tweet's text
+	 * @param createdAt
+	 *            Date Tweet was created
+	 * @param fromUser
+	 *            The username of the author of the tweet.
+	 * @param profileImageUrl
+	 *            The URL to the profile picture of the tweet's author.
+	 * @param toUserId
+	 *            The user ID of the user to whom the tweet is targeted.
+	 * @param fromUserId
+	 *            The user ID of the tweet's author.
+	 * @param languageCode
+	 *            The language code
+	 * @param source
+	 *            The source of the tweet.
+	 *
 	 * @deprecated Use other constructor with String ID instead.
 	 */
 	@Deprecated
-	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
-		this(id, String.valueOf(id), text, createdAt, fromUser, profileImageUrl, toUserId, fromUserId, languageCode, source);
+	public Tweet(long id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId,
+			long fromUserId, String languageCode, String source) {
+		this(id, String.valueOf(id), text, createdAt, fromUser, profileImageUrl, toUserId, fromUserId, languageCode,
+				source);
 	}
 
 	/**
 	 * Constructs a Tweet
-	 * 
-	 * @param id The tweet's ID
-	 * @param idStr The tweet's ID as a String
-	 * @param text The tweet's text
-	 * @param createdAt Date Tweet was created
-	 * @param fromUser The username of the author of the tweet.
-	 * @param profileImageUrl The URL to the profile picture of the tweet's author.
-	 * @param toUserId The user ID of the user to whom the tweet is targeted.
-	 * @param fromUserId The user ID of the tweet's author.
-	 * @param languageCode The language code
-	 * @param source The source of the tweet.
-	 * 
+	 *
+	 * @param id
+	 *            The tweet's ID
+	 * @param idStr
+	 *            The tweet's ID as a String
+	 * @param text
+	 *            The tweet's text
+	 * @param createdAt
+	 *            Date Tweet was created
+	 * @param fromUser
+	 *            The username of the author of the tweet.
+	 * @param profileImageUrl
+	 *            The URL to the profile picture of the tweet's author.
+	 * @param toUserId
+	 *            The user ID of the user to whom the tweet is targeted.
+	 * @param fromUserId
+	 *            The user ID of the tweet's author.
+	 * @param languageCode
+	 *            The language code
+	 * @param source
+	 *            The source of the tweet.
+	 *
 	 * @deprecated Use other constructor with String ID instead.
 	 */
 	@Deprecated
-	public Tweet(long id, String idStr, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
+	public Tweet(long id, String idStr, String text, Date createdAt, String fromUser, String profileImageUrl,
+			Long toUserId, long fromUserId, String languageCode, String source) {
 		this(Long.toString(id), text, createdAt, fromUser, profileImageUrl, toUserId, fromUserId, languageCode, source);
 	}
 
-	public Tweet(String id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId, long fromUserId, String languageCode, String source) {
+	public Tweet(String id, String text, Date createdAt, String fromUser, String profileImageUrl, Long toUserId,
+			long fromUserId, String languageCode, String source) {
 		this.id = id;
 		this.text = text;
 		this.createdAt = createdAt;
@@ -95,34 +120,38 @@ public class Tweet extends TwitterObject implements Serializable {
 		this.toUserId = toUserId;
 		this.fromUserId = fromUserId;
 		this.languageCode = languageCode;
-		this.source = source;		
+		this.source = source;
 	}
 
 	/**
-	 * The text of the tweet. If this tweet is a retweet of another tweet, the text may be preceeded with "RT \@someuser" and may be truncated at the end.
-	 * To get the raw, unmodified text of the original tweet, use {@link #getUnmodifiedText()}. 
+	 * The text of the tweet. If this tweet is a retweet of another tweet, the text
+	 * may be preceeded with "RT \@someuser" and may be truncated at the end. To get
+	 * the raw, unmodified text of the original tweet, use
+	 * {@link #getUnmodifiedText()}.
+	 *
 	 * @return The text of the tweet.
 	 */
 	public String getText() {
-		return text;
+		return this.text;
 	}
-	
+
 	/**
-	 * Returns the unmodified text of the tweet.
-	 * If this tweet is a retweet, it returns the text of the original tweet.
-	 * If it is not a retweet, then this method will return the same value as {@link #getText()}.
+	 * Returns the unmodified text of the tweet. If this tweet is a retweet, it
+	 * returns the text of the original tweet. If it is not a retweet, then this
+	 * method will return the same value as {@link #getText()}.
+	 *
 	 * @return The unmodified text of the tweet.
 	 */
 	public String getUnmodifiedText() {
-		return isRetweet() ? retweetedStatus.getText() : getText();
+		return this.isRetweet() ? this.retweetedStatus.getText() : this.getText();
 	}
 
 	public Date getCreatedAt() {
-		return createdAt;
+		return this.createdAt;
 	}
 
 	public String getFromUser() {
-		return fromUser;
+		return this.fromUser;
 	}
 
 	public void setFromUser(String fromUser) {
@@ -130,11 +159,11 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getProfileImageUrl() {
-		return profileImageUrl;
+		return this.profileImageUrl;
 	}
 
 	public void setProfileImageUrl(String profileImageUrl) {
@@ -142,7 +171,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public Long getToUserId() {
-		return toUserId;
+		return this.toUserId;
 	}
 
 	public void setToUserId(Long toUserId) {
@@ -150,15 +179,15 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public long getFromUserId() {
-		return fromUserId;
+		return this.fromUserId;
 	}
-	
+
 	public void setInReplyToStatusId(Long inReplyToStatusId) {
 		this.inReplyToStatusId = inReplyToStatusId;
 	}
-	
+
 	public Long getInReplyToStatusId() {
-		return inReplyToStatusId;
+		return this.inReplyToStatusId;
 	}
 
 	public void setFromUserId(long fromUserId) {
@@ -166,7 +195,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public String getLanguageCode() {
-		return languageCode;
+		return this.languageCode;
 	}
 
 	public void setLanguageCode(String languageCode) {
@@ -174,7 +203,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public String getSource() {
-		return source;
+		return this.source;
 	}
 
 	public void setSource(String source) {
@@ -182,27 +211,29 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public void setRetweetCount(Integer retweetCount) {
-		this.retweetCount = retweetCount;		
+		this.retweetCount = retweetCount;
 	}
-	
+
 	/**
-	 * The number of times this tweet has been retweeted.
-	 * Only available in timeline results. 
-	 * getRetweetCount() will return null for Tweet objects returned in search results.
-	 * @return the number of times the tweet has been retweeted or null if that information is unavailable
+	 * The number of times this tweet has been retweeted. Only available in timeline
+	 * results. getRetweetCount() will return null for Tweet objects returned in
+	 * search results.
+	 *
+	 * @return the number of times the tweet has been retweeted or null if that
+	 *         information is unavailable
 	 */
 	public Integer getRetweetCount() {
-		return retweetCount;
+		return this.retweetCount;
 	}
-	
+
 	public void setRetweeted(boolean retweeted) {
 		this.retweeted = retweeted;
 	}
 
 	public boolean isRetweeted() {
-		return retweeted;
+		return this.retweeted;
 	}
-	
+
 	public Tweet getRetweetedStatus() {
 		return this.retweetedStatus;
 	}
@@ -210,7 +241,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	public void setRetweetedStatus(final Tweet tweet) {
 		this.retweetedStatus = tweet;
 	}
-	
+
 	public boolean isRetweet() {
 		return this.retweetedStatus != null;
 	}
@@ -220,63 +251,67 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public boolean isFavorited() {
-		return favorited;
+		return this.favorited;
 	}
-	
+
 	public void setFavoriteCount(Integer favoriteCount) {
 		this.favoriteCount = favoriteCount;
 	}
-	
+
 	public Integer getFavoriteCount() {
-		return favoriteCount;
+		return this.favoriteCount;
 	}
 
 	public Entities getEntities() {
 		return this.entities;
 	}
-	
+
 	public void setEntities(final Entities ent) {
 		this.entities = ent;
 	}
 
+	public ExtendedEntities getExtendedEntities() {
+		return this.extendedEntities;
+	}
+
+	public void setExtendedEntities(final ExtendedEntities extendedEntities) {
+		this.extendedEntities = extendedEntities;
+	}
+
 	public boolean hasMentions() {
-		if (this.entities == null) {
+		if (this.entities == null)
 			return false;
-		}
 		return !this.entities.getMentions().isEmpty();
 	}
 
 	public boolean hasMedia() {
-		if (this.entities == null) {
+		if (this.entities == null)
 			return false;
-		}
 		return !this.entities.getMedia().isEmpty();
 	}
 
 	public boolean hasUrls() {
-		if (this.entities == null) {
+		if (this.entities == null)
 			return false;
-		}
 		return !this.entities.getUrls().isEmpty();
 	}
 
 	public boolean hasTags() {
-		if (this.entities == null) {
+		if (this.entities == null)
 			return false;
-		}
 		return !this.entities.getHashTags().isEmpty();
 	}
-	
+
 	public TwitterProfile getUser() {
 		return this.user;
 	}
-	
+
 	public void setUser(final TwitterProfile prof) {
 		this.user = prof;
 	}
 
 	public Long getInReplyToUserId() {
-		return inReplyToUserId;
+		return this.inReplyToUserId;
 	}
 
 	public void setInReplyToUserId(final Long inReplyToUserId) {
@@ -284,7 +319,7 @@ public class Tweet extends TwitterObject implements Serializable {
 	}
 
 	public String getInReplyToScreenName() {
-		return inReplyToScreenName;
+		return this.inReplyToScreenName;
 	}
 
 	public void setInReplyToScreenName(final String inReplyToScreenName) {
@@ -293,89 +328,79 @@ public class Tweet extends TwitterObject implements Serializable {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) {
+		if (this == o)
 			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
+		if ((o == null) || (this.getClass() != o.getClass()))
 			return false;
-		}
 
-		Tweet tweet = (Tweet) o;
+		final Tweet tweet = (Tweet) o;
 
-		if (fromUserId != tweet.fromUserId) {
+		if (this.fromUserId != tweet.fromUserId)
 			return false;
-		}
-		if (id != tweet.id) {
+		if (this.id != tweet.id)
 			return false;
-		}
-		if (retweeted != tweet.retweeted) {
+		if (this.retweeted != tweet.retweeted)
 			return false;
-		}
-		if (createdAt != null ? !createdAt.equals(tweet.createdAt) : tweet.createdAt != null) {
+		if (this.createdAt != null ? !this.createdAt.equals(tweet.createdAt) : tweet.createdAt != null)
 			return false;
-		}
-		if (entities != null ? !entities.equals(tweet.entities) : tweet.entities != null) {
+		if (this.entities != null ? !this.entities.equals(tweet.entities) : tweet.entities != null)
 			return false;
-		}
-		if (fromUser != null ? !fromUser.equals(tweet.fromUser) : tweet.fromUser != null) {
+		if (this.extendedEntities != null ? !this.extendedEntities.equals(tweet.extendedEntities)
+				: tweet.extendedEntities != null)
 			return false;
-		}
-		if (inReplyToScreenName != null ? !inReplyToScreenName.equals(tweet.inReplyToScreenName) : tweet.inReplyToScreenName != null) {
+		if (this.fromUser != null ? !this.fromUser.equals(tweet.fromUser) : tweet.fromUser != null)
 			return false;
-		}
-		if (inReplyToStatusId != null ? !inReplyToStatusId.equals(tweet.inReplyToStatusId) : tweet.inReplyToStatusId != null) {
+		if (this.inReplyToScreenName != null ? !this.inReplyToScreenName.equals(tweet.inReplyToScreenName)
+				: tweet.inReplyToScreenName != null)
 			return false;
-		}
-		if (inReplyToUserId != null ? !inReplyToUserId.equals(tweet.inReplyToUserId) : tweet.inReplyToUserId != null) {
+		if (this.inReplyToStatusId != null ? !this.inReplyToStatusId.equals(tweet.inReplyToStatusId)
+				: tweet.inReplyToStatusId != null)
 			return false;
-		}
-		if (languageCode != null ? !languageCode.equals(tweet.languageCode) : tweet.languageCode != null) {
+		if (this.inReplyToUserId != null ? !this.inReplyToUserId.equals(tweet.inReplyToUserId)
+				: tweet.inReplyToUserId != null)
 			return false;
-		}
-		if (profileImageUrl != null ? !profileImageUrl.equals(tweet.profileImageUrl) : tweet.profileImageUrl != null) {
+		if (this.languageCode != null ? !this.languageCode.equals(tweet.languageCode) : tweet.languageCode != null)
 			return false;
-		}
-		if (retweetCount != null ? !retweetCount.equals(tweet.retweetCount) : tweet.retweetCount != null) {
+		if (this.profileImageUrl != null ? !this.profileImageUrl.equals(tweet.profileImageUrl)
+				: tweet.profileImageUrl != null)
 			return false;
-		}
-		if (retweetedStatus != null ? !retweetedStatus.equals(tweet.retweetedStatus) : tweet.retweetedStatus != null) {
+		if (this.retweetCount != null ? !this.retweetCount.equals(tweet.retweetCount) : tweet.retweetCount != null)
 			return false;
-		}
-		if (source != null ? !source.equals(tweet.source) : tweet.source != null) {
+		if (this.retweetedStatus != null ? !this.retweetedStatus.equals(tweet.retweetedStatus)
+				: tweet.retweetedStatus != null)
 			return false;
-		}
-		if (text != null ? !text.equals(tweet.text) : tweet.text != null) {
+		if (this.source != null ? !this.source.equals(tweet.source) : tweet.source != null)
 			return false;
-		}
-		if (toUserId != null ? !toUserId.equals(tweet.toUserId) : tweet.toUserId != null) {
+		if (this.text != null ? !this.text.equals(tweet.text) : tweet.text != null)
 			return false;
-		}
-		if (user != null ? !user.equals(tweet.user) : tweet.user != null) {
+		if (this.toUserId != null ? !this.toUserId.equals(tweet.toUserId) : tweet.toUserId != null)
 			return false;
-		}
-	
+		if (this.user != null ? !this.user.equals(tweet.user) : tweet.user != null)
+			return false;
+
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = (id != null ? id.hashCode() : 0);
-		result = 31 * result + (text != null ? text.hashCode() : 0);
-		result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
-		result = 31 * result + (fromUser != null ? fromUser.hashCode() : 0);
-		result = 31 * result + (profileImageUrl != null ? profileImageUrl.hashCode() : 0);
-		result = 31 * result + (toUserId != null ? toUserId.hashCode() : 0);
-		result = 31 * result + (inReplyToStatusId != null ? inReplyToStatusId.hashCode() : 0);
-		result = 31 * result + (inReplyToUserId != null ? inReplyToUserId.hashCode() : 0);
-		result = 31 * result + (inReplyToScreenName != null ? inReplyToScreenName.hashCode() : 0);
-		result = 31 * result + (int) (fromUserId ^ (fromUserId >>> 32));
-		result = 31 * result + (languageCode != null ? languageCode.hashCode() : 0);
-		result = 31 * result + (source != null ? source.hashCode() : 0);
-		result = 31 * result + (retweetCount != null ? retweetCount.hashCode() : 0);
-		result = 31 * result + (retweeted ? 1 : 0);
-		result = 31 * result + (retweetedStatus != null ? retweetedStatus.hashCode() : 0);
-		result = 31 * result + (entities != null ? entities.hashCode() : 0);
-		result = 31 * result + (user != null ? user.hashCode() : 0);
+		int result = (this.id != null ? this.id.hashCode() : 0);
+		result = (31 * result) + (this.text != null ? this.text.hashCode() : 0);
+		result = (31 * result) + (this.createdAt != null ? this.createdAt.hashCode() : 0);
+		result = (31 * result) + (this.fromUser != null ? this.fromUser.hashCode() : 0);
+		result = (31 * result) + (this.profileImageUrl != null ? this.profileImageUrl.hashCode() : 0);
+		result = (31 * result) + (this.toUserId != null ? this.toUserId.hashCode() : 0);
+		result = (31 * result) + (this.inReplyToStatusId != null ? this.inReplyToStatusId.hashCode() : 0);
+		result = (31 * result) + (this.inReplyToUserId != null ? this.inReplyToUserId.hashCode() : 0);
+		result = (31 * result) + (this.inReplyToScreenName != null ? this.inReplyToScreenName.hashCode() : 0);
+		result = (31 * result) + (int) (this.fromUserId ^ (this.fromUserId >>> 32));
+		result = (31 * result) + (this.languageCode != null ? this.languageCode.hashCode() : 0);
+		result = (31 * result) + (this.source != null ? this.source.hashCode() : 0);
+		result = (31 * result) + (this.retweetCount != null ? this.retweetCount.hashCode() : 0);
+		result = (31 * result) + (this.retweeted ? 1 : 0);
+		result = (31 * result) + (this.retweetedStatus != null ? this.retweetedStatus.hashCode() : 0);
+		result = (31 * result) + (this.entities != null ? this.entities.hashCode() : 0);
+		result = (31 * result) + (this.extendedEntities != null ? this.extendedEntities.hashCode() : 0);
+		result = (31 * result) + (this.user != null ? this.user.hashCode() : 0);
 		return result;
 	}
 }
