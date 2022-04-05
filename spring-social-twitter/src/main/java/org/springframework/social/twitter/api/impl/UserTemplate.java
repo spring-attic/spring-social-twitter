@@ -18,6 +18,8 @@ package org.springframework.social.twitter.api.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.social.twitter.api.AccountSettings;
 import org.springframework.social.twitter.api.RateLimitStatus;
 import org.springframework.social.twitter.api.ResourceFamily;
@@ -112,6 +114,46 @@ class UserTemplate extends AbstractTwitterOperations implements UserOperations {
 	public AccountSettings updateAccountSettings(AccountSettingsData accountSettingsData) {
 		requireUserAuthorization();
 		return restTemplate.postForObject(buildUri("account/settings.json"), accountSettingsData.toRequestParameters(), AccountSettings.class);
+	}
+
+	public Boolean updateDeliveryDevice(DeliveryDevice deliveryDevice) {
+		requireUserAuthorization();
+		ResponseEntity<String> response = restTemplate.postForEntity(buildUri("account/update_delivery_device.json"), deliveryDevice.toRequestParameters(), null);
+		return HttpStatus.OK == response.getStatusCode();
+	}
+	
+	public TwitterProfile updateProfile(ProfileData profileData) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/update_profile.json"), profileData.toRequestParameters(), TwitterProfile.class);
+
+	}
+	
+	public TwitterProfile updateProfileBackgroundImage(ProfileBackgroundImage profileBackgroundImage) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/update_profile_background_image.json"), profileBackgroundImage.toRequestParameters(), TwitterProfile.class);
+	}
+
+	public TwitterProfile updateProfileColors(ProfileBackgroundColors profileBackgroundColors) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/update_profile_colors.json"), profileBackgroundColors.toRequestParameters(), TwitterProfile.class);
+	}
+
+	public TwitterProfile updateProfileImage(ProfileImage profileImage) {
+		requireUserAuthorization();
+		return restTemplate.postForObject(buildUri("account/update_profile_image.json"), profileImage.toRequestParameters(), TwitterProfile.class);
+	}
+
+	public Boolean removeProfileBanner() {
+		requireUserAuthorization();
+		ResponseEntity<String> response = restTemplate.postForEntity(buildUri("account/remove_profile_banner.json"), null, null);
+		return response.getStatusCode() == HttpStatus.OK;
+	}
+
+	public Boolean updateProfileBanner(ProfileBanner profileBanner) {
+		requireUserAuthorization();
+		ResponseEntity<String> response = restTemplate.postForEntity(buildUri("account/update_profile_banner.json"), profileBanner.toRequestParameters(), null);
+		HttpStatus status = response.getStatusCode();
+		return HttpStatus.OK == status || HttpStatus.ACCEPTED == status || HttpStatus.CREATED == status;
 	}
 
 }

@@ -21,6 +21,12 @@ import java.util.Map;
 import org.springframework.social.ApiException;
 import org.springframework.social.MissingAuthorizationException;
 import org.springframework.social.twitter.api.impl.AccountSettingsData;
+import org.springframework.social.twitter.api.impl.DeliveryDevice;
+import org.springframework.social.twitter.api.impl.ProfileBackgroundColors;
+import org.springframework.social.twitter.api.impl.ProfileBackgroundImage;
+import org.springframework.social.twitter.api.impl.ProfileBanner;
+import org.springframework.social.twitter.api.impl.ProfileData;
+import org.springframework.social.twitter.api.impl.ProfileImage;
 
 
 /**
@@ -156,4 +162,52 @@ public interface UserOperations {
 	 * @return The updated account settings.
 	 */
 	AccountSettings updateAccountSettings(AccountSettingsData accountSettingsData);
+
+	/**
+	 * Updates the authenticating user's delivery device settings.
+	 * @param deliveryDevice A DeliveryDevice with settings to be changed.
+	 * @return true if update was successful. Note that twitter returns code 404 also in case where mobile phone is not set in user settings.
+	 */	
+	Boolean updateDeliveryDevice(DeliveryDevice deliveryDevice);
+	
+	/**
+	 * Updates the authenticating user's profile.
+	 * @param profileData A ProfileData with settings to be updated.
+	 * @return updated profile. 
+	 */
+	TwitterProfile updateProfile(ProfileData profileData);
+
+	/**
+	 * Updates the authenticating user's account background image.
+	 * @param profileBackgroundImage A ProfileBackgroundImage with background image to be changed.
+	 * @return The updated profile.
+	 */	
+	TwitterProfile updateProfileBackgroundImage(ProfileBackgroundImage profileBackgroundImage);
+
+	/**
+	 * Updates the authenticating user's account background colors.
+	 * @param profileBackgroundColors A ProfileBackgroundColors with background color settings to be changed.
+	 * @return The updated profile.
+	 */	
+	TwitterProfile updateProfileColors(ProfileBackgroundColors profileBackgroundColors);
+
+	/**
+	 * Updates the authenticating user's account profile image.
+	 * @param profileImage A ProfileImage with image data to be changed.
+	 * @return The updated profile.
+	 */	
+	TwitterProfile updateProfileImage(ProfileImage profileImage);
+	
+	/**
+	 * Removes the authenticating user's profile banner.
+	 * @return true if update was successful.
+	 */	
+	Boolean removeProfileBanner();
+	
+	/**
+	 * Updates the authenticating user's account profile banner.
+	 * @param profileBanner A ProfileBanner with image data to be set as banner.
+	 * @return true if update was successful.
+	 */	
+	Boolean updateProfileBanner(ProfileBanner profileBanner);
 }
